@@ -1,0 +1,169 @@
+/* Crisis Intervention - Sticky Cards (CGMWTMAR2025 Grayscale) */
+
+/* Intro Section - Reversed Colors */
+.crisis-intro {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  background-color: #ffffff;
+  color: #0f0f0f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.crisis-intro h1 {
+  font-family: 'Rader', sans-serif;
+  font-size: 7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.35rem;
+  line-height: 1.1;
+  color: #0f0f0f;
+}
+
+.sticky-cards {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg);
+}
+
+.sticky-card {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  background-color: var(--fg);
+  color: var(--bg);
+  padding: 1.5rem;
+  display: flex;
+  gap: 3rem;
+  will-change: transform;
+}
+
+.sticky-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: var(--after-opacity, 0);
+  transition: opacity 0.1s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.sticky-card-index {
+  flex: 2;
+}
+
+.sticky-card-index h1 {
+  font-family: 'Rader', sans-serif;
+  font-size: 7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.35rem;
+  line-height: 1.1;
+  color: var(--bg);
+}
+
+.sticky-card-content {
+  flex: 4;
+  padding-top: 1.5rem;
+}
+
+.sticky-card-content-wrapper {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sticky-card-header {
+  width: 75%;
+  font-family: 'Rader', sans-serif;
+  font-size: 7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.35rem;
+  line-height: 1.1;
+  color: var(--bg);
+}
+
+.sticky-card-img img {
+  aspect-ratio: 5/3;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+.sticky-card-copy {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.sticky-card-copy-title {
+  flex: 2;
+}
+
+.sticky-card-copy-description {
+  flex: 4;
+}
+
+.sticky-card-copy-title p {
+  font-family: 'Messina Sans', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 650;
+  text-transform: uppercase;
+  color: var(--bg);
+}
+
+.sticky-card-copy-description p {
+  font-family: 'Messina Sans', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--bg);
+}
+
+@media (max-width: 1000px) {
+  .crisis-intro h1 {
+    font-size: 2rem;
+    letter-spacing: 0;
+  }
+
+  .sticky-card {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .sticky-card-index {
+    flex: 1;
+  }
+
+  .sticky-card-index h1 {
+    font-size: 2rem;
+    letter-spacing: 0;
+  }
+
+  .sticky-card-header {
+    font-size: 2rem;
+    letter-spacing: 0;
+  }
+
+  .sticky-card-content-wrapper {
+    width: 100%;
+  }
+
+  .sticky-card-copy {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .sticky-card-copy-title p,
+  .sticky-card-copy-description p {
+    font-size: 1rem;
+  }
+}

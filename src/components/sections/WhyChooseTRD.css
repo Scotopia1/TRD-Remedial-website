@@ -1,0 +1,88 @@
+/* Why TRD Remedial Section - GSAP Scroll Animation (Grayscale) */
+
+.why-choose-trd {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--fg);
+}
+
+.why-header {
+  position: relative;
+  width: 100%;
+  padding: 0 2em;
+  background-color: var(--fg);
+  will-change: transform;
+}
+
+.why-header h2 {
+  font-family: "Rader", sans-serif;
+  font-size: 8vw;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--bg);
+  text-align: center;
+}
+
+.why-header:nth-child(1),
+.why-header:nth-child(3) {
+  transform: translateX(100%) translateY(0%);
+}
+
+.why-header:nth-child(2) {
+  transform: translateX(-100%) translateY(0%);
+  z-index: 2;
+}
+
+.why-copy {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-top: 155svh;
+  padding: 2em 2em 25svh 2em;
+  text-align: center;
+  background-color: var(--fg);
+}
+
+.animate-text {
+  position: relative;
+  width: 60%;
+  margin: 0 auto;
+  font-family: "Messina Sans", sans-serif;
+  font-size: 4rem;
+  font-weight: 900;
+  letter-spacing: -0.15rem;
+  line-height: 1.125;
+  text-align: center;
+  color: #4f4f4f;
+  --clip-value: 100%;
+}
+
+.animate-text::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--bg);
+  clip-path: inset(0 0 var(--clip-value) 0);
+  will-change: clip-path;
+}
+
+@media (max-width: 1000px) {
+  .why-header h2 {
+    font-size: 14vw;
+  }
+
+  .animate-text {
+    width: 100%;
+    font-size: 2rem;
+    letter-spacing: -0.05rem;
+  }
+}

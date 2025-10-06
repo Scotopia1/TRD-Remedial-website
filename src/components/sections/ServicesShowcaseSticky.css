@@ -1,0 +1,130 @@
+/* Services Showcase - STICKY CARDS Style (Inverted Colors + TRD Fonts) */
+
+/* Intro Section - STICKY CARDS Style (Inverted Colors) */
+.services-intro {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  background-color: #ffffff; /* White background - INVERTED */
+  color: #1a1a1a; /* Black text - INVERTED */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.services-intro h1 {
+  font-family: "Rader", sans-serif;
+  font-weight: bold;
+  font-size: 7rem;
+  letter-spacing: -0.35rem;
+  line-height: 1.1;
+}
+
+.services-sticky-cards {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--trd-secondary); /* Light gray #f5f5f5 - INVERTED */
+}
+
+.service-sticky-card {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  background-color: var(--trd-primary); /* Dark #1a1a1a - INVERTED */
+  color: var(--trd-secondary); /* Light text #f5f5f5 */
+  padding: 1.5rem;
+  display: flex;
+  gap: 3rem;
+  will-change: transform;
+}
+
+.service-sticky-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5); /* White overlay - INVERTED from black */
+  opacity: var(--after-opacity, 0);
+  transition: opacity 0.1s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.service-sticky-card-index {
+  flex: 2;
+}
+
+.service-sticky-card-index h1 {
+  font-family: "Rader", sans-serif; /* TRD font */
+  font-weight: 100; /* Hairline */
+  font-size: 7rem;
+  letter-spacing: -0.35rem;
+  line-height: 1.1;
+}
+
+.service-sticky-card-content {
+  flex: 4;
+  padding-top: 1.5rem;
+  overflow-y: auto; /* Allow scrolling for tall content */
+  max-height: 100%; /* Constrain to parent height */
+}
+
+.service-sticky-card-content-wrapper {
+  position: relative;
+  z-index: 3; /* Above overlay (overlay is z-index: 2) */
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.service-sticky-card-header {
+  width: 75%;
+  font-family: "Rader", sans-serif; /* TRD font */
+  font-weight: bold;
+  font-size: 7rem;
+  letter-spacing: -0.35rem;
+  line-height: 1.1;
+}
+
+.service-sticky-card-img img {
+  aspect-ratio: 5/3;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1000px) {
+  .services-intro h1 {
+    font-size: 2rem;
+    letter-spacing: 0;
+  }
+
+  .service-sticky-card {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .service-sticky-card-content-wrapper {
+    width: 100%;
+  }
+
+  .service-sticky-card-index {
+    flex: 1;
+  }
+
+  .service-sticky-card-index h1 {
+    font-size: 2rem;
+    letter-spacing: 0;
+  }
+
+  .service-sticky-card-header {
+    font-size: 2rem;
+    letter-spacing: 0;
+    width: 100%;
+  }
+}

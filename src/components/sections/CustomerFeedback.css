@@ -1,0 +1,144 @@
+/* Customer Feedback - CGMWTMAR2025 Nico Palmer Pattern */
+
+.customer-feedback {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  padding: 4rem 2rem;
+  background-color: var(--trd-primary);
+  color: var(--trd-secondary);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+#customer-feedback-copy {
+  width: 50%;
+  margin: 0 auto;
+  position: relative;
+  min-height: 300px;
+}
+
+.customer-review-item {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+}
+
+.customer-review-item.active {
+  pointer-events: auto;
+}
+
+.quote-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.customer-review-copy {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.7;
+  font-weight: 400;
+  color: var(--trd-secondary);
+}
+
+.customer-review-author {
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--trd-accent);
+  margin-top: 1rem;
+}
+
+/* Thumbnail Navigation */
+.customer-feedback-list {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20%;
+  margin: 0 auto;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.customer-feedback-thumbnail {
+  aspect-ratio: 5/3;
+  min-height: 50px;
+  border: 1px dashed rgba(245, 245, 245, 0.3);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border 0.3s ease-in-out, transform 0.3s ease;
+  flex: 1;
+}
+
+.customer-feedback-thumbnail:hover {
+  transform: translateY(-4px);
+}
+
+.customer-feedback-thumbnail.active {
+  border: 1px dashed var(--trd-secondary);
+}
+
+.customer-feedback-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(0.7);
+  transition: filter 0.3s ease;
+}
+
+.customer-feedback-thumbnail.active img {
+  filter: grayscale(0%) brightness(1);
+}
+
+/* =====================================================
+   RESPONSIVE - MOBILE
+   ===================================================== */
+
+@media (max-width: 1000px) {
+  /* Customer Feedback */
+  #customer-feedback-copy {
+    width: 100%;
+  }
+
+  .customer-review-copy {
+    font-size: 1.25rem;
+  }
+
+  .customer-feedback-list {
+    width: 50%;
+  }
+}
+
+/* =====================================================
+   ACCESSIBILITY - Reduced Motion
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .customer-review-item,
+  .customer-feedback-thumbnail {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .customer-feedback-thumbnail:hover {
+    transform: none !important;
+  }
+}
