@@ -80,7 +80,7 @@
   font-size: 1.75rem;
   line-height: 1.3;
   font-weight: 600;
-  color: var(--trd-primary);
+  color: var(--trd-secondary);
 }
 
 .emergency-cta-header p {
@@ -88,7 +88,7 @@
   font-size: 1rem;
   line-height: 1.6;
   font-weight: 400;
-  color: var(--trd-primary);
+  color: var(--trd-secondary);
   margin-bottom: 0.5em;
   width: 90%;
 }

@@ -5,6 +5,7 @@ import './Menu.css';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
+import { useStore } from '@/stores/useStore';
 
 export function Menu() {
   const menuLinks = [
@@ -24,6 +25,7 @@ export function Menu() {
 
   const lastScrollY = useRef(0);
   const menuBarRef = useRef<HTMLDivElement>(null);
+  const { isLoading } = useStore();
 
   const [windowWidth, setWindowWidth] = useState(0);
   const [shouldDelayClose, setShouldDelayClose] = useState(false);
@@ -42,12 +44,21 @@ export function Menu() {
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollPositionRef.current}px`;
       document.body.style.width = '100%';
+      document.body.style.left = '0';
+      document.body.style.right = '0';
     } else {
-      document.body.style.removeProperty('overflow');
+      const scrollY = scrollPositionRef.current;
+
+      // Remove fixed positioning and restore overflow
       document.body.style.removeProperty('position');
       document.body.style.removeProperty('top');
+      document.body.style.removeProperty('left');
+      document.body.style.removeProperty('right');
       document.body.style.removeProperty('width');
-      window.scrollTo(0, scrollPositionRef.current);
+      document.body.style.removeProperty('overflow');
+
+      // Restore scroll position synchronously
+      window.scrollTo(0, scrollY);
     }
   };
 
@@ -193,7 +204,11 @@ export function Menu() {
   }, []);
 
   return (
-    <div className="menu-container" ref={menuContainer}>
+    <div
+      className="menu-container"
+      ref={menuContainer}
+      style={{ display: isLoading ? 'none' : 'block' }}
+    >
       <div className="menu-bar" ref={menuBarRef}>
         <div className="menu-bar-container">
           <div className="menu-logo" onClick={closeMenu}>

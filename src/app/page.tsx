@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { Hero } from '@/components/sections/Hero';
 import { Footer } from '@/components/sections/Footer';
-import { AssetPreloader } from '@/components/animations/AssetPreloader';
 import { OpeningAnimation } from '@/components/animations/OpeningAnimation';
 import { WhyChooseTRD } from '@/components/sections/WhyChooseTRD';
 import { ServicesShowcaseSticky } from '@/components/sections/ServicesShowcaseSticky';
@@ -15,12 +14,7 @@ import { BackedByStrengthStudio } from '@/components/sections/BackedByStrengthSt
 import { EmergencyCTA } from '@/components/sections/EmergencyCTA';
 
 export default function Home() {
-  const [assetsLoaded, setAssetsLoaded] = useState(false);
   const [openingComplete, setOpeningComplete] = useState(false);
-
-  const handleAssetsLoaded = () => {
-    setAssetsLoaded(true);
-  };
 
   const handleOpeningComplete = () => {
     setOpeningComplete(true);
@@ -28,13 +22,8 @@ export default function Home() {
 
   return (
     <>
-      {/* Asset Preloader - Shows first */}
-      <AssetPreloader onComplete={handleAssetsLoaded} />
-
-      {/* Opening Animation - Shows after assets loaded */}
-      {assetsLoaded && (
-        <OpeningAnimation onComplete={handleOpeningComplete} />
-      )}
+      {/* Opening Animation - Now includes asset loading */}
+      <OpeningAnimation onComplete={handleOpeningComplete} />
 
       {/* Main Content - Shows after opening animation */}
       <div className={`transition-opacity duration-500 ${openingComplete ? 'opacity-100' : 'opacity-0'}`}>

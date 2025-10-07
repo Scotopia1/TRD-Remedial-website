@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useStore } from '@/stores/useStore';
 
 interface OpeningAnimationProps {
   onComplete: () => void;
@@ -9,33 +10,73 @@ interface OpeningAnimationProps {
   posterSrc?: string;
 }
 
+// TRD Project Images to preload
+const projectImages = [
+  'https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=400&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop',
+  '/images/team/christopher-nassif.png',
+  '/images/team/charly-nassif.png',
+];
+
 export function OpeningAnimation({
   onComplete,
   videoSrc = '/videos/opening-animation.mp4',
   posterSrc = 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&h=1080&fit=crop',
 }: OpeningAnimationProps) {
-  const [hasVisited, setHasVisited] = useState(true); // Start as true to check localStorage
   const [isPlaying, setIsPlaying] = useState(false);
+  const [assetsLoaded, setAssetsLoaded] = useState(false);
+  const [videoEnded, setVideoEnded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { setIsLoading } = useStore();
 
   useEffect(() => {
-    // Check if user has visited before
-    const visited = localStorage.getItem('trd-opening-animation-seen');
-
-    if (visited === 'true') {
-      // Skip animation if already seen
-      onComplete();
-      return;
-    }
-
-    // Show animation for first-time visitors
-    setHasVisited(false);
+    // Always show opener on every visit
+    setIsLoading(true);
     setIsPlaying(true);
-  }, [onComplete]);
+
+    // Start preloading assets
+    preloadAssets();
+  }, [setIsLoading]);
+
+  const preloadAssets = async () => {
+    try {
+      // Preload all images
+      const imagePromises = projectImages.map((src) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = resolve; // Resolve even on error to not block
+          img.src = src;
+        });
+      });
+
+      await Promise.all(imagePromises);
+      setAssetsLoaded(true);
+    } catch (error) {
+      console.error('Error preloading assets:', error);
+      setAssetsLoaded(true); // Continue even if preloading fails
+    }
+  };
+
+  useEffect(() => {
+    // Only complete when BOTH video ended AND assets loaded
+    if (videoEnded && assetsLoaded) {
+      handleComplete();
+    } else if (videoEnded && !assetsLoaded) {
+      // Video ended but assets not loaded - pause on last frame
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
+    }
+  }, [videoEnded, assetsLoaded]);
 
   const handleComplete = () => {
-    // Mark as seen in localStorage
-    localStorage.setItem('trd-opening-animation-seen', 'true');
+    setIsLoading(false);
     setIsPlaying(false);
 
     // Small delay for smooth transition
@@ -45,13 +86,9 @@ export function OpeningAnimation({
   };
 
   const handleVideoEnd = () => {
-    handleComplete();
+    setVideoEnded(true);
+    // Don't call handleComplete here - let useEffect handle it
   };
-
-  // Don't render if already visited
-  if (hasVisited) {
-    return null;
-  }
 
   return (
     <AnimatePresence>
