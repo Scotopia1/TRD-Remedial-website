@@ -21,7 +21,7 @@ export function CaseStudiesOtisValen() {
     {
       title: "Sydney Tower GPR Scanning",
       category: "Non-Destructive Testing",
-      image: "https://images.unsplash.com/photo-1581092918484-8313e01f50e2?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop",
       href: "/case-studies/gpr-scanning",
     },
     {
@@ -39,13 +39,13 @@ export function CaseStudiesOtisValen() {
     {
       title: "Retail Complex Line Marking",
       category: "Traffic Management",
-      image: "https://images.unsplash.com/photo-1486406146456-8edd19c34d82?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=800&h=600&fit=crop",
       href: "/case-studies/line-marking",
     },
     {
       title: "Industrial Safety Fixtures",
       category: "Fall Protection",
-      image: "https://images.unsplash.com/photo-1503328427499-d92d414d0f41?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop",
       href: "/case-studies/safety-fixtures",
     },
   ];
@@ -174,7 +174,7 @@ export function CaseStudiesOtisValen() {
         <div className="cs-header-content">
           <div className="cs-profile-icon">
             <img
-              src="/trd-logo.svg"
+              src="/trd-logo-black.svg"
               alt="TRD Remedial"
             />
           </div>
@@ -189,7 +189,7 @@ export function CaseStudiesOtisValen() {
         </div>
         <div className="cs-footer">
           <div className="cs-footer-symbols">
-            <img src="/images/global/symbols.png" alt="" />
+            <img src="https://raw.githubusercontent.com/twitter/twemoji/master/assets/svg/25fc.svg" alt="Decorative icon" />
           </div>
           <div className="cs-footer-scroll-down">
             <p className="mn">See More Work</p>

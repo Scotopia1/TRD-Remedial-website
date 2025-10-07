@@ -1,0 +1,139 @@
+/* TRD Preloader - Image Grid Style */
+
+.preloader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100svh;
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: var(--trd-primary, #1a1a1a);
+  color: var(--trd-secondary, #f5f5f5);
+  overflow: hidden;
+  pointer-events: all;
+}
+
+.preloader-overlay p {
+  font-size: 1.3rem;
+  font-family: 'Messina Sans', sans-serif;
+}
+
+.preloader-services,
+.preloader-loader,
+.preloader-categories {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.preloader-loader {
+  align-items: center;
+  gap: 0;
+}
+
+.preloader-loader h1 {
+  font-family: 'Rader', sans-serif;
+  font-size: 2.5rem;
+  line-height: 0.9;
+  text-align: center;
+  text-transform: uppercase;
+  color: #3a3a3a;
+  background-image: linear-gradient(
+    0deg,
+    var(--trd-accent, #424242),
+    var(--trd-accent, #424242) 50%,
+    var(--trd-secondary, #f5f5f5) 0
+  );
+  background-size: 100% 200%;
+  background-position: 0% 100%;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.services-header,
+.service-item,
+.categories-header,
+.category-item {
+  display: flex;
+  gap: 2rem;
+  opacity: 0;
+}
+
+.services-header > *,
+.service-item > * {
+  flex: 1;
+}
+
+.preloader-categories {
+  align-items: center;
+}
+
+.categories-header,
+.category-item {
+  width: 100%;
+  text-align: center;
+}
+
+.service-item,
+.category-item {
+  color: var(--trd-accent, #424242);
+}
+
+.preloader-image-grid {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+  width: 30%;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transform: translate(-50%, -50%);
+}
+
+.preloader-grid-row {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+
+.grid-img {
+  position: relative;
+  flex: 1;
+  aspect-ratio: 1;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+  overflow: hidden;
+}
+
+.grid-img img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  filter: grayscale(100%);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1000px) {
+  .preloader-loader h1 {
+    font-size: 1.8rem;
+  }
+
+  .preloader-services,
+  .preloader-categories {
+    display: none;
+  }
+
+  .preloader-image-grid {
+    width: 90%;
+  }
+
+  .preloader-overlay p {
+    font-size: 1rem;
+  }
+}

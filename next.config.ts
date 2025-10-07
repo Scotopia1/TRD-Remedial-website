@@ -12,6 +12,24 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Headers for video files
+  async headers() {
+    return [
+      {
+        source: '/videos/:path*',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'video/mp4',
+          },
+          {
+            key: 'Accept-Ranges',
+            value: 'bytes',
+          },
+        ],
+      },
+    ];
+  },
   // Experimental features for better performance
   experimental: {
     optimizePackageImports: ['three', '@react-three/fiber', '@react-three/drei'],

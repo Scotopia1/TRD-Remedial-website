@@ -11,14 +11,12 @@ interface OpeningAnimationProps {
 
 export function OpeningAnimation({
   onComplete,
-  videoSrc = '/videos/opening-animation.webm',
+  videoSrc = '/videos/opening-animation.mp4',
   posterSrc = 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&h=1080&fit=crop',
 }: OpeningAnimationProps) {
   const [hasVisited, setHasVisited] = useState(true); // Start as true to check localStorage
-  const [showSkip, setShowSkip] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     // Check if user has visited before
@@ -33,27 +31,7 @@ export function OpeningAnimation({
     // Show animation for first-time visitors
     setHasVisited(false);
     setIsPlaying(true);
-
-    // Show skip button after 1 second
-    const skipTimeout = setTimeout(() => {
-      setShowSkip(true);
-    }, 1000);
-
-    // Auto-complete after 5 seconds
-    const autoCompleteTimeout = setTimeout(() => {
-      handleComplete();
-    }, 5000);
-
-    timeoutRef.current = autoCompleteTimeout;
-
-    // Cleanup
-    return () => {
-      clearTimeout(skipTimeout);
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
+  }, [onComplete]);
 
   const handleComplete = () => {
     // Mark as seen in localStorage
@@ -64,13 +42,6 @@ export function OpeningAnimation({
     setTimeout(() => {
       onComplete();
     }, 300);
-  };
-
-  const handleSkip = () => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    handleComplete();
   };
 
   const handleVideoEnd = () => {
@@ -112,30 +83,6 @@ export function OpeningAnimation({
             />
           </video>
 
-          {/* Skip Button */}
-          <AnimatePresence>
-            {showSkip && (
-              <motion.button
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                onClick={handleSkip}
-                className="absolute bottom-8 right-8 px-6 py-3 bg-white/10 hover:bg-white/20
-                         backdrop-blur-sm border border-white/20 rounded-lg text-white
-                         font-medium transition-all duration-300 hover:scale-105
-                         focus:outline-none focus:ring-2 focus:ring-white/50"
-                aria-label="Skip opening animation"
-              >
-                Skip
-              </motion.button>
-            )}
-          </AnimatePresence>
-
-          {/* Loading indicator (optional, for slow connections) */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-            <div className="w-12 h-12 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-          </div>
         </motion.div>
       )}
     </AnimatePresence>

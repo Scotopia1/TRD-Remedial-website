@@ -18,22 +18,17 @@
   position: relative;
   width: 100px;
   height: 100px;
-  border-radius: 1em;
   margin: 0 auto 1em;
-  outline: 0.25rem solid var(--trd-accent); /* #424242 */
-  border: 0.25rem solid var(--trd-primary); /* #1a1a1a */
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--trd-primary);
 }
 
 .cs-header .cs-profile-icon img {
-  width: 70%;
-  height: 70%;
+  width: 87.5%;
+  height: 87.5%;
   object-fit: contain;
-  filter: invert(1); /* Make logo white on dark background */
+  filter: none; /* Ensure logo displays in its original black color */
 }
 
 .cs-header .cs-header-content {

@@ -57,7 +57,13 @@ export function BackedByStrengthStudio() {
 
       {/* Mission Intro - Dark Inversion Section */}
       <section className="mission-intro">
-        <div className="mission-intro-col-sm"></div>
+        <div className="mission-intro-col-sm">
+          <img
+            src="https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=600&h=800&fit=crop"
+            alt="Structural reinforcement work"
+            className="mission-intro-image"
+          />
+        </div>
         <div className="mission-intro-col-lg">
           <div className="mission-intro-copy">
             <h3>

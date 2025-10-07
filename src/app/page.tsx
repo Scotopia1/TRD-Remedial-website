@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Hero } from '@/components/sections/Hero';
 import { Footer } from '@/components/sections/Footer';
+import { AssetPreloader } from '@/components/animations/AssetPreloader';
 import { OpeningAnimation } from '@/components/animations/OpeningAnimation';
 import { WhyChooseTRD } from '@/components/sections/WhyChooseTRD';
 import { ServicesShowcaseSticky } from '@/components/sections/ServicesShowcaseSticky';
@@ -14,19 +15,29 @@ import { BackedByStrengthStudio } from '@/components/sections/BackedByStrengthSt
 import { EmergencyCTA } from '@/components/sections/EmergencyCTA';
 
 export default function Home() {
-  const [showContent, setShowContent] = useState(false);
+  const [assetsLoaded, setAssetsLoaded] = useState(false);
+  const [openingComplete, setOpeningComplete] = useState(false);
 
-  const handleAnimationComplete = () => {
-    setShowContent(true);
+  const handleAssetsLoaded = () => {
+    setAssetsLoaded(true);
+  };
+
+  const handleOpeningComplete = () => {
+    setOpeningComplete(true);
   };
 
   return (
     <>
-      {/* Opening Animation */}
-      <OpeningAnimation onComplete={handleAnimationComplete} />
+      {/* Asset Preloader - Shows first */}
+      <AssetPreloader onComplete={handleAssetsLoaded} />
 
-      {/* Main Content */}
-      <div className={`transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Opening Animation - Shows after assets loaded */}
+      {assetsLoaded && (
+        <OpeningAnimation onComplete={handleOpeningComplete} />
+      )}
+
+      {/* Main Content - Shows after opening animation */}
+      <div className={`transition-opacity duration-500 ${openingComplete ? 'opacity-100' : 'opacity-0'}`}>
         {/* Main Content */}
         <main id="main-content" aria-label="Main content">
           {/* Hero Section */}
@@ -50,11 +61,11 @@ export default function Home() {
           {/* Customer Feedback - CGMWTMAR2025 Nico Palmer Pattern */}
           <CustomerFeedback />
 
-          {/* Backed by Strength - CGMWTJUNE2025 Wu Wei Studio Pattern */}
-          <BackedByStrengthStudio />
-
           {/* Emergency CTA */}
           <EmergencyCTA />
+
+          {/* Backed by Strength - CGMWTJUNE2025 Wu Wei Studio Pattern */}
+          <BackedByStrengthStudio />
         </main>
 
         {/* Footer */}

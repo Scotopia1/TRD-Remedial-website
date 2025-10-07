@@ -12,6 +12,7 @@ export function Hero() {
           loop
           muted
           playsInline
+          preload="auto"
           className="hero-video"
         >
           <source src="/videos/hero-video.mp4" type="video/mp4" />

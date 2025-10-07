@@ -21,7 +21,7 @@ export function ServicesShowcaseSticky() {
     {
       index: "02",
       title: "Concrete Cutting & Coring",
-      image: "https://images.unsplash.com/photo-1581092918484-8313e01f50e2?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop",
       description:
         "Precision cutting, sawing, and coring services for concrete, masonry, and stone. Diamond blade technology ensures clean cuts with minimal disruption and dust.",
     },
@@ -42,13 +42,13 @@ export function ServicesShowcaseSticky() {
     {
       index: "05",
       title: "Line Marking",
-      image: "https://images.unsplash.com/photo-1486406146456-8edd19c34d82?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=800&h=600&fit=crop",
       description: "",
     },
     {
       index: "06",
       title: "Safety Fixtures",
-      image: "https://images.unsplash.com/photo-1503328427499-d92d414d0f41?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop",
       description:
         "Installation of safety anchor points, handrails, and fall protection systems. Fully compliant with Australian safety standards and regulations.",
     },
