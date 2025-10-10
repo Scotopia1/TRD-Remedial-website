@@ -8,7 +8,7 @@ import { WhyChooseTRD } from '@/components/sections/WhyChooseTRD';
 import { ServicesShowcaseSticky } from '@/components/sections/ServicesShowcaseSticky';
 import { CaseStudiesOtisValen } from '@/components/sections/CaseStudiesOtisValen';
 import { ThreeDShowcasePinned } from '@/components/sections/ThreeDShowcasePinned';
-import { LeadershipTeamInteractive } from '@/components/sections/LeadershipTeamInteractive';
+import { TeamScrollReveal } from '@/components/sections/TeamScrollReveal';
 import { CustomerFeedback } from '@/components/sections/CustomerFeedback';
 import { BackedByStrengthStudio } from '@/components/sections/BackedByStrengthStudio';
 import { EmergencyCTA } from '@/components/sections/EmergencyCTA';
@@ -44,8 +44,8 @@ export default function Home() {
           {/* 3D Showcase - WonJyou Pinned Scroll Style */}
           <ThreeDShowcasePinned />
 
-          {/* Leadership Team - CodeGrid Interactive Pattern */}
-          <LeadershipTeamInteractive />
+          {/* Leadership Team - Scroll-Controlled Reveal Pattern */}
+          <TeamScrollReveal />
 
           {/* Customer Feedback - CGMWTMAR2025 Nico Palmer Pattern */}
           <CustomerFeedback />
