@@ -21,10 +21,13 @@ export function Hero() {
 
       <div className="hero-header">
         <AnimatedCopy tag="h1" animateOnScroll={false} delay={0.7}>
-          TRD
+          THE
         </AnimatedCopy>
         <AnimatedCopy tag="h1" animateOnScroll={false} delay={0.8}>
           REMEDIAL
+        </AnimatedCopy>
+        <AnimatedCopy tag="h1" animateOnScroll={false} delay={0.9}>
+          EXPERTS
         </AnimatedCopy>
       </div>
     </section>
