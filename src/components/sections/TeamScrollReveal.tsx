@@ -231,6 +231,40 @@ export function TeamScrollReveal() {
     };
   };
 
+  // Calculate responsive font size based on name length
+  const calculateFontSize = (name: string): { desktop: string; mobile: string } => {
+    const totalLength = name.length;
+
+    // Base sizes
+    const baseDesktop = 6.5; // rem
+    const baseMobile = 5; // rem
+
+    // Character thresholds
+    const shortThreshold = 12; // e.g., "Fahed Nassif"
+    const longThreshold = 15; // e.g., "Christopher Nassif"
+
+    let desktopSize = baseDesktop;
+    let mobileSize = baseMobile;
+
+    if (totalLength > longThreshold) {
+      // Long names: scale down proportionally
+      const scaleFactor = shortThreshold / totalLength;
+      desktopSize = baseDesktop * scaleFactor;
+      mobileSize = baseMobile * scaleFactor;
+    } else if (totalLength > shortThreshold) {
+      // Medium names: slight reduction
+      const scaleFactor = 0.85;
+      desktopSize = baseDesktop * scaleFactor;
+      mobileSize = baseMobile * scaleFactor;
+    }
+    // Short names keep base size
+
+    return {
+      desktop: `${desktopSize.toFixed(2)}rem`,
+      mobile: `${mobileSize.toFixed(2)}rem`,
+    };
+  };
+
   return (
     <>
       <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
@@ -244,6 +278,7 @@ export function TeamScrollReveal() {
       <section className="team-reveal" ref={teamSectionRef}>
         {TEAM_MEMBERS.map((member, index) => {
           const nameParts = splitName(member.name);
+          const fontSize = calculateFontSize(member.name);
           return (
             <div key={member.id} className="team-member">
               {/* Large Initial Letter */}
@@ -261,7 +296,13 @@ export function TeamScrollReveal() {
                 {/* Member Info */}
                 <div className="team-member-info">
                   <p className="team-member-role">( {member.title} )</p>
-                  <h1 className="team-member-name">
+                  <h1
+                    className="team-member-name"
+                    style={{
+                      '--name-font-size-desktop': fontSize.desktop,
+                      '--name-font-size-mobile': fontSize.mobile,
+                    } as React.CSSProperties}
+                  >
                     {nameParts.first} <span>{nameParts.last}</span>
                   </h1>
                 </div>

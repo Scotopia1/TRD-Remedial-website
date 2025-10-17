@@ -7,7 +7,7 @@ import { OpeningAnimation } from '@/components/animations/OpeningAnimation';
 import { WhyChooseTRD } from '@/components/sections/WhyChooseTRD';
 import { ServicesShowcaseSticky } from '@/components/sections/ServicesShowcaseSticky';
 import { CaseStudiesOtisValen } from '@/components/sections/CaseStudiesOtisValen';
-import { ThreeDShowcasePinned } from '@/components/sections/ThreeDShowcasePinned';
+// import { ThreeDShowcasePinned } from '@/components/sections/ThreeDShowcasePinned';
 import { TeamScrollReveal } from '@/components/sections/TeamScrollReveal';
 import { CustomerFeedback } from '@/components/sections/CustomerFeedback';
 import { BackedByStrengthStudio } from '@/components/sections/BackedByStrengthStudio';
@@ -42,7 +42,7 @@ export default function Home() {
           <CaseStudiesOtisValen />
 
           {/* 3D Showcase - WonJyou Pinned Scroll Style */}
-          <ThreeDShowcasePinned />
+          {/* <ThreeDShowcasePinned /> */}
 
           {/* Leadership Team - Scroll-Controlled Reveal Pattern */}
           <TeamScrollReveal />

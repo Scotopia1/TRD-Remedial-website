@@ -165,7 +165,7 @@
 }
 
 .team-member-name {
-  font-size: 6.5rem;
+  font-size: var(--name-font-size-desktop, 6.5rem);
   font-weight: 800;
   text-transform: uppercase;
   line-height: 0.9;
@@ -264,7 +264,7 @@
 
   /* Member Name - Smaller on Mobile */
   .team-member-name {
-    font-size: 5rem;
+    font-size: var(--name-font-size-mobile, 5rem);
   }
 }
 
