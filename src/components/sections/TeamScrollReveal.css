@@ -129,6 +129,8 @@
   background-color: var(--team-card-bg);
   border-radius: 1.5rem;
   will-change: transform;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* Member Image */
@@ -153,6 +155,8 @@
   align-items: center;
   text-align: center;
   gap: 1rem;
+  width: 100%;
+  overflow: hidden;
 }
 
 .team-member-role {
@@ -171,10 +175,22 @@
   line-height: 0.9;
   color: var(--team-accent);
   font-family: "Rader", sans-serif;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: manual;
+  max-width: 100%;
+  width: 100%;
+  display: block;
+  white-space: normal;
+  text-align: center;
 }
 
 .team-member-name span {
   color: var(--team-card-text);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: inline;
+  white-space: normal;
 }
 
 /* ============================================

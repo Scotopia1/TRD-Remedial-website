@@ -21,7 +21,6 @@ export function Menu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuAnimation = useRef<GSAPTimeline | null>(null);
   const menuLinksAnimation = useRef<GSAPTimeline | null>(null);
-  const menuBarAnimation = useRef<GSAPTimeline | null>(null);
 
   const lastScrollY = useRef(0);
   const menuBarRef = useRef<HTMLDivElement>(null);
@@ -63,9 +62,9 @@ export function Menu() {
   };
 
   const toggleMenu = () => {
-    const hamburger = document.querySelector('.hamburger-icon');
-    if (hamburger) {
-      hamburger.classList.toggle('active');
+    const logoButton = document.querySelector('.logo-menu-button');
+    if (logoButton) {
+      logoButton.classList.toggle('active');
     }
     const newMenuState = !isMenuOpen;
     setIsMenuOpen(newMenuState);
@@ -74,9 +73,9 @@ export function Menu() {
 
   const closeMenu = () => {
     if (isMenuOpen) {
-      const hamburger = document.querySelector('.hamburger-icon');
-      if (hamburger) {
-        hamburger.classList.toggle('active');
+      const logoButton = document.querySelector('.logo-menu-button');
+      if (logoButton) {
+        logoButton.classList.remove('active');
       }
       setIsMenuOpen(false);
       toggleBodyScroll(false);
@@ -123,25 +122,6 @@ export function Menu() {
       ease: 'power4.inOut',
     });
 
-    const createMenuBarAnimation = () => {
-      if (menuBarAnimation.current) {
-        menuBarAnimation.current.kill();
-      }
-
-      const heightValue =
-        windowWidth < 1000 ? 'calc(100% - 2.5em)' : 'calc(100% - 4em)';
-
-      menuBarAnimation.current = gsap
-        .timeline({ paused: true })
-        .to('.menu-bar', {
-          duration: 1,
-          height: heightValue,
-          ease: 'power4.inOut',
-        });
-    };
-
-    createMenuBarAnimation();
-
     menuLinksAnimation.current = gsap
       .timeline({ paused: true })
       .to('.menu-link-item-holder', {
@@ -156,11 +136,9 @@ export function Menu() {
   useEffect(() => {
     if (isMenuOpen) {
       menuAnimation.current?.play();
-      menuBarAnimation.current?.play();
       menuLinksAnimation.current?.play();
     } else {
       menuAnimation.current?.reverse();
-      menuBarAnimation.current?.reverse();
       menuLinksAnimation.current?.reverse();
     }
   }, [isMenuOpen]);
@@ -211,19 +189,16 @@ export function Menu() {
     >
       <div className="menu-bar" ref={menuBarRef}>
         <div className="menu-bar-container">
-          <div className="menu-logo" onClick={closeMenu}>
-            <Link href="/">
-              <h4>TRD</h4>
-            </Link>
-          </div>
           <div className="menu-actions">
             <div className="menu-toggle">
-              <button className="hamburger-icon" onClick={toggleMenu}></button>
+              <button className="logo-menu-button" onClick={toggleMenu}>
+                <img src="/trd-logo.svg" alt="TRD Menu" className="logo-icon" />
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <div className="menu">
+      <div className={`menu ${isMenuOpen ? 'menu-open' : ''}`}>
         <div className="menu-col">
           <div className="menu-sub-col">
             <div className="menu-links">

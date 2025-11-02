@@ -5,7 +5,11 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
-    "start": "next start"
+    "start": "next start",
+    "test:responsive": "playwright test",
+    "test:responsive:ui": "playwright test --ui",
+    "test:responsive:headed": "playwright test --headed",
+    "test:overflow": "node tests/animation-overflow-check.js"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -26,11 +30,13 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.56.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.180.0",
+    "puppeteer": "^24.26.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

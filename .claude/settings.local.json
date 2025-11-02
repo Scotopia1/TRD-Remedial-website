@@ -8,7 +8,13 @@
       "Read(//c/Users/johnn/.claude/**)",
       "Bash(npm install:*)",
       "Bash(npm run build:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(del nul)",
+      "Bash(del \"public\\videos\\NUL\")",
+      "Bash(rm:*)"
     ],
     "deny": [],
     "ask": []

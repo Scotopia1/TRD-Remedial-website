@@ -16,7 +16,7 @@
   position: relative;
   width: 100%;
   padding: 0 2em;
-  background-color: var(--fg);
+  background-color: transparent;
   will-change: transform;
 }
 
@@ -43,36 +43,55 @@
 
 .why-copy {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100svh;
   margin-top: 155svh;
-  padding: 2em 2em 25svh 2em;
-  text-align: center;
+  overflow: hidden;
   background-color: var(--fg);
 }
 
-.animate-text {
-  position: relative;
-  width: 60%;
-  margin: 0 auto;
-  font-family: "Messina Sans", sans-serif;
-  font-size: 4rem;
-  font-weight: 900;
-  letter-spacing: -0.15rem;
-  line-height: 1.125;
+.why-copy .copy-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  color: #4f4f4f;
-  --clip-value: 100%;
 }
 
-.animate-text::before {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
+.why-copy .anime-text {
+  width: 60%;
+}
+
+.why-copy .anime-text h1 {
   color: var(--bg);
-  clip-path: inset(0 0 var(--clip-value) 0);
-  will-change: clip-path;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.8rem; /* 70% of 4rem */
+  font-weight: 900;
+  line-height: 1.125;
+  font-family: "Messina Sans", sans-serif;
+  letter-spacing: -0.15rem;
+}
+
+.why-copy .anime-text .word {
+  display: inline-block;
+  position: relative;
+  margin-right: 0.2rem;
+  margin-bottom: 0.2rem;
+  padding: 0.1rem 0.2rem;
+  border-radius: 8px;
+  will-change: background-color, opacity;
+}
+
+.why-copy .anime-text .word span {
+  position: relative;
+  color: var(--bg);
+}
+
+.why-copy .anime-text .word,
+.why-copy .anime-text .word span {
+  opacity: 0;
 }
 
 @media (max-width: 1000px) {
@@ -80,9 +99,19 @@
     font-size: 14vw;
   }
 
-  .animate-text {
+  .why-copy .anime-text {
     width: 100%;
-    font-size: 2rem;
-    letter-spacing: -0.05rem;
+    padding: 0 1rem;
+  }
+
+  .why-copy .anime-text h1 {
+    font-size: 1.4rem; /* 70% of 2rem */
+    letter-spacing: -0.035rem;
+  }
+
+  .why-copy .anime-text .word {
+    margin-right: 0.1rem;
+    margin-bottom: 0.15rem;
+    padding: 0.05rem 0.125rem;
   }
 }

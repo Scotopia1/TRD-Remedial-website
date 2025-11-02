@@ -69,12 +69,12 @@
   height: 100%;
   min-height: 100%;
   padding: 2em;
+  padding-bottom: 4em; /* Bottom padding instead of margin */
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 4em;
-  margin-bottom: 8em;
-  background-color: var(--trd-secondary); /* Light gray #f5f5f5 */
+  background-color: #ffffff; /* White background */
 }
 
 .cs-work-items .cs-row {

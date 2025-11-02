@@ -6,127 +6,150 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { SERVICES } from "@/data/services";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function ServicesShowcaseSticky() {
-  const servicesData = [
-    {
-      index: "01",
-      title: "Carbon Fibre Reinforcement",
-      image: "https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=800&h=600&fit=crop",
-      description:
-        "Advanced structural strengthening using high-performance carbon fiber composite systems. Ideal for reinforcing concrete structures without adding significant weight or bulk.",
-    },
-    {
-      index: "02",
-      title: "Concrete Cutting & Coring",
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop",
-      description:
-        "Precision cutting, sawing, and coring services for concrete, masonry, and stone. Diamond blade technology ensures clean cuts with minimal disruption and dust.",
-    },
-    {
-      index: "03",
-      title: "Crack Injection",
-      image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop",
-      description:
-        "Specialized epoxy and polyurethane injection to seal and repair structural cracks. Restores structural integrity while preventing water ingress and further deterioration.",
-    },
-    {
-      index: "04",
-      title: "GPR Scanning",
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop",
-      description:
-        "Non-destructive Ground Penetrating Radar technology to locate rebar, conduits, voids, and embedded objects. Essential for safe drilling and cutting operations.",
-    },
-    {
-      index: "05",
-      title: "Line Marking",
-      image: "https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=800&h=600&fit=crop",
-      description: "",
-    },
-    {
-      index: "06",
-      title: "Safety Fixtures",
-      image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop",
-      description:
-        "Installation of safety anchor points, handrails, and fall protection systems. Fully compliant with Australian safety standards and regulations.",
-    },
-  ];
+  const sectionRef = useRef<HTMLElement>(null);
 
-  const container = useRef(null);
+  // Initial rotations for visual interest (from reference design)
+  const rotations = [-12, 10, -5, 5, -5, -2];
 
-  useGSAP(
-    () => {
-      const stickyCards = document.querySelectorAll(".service-sticky-card");
+  useGSAP(() => {
+    if (!sectionRef.current) return;
 
-      stickyCards.forEach((card, index) => {
-        if (index < stickyCards.length - 1) {
-          ScrollTrigger.create({
-            trigger: card,
-            start: "top top",
-            endTrigger: stickyCards[stickyCards.length - 1],
-            end: "top top",
-            pin: true,
-            pinSpacing: false,
-          });
-        }
+    const galleryCards = gsap.utils.toArray<HTMLElement>(".gallery-card");
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        if (index < stickyCards.length - 1) {
-          ScrollTrigger.create({
-            trigger: stickyCards[index + 1],
-            start: "top bottom",
-            end: "top top",
-            onUpdate: (self) => {
-              const progress = self.progress;
-              const scale = 1 - progress * 0.25;
-              const rotation = (index % 2 === 0 ? 5 : -5) * progress;
-              const afterOpacity = progress;
-
-              gsap.set(card, {
-                scale: scale,
-                rotation: rotation,
-                "--after-opacity": afterOpacity,
-              });
-            },
-          });
-        }
+    // Set initial positions - cards start below viewport with rotation
+    galleryCards.forEach((card, index) => {
+      gsap.set(card, {
+        y: prefersReducedMotion ? 0 : window.innerHeight,
+        rotate: prefersReducedMotion ? 0 : (rotations[index] || 0),
       });
-    },
-    { scope: container }
-  );
+    });
+
+    if (prefersReducedMotion) {
+      // Simplified animation for reduced motion - just fade and simple position
+      galleryCards.forEach((card, index) => {
+        gsap.set(card, {
+          opacity: 1,
+          y: 0,
+          x: 0,
+        });
+      });
+      return;
+    }
+
+    // Pin section and animate cards on scroll
+    ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: "top top",
+      end: `+=${window.innerHeight * 8}px`,
+      pin: true,
+      pinSpacing: true,
+      scrub: 1,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        const totalCards = galleryCards.length;
+        const progressPerCard = 1 / totalCards;
+
+        galleryCards.forEach((galleryCard, index) => {
+          const galleryCardStart = index * progressPerCard;
+          let galleryCardProgress =
+            (progress - galleryCardStart) / progressPerCard;
+          galleryCardProgress = Math.min(Math.max(galleryCardProgress, 0), 1);
+
+          // Card slides up from bottom
+          let yPos = window.innerHeight * (1 - galleryCardProgress);
+          let xPos = 0;
+
+          // After card is fully revealed, slide it to upper-left
+          if (galleryCardProgress === 1 && index < totalCards - 1) {
+            const remainingProgress =
+              (progress - (galleryCardStart + progressPerCard)) /
+              (1 - (galleryCardStart + progressPerCard));
+            if (remainingProgress > 0) {
+              const distanceMultiplier = 1 - index * 0.15;
+              xPos =
+                -window.innerWidth * 0.3 * distanceMultiplier * remainingProgress;
+              yPos =
+                -window.innerHeight *
+                0.3 *
+                distanceMultiplier *
+                remainingProgress;
+            }
+          }
+
+          gsap.to(galleryCard, {
+            y: yPos,
+            x: xPos,
+            duration: 0,
+            ease: "none",
+          });
+        });
+      },
+    });
+  }, { scope: sectionRef });
 
   return (
-    <>
-      {/* Intro Section - STICKY CARDS Style (Inverted Colors) */}
-      <section className="services-intro">
-        <h1>Our Services</h1>
-      </section>
-
-      {/* Sticky Cards */}
-      <div className="services-sticky-cards" ref={container}>
-        {servicesData.map((serviceData, index) => (
-        <a
-          href={`/services/${serviceData.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`}
-          className="service-sticky-card"
-          key={index}
-          style={{ cursor: 'pointer' }}
-        >
-          <div className="service-sticky-card-index">
-            <h1>{serviceData.index}</h1>
-          </div>
-          <div className="service-sticky-card-content">
-            <div className="service-sticky-card-content-wrapper">
-              <h1 className="service-sticky-card-header">{serviceData.title}</h1>
-
-              <div className="service-sticky-card-img">
-                <img src={serviceData.image} alt={serviceData.title} />
-              </div>
-            </div>
-          </div>
-        </a>
-      ))}
+    <section
+      ref={sectionRef}
+      className="services-gallery"
+      aria-label="Services Gallery"
+    >
+      {/* Header */}
+      <div className="services-gallery-header">
+        <h3>
+          Our Services
+        </h3>
       </div>
-    </>
+
+      {/* Decorative Top Bar */}
+      <div className="services-top-bar" role="presentation">
+        <div className="container">
+          <div className="symbols-container">
+            <div className="symbol" aria-hidden="true"></div>
+          </div>
+          <div className="symbols-container">
+            <div className="symbol" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Decorative Bottom Bar */}
+      <div className="services-bottom-bar" role="presentation">
+        <div className="container">
+          <p className="mono">
+            <span aria-hidden="true">&#9654;</span> Services Gallery
+          </p>
+          <p className="mono">/ Six Core Solutions</p>
+        </div>
+      </div>
+
+      {/* Gallery Cards */}
+      {SERVICES.map((service, index) => (
+        <div
+          key={service.id}
+          className="gallery-card"
+          role="article"
+          aria-label={`Service ${index + 1}: ${service.title}`}
+        >
+          <div className="gallery-card-img">
+            <img
+              src={service.visual}
+              alt={`${service.title} - ${service.description}`}
+              loading="lazy"
+            />
+          </div>
+          <div className="gallery-card-content">
+            <p className="mono">
+              {String(index + 1).padStart(2, "0")} - {service.title}
+            </p>
+          </div>
+        </div>
+      ))}
+    </section>
   );
 }
