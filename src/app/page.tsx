@@ -5,7 +5,7 @@ import { Hero } from '@/components/sections/Hero';
 import { Footer } from '@/components/sections/Footer';
 import { OpeningAnimation } from '@/components/animations/OpeningAnimation';
 import { WhyChooseTRD } from '@/components/sections/WhyChooseTRD';
-import { ServicesShowcaseSticky } from '@/components/sections/ServicesShowcaseSticky';
+import ServicesSpotlight from '@/components/sections/ServicesSpotlight';
 import { CaseStudiesOtisValen } from '@/components/sections/CaseStudiesOtisValen';
 // import { ThreeDShowcasePinned } from '@/components/sections/ThreeDShowcasePinned';
 import { TeamScrollReveal } from '@/components/sections/TeamScrollReveal';
@@ -35,8 +35,8 @@ export default function Home() {
           {/* Why TRD Remedial - GSAP Scroll Animation */}
           <WhyChooseTRD />
 
-          {/* Services Showcase - STICKY CARDS Style */}
-          <ServicesShowcaseSticky />
+          {/* Services Showcase - SPOTLIGHT Style */}
+          <ServicesSpotlight />
 
           {/* Case Studies - CGMWTMAY2025 Otis Valen Style */}
           <CaseStudiesOtisValen />
