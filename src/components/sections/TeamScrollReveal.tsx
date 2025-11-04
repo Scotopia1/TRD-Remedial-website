@@ -74,6 +74,7 @@ export function TeamScrollReveal() {
           start: 'top bottom', // Start when section enters viewport
           end: 'top top', // End when section reaches top
           scrub: 1, // Smooth sync with scroll
+          refreshPriority: 7,
           onUpdate: (self) => {
             const progress = self.progress;
 
@@ -126,6 +127,7 @@ export function TeamScrollReveal() {
           end: `+=${window.innerHeight * 3}`, // 3x viewport height scroll
           pin: true, // Pin section during scroll
           scrub: 1, // Smooth sync with scroll
+          refreshPriority: 7,
           onUpdate: (self) => {
             const progress = self.progress;
 
@@ -269,52 +271,55 @@ export function TeamScrollReveal() {
     <>
       <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
 
-      {/* Hero Section */}
-      <section className="team-hero">
-        <h1>Meet The Team</h1>
-      </section>
+      {/* Consolidated Team Section - Prevents team members from splitting apart */}
+      <section className="team-scroll-reveal-wrapper">
+        {/* Hero Section */}
+        <div className="team-hero">
+          <h1>Meet The Team</h1>
+        </div>
 
-      {/* Team Reveal Section */}
-      <section className="team-reveal" ref={teamSectionRef}>
-        {TEAM_MEMBERS.map((member, index) => {
-          const nameParts = splitName(member.name);
-          const fontSize = calculateFontSize(member.name);
-          return (
-            <div key={member.id} className="team-member">
-              {/* Large Initial Letter */}
-              <div className="team-member-name-initial">
-                <h1>{getInitial(member.name)}</h1>
-              </div>
-
-              {/* Team Member Card */}
-              <div className="team-member-card">
-                {/* Member Image */}
-                <div className="team-member-img">
-                  <img src={member.image} alt={member.name} />
+        {/* Team Reveal Section */}
+        <div className="team-reveal" ref={teamSectionRef}>
+          {TEAM_MEMBERS.map((member, index) => {
+            const nameParts = splitName(member.name);
+            const fontSize = calculateFontSize(member.name);
+            return (
+              <div key={member.id} className="team-member">
+                {/* Large Initial Letter */}
+                <div className="team-member-name-initial">
+                  <h1>{getInitial(member.name)}</h1>
                 </div>
 
-                {/* Member Info */}
-                <div className="team-member-info">
-                  <p className="team-member-role">( {member.title} )</p>
-                  <h1
-                    className="team-member-name"
-                    style={{
-                      '--name-font-size-desktop': fontSize.desktop,
-                      '--name-font-size-mobile': fontSize.mobile,
-                    } as React.CSSProperties}
-                  >
-                    {nameParts.first} <span>{nameParts.last}</span>
-                  </h1>
+                {/* Team Member Card */}
+                <div className="team-member-card">
+                  {/* Member Image */}
+                  <div className="team-member-img">
+                    <img src={member.image} alt={member.name} />
+                  </div>
+
+                  {/* Member Info */}
+                  <div className="team-member-info">
+                    <p className="team-member-role">( {member.title} )</p>
+                    <h1
+                      className="team-member-name"
+                      style={{
+                        '--name-font-size-desktop': fontSize.desktop,
+                        '--name-font-size-mobile': fontSize.mobile,
+                      } as React.CSSProperties}
+                    >
+                      {nameParts.first} <span>{nameParts.last}</span>
+                    </h1>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </section>
+            );
+          })}
+        </div>
 
-      {/* Outro Section */}
-      <section className="team-outro">
-        <h1>Building Tomorrow's Structures</h1>
+        {/* Outro Section */}
+        <div className="team-outro">
+          <h1>Building Tomorrow's Structures</h1>
+        </div>
       </section>
     </>
   );

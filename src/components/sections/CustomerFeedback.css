@@ -11,8 +11,8 @@
   position: relative;
   width: 100vw;
   height: 100svh;
-  background-color: var(--concrete-900);
-  color: var(--concrete-100);
+  background-color: var(--concrete-100);
+  color: var(--concrete-900);
   overflow: hidden;
 }
 
@@ -49,7 +49,7 @@
 .feedback-bottom-bar-content p {
   font-family: "Messina Sans Mono", monospace;
   font-size: 0.875rem;
-  color: var(--concrete-100);
+  color: var(--concrete-900);
   opacity: 0.7;
 }
 
@@ -87,8 +87,8 @@
   width: 65%;
   max-width: 800px;
   padding: 4rem;
-  background-color: var(--concrete-100);
-  border: 2px dashed var(--concrete-900);
+  background-color: var(--concrete-900);
+  border: 2px dashed var(--concrete-100);
   border-radius: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -114,7 +114,7 @@
   font-size: 1.5rem;
   line-height: 1.7;
   font-weight: 400;
-  color: var(--concrete-900);
+  color: var(--concrete-100);
   text-align: center;
 }
 
@@ -124,7 +124,7 @@
   flex-direction: column;
   gap: 0.5rem;
   padding-top: 1.5rem;
-  border-top: 1px dashed rgba(26, 26, 26, 0.15);
+  border-top: 1px dashed rgba(233, 236, 239, 0.15);
 }
 
 .feedback-author h4 {
@@ -143,7 +143,7 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--concrete-900);
+  color: var(--concrete-100);
   opacity: 0.7;
 }
 
@@ -167,7 +167,7 @@
 .progress-indicator {
   width: 1px;
   height: 50%;
-  background-color: rgba(233, 236, 239, 0.3);
+  background-color: rgba(26, 26, 26, 0.3);
 }
 
 .progress-bar {
@@ -176,8 +176,8 @@
   left: 0;
   width: 0%;
   height: 100%;
-  border: 1px solid var(--concrete-100);
-  background-color: rgba(233, 236, 239, 0.1);
+  border: 1px solid var(--concrete-900);
+  background-color: rgba(26, 26, 26, 0.1);
   transform-origin: left;
   will-change: width;
   transition: none; /* Animated by GSAP */
@@ -187,39 +187,25 @@
    RESPONSIVE - MOBILE
    ============================================ */
 @media (max-width: 1000px) {
-  /* Disable horizontal scroll on mobile */
-  .feedback-scroll-section {
-    height: auto;
-    min-height: 100svh;
-  }
-
-  .feedback-scroll-wrapper {
-    width: 100%;
-    flex-direction: column;
-    height: auto;
-    transform: none !important;
-  }
-
+  /* Keep horizontal scroll on mobile - just adjust sizing */
   .feedback-card {
-    width: 100%;
-    height: auto;
-    min-height: 100svh;
     padding: 2rem 1rem;
   }
 
   .feedback-card-content {
-    width: 100%;
+    width: 80%;
+    max-width: 600px;
     padding: 2.5rem 1.5rem;
   }
 
   /* Typography - Mobile */
   .feedback-copy p {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     line-height: 1.6;
   }
 
   .feedback-author h4 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 
   .feedback-author p.mono {
@@ -240,9 +226,11 @@
     font-size: 0.75rem;
   }
 
-  /* Progress Bar - Hide on Mobile */
+  /* Progress Bar - Keep visible but smaller */
   .feedback-progress-bar {
-    display: none;
+    width: 30%;
+    min-width: 200px;
+    bottom: 2rem;
   }
 }
 

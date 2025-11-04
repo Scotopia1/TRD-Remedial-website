@@ -57,7 +57,7 @@ export function CustomerFeedback() {
     const wrapper = wrapperRef.current;
     const progressBar = progressBarRef.current;
 
-    // Calculate how far to translate
+    // Calculate how far to translate - works on all screen sizes
     const calculateDimensions = () => {
       const wrapperWidth = wrapper.offsetWidth;
       const viewportWidth = window.innerWidth;
@@ -79,6 +79,7 @@ export function CustomerFeedback() {
       pinSpacing: true,
       scrub: isSafari && isIOS ? 0.5 : 1,
       invalidateOnRefresh: true,
+      refreshPriority: 6,
       onRefresh: () => {
         moveDistance = calculateDimensions();
       },

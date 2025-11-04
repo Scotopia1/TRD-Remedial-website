@@ -35,7 +35,7 @@ export default function Home() {
           {/* Why TRD Remedial - GSAP Scroll Animation */}
           <WhyChooseTRD />
 
-          {/* Services Showcase - SPOTLIGHT Style */}
+          {/* Services Spotlight - CGMWTAUGUST2025 Spotlight Pattern */}
           <ServicesSpotlight />
 
           {/* Case Studies - CGMWTMAY2025 Otis Valen Style */}

@@ -21,6 +21,16 @@
 }
 
 /* ============================================
+   WRAPPER SECTION (Consolidates all 3 parts)
+   ============================================ */
+.team-scroll-reveal-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--team-bg-dark);
+}
+
+/* ============================================
    SECTION BASE STYLES
    ============================================ */
 .team-hero,

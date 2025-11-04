@@ -30,34 +30,44 @@ export function Menu() {
   const [shouldDelayClose, setShouldDelayClose] = useState(false);
   const previousPathRef = useRef(pathname);
   const scrollPositionRef = useRef(0);
+  const [isOnLightBackground, setIsOnLightBackground] = useState(false);
+  const [showMenuHint, setShowMenuHint] = useState(false);
 
   // Initialize window width on client
   useEffect(() => {
     setWindowWidth(window.innerWidth);
   }, []);
 
+  // Show menu hint for 3 seconds AFTER loading completes
+  useEffect(() => {
+    if (!isLoading) {
+      // Start hint animation after loading is done
+      setShowMenuHint(true);
+
+      const timer = setTimeout(() => {
+        setShowMenuHint(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
+
   const toggleBodyScroll = (disableScroll: boolean) => {
     if (disableScroll) {
+      // Save current scroll position
       scrollPositionRef.current = window.pageYOffset;
+
+      // Prevent scroll without position: fixed (avoids visual jump)
+      document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollPositionRef.current}px`;
-      document.body.style.width = '100%';
-      document.body.style.left = '0';
-      document.body.style.right = '0';
+      document.body.style.paddingRight = `${window.innerWidth - document.documentElement.clientWidth}px`;
     } else {
-      const scrollY = scrollPositionRef.current;
-
-      // Remove fixed positioning and restore overflow
-      document.body.style.removeProperty('position');
-      document.body.style.removeProperty('top');
-      document.body.style.removeProperty('left');
-      document.body.style.removeProperty('right');
-      document.body.style.removeProperty('width');
+      // Restore scroll
+      document.documentElement.style.removeProperty('overflow');
       document.body.style.removeProperty('overflow');
+      document.body.style.removeProperty('padding-right');
 
-      // Restore scroll position synchronously
-      window.scrollTo(0, scrollY);
+      // No need to restore scroll position - user stays where they were
     }
   };
 
@@ -175,10 +185,49 @@ export function Menu() {
 
   useEffect(() => {
     return () => {
-      if (document.body.style.position === 'fixed') {
+      // Cleanup: restore scroll if component unmounts with menu open
+      if (document.body.style.overflow === 'hidden') {
         toggleBodyScroll(false);
       }
     };
+  }, []);
+
+  // Detect section background color and adapt logo
+  useEffect(() => {
+    // Sections with light/white backgrounds
+    const lightSections = [
+      '.feedback-scroll-section', // CustomerFeedback
+      '.cs-header', // CaseStudies header
+      '.cs-work-items', // CaseStudies items
+      '.backed-by-strength-studio', // BackedByStrengthStudio (if white)
+    ];
+
+    const observerOptions = {
+      threshold: [0, 0.5, 1],
+      rootMargin: '-80px 0px 0px 0px', // Account for menu bar height
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+          // Check if this section is a light section
+          const isLight = lightSections.some((selector) =>
+            entry.target.matches(selector)
+          );
+          setIsOnLightBackground(isLight);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe all major sections
+    const sections = document.querySelectorAll(
+      'section, .feedback-scroll-section, .cs-header, .cs-work-items'
+    );
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -191,8 +240,19 @@ export function Menu() {
         <div className="menu-bar-container">
           <div className="menu-actions">
             <div className="menu-toggle">
-              <button className="logo-menu-button" onClick={toggleMenu}>
-                <img src="/trd-logo.svg" alt="TRD Menu" className="logo-icon" />
+              <button
+                className={`logo-menu-button ${showMenuHint ? 'menu-hint' : ''}`}
+                onClick={toggleMenu}
+              >
+                <img
+                  src="/trd-logo.svg"
+                  alt="TRD Menu"
+                  className="logo-icon"
+                  style={{
+                    filter: isOnLightBackground ? 'invert(1) brightness(0)' : 'none',
+                    transition: 'filter 0.5s ease',
+                  }}
+                />
               </button>
             </div>
           </div>

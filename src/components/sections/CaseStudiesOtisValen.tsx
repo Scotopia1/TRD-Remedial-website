@@ -146,7 +146,8 @@ export function CaseStudiesOtisValen() {
 
       const trigger = ScrollTrigger.create({
         trigger: row as HTMLElement,
-        start: "top 75%",
+        start: "top 80%",
+        refreshPriority: 8,
         onEnter: () => {
           gsap.timeline().to(workItems, {
             duration: 1,

@@ -68,6 +68,7 @@ export function WhyChooseTRD() {
       pin: true,
       scrub: 1,
       pinSpacing: false,
+      refreshPriority: 10,
       onUpdate: (self) => {
         if (!headers[0] || !headers[1] || !headers[2]) return;
 
@@ -101,9 +102,10 @@ export function WhyChooseTRD() {
         trigger: textContainerRef.current,
         pin: textContainerRef.current,
         start: 'top top',
-        end: `+=${window.innerHeight * 4}`,
+        end: `+=${window.innerHeight * 3}`,
         pinSpacing: true,
         scrub: 1,
+        refreshPriority: 10,
         onUpdate: (self) => {
           const progress = self.progress;
           const words = Array.from(textRef.current!.querySelectorAll('.word'));
@@ -113,88 +115,46 @@ export function WhyChooseTRD() {
             const wordText = word.querySelector('span');
             if (!wordText) return;
 
-            if (progress <= 0.7) {
-              // Phase 1: Reveal animation (0-70%)
-              const progressTarget = 0.7;
-              const revealProgress = Math.min(1, progress / progressTarget);
+            // Reveal animation - words stay visible once revealed
+            const overlapWords = 15;
+            const totalAnimationLength = 1 + overlapWords / totalWords;
 
-              const overlapWords = 15;
-              const totalAnimationLength = 1 + overlapWords / totalWords;
+            const wordStart = index / totalWords;
+            const wordEnd = wordStart + overlapWords / totalWords;
 
-              const wordStart = index / totalWords;
-              const wordEnd = wordStart + overlapWords / totalWords;
+            const timelineScale =
+              1 /
+              Math.min(
+                totalAnimationLength,
+                1 + (totalWords - 1) / totalWords + overlapWords / totalWords
+              );
 
-              const timelineScale =
-                1 /
-                Math.min(
-                  totalAnimationLength,
-                  1 + (totalWords - 1) / totalWords + overlapWords / totalWords
-                );
+            const adjustedStart = wordStart * timelineScale;
+            const adjustedEnd = wordEnd * timelineScale;
+            const duration = adjustedEnd - adjustedStart;
 
-              const adjustedStart = wordStart * timelineScale;
-              const adjustedEnd = wordEnd * timelineScale;
-              const duration = adjustedEnd - adjustedStart;
+            const wordProgress =
+              progress <= adjustedStart
+                ? 0
+                : progress >= adjustedEnd
+                ? 1
+                : (progress - adjustedStart) / duration;
 
-              const wordProgress =
-                revealProgress <= adjustedStart
-                  ? 0
-                  : revealProgress >= adjustedEnd
-                  ? 1
-                  : (revealProgress - adjustedStart) / duration;
+            // Word opacity
+            (word as HTMLElement).style.opacity = String(wordProgress);
 
-              // Word opacity
-              (word as HTMLElement).style.opacity = String(wordProgress);
+            // Background fade
+            const backgroundFadeStart = wordProgress >= 0.9 ? (wordProgress - 0.9) / 0.1 : 0;
+            const backgroundOpacity = Math.max(0, 1 - backgroundFadeStart);
+            (word as HTMLElement).style.backgroundColor = `rgba(${wordHighlightBgColor}, ${backgroundOpacity})`;
 
-              // Background fade
-              const backgroundFadeStart = wordProgress >= 0.9 ? (wordProgress - 0.9) / 0.1 : 0;
-              const backgroundOpacity = Math.max(0, 1 - backgroundFadeStart);
-              (word as HTMLElement).style.backgroundColor = `rgba(${wordHighlightBgColor}, ${backgroundOpacity})`;
-
-              // Text reveal
-              const textRevealThreshold = 0.9;
-              const textRevealProgress =
-                wordProgress >= textRevealThreshold
-                  ? (wordProgress - textRevealThreshold) / (1 - textRevealThreshold)
-                  : 0;
-              (wordText as HTMLElement).style.opacity = String(Math.pow(textRevealProgress, 0.5));
-            } else {
-              // Phase 2: Reverse animation (70-100%)
-              const reverseProgress = (progress - 0.7) / 0.3;
-              (word as HTMLElement).style.opacity = '1';
-              const targetTextOpacity = 1;
-
-              const reverseOverlapWords = 5;
-              const reverseWordStart = index / totalWords;
-              const reverseWordEnd = reverseWordStart + reverseOverlapWords / totalWords;
-
-              const reverseTimelineScale =
-                1 /
-                Math.max(
-                  1,
-                  (totalWords - 1) / totalWords + reverseOverlapWords / totalWords
-                );
-
-              const reverseAdjustedStart = reverseWordStart * reverseTimelineScale;
-              const reverseAdjustedEnd = reverseWordEnd * reverseTimelineScale;
-              const reverseDuration = reverseAdjustedEnd - reverseAdjustedStart;
-
-              const reverseWordProgress =
-                reverseProgress <= reverseAdjustedStart
-                  ? 0
-                  : reverseProgress >= reverseAdjustedEnd
-                  ? 1
-                  : (reverseProgress - reverseAdjustedStart) / reverseDuration;
-
-              if (reverseWordProgress > 0) {
-                (wordText as HTMLElement).style.opacity = String(
-                  targetTextOpacity * (1 - reverseWordProgress)
-                );
-                (word as HTMLElement).style.backgroundColor = `rgba(${wordHighlightBgColor}, ${reverseWordProgress})`;
-              } else {
-                (wordText as HTMLElement).style.opacity = String(targetTextOpacity);
-                (word as HTMLElement).style.backgroundColor = `rgba(${wordHighlightBgColor}, 0)`;
-              }
-            }
+            // Text reveal (stays visible once revealed)
+            const textRevealThreshold = 0.9;
+            const textRevealProgress =
+              wordProgress >= textRevealThreshold
+                ? (wordProgress - textRevealThreshold) / (1 - textRevealThreshold)
+                : 0;
+            (wordText as HTMLElement).style.opacity = String(Math.pow(textRevealProgress, 0.5));
           });
         },
       });
