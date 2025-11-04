@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function TeamScrollReveal() {
   const lenisRef = useRef<any>(null);
-  const teamSectionRef = useRef<HTMLElement>(null);
+  const teamSectionRef = useRef<HTMLDivElement>(null);
   const cardPlaceholderEntranceRef = useRef<ScrollTrigger | null>(null);
   const cardSlideInAnimationRef = useRef<ScrollTrigger | null>(null);
 

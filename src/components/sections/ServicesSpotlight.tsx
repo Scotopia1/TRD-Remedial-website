@@ -232,6 +232,9 @@ const ServicesSpotlight = () => {
         }
         // ==================== PHASE 3: Main Animation (25-95%) ====================
         else if (progress > 0.25 && progress <= 0.95) {
+          // Null check for required elements
+          if (!titlesContainer || !titleElements) return;
+
           // Maintain background and intro text state
           gsap.set(".spotlight-bg-img", { transform: "scale(1)" });
           gsap.set(".spotlight-bg-img img", { transform: "scale(1)" });
@@ -335,13 +338,13 @@ const ServicesSpotlight = () => {
         <div className="spotlight-intro-text-wrapper">
           <div
             className="spotlight-intro-text"
-            ref={(el) => (introTextElementsRef.current[0] = el)}
+            ref={(el) => { introTextElementsRef.current[0] = el; }}
           >
             <p>Comprehensive</p>
           </div>
           <div
             className="spotlight-intro-text"
-            ref={(el) => (introTextElementsRef.current[1] = el)}
+            ref={(el) => { introTextElementsRef.current[1] = el; }}
           >
             <p>Solutions</p>
           </div>
