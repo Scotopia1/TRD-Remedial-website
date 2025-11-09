@@ -27,7 +27,7 @@ export function errorResponse(error: string, status = 400) {
 export function validationErrorResponse(zodError: ZodError) {
   const errors: Record<string, string[]> = {}
 
-  zodError.errors.forEach((err) => {
+  zodError.issues.forEach((err) => {
     const path = err.path.join('.')
     if (!errors[path]) {
       errors[path] = []

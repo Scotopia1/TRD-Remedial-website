@@ -6,6 +6,7 @@ import { AccessibilityProvider } from "@/components/providers/AccessibilityProvi
 import { StructuredData } from "@/components/seo/StructuredData";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { Menu } from "@/components/layout/Menu";
 import { Footer } from "@/components/sections/Footer";
 
@@ -130,6 +131,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AccessibilityProvider>
+          <ScrollToTop />
           <Menu />
           <CustomCursor />
           <ScrollProgress />
