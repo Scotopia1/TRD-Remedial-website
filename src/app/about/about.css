@@ -1,0 +1,255 @@
+.about-page {
+  width: 100%;
+  background-color: var(--concrete-900);
+  color: var(--concrete-100);
+}
+
+/* Hero Section */
+.about-hero {
+  min-height: 90svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.about-hero-content {
+  width: 100%;
+  max-width: 1400px;
+}
+
+.about-hero-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+}
+
+.about-hero-row-right {
+  justify-content: flex-end;
+}
+
+.about-hero-title {
+  font-family: "Rader", sans-serif;
+  font-size: clamp(4rem, 12vw, 10rem);
+  font-weight: 900;
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--concrete-100);
+}
+
+/* Description Section */
+.about-description {
+  padding: 8rem 2rem 10rem;
+}
+
+.about-description-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.about-description-image {
+  width: 30%;
+  min-width: 300px;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.about-description-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.about-description-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.about-description-paragraph {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.75rem;
+  line-height: 1.5;
+  color: var(--concrete-200);
+  text-align: center;
+  max-width: 900px;
+}
+
+/* CTA Section */
+.about-cta {
+  padding: 8rem 2rem;
+  background-color: var(--concrete-800);
+}
+
+.about-cta-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.about-cta-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.about-cta-label {
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--trd-accent);
+}
+
+.about-cta-intro {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--concrete-300);
+}
+
+.about-cta-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.about-cta-heading {
+  font-family: "Rader", sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--concrete-100);
+}
+
+.about-cta-buttons {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.about-cta-button {
+  padding: 1.25rem 2.5rem;
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--concrete-900);
+  background-color: var(--trd-accent);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.about-cta-button:hover {
+  background-color: #ff8555;
+  transform: translateY(-2px);
+}
+
+.about-cta-button-secondary {
+  background-color: transparent;
+  color: var(--concrete-100);
+  border: 2px solid var(--concrete-300);
+}
+
+.about-cta-button-secondary:hover {
+  background-color: var(--concrete-300);
+  color: var(--concrete-900);
+  border-color: var(--concrete-300);
+}
+
+/* Responsive Design */
+@media (max-width: 1000px) {
+  .about-hero {
+    min-height: 70svh;
+  }
+
+  .about-hero-title {
+    font-size: clamp(3rem, 10vw, 6rem);
+  }
+
+  .about-description {
+    padding: 5rem 2rem 6rem;
+  }
+
+  .about-description-image {
+    width: 50%;
+    min-width: 250px;
+  }
+
+  .about-description-paragraph {
+    font-size: 1.25rem;
+  }
+
+  .about-cta-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .about-cta-heading {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .about-hero-row {
+    justify-content: center;
+  }
+
+  .about-hero-row-right {
+    justify-content: center;
+  }
+
+  .about-hero-title {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+
+  .about-description {
+    padding: 4rem 1.5rem 5rem;
+  }
+
+  .about-description-image {
+    width: 80%;
+  }
+
+  .about-description-paragraph {
+    font-size: 1.125rem;
+  }
+
+  .about-cta {
+    padding: 5rem 1.5rem;
+  }
+
+  .about-cta-buttons {
+    flex-direction: column;
+  }
+
+  .about-cta-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .about-cta-button {
+    transition: none;
+  }
+
+  .about-cta-button:hover {
+    transform: none;
+  }
+}

@@ -16,37 +16,37 @@ export function CaseStudiesOtisValen() {
       title: "Carbon Fibre Bridge Repair",
       category: "Structural Reinforcement",
       image: "https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=800&h=600&fit=crop",
-      href: "/case-studies/carbon-fibre-bridge",
+      href: "/projects/westfield-carpark-carbon-fibre-strengthening",
     },
     {
       title: "Sydney Tower GPR Scanning",
       category: "Non-Destructive Testing",
       image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop",
-      href: "/case-studies/gpr-scanning",
+      href: "/projects/bondi-apartment-slab-scanning",
     },
     {
       title: "Warehouse Floor Crack Injection",
       category: "Concrete Repair",
       image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop",
-      href: "/case-studies/crack-injection",
+      href: "/projects/greenacre-plaza-post-tension-repair",
     },
     {
       title: "Parking Structure Reinforcement",
       category: "Carbon Fibre Systems",
       image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=600&fit=crop",
-      href: "/case-studies/parking-structure",
+      href: "/projects/penrith-warehouse-carbon-fibre-upgrade",
     },
     {
       title: "Retail Complex Line Marking",
       category: "Traffic Management",
       image: "https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=800&h=600&fit=crop",
-      href: "/case-studies/line-marking",
+      href: "/projects/liverpool-shopping-precinct-carpark",
     },
     {
       title: "Industrial Safety Fixtures",
       category: "Fall Protection",
       image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop",
-      href: "/case-studies/safety-fixtures",
+      href: "/projects/olympic-park-safety-handrails",
     },
   ];
 

@@ -1,0 +1,157 @@
+// TRD Website Admin Panel - Prisma Schema
+// This schema defines all content models for the admin panel
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Services Model (6 services)
+model Service {
+  id           String    @id @default(cuid())
+  slug         String    @unique
+  title        String
+  tagline      String
+  description  String    @db.Text
+  features     String[]
+  benefits     String[]
+  icon         String
+  visual       String
+  heroImage    String?
+  featureImage String?
+  processImage String?
+  stats        Json?
+  process      Json?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  projects Project[] @relation("ServiceProjects")
+
+  @@index([slug])
+}
+
+// Projects Model (12 projects)
+model Project {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  name            String
+  location        String
+  date            DateTime
+  serviceType     String
+  serviceId       String
+  service         Service  @relation("ServiceProjects", fields: [serviceId], references: [id])
+  categories      String[]
+  featuredImage   String
+  thumbnailImage  String
+  heroImage       String
+  tagline         String
+  challenge       String   @db.Text
+  solution        String   @db.Text
+  results         String   @db.Text
+  beforeImage     Json?
+  afterImage      Json?
+  galleryImages   Json?
+  stats           Json?
+  testimonial     Json?
+  timeline        String?
+  budget          String?
+  teamMembers     TeamMember[] @relation("ProjectTeam")
+  relatedProjects Project[]    @relation("RelatedProjects")
+  relatedTo       Project[]    @relation("RelatedProjects")
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@index([slug])
+  @@index([serviceId])
+  @@index([date])
+}
+
+// Team Members Model (3 members)
+model TeamMember {
+  id        String   @id @default(cuid())
+  name      String
+  title     String
+  roles     String[]
+  expertise String[]
+  bio       String   @db.Text
+  image     String
+  linkedIn  String?
+  projects  Project[] @relation("ProjectTeam")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Company Values Model (8 values)
+model CompanyValue {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  image       String?
+  isText      Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([order])
+}
+
+// Case Studies Model (3 case studies)
+model CaseStudy {
+  id        String   @id @default(cuid())
+  title     String
+  location  String
+  challenge String   @db.Text
+  solution  String[] @db.Text
+  result    String   @db.Text
+  metrics   Json?
+  images    Json?
+  visual    String?  // timeline, slider, 3d-visualization
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Media Library for file management
+model Media {
+  id        String   @id @default(cuid())
+  filename  String
+  url       String
+  mimeType  String
+  size      Int
+  alt       String?
+  caption   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([mimeType])
+  @@index([createdAt])
+}
+
+// Site Settings (singleton)
+model SiteSettings {
+  id              String   @id @default("main")
+  contactEmail    String
+  contactPhone    String
+  contactAddress  String   @db.Text
+  businessHours   String
+  siteTitle       String
+  siteDescription String   @db.Text
+  updatedAt       DateTime @updatedAt
+}
+
+// Admin Users
+model User {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique  // Clerk user ID
+  email     String   @unique
+  name      String
+  role      String   @default("editor")  // admin, editor, viewer
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([clerkId])
+  @@index([email])
+}

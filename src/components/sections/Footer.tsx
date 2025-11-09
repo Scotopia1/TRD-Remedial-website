@@ -30,7 +30,7 @@ export function Footer() {
             <span>Services</span>
             <span>&#8594;</span>
           </Link>
-          <Link href="/case-studies" className="footer-nav-item">
+          <Link href="/projects" className="footer-nav-item">
             <span>Projects</span>
             <span>&#8594;</span>
           </Link>

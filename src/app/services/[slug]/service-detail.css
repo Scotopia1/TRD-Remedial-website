@@ -1,0 +1,456 @@
+/* Service Detail Page Styles - Based on CGMWTFEB2025 Project Page */
+
+.service-detail-page {
+  width: 100%;
+  background-color: var(--concrete-900);
+  color: var(--concrete-100);
+}
+
+/* 1. Hero Section - 100svh */
+.service-hero {
+  display: flex;
+  width: 100vw;
+  height: 100svh;
+  position: relative;
+}
+
+.service-hero-image {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-hero-content {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 5%;
+  background: var(--concrete-900);
+}
+
+.service-hero-text {
+  max-width: 600px;
+}
+
+.service-hero-title {
+  font-family: "Rader", sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 0.9;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  color: var(--concrete-100);
+}
+
+.service-hero-tagline {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.5rem;
+  color: var(--concrete-300);
+  line-height: 1.5;
+}
+
+/* Section Spacing */
+.service-section {
+  width: 100vw;
+  padding: 8rem 0;
+}
+
+.service-content {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.service-content-wide {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+  align-items: center;
+}
+
+/* Section Titles */
+.section-title {
+  font-family: "Rader", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--concrete-100);
+  margin-bottom: 2rem;
+}
+
+.section-copy {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: var(--concrete-300);
+  max-width: 800px;
+}
+
+/* 2. Overview Section */
+.service-overview {
+  background: var(--concrete-900);
+}
+
+/* 3. Features Visual */
+.service-features-visual {
+  width: 100vw;
+  height: 100svh;
+  padding: 0;
+  position: relative;
+}
+
+.feature-image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 4. Features List */
+.service-features-list {
+  background: var(--concrete-800);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-item {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.125rem;
+  color: var(--concrete-100);
+  padding: 1.5rem;
+  background: var(--concrete-900);
+  border-left: 3px solid var(--trd-accent);
+  border-radius: 0.5rem;
+}
+
+/* 5. Benefits Section */
+.service-benefits {
+  background: var(--concrete-900);
+}
+
+.benefits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.benefit-item {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--concrete-200);
+  padding-left: 2rem;
+  position: relative;
+}
+
+/* 6. Stats Section */
+.service-stats {
+  background: var(--concrete-800);
+  padding: 10rem 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 4rem;
+}
+
+.stat {
+  border-top: 1px solid rgba(255, 255, 255, 0.125);
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stat-value {
+  font-family: "Rader", sans-serif;
+  font-size: 6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--trd-accent);
+}
+
+.stat-label {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--concrete-300);
+}
+
+/* 7. Process Visual */
+.service-process-visual {
+  width: 100vw;
+  height: 100svh;
+  padding: 0;
+  position: relative;
+}
+
+.process-image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 8. Process Steps */
+.service-process {
+  background: var(--concrete-900);
+}
+
+.process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.process-step {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.process-step:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.step-number {
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--trd-accent);
+  line-height: 1;
+}
+
+.step-title {
+  font-family: "Rader", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--concrete-100);
+  margin-bottom: 0.5rem;
+}
+
+.step-description {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--concrete-300);
+}
+
+/* 9. CTA Section */
+.service-cta {
+  background: linear-gradient(135deg, var(--concrete-900) 0%, #1a1a1a 100%);
+  padding: 10rem 0;
+}
+
+.cta-title {
+  font-family: "Rader", sans-serif;
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--concrete-100);
+  margin-bottom: 1.5rem;
+}
+
+.cta-description {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.25rem;
+  color: var(--concrete-300);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.button-primary,
+.button-secondary {
+  display: inline-block;
+  padding: 1.25rem 3rem;
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.button-primary {
+  background: var(--trd-accent);
+  color: white;
+  border: 2px solid var(--trd-accent);
+}
+
+.button-primary:hover {
+  background: #ff5722;
+  border-color: #ff5722;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+}
+
+.button-secondary {
+  background: transparent;
+  color: var(--concrete-100);
+  border: 2px solid var(--concrete-100);
+}
+
+.button-secondary:hover {
+  background: var(--concrete-100);
+  color: var(--concrete-900);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design - Mobile < 900px */
+@media (max-width: 900px) {
+  .service-hero {
+    flex-direction: column-reverse;
+    height: 200svh;
+  }
+
+  .service-hero-image {
+    width: 100%;
+    height: 50%;
+  }
+
+  .service-hero-content {
+    width: 100%;
+    height: 50%;
+    padding: 0 8%;
+  }
+
+  .service-hero-title {
+    font-size: 2.5rem;
+  }
+
+  .service-hero-tagline {
+    font-size: 1.125rem;
+  }
+
+  .service-section {
+    padding: 5rem 0;
+  }
+
+  .service-content {
+    width: 100%;
+    padding: 0 8%;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .section-copy {
+    font-size: 1rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .feature-item {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  .benefit-item {
+    font-size: 1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .stat-value {
+    font-size: 4rem;
+  }
+
+  .process-step {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .step-number {
+    font-size: 2rem;
+  }
+
+  .step-title {
+    font-size: 1.5rem;
+  }
+
+  .step-description {
+    font-size: 1rem;
+  }
+
+  .cta-title {
+    font-size: 3rem;
+  }
+
+  .cta-description {
+    font-size: 1rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cta-buttons a,
+  .cta-buttons button {
+    width: 100%;
+  }
+}
+
+/* Tablet */
+@media (max-width: 640px) {
+  .service-features-visual,
+  .service-process-visual {
+    height: 60svh;
+  }
+
+  .service-stats {
+    padding: 6rem 0;
+  }
+
+  .service-cta {
+    padding: 6rem 0;
+  }
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .button-secondary {
+    transition: none;
+  }
+}

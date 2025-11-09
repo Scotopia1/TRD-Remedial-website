@@ -42,10 +42,10 @@ export const HERO_STATS = [
 // Navigation Links
 export const NAV_LINKS = [
   { label: 'Home', href: '/' },
-  { label: 'Services', href: '#services' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Services', href: '/services' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ] as const;
 
 // Animation Duration

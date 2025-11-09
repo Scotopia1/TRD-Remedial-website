@@ -11,9 +11,9 @@ export function Menu() {
   const menuLinks = [
     { path: '/', label: 'Home' },
     { path: '/services', label: 'Services' },
+    { path: '/projects', label: 'Projects' },
     { path: '/about', label: 'About' },
     { path: '/contact', label: 'Contact' },
-    { path: '/faq', label: 'FAQ' },
   ];
 
   const pathname = usePathname();

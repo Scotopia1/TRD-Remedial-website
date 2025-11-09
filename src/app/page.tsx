@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { Hero } from '@/components/sections/Hero';
-import { Footer } from '@/components/sections/Footer';
 import { OpeningAnimation } from '@/components/animations/OpeningAnimation';
 import { WhyChooseTRD } from '@/components/sections/WhyChooseTRD';
 import ServicesSpotlight from '@/components/sections/ServicesSpotlight';
@@ -56,9 +55,6 @@ export default function Home() {
           {/* Backed by Strength - CGMWTJUNE2025 Wu Wei Studio Pattern */}
           <BackedByStrengthStudio />
         </main>
-
-        {/* Footer */}
-        <Footer />
       </div>
     </>
   );

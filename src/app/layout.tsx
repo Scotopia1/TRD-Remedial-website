@@ -7,6 +7,7 @@ import { StructuredData } from "@/components/seo/StructuredData";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { Menu } from "@/components/layout/Menu";
+import { Footer } from "@/components/sections/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -135,6 +136,7 @@ export default function RootLayout({
           <SmoothScrollProvider>
             {children}
           </SmoothScrollProvider>
+          <Footer />
         </AccessibilityProvider>
       </body>
     </html>

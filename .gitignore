@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# prisma
+/src/generated/prisma
+
+# test files
+test-*.ts
+test-*.js
+api-manual-tests.http
+
+# system files
+nul
