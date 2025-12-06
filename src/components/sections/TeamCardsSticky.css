@@ -1,0 +1,203 @@
+/* Team Cards Section - Desktop Animated Version */
+.team-desktop.team-cards-section {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  background-color: var(--concrete-900);
+}
+
+.sticky-header {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 250vw;
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  will-change: transform;
+}
+
+.sticky-header h1 {
+  margin: 0;
+  color: var(--concrete-700);
+  font-family: 'Rader', sans-serif;
+  font-size: 28vw;
+  font-weight: 900;
+  letter-spacing: -0.5rem;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+.team-card {
+  position: absolute;
+  top: 10%;
+  left: 100%;
+  width: 325px;
+  height: 500px;
+  background-color: var(--concrete-800);
+  border-radius: 1rem;
+  padding: 1rem;
+  will-change: transform;
+  z-index: 2;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Unified grey accent color for all cards */
+#team-card-1 {
+  background-color: var(--trd-accent); /* TRD Grey */
+}
+
+#team-card-2 {
+  background-color: var(--trd-accent); /* TRD Grey */
+}
+
+#team-card-3 {
+  background-color: var(--trd-accent); /* TRD Grey */
+}
+
+.team-card .team-card-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.team-card .team-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-card-content {
+  width: 100%;
+  height: 275px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.team-card-title h2 {
+  margin: 0;
+  font-family: 'Rader', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.05rem;
+  line-height: 1.2;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.team-card-description p {
+  margin: 0;
+  font-family: 'Messina Sans', sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
+
+/* Mobile static section */
+.team-mobile.team-cards-section {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  background-color: var(--concrete-900);
+  padding: 2rem 1rem;
+  display: none;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mobile-header {
+  position: static;
+  width: 100%;
+  height: auto;
+  display: block;
+  will-change: auto;
+  margin-bottom: 0.5rem;
+}
+
+.mobile-header h1 {
+  margin: 0 0 0.5rem 0;
+  color: var(--concrete-100);
+  font-family: 'Rader', sans-serif;
+  font-size: 2.25rem;
+  font-weight: 900;
+  letter-spacing: -0.06rem;
+  line-height: 110%;
+  text-transform: uppercase;
+}
+
+/* Mobile breakpoint - hide desktop, show mobile */
+@media (max-width: 999px) {
+  .team-desktop.team-cards-section {
+    display: none;
+  }
+
+  .team-mobile.team-cards-section {
+    display: flex;
+  }
+
+  .team-card {
+    position: static;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    max-width: 680px;
+    margin: 0 auto;
+    will-change: auto;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .team-card .team-card-image {
+    height: 240px;
+    margin-bottom: 1rem;
+  }
+
+  .team-card-content {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow: visible;
+  }
+
+  .team-card-title h2 {
+    font-size: 1.5rem;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+
+  .team-card-description p {
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+}
+
+/* Desktop breakpoint - show desktop, hide mobile */
+@media (min-width: 1000px) {
+  .team-mobile.team-cards-section {
+    display: none;
+  }
+
+  .team-desktop.team-cards-section {
+    display: block;
+  }
+}

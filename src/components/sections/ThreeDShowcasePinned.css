@@ -1,0 +1,274 @@
+/* 3D Showcase Pinned - WonJyou Style with TRD Branding */
+
+.three-d-showcase-pinned {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--concrete-900);
+  overflow: hidden;
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.showcase-bg-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  background-image: radial-gradient(circle at 20% 50%, rgba(255,107,53,0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(255,107,53,0.2) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.showcase-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Main 3D/2D Viewer */
+.showcase-viewer {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  height: 700px;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  background-color: var(--concrete-800);
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Service Text Overlays - WonJyou Style */
+.service-text-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 3rem;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 26, 0.85) 0%,
+    rgba(26, 26, 26, 0.75) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.service-text-content {
+  max-width: 800px;
+}
+
+.service-text-title {
+  font-family: "Rader", sans-serif;
+  font-weight: bold;
+  font-size: 4rem;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--trd-secondary);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.service-text-description {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--trd-secondary);
+  opacity: 0.85;
+}
+
+/* View Mode Toggle (Bottom Right) */
+.showcase-toggle-wrapper {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 20;
+}
+
+.showcase-toggle-buttons {
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 0.75rem;
+  padding: 0.25rem;
+}
+
+.showcase-toggle-btn {
+  padding: 0.75rem 1.5rem;
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.showcase-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.showcase-toggle-btn.active {
+  background: var(--trd-accent);
+  color: var(--trd-secondary);
+  box-shadow: 0 4px 12px rgba(66, 66, 66, 0.3);
+  transform: scale(1.05);
+}
+
+/* Scroll Progress Indicator (Top Left) */
+.showcase-scroll-indicator {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  z-index: 20;
+}
+
+.showcase-scroll-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.showcase-scroll-text {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+.showcase-scroll-bar {
+  width: 96px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.showcase-scroll-progress {
+  height: 100%;
+  background: var(--trd-accent);
+  border-radius: 2px;
+  transition: width 0.15s ease-out;
+}
+
+/* Mobile: Service List (No Pinning) */
+.mobile-services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+.mobile-service-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.mobile-service-title {
+  font-family: "Rader", sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  color: var(--trd-secondary);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.mobile-service-description {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsive - Tablet */
+@media (max-width: 1024px) {
+  .showcase-viewer {
+    height: 600px;
+  }
+
+  .service-text-title {
+    font-size: 3rem;
+  }
+
+  .service-text-description {
+    font-size: 1.1rem;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .three-d-showcase-pinned {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .showcase-container {
+    padding: 1rem;
+    flex-direction: column;
+  }
+
+  .showcase-viewer {
+    height: 500px;
+  }
+
+  .service-text-overlay {
+    display: none; /* Hidden on mobile - use service list instead */
+  }
+
+  .showcase-scroll-indicator {
+    display: none;
+  }
+
+  .showcase-toggle-wrapper {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .showcase-toggle-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .service-text-overlay,
+  .showcase-toggle-btn,
+  .showcase-scroll-progress {
+    transition: none !important;
+  }
+}

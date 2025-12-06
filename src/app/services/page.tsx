@@ -1,0 +1,111 @@
+'use client';
+
+import './services.css';
+import Link from 'next/link';
+import { SERVICES } from '@/data/services';
+import { AnimatedH1 } from '@/components/animations/AnimatedH1';
+import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
+import { ParallaxImage } from '@/components/animations/ParallaxImage';
+import { useStore } from '@/stores/useStore';
+
+export default function ServicesPage() {
+  const setCursorVariant = useStore((state) => state.setCursorVariant);
+
+  return (
+    <div className="services-page">
+      {/* Hero Section - 100svh */}
+      <section className="services-hero">
+        <div className="services-hero-content">
+          <AnimatedH1 delay={0.5} className="services-hero-title">
+            Our Services
+          </AnimatedH1>
+          <AnimatedCopy delay={0.7} tag="p" className="services-hero-description">
+            Six specialized solutions for structural remediation.
+            <br />
+            Precision engineering meets proven expertise.
+          </AnimatedCopy>
+        </div>
+      </section>
+
+      {/* Services Grid - Each 100svh */}
+      <section className="services-grid">
+        {SERVICES.map((service, index) => (
+          <Link
+            key={service.id}
+            href={`/services/${service.slug}`}
+            className="service-card"
+            onMouseEnter={() => setCursorVariant('hover')}
+            onMouseLeave={() => setCursorVariant('default')}
+          >
+            {/* Parallax Background Image */}
+            <div className="service-card-image">
+              <ParallaxImage
+                src={service.visual}
+                alt={service.title}
+                speed={0.2}
+              />
+            </div>
+
+            {/* Overlay with Service Info */}
+            <div className="service-overlay">
+              <div className="service-number">
+                {String(index + 1).padStart(2, '0')}
+              </div>
+              <AnimatedH1
+                animateOnScroll={true}
+                className="service-title"
+              >
+                {service.title}
+              </AnimatedH1>
+              <AnimatedCopy
+                animateOnScroll={true}
+                delay={0.15}
+                tag="p"
+                className="service-tagline"
+              >
+                {service.tagline}
+              </AnimatedCopy>
+            </div>
+
+            {/* Hover Arrow Indicator */}
+            <div className="service-arrow">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </div>
+          </Link>
+        ))}
+      </section>
+
+      {/* CTA Section */}
+      <section className="services-cta">
+        <AnimatedH1 animateOnScroll={true} className="services-cta-title">
+          Need Expert Advice?
+        </AnimatedH1>
+        <AnimatedCopy
+          animateOnScroll={true}
+          delay={0.15}
+          tag="p"
+          className="services-cta-description"
+        >
+          Contact our team for a free consultation and site assessment.
+        </AnimatedCopy>
+        <Link
+          href="/contact"
+          className="services-cta-button"
+          onMouseEnter={() => setCursorVariant('cta')}
+          onMouseLeave={() => setCursorVariant('default')}
+        >
+          Get In Touch
+        </Link>
+      </section>
+    </div>
+  );
+}

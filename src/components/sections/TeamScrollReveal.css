@@ -1,0 +1,314 @@
+/* ============================================
+   TEAM SCROLL REVEAL - TRD WEBSITE
+   Adapted from: TEAM PAGE LIKE A SCROLL-CONTROLLED REVEAL
+   Phase 1: Foundation & Styling (No animations yet)
+   ============================================ */
+
+/* ============================================
+   COLOR VARIABLES - GREYSCALE PALETTE
+   ============================================ */
+:root {
+  /* Concrete Palette - Already defined in globals.css */
+  /* Using existing TRD greyscale colors */
+
+  /* Team Section Specific Colors */
+  --team-bg-dark: var(--concrete-900);
+  --team-text-light: var(--concrete-100);
+  --team-accent: var(--trd-accent);
+  --team-border: rgba(233, 236, 239, 0.35); /* concrete-100 with opacity */
+  --team-card-bg: var(--concrete-100);
+  --team-card-text: var(--concrete-900);
+}
+
+/* ============================================
+   WRAPPER SECTION (Consolidates all 3 parts)
+   ============================================ */
+.team-scroll-reveal-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--team-bg-dark);
+}
+
+/* ============================================
+   SECTION BASE STYLES
+   ============================================ */
+.team-hero,
+.team-reveal,
+.team-outro {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.team-hero {
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--team-bg-dark);
+}
+
+.team-hero h1 {
+  width: 75%;
+  color: var(--team-accent);
+  font-size: 12rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.8;
+  font-family: "Rader", sans-serif;
+}
+
+/* ============================================
+   TEAM REVEAL SECTION
+   ============================================ */
+.team-reveal {
+  height: 100svh;
+  display: flex;
+  gap: 1rem;
+  background-color: var(--team-bg-dark);
+}
+
+/* ============================================
+   TEAM MEMBER CONTAINERS
+   ============================================ */
+.team-member {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 2px dashed var(--team-border);
+  border-radius: 1.5rem;
+  will-change: transform;
+}
+
+/* Z-index stacking for layered entrance */
+.team-member:nth-child(1) {
+  z-index: 2;
+}
+
+.team-member:nth-child(2) {
+  z-index: 1;
+}
+
+.team-member:nth-child(3) {
+  z-index: 0;
+}
+
+/* ============================================
+   TEAM MEMBER - INITIAL LETTER
+   ============================================ */
+.team-member-name-initial {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.team-member-name-initial h1 {
+  color: var(--team-accent);
+  font-size: 20rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1;
+  will-change: transform;
+  font-family: "Rader", sans-serif;
+}
+
+/* ============================================
+   TEAM MEMBER CARD
+   ============================================ */
+.team-member-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  background-color: var(--team-card-bg);
+  border-radius: 1.5rem;
+  will-change: transform;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Member Image */
+.team-member-img {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.team-member-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Member Info */
+.team-member-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+.team-member-role {
+  text-transform: uppercase;
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--team-card-text);
+  line-height: 1;
+}
+
+.team-member-name {
+  font-size: var(--name-font-size-desktop, 6.5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.9;
+  color: var(--team-accent);
+  font-family: "Rader", sans-serif;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: manual;
+  max-width: 100%;
+  width: 100%;
+  display: block;
+  white-space: normal;
+  text-align: center;
+}
+
+.team-member-name span {
+  color: var(--team-card-text);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: inline;
+  white-space: normal;
+}
+
+/* ============================================
+   INITIAL ANIMATION STATES
+   (Ready for Phase 2 animations)
+   ============================================ */
+
+/* Members start below viewport */
+.team-member {
+  transform: translateY(125%);
+}
+
+/* Initial letters start scaled to 0 */
+.team-member-name-initial h1 {
+  transform: scale(0);
+}
+
+/* Cards start off-screen right with rotation */
+.team-member:nth-child(1) .team-member-card {
+  transform: translate(300%, -50%) scale(0.75) rotate(20deg);
+}
+
+.team-member:nth-child(2) .team-member-card {
+  transform: translate(200%, -50%) scale(0.75) rotate(20deg);
+}
+
+.team-member:nth-child(3) .team-member-card {
+  transform: translate(100%, -50%) scale(0.75) rotate(20deg);
+}
+
+/* ============================================
+   OUTRO SECTION
+   ============================================ */
+.team-outro {
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--team-bg-dark);
+}
+
+.team-outro h1 {
+  width: 75%;
+  color: var(--team-accent);
+  font-size: 12rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.8;
+  font-family: "Rader", sans-serif;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - MOBILE
+   ============================================ */
+@media (max-width: 1000px) {
+  /* Hero & Outro Typography */
+  .team-hero h1,
+  .team-outro h1 {
+    width: 100%;
+    font-size: 4rem;
+  }
+
+  /* Team Section - Stack Vertically */
+  .team-reveal {
+    height: 250svh;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Team Members - Mobile Layout */
+  .team-member {
+    max-width: 400px;
+    transform: translateY(0%) !important;
+  }
+
+  /* Initial Letters - Always Visible on Mobile */
+  .team-member-name-initial h1 {
+    transform: scale(1);
+    font-size: 12rem;
+  }
+
+  /* Cards - Centered on Mobile */
+  .team-member .team-member-card {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg) !important;
+  }
+
+  /* Member Name - Smaller on Mobile */
+  .team-member-name {
+    font-size: var(--name-font-size-mobile, 5rem);
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY - REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  /* Reset all transforms for reduced motion */
+  .team-member,
+  .team-member-name-initial h1,
+  .team-member-card {
+    transform: none !important;
+  }
+
+  /* Disable will-change */
+  .team-member,
+  .team-member-name-initial h1,
+  .team-member-card {
+    will-change: auto !important;
+  }
+}

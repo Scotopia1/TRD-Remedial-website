@@ -1,0 +1,355 @@
+/* Leadership Team Interactive - CodeGrid Pattern with TRD Branding */
+
+.leadership-team-interactive {
+  position: relative;
+  width: 100%;
+  background-color: var(--trd-secondary);
+}
+
+/* =====================================================
+   HERO SECTION - CodeGrid Interactive Pattern
+   ===================================================== */
+
+.team-interactive-hero {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: var(--trd-primary);
+  color: var(--trd-secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5em;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+/* Profile Images Row */
+.profile-images {
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+}
+
+.img {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  padding: 5px;
+  cursor: pointer;
+  will-change: width, height;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.img .profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.img:hover .profile-image {
+  filter: grayscale(0%);
+}
+
+/* Profile Names - Massive Typography */
+.profile-names {
+  width: 100%;
+  height: 15rem;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  overflow: hidden;
+}
+
+.name h1 {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Rader", sans-serif;
+  font-size: clamp(3rem, 10vw, 15rem);
+  font-weight: 900;
+  letter-spacing: -0.2rem;
+  line-height: 1.1;
+  color: var(--trd-accent);
+  user-select: none;
+  transform: translateY(100%);
+  will-change: transform;
+  padding: 0 1rem;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.name.default h1 {
+  color: var(--trd-secondary);
+  transform: translateY(-100%);
+}
+
+.name h1 .letter {
+  position: relative;
+  display: inline-block;
+  transform: translateY(0%);
+  will-change: transform;
+}
+
+/* =====================================================
+   DETAIL CARDS SECTION
+   ===================================================== */
+
+.team-details-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--trd-secondary);
+  padding: 4rem 0;
+}
+
+.team-details-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.team-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.team-detail-card {
+  position: relative;
+  background-color: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform, box-shadow;
+}
+
+.team-detail-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Image */
+.detail-card-image {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+}
+
+.detail-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.team-detail-card:hover .detail-card-image img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+.detail-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 50%,
+    rgba(26, 26, 26, 0.8) 100%
+  );
+  pointer-events: none;
+}
+
+/* Card Content */
+.detail-card-content {
+  padding: 1.5rem;
+}
+
+.detail-card-name {
+  font-family: "Rader", sans-serif;
+  font-size: 1.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--trd-primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.detail-card-title {
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--trd-accent);
+  margin-bottom: 1rem;
+}
+
+.detail-card-bio {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--concrete-600);
+  margin-bottom: 1.25rem;
+}
+
+/* Expertise Tags */
+.detail-card-expertise {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.expertise-tag {
+  padding: 0.4rem 0.875rem;
+  background-color: var(--concrete-100);
+  color: var(--concrete-700);
+  font-family: "Messina Sans", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 0.375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.expertise-tag.more {
+  background-color: rgba(66, 66, 66, 0.1);
+  color: var(--trd-accent);
+}
+
+/* LinkedIn Link */
+.detail-card-linkedin {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--trd-accent);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 0.5rem 0;
+}
+
+.detail-card-linkedin:hover {
+  color: var(--trd-primary);
+}
+
+.linkedin-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.detail-card-linkedin:hover .linkedin-icon {
+  transform: scale(1.1);
+}
+
+/* =====================================================
+   RESPONSIVE - MOBILE
+   ===================================================== */
+
+@media screen and (max-width: 900px) {
+  .team-interactive-hero {
+    flex-direction: column-reverse;
+    min-height: auto;
+    padding: 3rem 1rem;
+  }
+
+  .profile-images {
+    flex-wrap: wrap;
+    max-width: 90%;
+    justify-content: center;
+  }
+
+  .img {
+    width: 60px;
+    height: 60px;
+    padding: 2.5px;
+  }
+
+  .profile-names {
+    height: 4rem;
+    margin-bottom: 2rem;
+  }
+
+  .name h1 {
+    font-size: 4rem;
+    letter-spacing: 0;
+  }
+
+  .team-details-section {
+    padding: 2rem 0;
+  }
+
+  .team-details-container {
+    padding: 0 1rem;
+  }
+
+  .team-details-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .detail-card-image {
+    height: 280px;
+  }
+
+  .detail-card-name {
+    font-size: 1.5rem;
+  }
+}
+
+/* Responsive - Tablet */
+@media screen and (min-width: 901px) and (max-width: 1200px) {
+  .name h1 {
+    font-size: 12rem;
+  }
+
+  .profile-names {
+    height: 12rem;
+  }
+
+  .team-details-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Responsive - Large Screens */
+@media screen and (min-width: 1400px) {
+  .team-details-container {
+    max-width: 1600px;
+  }
+
+  .team-details-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* =====================================================
+   ACCESSIBILITY - Reduced Motion
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .img,
+  .team-detail-card,
+  .detail-card-image img,
+  .linkedin-icon {
+    transition: none !important;
+  }
+
+  .name h1 .letter {
+    transform: none !important;
+  }
+}

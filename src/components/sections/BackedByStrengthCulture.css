@@ -1,0 +1,363 @@
+/* Backed by Strength Culture - CGMWTSEPT2025 Pattern with TRD Branding */
+
+.backed-by-strength-culture {
+  position: relative;
+  width: 100%;
+  background-color: var(--trd-secondary);
+}
+
+/* =====================================================
+   STRENGTH HERO SECTION
+   ===================================================== */
+
+.strength-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.strength-hero .strength-hero-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+.strength-hero .strength-hero-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(0.6);
+}
+
+.strength-hero .strength-hero-header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.strength-hero .strength-hero-header h1 {
+  width: 100%;
+  font-family: "Rader", sans-serif;
+  font-size: 20vw;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.25vw;
+  color: var(--trd-secondary);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.strength-hero .strength-hero-footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.strength-hero .strength-hero-footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: rgba(245, 245, 245, 0.7);
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* =====================================================
+   CAPABILITIES GRID SECTION
+   ===================================================== */
+
+.capabilities-grid {
+  position: relative;
+  width: 100%;
+  background-color: var(--trd-secondary);
+  overflow: hidden;
+}
+
+.capability-row {
+  width: 100%;
+  display: flex;
+}
+
+.capability-col {
+  flex: 1;
+  aspect-ratio: 1;
+}
+
+.capability-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.capability-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0) brightness(0.85) contrast(1.0125);
+}
+
+.capability-img[data-origin="left"] {
+  transform-origin: 0% 0%;
+}
+
+.capability-img[data-origin="right"] {
+  transform-origin: 100% 0%;
+}
+
+/* Pinned Header */
+.capabilities-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.capabilities-header h2 {
+  font-family: "Rader", sans-serif;
+  font-size: 10vw;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.15vw;
+  color: var(--trd-accent);
+}
+
+/* =====================================================
+   SPLIT ELEMENT DIVIDER
+   ===================================================== */
+
+.split-element {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--trd-secondary);
+  overflow: hidden;
+}
+
+.split-element .container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.split-element .split-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%);
+}
+
+.split-element .split-img img {
+  width: 100%;
+  height: 50%;
+  object-fit: contain;
+  will-change: transform;
+  filter: grayscale(100%) opacity(0.15);
+}
+
+.split-element .split-top {
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+}
+
+.split-element .split-top img {
+  transform: scale(1.5);
+}
+
+.split-element .split-bottom {
+  clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+}
+
+.split-element .split-bottom img {
+  transform: scale(2);
+}
+
+/* Copy Overlay */
+.split-element .split-copy {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  background-color: var(--trd-accent);
+  color: var(--trd-secondary);
+  text-align: center;
+  transform: translateY(-50%);
+  overflow: hidden;
+}
+
+.split-element .split-copy p {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.split-element .split-copy p span {
+  white-space: nowrap;
+}
+
+/* =====================================================
+   COMPANY MISSION SECTION
+   ===================================================== */
+
+.company-mission {
+  position: relative;
+  width: 100%;
+  padding: 4rem 0 8rem 0;
+  background-color: var(--trd-secondary);
+  color: var(--concrete-600);
+}
+
+.company-mission .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  text-align: center;
+}
+
+.company-mission .mission-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.company-mission .mission-header p {
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--trd-accent);
+}
+
+.company-mission .mission-header h3 {
+  font-family: "Rader", sans-serif;
+  font-size: 4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--trd-primary);
+}
+
+.company-mission .mission-copy {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  color: var(--concrete-600);
+}
+
+.company-mission .mission-copy p {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1rem;
+  line-height: 1.8;
+  text-align: left;
+}
+
+/* =====================================================
+   RESPONSIVE - MOBILE
+   ===================================================== */
+
+@media (max-width: 1000px) {
+  /* Hero */
+  .strength-hero .strength-hero-header h1 {
+    font-size: 30vw;
+  }
+
+  /* Capabilities Header */
+  .capabilities-header h2 {
+    font-size: 15vw;
+  }
+
+  /* Split Element */
+  .split-element {
+    height: 75vh;
+  }
+
+  .split-element .split-copy p {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1rem;
+    row-gap: 0.5rem;
+    padding: 1rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  /* Mission */
+  .company-mission .mission-header h3 {
+    font-size: 3rem;
+  }
+
+  .company-mission .mission-copy {
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   RESPONSIVE - TABLET
+   ===================================================== */
+
+@media (min-width: 1001px) and (max-width: 1400px) {
+  .strength-hero .strength-hero-header h1 {
+    font-size: 18vw;
+  }
+
+  .capabilities-header h2 {
+    font-size: 12vw;
+  }
+
+  .company-mission .mission-header h3 {
+    font-size: 3.5rem;
+  }
+
+  .company-mission .mission-copy {
+    width: 75%;
+  }
+}
+
+/* =====================================================
+   ACCESSIBILITY - Reduced Motion
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .capability-img {
+    transition: none !important;
+  }
+
+  .split-element .split-img img {
+    transform: none !important;
+  }
+}
