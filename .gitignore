@@ -12,7 +12,8 @@
 
 # Testing
 /coverage
-test-results/
+/tests/
+/test-results/
 playwright-report/
 playwright/.cache/
 *.spec.ts.snap
@@ -106,6 +107,9 @@ test-*.mjs
 api-manual-tests.http
 *.test.local.*
 
+# Documentation
+/docs/
+
 # Claude Code Files & Directories
 .claude/
 *_PLAN.md
@@ -126,8 +130,6 @@ api-manual-tests.http
 *_report.md
 IMPLEMENTATION_*.md
 PHASE_*.md
-docs/*-Implementation-Plan.md
-docs/*-implementation-plan.md
 
 # Misc
 .turbo
