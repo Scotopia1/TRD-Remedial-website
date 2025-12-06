@@ -128,8 +128,14 @@ api-manual-tests.http
 *_phase*.md
 *_REPORT.md
 *_report.md
+*_REFERENCE.md
+*_reference.md
+*_CHECKLIST.md
+*_checklist.md
 IMPLEMENTATION_*.md
 PHASE_*.md
+COMPONENT_LIBRARY_REFERENCE.md
+TESTING_CHECKLIST.md
 
 # Misc
 .turbo
