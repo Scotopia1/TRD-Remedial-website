@@ -106,8 +106,28 @@ test-*.mjs
 api-manual-tests.http
 *.test.local.*
 
-# Claude Settings
-.claude/settings.local.json
+# Claude Code Files & Directories
+.claude/
+*_PLAN.md
+*_plan.md
+*PLAN*.md
+*plan*.md
+*_IMPLEMENTATION*.md
+*_implementation*.md
+*_COMPLETE.md
+*_complete.md
+*_SUMMARY.md
+*_summary.md
+*_CHANGELOG.md
+*_changelog.md
+*_PHASE*.md
+*_phase*.md
+*_REPORT.md
+*_report.md
+IMPLEMENTATION_*.md
+PHASE_*.md
+docs/*-Implementation-Plan.md
+docs/*-implementation-plan.md
 
 # Misc
 .turbo
