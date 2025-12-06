@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+# Dependencies
 /node_modules
 /.pnp
 .pnp.*
@@ -10,50 +10,105 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
+# Testing
 /coverage
+test-results/
+playwright-report/
+playwright/.cache/
+*.spec.ts.snap
 
-# next.js
+# Next.js
 /.next/
 /out/
+.next/
 
-# production
+# Production
 /build
+/dist
 
-# misc
-.DS_Store
-*.pem
+# Environment Files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
 
-# debug
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Prisma
+/src/generated/prisma
+prisma/migrations/
+*.db
+*.db-journal
+
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+lerna-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# Debug
+node_modules.nosync
 
-# vercel
-.vercel
+# IDE & Editor Files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
 
-# prisma
-/src/generated/prisma
-
-# test files
-test-*.ts
-test-*.js
-api-manual-tests.http
-
-# system files
+# Temporary & Backup Files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*~
 nul
 _nul
 
-# claude settings
+# Certificates
+*.pem
+*.key
+*.cert
+*.crt
+
+# Test Files (manual tests only)
+test-*.ts
+test-*.js
+test-*.mjs
+api-manual-tests.http
+*.test.local.*
+
+# Claude Settings
 .claude/settings.local.json
 
-# test results
-test-results/
+# Misc
+.turbo
+.contentlayer
