@@ -165,6 +165,16 @@ body {
   color: var(--fg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* iOS Touch Optimization */
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Ensure smooth scrolling on main container for iOS */
+html {
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 
 img {
@@ -337,9 +347,7 @@ textarea::placeholder {
 }
 
 /* Smooth Scroll - Enhanced with Lenis */
-html {
-  scroll-behavior: smooth;
-}
+/* scroll-behavior removed - conflicts with GSAP ScrollTrigger on iOS */
 
 html.lenis {
   height: auto;

@@ -20,6 +20,12 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     // Check if on mobile
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
+    // Configure ScrollTrigger for iOS (runs on both mobile and desktop)
+    ScrollTrigger.config({
+      ignoreMobileResize: true, // Prevents jumps when iOS address bar appears/disappears
+      autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load'
+    });
+
     // Only enable smooth scroll on desktop
     if (isMobile) return;
 
