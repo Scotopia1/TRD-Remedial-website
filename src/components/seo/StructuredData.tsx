@@ -6,7 +6,7 @@ export function StructuredData() {
     name: "TRD Remedial",
     legalName: "Tension Reinforced Developments",
     url: "https://thetrdgroup.com.au",
-    logo: "https://thetrdgroup.com.au/images/logo.svg",
+    logo: "https://thetrdgroup.com.au/trd-logo.svg",
     foundingDate: "2017",
     founders: [
       {

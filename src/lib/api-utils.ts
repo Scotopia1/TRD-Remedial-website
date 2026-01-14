@@ -2,6 +2,7 @@
 import { NextResponse } from 'next/server'
 import { ZodError } from 'zod'
 import { Prisma } from '@prisma/client'
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 
 export type ApiResponse<T = any> = {
   success: boolean
@@ -54,7 +55,7 @@ export function handleApiError(error: unknown) {
   }
 
   // Prisma errors
-  if (error instanceof Prisma.PrismaClientKnownRequestError) {
+  if (error instanceof PrismaClientKnownRequestError) {
     switch (error.code) {
       case 'P2002':
         return errorResponse('A record with this value already exists', 409)
