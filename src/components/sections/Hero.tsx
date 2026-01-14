@@ -3,7 +3,11 @@
 import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
 import './Hero.css';
 
-export function Hero() {
+interface HeroProps {
+  showContent?: boolean;
+}
+
+export function Hero({ showContent = true }: HeroProps) {
   return (
     <section className="hero">
       <div className="hero-img">
@@ -20,13 +24,13 @@ export function Hero() {
       </div>
 
       <div className="hero-header">
-        <AnimatedCopy tag="h1" animateOnScroll={false} delay={0.7}>
+        <AnimatedCopy tag="h1" animateOnScroll={false} delay={0.1} trigger={showContent}>
           THE
         </AnimatedCopy>
-        <AnimatedCopy tag="h1" animateOnScroll={false} delay={0.8}>
+        <AnimatedCopy tag="h1" animateOnScroll={false} delay={0.2} trigger={showContent}>
           REMEDIAL
         </AnimatedCopy>
-        <AnimatedCopy tag="h1" animateOnScroll={false} delay={0.9}>
+        <AnimatedCopy tag="h1" animateOnScroll={false} delay={0.3} trigger={showContent}>
           EXPERTS
         </AnimatedCopy>
       </div>

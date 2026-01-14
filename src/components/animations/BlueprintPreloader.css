@@ -1,0 +1,231 @@
+/* Blueprint Preloader - Technical Drawing Animation */
+
+:root {
+  --bp-bg-color: #000000;
+  --bp-accent-color: #ffffff;
+  --bp-ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --bp-reveal-ease: cubic-bezier(0.77, 0, 0.175, 1);
+  --bp-sync-speed: 2.2s;
+}
+
+/* --- THE UNIFIED LOADER CONTAINER --- */
+.blueprint-loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: all;
+  background-color: transparent;
+}
+
+.blueprint-loader-container.phase-4 {
+  pointer-events: none;
+}
+
+/* --- INITIAL BLACK COVER --- */
+.initial-black-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  z-index: 10;
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+/* Fade out black cover when phase 1 starts */
+.blueprint-loader-container.phase-1 .initial-black-cover {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --- BACKDROP BLUR LAYER --- */
+.backdrop-blur-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 1;
+  transition: opacity var(--bp-sync-speed) var(--bp-reveal-ease),
+              backdrop-filter var(--bp-sync-speed) var(--bp-reveal-ease),
+              -webkit-backdrop-filter var(--bp-sync-speed) var(--bp-reveal-ease);
+}
+
+/* --- OVERLAY SVG --- */
+.overlay-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+/* Dark overlay rect */
+.dark-overlay {
+  fill: rgba(0, 0, 0, 0.75);
+  transition: opacity var(--bp-sync-speed) var(--bp-reveal-ease);
+}
+
+/* Mask circles - expand to reveal content */
+.mask-circle {
+  transition: transform var(--bp-sync-speed) var(--bp-reveal-ease);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* Branding Units */
+.branding-unit {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.unit-circle {
+  fill: none;
+  stroke: var(--bp-accent-color);
+  stroke-width: 1px;
+  opacity: 0.3;
+}
+
+/* Text styling: clean outline using masks to hide internal glyph overlaps */
+.branding-text-stroke {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 90px;
+  fill: var(--bp-accent-color);
+  stroke: var(--bp-accent-color);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  opacity: 0;
+  transform: scale(1.15);
+  filter: blur(8px) drop-shadow(1px 1px 2px rgba(0,0,0,0.5));
+  transition: opacity 0.4s ease, transform 0.6s var(--bp-ease-out-expo), filter 0.6s var(--bp-ease-out-expo);
+}
+
+/* Technical Blueprint Lines */
+.const-line {
+  stroke: var(--bp-accent-color);
+  stroke-width: 0.6px;
+  fill: none;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  opacity: 0.15;
+  transition: stroke-dashoffset 2s var(--bp-ease-out-expo),
+              transform var(--bp-sync-speed) var(--bp-reveal-ease),
+              opacity 1.5s var(--bp-reveal-ease);
+  transform-origin: center;
+}
+
+.const-line.heavy {
+  stroke-width: 1.2px;
+  opacity: 0.3;
+}
+
+.const-line.dashed {
+  stroke-dasharray: 4, 4;
+}
+
+.tick-label {
+  font-size: 6px;
+  fill: var(--bp-accent-color);
+  opacity: 0;
+  transition: opacity 1s ease 0.5s, transform var(--bp-sync-speed) var(--bp-reveal-ease);
+  transform-origin: center;
+}
+
+/* --- PHASE 1: Blueprint Draw & Units Appear --- */
+.blueprint-loader-container.phase-1 .const-line {
+  stroke-dashoffset: 0;
+}
+
+.blueprint-loader-container.phase-1 .tick-label {
+  opacity: 0.2;
+}
+
+.blueprint-loader-container.phase-1 .branding-unit {
+  opacity: 1;
+}
+
+/* --- PHASE 2: The Component Snap Reveal --- */
+.blueprint-loader-container.phase-2 .branding-text-stroke {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0px);
+  animation: text-flicker 0.4s step-end forwards;
+}
+
+@keyframes text-flicker {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  40% { opacity: 0.4; }
+  60% { opacity: 1; }
+  80% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* --- PHASE 3: Circles Expand to Reveal Content --- */
+
+/* Mask circles expand to reveal more content */
+.blueprint-loader-container.phase-3 .mask-circle {
+  transform: scale(45);
+}
+
+/* Blueprint lines zoom out and fade */
+.blueprint-loader-container.phase-3 .floorplan-layer,
+.blueprint-loader-container.phase-3 .main-axes {
+  transform: scale(45);
+}
+
+/* Branding units just fade out - NO zoom */
+.blueprint-loader-container.phase-3 .branding-unit {
+  opacity: 0;
+  transition: opacity 0.8s var(--bp-reveal-ease) !important;
+}
+
+.blueprint-loader-container.phase-3 .const-line,
+.blueprint-loader-container.phase-3 .tick-label {
+  opacity: 0;
+  transition: opacity 1s var(--bp-reveal-ease), transform var(--bp-sync-speed) var(--bp-reveal-ease) !important;
+}
+
+/* Blur fades out */
+.blueprint-loader-container.phase-3 .backdrop-blur-layer {
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  opacity: 0;
+}
+
+/* Dark overlay fades */
+.blueprint-loader-container.phase-3 .dark-overlay {
+  opacity: 0;
+}
+
+/* --- PHASE 4: Fade out completely --- */
+.blueprint-loader-container.phase-4 {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 768px) {
+  .branding-text-stroke {
+    font-size: 70px;
+  }
+
+  .tick-label {
+    font-size: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .branding-text-stroke {
+    font-size: 55px;
+  }
+}

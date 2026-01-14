@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Hero } from '@/components/sections/Hero';
-import { OpeningAnimation } from '@/components/animations/OpeningAnimation';
-import { WhyChooseTRD } from '@/components/sections/WhyChooseTRD';
+import { BlueprintPreloader } from '@/components/animations/BlueprintPreloader';
+import { IntroStats } from '@/components/sections/IntroStats';
 import ServicesSpotlight from '@/components/sections/ServicesSpotlight';
 import { CaseStudiesOtisValen } from '@/components/sections/CaseStudiesOtisValen';
 // import { ThreeDShowcasePinned } from '@/components/sections/ThreeDShowcasePinned';
@@ -15,24 +15,24 @@ import { EmergencyCTA } from '@/components/sections/EmergencyCTA';
 export default function Home() {
   const [openingComplete, setOpeningComplete] = useState(false);
 
-  const handleOpeningComplete = () => {
+  const handleOpeningComplete = useCallback(() => {
     setOpeningComplete(true);
-  };
+  }, []);
 
   return (
     <>
-      {/* Opening Animation - Now includes asset loading */}
-      <OpeningAnimation onComplete={handleOpeningComplete} />
+      {/* Blueprint Preloader - SVG animation with T-R-D reveal */}
+      <BlueprintPreloader onComplete={handleOpeningComplete} />
 
-      {/* Main Content - Shows after opening animation */}
-      <div className={`transition-opacity duration-500 ${openingComplete ? 'opacity-100' : 'opacity-0'}`}>
-        {/* Main Content */}
-        <main id="main-content" aria-label="Main content">
-          {/* Hero Section */}
-          <Hero />
+      {/* Main Content */}
+      <main id="main-content" aria-label="Main content">
+        {/* Hero Section - Video always visible, text appears after loading */}
+        <Hero showContent={openingComplete} />
 
-          {/* Why TRD Remedial - GSAP Scroll Animation */}
-          <WhyChooseTRD />
+        {/* Rest of content - Shows after opening animation */}
+        <div className={`transition-opacity duration-500 ${openingComplete ? 'opacity-100' : 'opacity-0'}`}>
+          {/* Intro Stats - CGMWTNOV2025 Intro Pattern */}
+          <IntroStats />
 
           {/* Services Spotlight - CGMWTAUGUST2025 Spotlight Pattern */}
           <ServicesSpotlight />
@@ -54,8 +54,8 @@ export default function Home() {
 
           {/* Backed by Strength - CGMWTJUNE2025 Wu Wei Studio Pattern */}
           <BackedByStrengthStudio />
-        </main>
-      </div>
+        </div>
+      </main>
     </>
   );
 }

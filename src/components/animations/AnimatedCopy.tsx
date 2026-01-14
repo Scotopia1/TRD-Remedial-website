@@ -20,6 +20,7 @@ interface AnimatedCopyProps {
   animateOnScroll?: boolean;
   direction?: 'top' | 'bottom';
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div';
+  trigger?: boolean;
 }
 
 export function AnimatedCopy({
@@ -33,11 +34,13 @@ export function AnimatedCopy({
   animateOnScroll = true,
   direction = 'bottom',
   tag = 'p',
+  trigger = true,
 }: AnimatedCopyProps) {
   const copyRef = useRef<HTMLElement>(null);
   const [copyId, setCopyId] = useState<string | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
   const textSplitRef = useRef<SplitType | null>(null);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
     setCopyId(`copy-${Math.floor(Math.random() * 10000)}`);
@@ -79,7 +82,14 @@ export function AnimatedCopy({
 
   useGSAP(
     () => {
+      // Wait for initialization and trigger (if using trigger mode)
       if (!isInitialized || !copyRef.current) return;
+      // For non-scroll animations, wait for trigger and prevent re-animation
+      if (!animateOnScroll && (!trigger || hasAnimated.current)) return;
+
+      if (!animateOnScroll) {
+        hasAnimated.current = true;
+      }
 
       const tl = gsap.timeline({
         defaults: {
@@ -121,6 +131,7 @@ export function AnimatedCopy({
         ease,
         stagger,
         direction,
+        trigger,
       ],
     }
   );
