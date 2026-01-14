@@ -18,6 +18,10 @@
   z-index: 9999;
   pointer-events: all;
   background-color: transparent;
+  /* GPU acceleration for smoother animations */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: opacity;
 }
 
 .blueprint-loader-container.phase-4 {
@@ -56,6 +60,9 @@
   transition: opacity var(--bp-sync-speed) var(--bp-reveal-ease),
               backdrop-filter var(--bp-sync-speed) var(--bp-reveal-ease),
               -webkit-backdrop-filter var(--bp-sync-speed) var(--bp-reveal-ease);
+  will-change: opacity, backdrop-filter;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 /* --- OVERLAY SVG --- */
@@ -79,12 +86,14 @@
   transition: transform var(--bp-sync-speed) var(--bp-reveal-ease);
   transform-origin: center;
   transform-box: fill-box;
+  will-change: transform;
 }
 
 /* Branding Units */
 .branding-unit {
   opacity: 0;
   transition: opacity 0.5s ease;
+  will-change: opacity;
 }
 
 .unit-circle {
@@ -120,6 +129,14 @@
   transition: stroke-dashoffset 2s var(--bp-ease-out-expo),
               transform var(--bp-sync-speed) var(--bp-reveal-ease),
               opacity 1.5s var(--bp-reveal-ease);
+  transform-origin: center;
+  will-change: stroke-dashoffset, opacity;
+}
+
+/* Layer groups that scale */
+.floorplan-layer,
+.main-axes {
+  will-change: transform, opacity;
   transform-origin: center;
 }
 
@@ -214,9 +231,44 @@
 }
 
 /* --- RESPONSIVE ADJUSTMENTS --- */
-@media (max-width: 768px) {
-  .branding-text-stroke {
-    font-size: 70px;
+
+/* Mobile-first touch and scroll handling */
+.blueprint-loader-container {
+  touch-action: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+}
+
+/* Safe area support for notched devices */
+@supports (padding: env(safe-area-inset-top)) {
+  .blueprint-loader-container {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Use svh for better mobile viewport handling */
+@supports (height: 100svh) {
+  .blueprint-loader-container {
+    height: 100svh;
+  }
+
+  .backdrop-blur-layer,
+  .initial-black-cover {
+    height: 100svh;
+  }
+}
+
+/* Tablet screens */
+@media (max-width: 1024px) {
+  .const-line {
+    stroke-width: 0.5px;
+  }
+
+  .const-line.heavy {
+    stroke-width: 1px;
   }
 
   .tick-label {
@@ -224,8 +276,137 @@
   }
 }
 
+/* Mobile screens */
+@media (max-width: 768px) {
+  .backdrop-blur-layer {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .const-line {
+    stroke-width: 0.4px;
+    opacity: 0.1;
+  }
+
+  .const-line.heavy {
+    stroke-width: 0.8px;
+    opacity: 0.2;
+  }
+
+  .tick-label {
+    font-size: 4px;
+    opacity: 0;
+  }
+
+  .blueprint-loader-container.phase-1 .tick-label {
+    opacity: 0.15;
+  }
+
+  .unit-circle {
+    stroke-width: 0.8px;
+  }
+}
+
+/* Small mobile screens */
 @media (max-width: 480px) {
-  .branding-text-stroke {
-    font-size: 55px;
+  .backdrop-blur-layer {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .const-line {
+    stroke-width: 0.3px;
+  }
+
+  .const-line.heavy {
+    stroke-width: 0.6px;
+  }
+
+  .tick-label {
+    display: none;
+  }
+
+  /* Reduce circle expansion on small screens for performance */
+  .blueprint-loader-container.phase-3 .mask-circle {
+    transform: scale(35);
+  }
+
+  .blueprint-loader-container.phase-3 .floorplan-layer,
+  .blueprint-loader-container.phase-3 .main-axes {
+    transform: scale(35);
+  }
+}
+
+/* Very small screens (iPhone SE, etc.) */
+@media (max-width: 375px) {
+  .backdrop-blur-layer {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .blueprint-loader-container.phase-3 .mask-circle {
+    transform: scale(30);
+  }
+
+  .blueprint-loader-container.phase-3 .floorplan-layer,
+  .blueprint-loader-container.phase-3 .main-axes {
+    transform: scale(30);
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 896px) and (orientation: landscape) {
+  .blueprint-loader-container {
+    height: 100vh;
+    height: 100svh;
+  }
+
+  /* Reduce blur for landscape as content is more visible */
+  .backdrop-blur-layer {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+/* High DPI screens - sharper lines */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .const-line {
+    stroke-width: 0.5px;
+  }
+
+  .const-line.heavy {
+    stroke-width: 1px;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .blueprint-loader-container,
+  .backdrop-blur-layer,
+  .dark-overlay,
+  .mask-circle,
+  .branding-unit,
+  .branding-text-stroke,
+  .const-line,
+  .tick-label,
+  .initial-black-cover {
+    transition-duration: 0.1s !important;
+    animation-duration: 0.1s !important;
+  }
+
+  .blueprint-loader-container.phase-2 .branding-text-stroke {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(1px)) {
+  .backdrop-blur-layer {
+    background-color: rgba(0, 0, 0, 0.85);
+  }
+
+  .blueprint-loader-container.phase-3 .backdrop-blur-layer {
+    background-color: transparent;
   }
 }
