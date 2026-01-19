@@ -57,34 +57,45 @@ export function IntroStats() {
     });
   }, []);
 
-  // Text color fill animation with SplitType
+  // Text reveal animation with SplitType (WORD-BY-WORD)
   useGSAP(() => {
     if (!copyRef.current || !copyContainerRef.current) return;
 
     document.fonts.ready.then(() => {
       const split = new SplitType(copyRef.current!, {
-        types: 'chars',
-        charClass: 'char',
+        types: 'words',
+        wordClass: 'word',
       });
 
-      // Set initial color
-      gsap.set(split.chars, { color: '#999999' });
+      // Set initial opacity
+      gsap.set(split.words, { opacity: 0 });
 
       ScrollTrigger.create({
         trigger: copyContainerRef.current,
         start: 'top 75%',
-        end: 'bottom 30%',
+        end: 'center center',
         onUpdate: (self) => {
           const progress = self.progress;
-          const totalChars = split.chars?.length || 0;
-          const charsToColor = Math.floor(progress * totalChars);
+          const totalWords = split.words?.length || 0;
 
-          split.chars?.forEach((char, index) => {
-            if (index < charsToColor) {
-              gsap.to(char, { color: '#1a1a1a', duration: 0.3 });
-            } else {
-              gsap.to(char, { color: '#999999', duration: 0.3 });
+          split.words?.forEach((word, index) => {
+            const wordProgress = index / totalWords;
+            const nextWordProgress = (index + 1) / totalWords;
+
+            let opacity = 0;
+
+            if (progress >= nextWordProgress) {
+              opacity = 1;
+            } else if (progress >= wordProgress) {
+              const fadeProgress = (progress - wordProgress) / (nextWordProgress - wordProgress);
+              opacity = fadeProgress;
             }
+
+            gsap.to(word, {
+              opacity: opacity,
+              duration: 0.1,
+              overwrite: true,
+            });
           });
         },
       });

@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { Hero } from '@/components/sections/Hero';
+import { IntroStats } from '@/components/sections/IntroStats';
 import { BlueprintPreloader } from '@/components/animations/BlueprintPreloader';
 import ServicesSpotlight from '@/components/sections/ServicesSpotlight';
 import { CaseStudiesOtisValen } from '@/components/sections/CaseStudiesOtisValen';
@@ -30,6 +31,9 @@ export default function Home() {
 
         {/* Rest of content - Shows after opening animation */}
         <div className={`transition-opacity duration-500 ${openingComplete ? 'opacity-100' : 'opacity-0'}`}>
+          {/* Why TRD Remedial Section - Word-by-word text reveal */}
+          <IntroStats />
+
           {/* Services Spotlight - CGMWTAUGUST2025 Spotlight Pattern */}
           <ServicesSpotlight />
 

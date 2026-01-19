@@ -148,10 +148,9 @@
   color: #999999;
 }
 
-.intro-copy-wrapper .char {
+.intro-copy-wrapper .word {
   display: inline-block;
-  will-change: color;
-  transition: color 0.3s ease;
+  will-change: opacity;
 }
 
 /* Responsive Design */
@@ -381,7 +380,7 @@
     transform: none;
   }
 
-  .intro-copy-wrapper .char {
-    transition: none;
+  .intro-copy-wrapper .word {
+    opacity: 1 !important;
   }
 }
