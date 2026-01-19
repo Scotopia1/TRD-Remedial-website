@@ -2,8 +2,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import { useLenis } from 'lenis/react';
-
-const lerp = (start: number, end: number, factor: number) => start + (end - start) * factor;
+import { gsap } from 'gsap';
 
 interface ParallaxImageProps {
   src: string;
@@ -14,10 +13,8 @@ interface ParallaxImageProps {
 
 export function ParallaxImage({ src, alt, speed = 0.3, className = '' }: ParallaxImageProps) {
   const imageRef = useRef<HTMLImageElement>(null);
-  const bounds = useRef<{ top: number; bottom: number; height: number } | null>(null);
-  const currentTranslateY = useRef(0);
-  const targetTranslateY = useRef(0);
-  const rafId = useRef<number | null>(null);
+  const bounds = useRef<{ top: number; height: number } | null>(null);
+  const quickToY = useRef<gsap.QuickToFunc | null>(null);
   const [isDesktop, setIsDesktop] = useState(false);
 
   // Check if desktop (disable parallax on mobile < 900px)
@@ -36,16 +33,24 @@ export function ParallaxImage({ src, alt, speed = 0.3, className = '' }: Paralla
     };
   }, []);
 
-  // Setup bounds tracking and animation loop
+  // Setup GSAP quickTo for smooth interpolation (uses GSAP's unified ticker)
   useEffect(() => {
-    if (!isDesktop) return;
+    if (!isDesktop || !imageRef.current) return;
+
+    // Create quickTo for smooth Y translation
+    quickToY.current = gsap.quickTo(imageRef.current, 'y', {
+      duration: 0.6,
+      ease: 'power2.out',
+    });
+
+    // Set initial scale
+    gsap.set(imageRef.current, { scale: 1.5 });
 
     const updateBounds = () => {
       if (imageRef.current) {
         const rect = imageRef.current.getBoundingClientRect();
         bounds.current = {
           top: rect.top + window.scrollY,
-          bottom: rect.bottom + window.scrollY,
           height: rect.height,
         };
       }
@@ -54,45 +59,23 @@ export function ParallaxImage({ src, alt, speed = 0.3, className = '' }: Paralla
     updateBounds();
     window.addEventListener('resize', updateBounds);
 
-    // Animation loop using LERP interpolation
-    const animate = () => {
-      if (imageRef.current && bounds.current) {
-        currentTranslateY.current = lerp(
-          currentTranslateY.current,
-          targetTranslateY.current,
-          0.1 // Smoothing factor
-        );
-
-        // Only update transform if there's significant change
-        if (
-          Math.abs(currentTranslateY.current - targetTranslateY.current) > 0.01
-        ) {
-          imageRef.current.style.transform = `translateY(${currentTranslateY.current}px) scale(1.5)`;
-        }
-      }
-      rafId.current = requestAnimationFrame(animate);
-    };
-
-    animate();
-
     return () => {
       window.removeEventListener('resize', updateBounds);
-      if (rafId.current) {
-        cancelAnimationFrame(rafId.current);
-      }
+      quickToY.current = null;
     };
   }, [isDesktop]);
 
-  // Use Lenis scroll position (not window.scrollY) for accurate parallax with virtualized scroll
+  // Use Lenis scroll position for parallax calculation
   useLenis(({ scroll }: { scroll: number }) => {
-    if (!isDesktop || !bounds.current) return;
+    if (!isDesktop || !bounds.current || !quickToY.current) return;
 
     const windowHeight = window.innerHeight;
     const elementMiddle = bounds.current.top + bounds.current.height / 2;
     const windowMiddle = scroll + windowHeight / 2;
     const distanceFromCenter = windowMiddle - elementMiddle;
 
-    targetTranslateY.current = distanceFromCenter * speed;
+    // Use GSAP quickTo for smooth interpolation
+    quickToY.current(distanceFromCenter * speed);
   });
 
   return (

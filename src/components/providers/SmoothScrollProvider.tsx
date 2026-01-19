@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, ReactNode, useRef } from 'react';
+import { useEffect, useState, ReactNode, useRef, useCallback } from 'react';
 import { ReactLenis, useLenis } from 'lenis/react';
 import { ViewTransitions } from 'next-view-transitions';
 import { gsap } from 'gsap';
@@ -12,10 +12,13 @@ interface SmoothScrollProviderProps {
   children: ReactNode;
 }
 
-// Default desktop settings (used during SSR and initial load)
+// Shared easing function
+const easeOutExpo = (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t));
+
+// Default desktop settings
 const desktopSettings = {
   duration: 1.2,
-  easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  easing: easeOutExpo,
   direction: 'vertical' as const,
   orientation: 'vertical' as const,
   gestureOrientation: 'vertical' as const,
@@ -31,7 +34,7 @@ const desktopSettings = {
 // Mobile settings
 const mobileSettings = {
   duration: 0.8,
-  easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  easing: easeOutExpo,
   direction: 'vertical' as const,
   orientation: 'vertical' as const,
   gestureOrientation: 'vertical' as const,
@@ -46,38 +49,60 @@ const mobileSettings = {
 
 /**
  * ScrollTrigger Integration Component
- * Syncs Lenis scroll position with GSAP ScrollTrigger
+ * Properly syncs Lenis with GSAP using scroller proxy pattern
  */
 function ScrollTriggerSync() {
-  const hasInitialized = useRef(false);
+  const lenisRef = useRef<any>(null);
+  const scrollRef = useRef(0);
 
+  // Store lenis instance and track scroll position
   useLenis((lenis) => {
-    // Update ScrollTrigger on every Lenis scroll
+    lenisRef.current = lenis;
+    scrollRef.current = lenis.scroll;
+    // Update ScrollTrigger with current scroll position
     ScrollTrigger.update();
   });
 
   useEffect(() => {
-    // Only refresh once after initial mount
-    if (!hasInitialized.current) {
-      hasInitialized.current = true;
-      // Delay refresh to ensure all components are mounted
-      const timeoutId = setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 100);
-      return () => clearTimeout(timeoutId);
-    }
+    // Set up scroller proxy to tell ScrollTrigger about Lenis scroll position
+    ScrollTrigger.scrollerProxy(document.documentElement, {
+      scrollTop(value?: number) {
+        if (arguments.length && lenisRef.current) {
+          lenisRef.current.scrollTo(value, { immediate: true });
+        }
+        return scrollRef.current;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+      pinType: 'transform',
+    });
+
+    // Refresh after setup
+    const refreshTimeout = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+
+    return () => {
+      clearTimeout(refreshTimeout);
+      ScrollTrigger.clearScrollMemory();
+    };
   }, []);
 
   return null;
 }
 
 /**
- * Smooth Scroll Provider - CGMWTAUG2025 Pattern
- * Uses ReactLenis with responsive device-specific settings
- * Clean integration without ScrollTrigger conflicts
+ * Smooth Scroll Provider
+ * Uses ReactLenis with scroller proxy for proper GSAP integration
  */
 export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
-  const [isMobile, setIsMobile] = useState(false); // Default to desktop (safer for SSR)
+  const [isMobile, setIsMobile] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -90,19 +115,21 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     checkMobile();
     window.addEventListener('resize', checkMobile);
 
-    // ScrollTrigger config (no normalizeScroll - that caused conflicts)
+    // ScrollTrigger config
     ScrollTrigger.config({
       ignoreMobileResize: true,
       autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
     });
 
+    // Disable GSAP's lag smoothing for consistent frame delivery
+    gsap.ticker.lagSmoothing(0);
+
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Refresh ScrollTrigger when mobile state changes (after initial load)
+  // Refresh ScrollTrigger when mobile state changes
   useEffect(() => {
     if (isClient) {
-      // Small delay to let Lenis update with new settings
       const timeoutId = setTimeout(() => {
         ScrollTrigger.refresh();
       }, 150);
@@ -110,7 +137,6 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     }
   }, [isMobile, isClient]);
 
-  // Select settings based on device type
   const scrollSettings = isMobile ? mobileSettings : desktopSettings;
 
   return (
