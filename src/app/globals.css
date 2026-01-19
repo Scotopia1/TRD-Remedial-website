@@ -176,21 +176,16 @@ body {
 }
 
 /* =====================================================
-   SMOOTH SCROLLING - Native CSS
+   SMOOTH SCROLLING - Handled by Lenis
    ===================================================== */
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; -- REMOVED: Lenis handles smooth scrolling */
   touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
 
   /* Prevent overscroll bounce */
   overscroll-behavior: none;
   overscroll-behavior-y: none;
-}
-
-/* Disable smooth scroll for anchor jumps during animations */
-html.no-smooth-scroll {
-  scroll-behavior: auto;
 }
 
 /* Reduced motion preference */
@@ -435,7 +430,7 @@ textarea::placeholder {
   }
 }
 
-/* Legacy Lenis CSS removed - using native scroll-behavior: smooth */
+/* Lenis handles smooth scrolling via ReactLenis provider (CGMWTAUG2025 pattern) */
 
 /* Hardware acceleration for smooth scrolling */
 body {
