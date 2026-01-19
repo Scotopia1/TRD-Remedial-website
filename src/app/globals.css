@@ -175,15 +175,29 @@ body {
   overscroll-behavior-y: none;
 }
 
-/* Ensure smooth scrolling on main container */
+/* =====================================================
+   SMOOTH SCROLLING - Native CSS
+   ===================================================== */
 html {
+  scroll-behavior: smooth;
   touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
+
+  /* Prevent overscroll bounce */
   overscroll-behavior: none;
   overscroll-behavior-y: none;
+}
 
-  /* Prevent pull-to-refresh on mobile */
-  overscroll-behavior-y: contain;
+/* Disable smooth scroll for anchor jumps during animations */
+html.no-smooth-scroll {
+  scroll-behavior: auto;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* =====================================================
@@ -247,9 +261,8 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Prevent scroll chaining */
-[data-lenis-prevent],
-.lenis-prevent {
+/* Prevent scroll chaining on nested scrollable elements */
+.scroll-prevent {
   overscroll-behavior: contain;
 }
 
@@ -422,28 +435,7 @@ textarea::placeholder {
   }
 }
 
-/* Smooth Scroll - Enhanced with Lenis */
-/* scroll-behavior removed - conflicts with GSAP ScrollTrigger on iOS */
-
-html.lenis {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-.lenis.lenis-scrolling iframe {
-  pointer-events: none;
-}
+/* Legacy Lenis CSS removed - using native scroll-behavior: smooth */
 
 /* Hardware acceleration for smooth scrolling */
 body {

@@ -104,7 +104,7 @@ export function ThreeDShowcasePinned() {
       start: 'top top',
       end: `+=${window.innerHeight * 3}`, // 3x viewport for 5 phases
       pin: true,
-      scrub: 0.5, // Reduced for smoother, more responsive transitions with Lenis
+      scrub: 0.5, // Smooth scroll sync
       pinSpacing: true,
       anticipatePin: 1, // Smooth pin anticipation
       onUpdate: (self) => {

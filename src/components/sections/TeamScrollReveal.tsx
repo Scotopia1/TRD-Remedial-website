@@ -2,31 +2,18 @@
 
 import './TeamScrollReveal.css';
 
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { ReactLenis } from 'lenis/react';
 import { TEAM_MEMBERS } from '@/data/team';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function TeamScrollReveal() {
-  const lenisRef = useRef<any>(null);
   const teamSectionRef = useRef<HTMLDivElement>(null);
   const cardPlaceholderEntranceRef = useRef<ScrollTrigger | null>(null);
   const cardSlideInAnimationRef = useRef<ScrollTrigger | null>(null);
-
-  // Integrate Lenis with GSAP ticker
-  useEffect(() => {
-    function update(time: number) {
-      lenisRef.current?.lenis?.raf(time * 1000);
-    }
-
-    gsap.ticker.add(update);
-
-    return () => gsap.ticker.remove(update);
-  }, []);
 
   // Phase 2: Animation Implementation
   useGSAP(
@@ -269,8 +256,6 @@ export function TeamScrollReveal() {
 
   return (
     <>
-      <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
-
       {/* Consolidated Team Section - Prevents team members from splitting apart */}
       <section className="team-scroll-reveal-wrapper">
         {/* Hero Section */}

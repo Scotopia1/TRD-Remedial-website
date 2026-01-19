@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
-import { useLenis } from 'lenis/react';
 
 const lerp = (start: number, end: number, factor: number) => start + (end - start) * factor;
 
@@ -84,17 +83,27 @@ export function ParallaxImage({ src, alt, speed = 0.3, className = '' }: Paralla
     };
   }, [isDesktop]);
 
-  // Update target translateY based on scroll position
-  useLenis(({ scroll }: any) => {
+  // Update target translateY based on scroll position (using native scroll)
+  useEffect(() => {
     if (!isDesktop || !bounds.current) return;
 
-    const windowHeight = window.innerHeight;
-    const elementMiddle = bounds.current.top + bounds.current.height / 2;
-    const windowMiddle = scroll + windowHeight / 2;
-    const distanceFromCenter = windowMiddle - elementMiddle;
+    const handleScroll = () => {
+      if (!bounds.current) return;
 
-    targetTranslateY.current = distanceFromCenter * speed;
-  });
+      const scroll = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const elementMiddle = bounds.current.top + bounds.current.height / 2;
+      const windowMiddle = scroll + windowHeight / 2;
+      const distanceFromCenter = windowMiddle - elementMiddle;
+
+      targetTranslateY.current = distanceFromCenter * speed;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial call
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isDesktop, speed]);
 
   return (
     <img
