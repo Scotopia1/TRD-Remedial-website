@@ -34,7 +34,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     ScrollTrigger.normalizeScroll({
       allowNestedScroll: true,
       lockAxis: false,
-      momentum: (self) => Math.min(3, self.velocityY / 1000), // Smooth momentum
+      momentum: (self: { velocityY: number }) => Math.min(3, self.velocityY / 1000), // Smooth momentum
       type: 'wheel,touch,pointer',
       // Disable on iOS Safari due to known issues
       ...(isIOS && isSafari ? { type: 'wheel' } : {}),
