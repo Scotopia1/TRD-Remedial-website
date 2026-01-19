@@ -218,17 +218,17 @@
   transform: scale(0);
 }
 
-/* Cards start off-screen right with rotation */
+/* Cards start off-screen right with 0deg rotation (rotation applied during animation) */
 .team-member:nth-child(1) .team-member-card {
-  transform: translate(300%, -50%) scale(0.75) rotate(20deg);
+  transform: translate(300%, -50%) scale(0.75) rotate(0deg);
 }
 
 .team-member:nth-child(2) .team-member-card {
-  transform: translate(200%, -50%) scale(0.75) rotate(20deg);
+  transform: translate(200%, -50%) scale(0.75) rotate(0deg);
 }
 
 .team-member:nth-child(3) .team-member-card {
-  transform: translate(100%, -50%) scale(0.75) rotate(20deg);
+  transform: translate(100%, -50%) scale(0.75) rotate(0deg);
 }
 
 /* ============================================

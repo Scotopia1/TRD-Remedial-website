@@ -138,12 +138,10 @@ export function TeamScrollReveal() {
                 const cardSlideInX =
                   cardInitialX + cardProgress * (cardTargetX - cardInitialX);
 
-                // Rotation: 20deg -> 0deg
-                const cardSlideInRotation = 20 - cardProgress * 20;
-
+                // No rotation - cards stay straight (0deg) throughout animation
                 gsap.set(card, {
                   x: `${cardSlideInX}%`,
-                  rotation: cardSlideInRotation,
+                  rotation: 0,
                 });
               } else if (progress > xRotationEnd) {
                 // Set final position after slide completes
