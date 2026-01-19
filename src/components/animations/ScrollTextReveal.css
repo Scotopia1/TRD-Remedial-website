@@ -1,0 +1,13 @@
+.scroll-text-reveal {
+  text-align: center;
+}
+
+.scroll-text-reveal .word {
+  display: inline-block;
+  will-change: opacity;
+  margin-right: 0.25em;
+}
+
+.scroll-text-reveal .word:last-child {
+  margin-right: 0;
+}
