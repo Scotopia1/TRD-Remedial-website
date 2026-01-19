@@ -25,12 +25,11 @@ const ServicesSpotlight = () => {
   const currentActiveIndexRef = useRef(0);
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
-  // Configuration optimized for 6 TRD services (vs 10 items in reference)
+  // Configuration matching CGMWTAUG2025 reference
   // NOTE: These values are interconnected - gap, speed, and arcRadius work together
-  // Adjusted from reference (gap: 0.08, speed: 0.3) to account for fewer items
   const config = {
-    gap: 0.12,        // Increased from 0.08 - larger gap for fewer items
-    speed: 0.4,       // Slower reveal for more emphasis (was 0.3)
+    gap: 0.08,        // Matches reference
+    speed: 0.3,       // Matches reference
     arcRadius: 500,   // Maintained from reference
   };
 
@@ -126,12 +125,13 @@ const ServicesSpotlight = () => {
 
     // Bezier curve calculations for image movement (responsive)
     const isMobile = window.innerWidth < 1000;
-    const containerWidth = isMobile ? window.innerWidth * 0.4 : window.innerWidth * 0.3;
+    const containerWidth = isMobile ? window.innerWidth * 0.5 : window.innerWidth * 0.3;
     const containerHeight = window.innerHeight;
-    const arcStartX = isMobile ? containerWidth - 50 : containerWidth - 220;
+    // On mobile: push images further right to avoid text collision
+    const arcStartX = isMobile ? containerWidth + 20 : containerWidth - 220;
     const arcStartY = -200;
     const arcEndY = containerHeight + 200;
-    const arcRadius = isMobile ? 200 : config.arcRadius;
+    const arcRadius = isMobile ? 150 : config.arcRadius;
     const arcControlPointX = arcStartX + arcRadius;
     const arcControlPointY = containerHeight / 2;
 
@@ -168,11 +168,11 @@ const ServicesSpotlight = () => {
     // Set all images to invisible initially
     imageElements.forEach((img) => gsap.set(img, { opacity: 0 }));
 
-    // Create ScrollTrigger - 6vh duration (reduced from 10vh for 6 services)
+    // Create ScrollTrigger - dynamic duration based on service count
     scrollTriggerRef.current = ScrollTrigger.create({
       trigger: ".services-spotlight",
       start: "top top",
-      end: `+=${window.innerHeight * 6}px`, // 6 viewports for 6 services
+      end: `+=${window.innerHeight * spotlightItems.length}px`, // Dynamic based on service count
       pin: true,
       pinSpacing: true, // Enable spacing to prevent content skipping
       scrub: 1,
@@ -224,11 +224,18 @@ const ServicesSpotlight = () => {
 
           // Show main UI elements
           imageElements.forEach((img) => gsap.set(img, { opacity: 0 }));
-          if (spotlightHeader) spotlightHeader.style.opacity = "1";
+          if (spotlightHeader) {
+            spotlightHeader.style.opacity = "1";
+            // Reset to "Our Services" at start
+            spotlightHeader.innerHTML = `<p>Our Services</p>`;
+          }
           gsap.set(titlesContainerElement, {
             "--before-opacity": "1",
             "--after-opacity": "1",
           });
+
+          // Reset active index for mobile header tracking
+          currentActiveIndex = -1;
         }
         // ==================== PHASE 3: Main Animation (25-95%) ====================
         else if (progress > 0.25 && progress <= 0.95) {
@@ -281,31 +288,84 @@ const ServicesSpotlight = () => {
             }
           });
 
-          // Detect which title is closest to viewport center (active state)
-          const viewportMiddle = viewportHeight / 2;
+          // Detect active service - use different methods for desktop vs mobile
           let closestIndex = 0;
-          let closestDistance = Infinity;
 
-          titleElements.forEach((title, index) => {
-            const titleRect = title.getBoundingClientRect();
-            const titleCenter = titleRect.top + titleRect.height / 2;
-            const distanceFromCenter = Math.abs(titleCenter - viewportMiddle);
+          if (isMobile) {
+            // On mobile: sync with bezier image timing
+            // Find which image is currently most visible (closest to middle of its animation)
+            let bestMatchScore = -1;
 
-            if (distanceFromCenter < closestDistance) {
-              closestDistance = distanceFromCenter;
-              closestIndex = index;
+            imageElements.forEach((_, index) => {
+              const imageProgress = getImgProgressState(index, switchProgress);
+              // Only consider images that are currently animating (0 to 1)
+              if (imageProgress >= 0 && imageProgress <= 1) {
+                // Score based on how close to middle of animation (0.5 = peak visibility)
+                const score = 1 - Math.abs(imageProgress - 0.5);
+                if (score > bestMatchScore) {
+                  bestMatchScore = score;
+                  closestIndex = index;
+                }
+              }
+            });
+
+            // Fallback: if no image is animating, use the last visible one
+            if (bestMatchScore === -1) {
+              for (let i = imageElements.length - 1; i >= 0; i--) {
+                if (getImgProgressState(i, switchProgress) > 1) {
+                  closestIndex = i;
+                  break;
+                }
+              }
             }
-          });
+          } else {
+            // On desktop: detect which title is closest to viewport center
+            const viewportMiddle = viewportHeight / 2;
+            let closestDistance = Infinity;
+
+            titleElements.forEach((title, index) => {
+              const titleRect = title.getBoundingClientRect();
+              const titleCenter = titleRect.top + titleRect.height / 2;
+              const distanceFromCenter = Math.abs(titleCenter - viewportMiddle);
+
+              if (distanceFromCenter < closestDistance) {
+                closestDistance = distanceFromCenter;
+                closestIndex = index;
+              }
+            });
+          }
 
           // Update active title and background image
           if (closestIndex !== currentActiveIndex) {
-            titleElements[currentActiveIndex].style.opacity = "0.35";
-            titleElements[closestIndex].style.opacity = "1";
+            // Only update title opacity on desktop (titles hidden on mobile)
+            if (!isMobile && titleElements) {
+              // Deselect previous title (if valid index)
+              if (currentActiveIndex >= 0 && currentActiveIndex < titleElements.length) {
+                titleElements[currentActiveIndex].style.opacity = "0.35";
+              }
+              // Select new title
+              if (closestIndex >= 0 && closestIndex < titleElements.length) {
+                titleElements[closestIndex].style.opacity = "1";
+              }
+            }
 
             // Change background image to match active service
             const bgImg = document.querySelector(".spotlight-bg-img img") as HTMLImageElement;
-            if (bgImg) {
+            if (bgImg && closestIndex >= 0 && closestIndex < spotlightItems.length) {
               bgImg.src = spotlightItems[closestIndex].img;
+            }
+
+            // On mobile: update header text to show service name
+            if (isMobile && spotlightHeader && closestIndex >= 0) {
+              const serviceName = spotlightItems[closestIndex].name;
+              // Format: max 2 words per line
+              const words = serviceName.split(" ");
+              let formattedName = "";
+              for (let i = 0; i < words.length; i += 2) {
+                if (i > 0) formattedName += "<br>";
+                formattedName += words.slice(i, i + 2).join(" ");
+              }
+              spotlightHeader.innerHTML = `<p>${formattedName}</p>`;
             }
 
             currentActiveIndex = closestIndex;

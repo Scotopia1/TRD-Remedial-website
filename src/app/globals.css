@@ -166,15 +166,91 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* iOS Touch Optimization */
+  /* iOS/Android Touch Optimization */
   touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
+
+  /* Prevent overscroll bounce */
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
 }
 
-/* Ensure smooth scrolling on main container for iOS */
+/* Ensure smooth scrolling on main container */
 html {
   touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+
+  /* Prevent pull-to-refresh on mobile */
+  overscroll-behavior-y: contain;
+}
+
+/* =====================================================
+   MOBILE SCROLL FIXES - iOS & Android
+   ===================================================== */
+
+/* Prevent iOS rubber-banding/bounce */
+@supports (-webkit-touch-callout: none) {
+  html, body {
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
+  }
+}
+
+/* Android scroll optimization */
+@supports not (-webkit-touch-callout: none) {
+  html, body {
+    scroll-behavior: smooth;
+    overscroll-behavior-y: contain;
+  }
+}
+
+/* Fix iOS Safari 100vh issue */
+@supports (-webkit-touch-callout: none) {
+  .full-height {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Prevent text selection during scroll on mobile */
+@media (hover: none) and (pointer: coarse) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+
+  /* Allow text selection on inputs */
+  input, textarea, [contenteditable] {
+    -webkit-touch-callout: default;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+}
+
+/* Fix position:fixed flickering on iOS */
+@supports (-webkit-touch-callout: none) {
+  .fixed-element {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+}
+
+/* Smooth momentum scrolling for scrollable containers */
+.scroll-container {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+/* Prevent scroll chaining */
+[data-lenis-prevent],
+.lenis-prevent {
+  overscroll-behavior: contain;
 }
 
 img {

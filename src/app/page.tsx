@@ -3,7 +3,6 @@
 import { useState, useCallback } from 'react';
 import { Hero } from '@/components/sections/Hero';
 import { BlueprintPreloader } from '@/components/animations/BlueprintPreloader';
-import { IntroStats } from '@/components/sections/IntroStats';
 import ServicesSpotlight from '@/components/sections/ServicesSpotlight';
 import { CaseStudiesOtisValen } from '@/components/sections/CaseStudiesOtisValen';
 // import { ThreeDShowcasePinned } from '@/components/sections/ThreeDShowcasePinned';
@@ -31,9 +30,6 @@ export default function Home() {
 
         {/* Rest of content - Shows after opening animation */}
         <div className={`transition-opacity duration-500 ${openingComplete ? 'opacity-100' : 'opacity-0'}`}>
-          {/* Intro Stats - CGMWTNOV2025 Intro Pattern */}
-          <IntroStats />
-
           {/* Services Spotlight - CGMWTAUGUST2025 Spotlight Pattern */}
           <ServicesSpotlight />
 

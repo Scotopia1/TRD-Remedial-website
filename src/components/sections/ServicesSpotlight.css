@@ -81,7 +81,7 @@
   transform: scale(0);
   will-change: transform;
   border-radius: 2rem;
-  opacity: 0.5;
+  opacity: 0.65;
   z-index: 101;
 }
 
@@ -159,7 +159,7 @@
   color: var(--concrete-100);
   opacity: 0.35;
   transition: opacity 0.3s ease;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.125rem, 4.25vw, 3.4rem); /* Reduced by 0.85x */
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -217,7 +217,7 @@
 
 /* ==================== RESPONSIVE DESIGN ==================== */
 @media (max-width: 1000px) {
-  /* Simplified mobile layout - text only, no floating images */
+  /* Mobile layout - hide titles, keep images (matches CGMWTAUG2025) */
 
   /* Show background image statically on mobile */
   .spotlight-bg-img {
@@ -235,13 +235,32 @@
     filter: grayscale(0.5) brightness(0.6);
   }
 
-  /* Hide floating images on mobile - too cluttered */
-  .spotlight-images {
+  /* Hide titles on mobile (matches CGMWTAUG2025 behavior) */
+  .spotlight-titles {
     display: none !important;
   }
 
-  .spotlight-img {
+  .spotlight-titles-container {
     display: none !important;
+  }
+
+  /* Hide decorative lines on mobile */
+  .spotlight-titles-container::before,
+  .spotlight-titles-container::after {
+    display: none !important;
+  }
+
+  /* Keep floating images visible on mobile */
+  .spotlight-images {
+    display: flex !important;
+    width: 40%;
+    right: 5%;
+  }
+
+  .spotlight-img {
+    display: block !important;
+    width: 150px;
+    height: 112px;
   }
 
   /* Adjust intro text size */
@@ -249,67 +268,52 @@
     font-size: clamp(1.25rem, 4vw, 2rem);
   }
 
-  /* Keep header in original centered position */
+  /* Header - left side, constrained width to avoid image collision */
   .spotlight-header {
     top: 50%;
-    left: 10%;
+    left: 5%;
     transform: translateY(-50%);
+    z-index: 105;
+    max-width: 40%;
   }
 
-  .spotlight-header h2 {
-    font-size: clamp(2rem, 6vw, 3rem);
+  .spotlight-header p {
+    font-size: clamp(1.25rem, 5vw, 2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
-  /* Titles container - MUST stay within this container for clipping */
-  .spotlight-titles-container {
-    left: 15vw;
-    width: 70vw;
-    overflow: hidden; /* Critical: ensures clipping works */
-    clip-path: polygon(
-      20svh 0px,
-      0px 50%,
-      20svh 100%,
-      100% calc(100% + 40svh),
-      100% -40svh
-    );
+  /* Position images more to the right to avoid text collision */
+  .spotlight-images {
+    display: flex !important;
+    width: 50%;
+    right: 0;
   }
 
-  /* Position titles INSIDE the clipped container - pushed right */
-  .spotlight-titles {
-    position: absolute;
-    left: 45%; /* Push titles 15% more to the right */
-    top: 0;
-    width: 63%; /* Shrink width by 40% total (30% + 10%) */
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 1rem;
-  }
-
-  .spotlight-titles h1 {
-    font-size: clamp(1.75rem, 5vw, 2.5rem);
-    line-height: 1.3;
-    margin: 1.5rem 0;
-  }
-
-  /* Keep white diagonal lines visible */
-  .spotlight-titles-container::before,
-  .spotlight-titles-container::after {
-    opacity: 1;
+  .spotlight-img {
+    display: block !important;
+    width: 140px;
+    height: 105px;
   }
 }
 
 @media (max-width: 640px) {
-  /* Small mobile - text only, tighter layout */
+  /* Small mobile - images only, hide titles (matches CGMWTAUG2025) */
 
-  /* Keep images hidden */
+  /* Keep images visible - positioned right to avoid text collision */
   .spotlight-images {
-    display: none !important;
+    display: flex !important;
+    width: 55%;
+    right: 0;
   }
 
   .spotlight-img {
-    display: none !important;
+    display: block !important;
+    width: 100px;
+    height: 75px;
   }
 
   /* Adjust intro text for small screens */
@@ -325,41 +329,22 @@
     padding-left: 0.25rem;
   }
 
-  /* Header positioning for small screens - keep centered */
+  /* Header - left side, constrained to avoid collision */
   .spotlight-header {
     top: 50%;
-    left: 8%;
+    left: 4%;
     transform: translateY(-50%);
+    z-index: 105;
+    max-width: 38%;
   }
 
-  .spotlight-header h2 {
-    font-size: clamp(1.75rem, 6vw, 2.25rem);
-  }
-
-  /* Tighter clip path and container for small screens */
-  .spotlight-titles-container {
-    left: 12vw;
-    width: 75vw;
-    clip-path: polygon(
-      15svh 0px,
-      0px 50%,
-      15svh 100%,
-      100% calc(100% + 30svh),
-      100% -30svh
-    );
-  }
-
-  /* Smaller text for small screens - pushed right */
-  .spotlight-titles {
-    left: 40%; /* Push 15% more to the right on small screens */
-    width: 67.5%; /* Shrink by additional 10% */
-    padding-left: 1rem;
-  }
-
-  .spotlight-titles h1 {
-    font-size: clamp(1.25rem, 5vw, 1.75rem);
-    line-height: 1.4;
-    margin: 1rem 0;
+  .spotlight-header p {
+    font-size: clamp(1rem, 4.5vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
 }
 
