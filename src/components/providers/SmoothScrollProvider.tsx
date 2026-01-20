@@ -63,6 +63,18 @@ function ScrollTriggerSync() {
     ScrollTrigger.update();
   });
 
+  // Listen for instant scroll reset events (from page transitions)
+  useEffect(() => {
+    const handleInstantScrollReset = () => {
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(0, { immediate: true });
+      }
+    };
+
+    window.addEventListener('instantScrollReset', handleInstantScrollReset);
+    return () => window.removeEventListener('instantScrollReset', handleInstantScrollReset);
+  }, []);
+
   useEffect(() => {
     // Set up scroller proxy to tell ScrollTrigger about Lenis scroll position
     ScrollTrigger.scrollerProxy(document.documentElement, {

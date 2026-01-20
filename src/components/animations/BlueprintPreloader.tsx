@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useStore } from '@/stores/useStore';
 import './BlueprintPreloader.css';
 
@@ -10,21 +10,35 @@ interface BlueprintPreloaderProps {
 
 type Phase = 0 | 1 | 2 | 3 | 4;
 
+const PRELOADER_SESSION_KEY = 'trd-preloader-shown';
+
 export function BlueprintPreloader({ onComplete }: BlueprintPreloaderProps) {
   const [phase, setPhase] = useState<Phase>(0);
   const [isVisible, setIsVisible] = useState(true);
   const { setIsLoading } = useStore();
   const hasStarted = useRef(false);
+  const onCompleteRef = useRef(onComplete);
 
-  const handleComplete = useCallback(() => {
-    setIsLoading(false);
-    onComplete();
-  }, [onComplete, setIsLoading]);
+  // Keep ref updated
+  onCompleteRef.current = onComplete;
 
   useEffect(() => {
     // Prevent double execution
     if (hasStarted.current) return;
     hasStarted.current = true;
+
+    // Check if preloader was already shown in this session
+    const wasShown = sessionStorage.getItem(PRELOADER_SESSION_KEY);
+    if (wasShown) {
+      // Skip animation - immediately complete
+      setIsVisible(false);
+      setIsLoading(false);
+      onCompleteRef.current();
+      return;
+    }
+
+    // Mark as shown for this session
+    sessionStorage.setItem(PRELOADER_SESSION_KEY, 'true');
 
     // Lock body scroll during animation
     document.body.style.overflow = 'hidden';
@@ -40,7 +54,8 @@ export function BlueprintPreloader({ onComplete }: BlueprintPreloaderProps) {
 
     // Trigger hero content to appear as circles expand (at 3.7s)
     const contentTimer = setTimeout(() => {
-      handleComplete();
+      setIsLoading(false);
+      onCompleteRef.current();
     }, 3700);
 
     // Phase 4: Complete and fade out (at 5.5s)
@@ -64,7 +79,7 @@ export function BlueprintPreloader({ onComplete }: BlueprintPreloaderProps) {
       clearTimeout(hideTimer);
       document.body.style.overflow = 'auto';
     };
-  }, [handleComplete]);
+  }, [setIsLoading]);
 
   if (!isVisible) return null;
 

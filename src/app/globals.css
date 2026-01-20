@@ -616,3 +616,24 @@ body.keyboard-nav *:focus {
     transform: none !important;
   }
 }
+
+/* ========================================
+   Page Transition Grid (CGMWTDEC2025 Style)
+   ======================================== */
+.transition-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100svh;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.transition-block {
+  position: absolute;
+  top: 0;
+  background-color: #1a1a1a; /* TRD primary dark color */
+  transform-origin: left;
+}

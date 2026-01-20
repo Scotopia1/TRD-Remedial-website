@@ -93,7 +93,7 @@ export function Menu() {
 
   const handleLinkClick = (path: string) => {
     if (path !== pathname) {
-      setShouldDelayClose(true);
+      closeMenu(); // Close menu immediately when a page is selected
     }
   };
 
@@ -102,7 +102,7 @@ export function Menu() {
       const timer = setTimeout(() => {
         closeMenu();
         setShouldDelayClose(false);
-      }, 700);
+      }, 100); // Close menu quickly before transition reveals new page
 
       previousPathRef.current = pathname;
       return () => clearTimeout(timer);
@@ -191,11 +191,15 @@ export function Menu() {
     };
   }, []);
 
+  // Only hide menu during loading on homepage (where preloader exists)
+  const isHomePage = pathname === '/';
+  const shouldHideMenu = isLoading && isHomePage;
+
   return (
     <div
       className="menu-container"
       ref={menuContainer}
-      style={{ display: isLoading ? 'none' : 'block' }}
+      style={{ display: shouldHideMenu ? 'none' : 'block' }}
     >
       <div className="menu-bar" ref={menuBarRef}>
         <div className="menu-bar-container">

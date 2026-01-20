@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { AccessibilityProvider } from "@/components/providers/AccessibilityProvider";
+import { TransitionProvider } from "@/components/providers/TransitionProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
@@ -135,10 +136,12 @@ export default function RootLayout({
           <Menu />
           <CustomCursor />
           <ScrollProgress />
-          <SmoothScrollProvider>
-            {children}
-          </SmoothScrollProvider>
-          <Footer />
+          <TransitionProvider>
+            <SmoothScrollProvider>
+              {children}
+            </SmoothScrollProvider>
+            <Footer />
+          </TransitionProvider>
         </AccessibilityProvider>
       </body>
     </html>
