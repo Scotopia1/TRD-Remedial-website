@@ -155,7 +155,8 @@
 }
 
 .about-cta-button:hover {
-  background-color: #ff8555;
+  background-color: var(--trd-secondary);
+  color: var(--trd-primary);
   transform: translateY(-2px);
 }
 

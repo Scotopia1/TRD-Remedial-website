@@ -224,7 +224,8 @@
 }
 
 .button-primary:hover {
-  background: #ff5722;
+  background: var(--trd-secondary);
+  color: var(--trd-primary);
   transform: translateY(-2px);
 }
 

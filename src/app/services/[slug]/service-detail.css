@@ -312,10 +312,11 @@
 }
 
 .button-primary:hover {
-  background: #ff5722;
-  border-color: #ff5722;
+  background: var(--trd-secondary);
+  border-color: var(--trd-secondary);
+  color: var(--trd-primary);
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .button-secondary {
