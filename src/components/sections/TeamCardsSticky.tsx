@@ -11,7 +11,6 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export function TeamCardsSticky() {
   const stickyRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(
@@ -22,61 +21,61 @@ export function TeamCardsSticky() {
         let scrollTriggerInstance: ScrollTrigger | null = null;
 
         const stickySection = stickyRef.current;
-        const stickyHeader = headerRef.current;
-        const cards = cardsRef.current;
+        const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
 
-        if (!stickySection || !stickyHeader || !cards || cards.length === 0) {
+        if (!stickySection || cards.length === 0) {
           return () => {};
         }
 
-        let stickyHeight = 0;
-        let maxTranslate = 0;
-        let cardWidth = 325;
-        let viewportWidth = window.innerWidth;
-        let cardStartX = 25;
-        let cardEndX = -650;
+        const stickyHeight = window.innerHeight * 3; // Shorter scroll since we stop at center
+        const totalCards = cards.length;
 
-        const measure = () => {
-          stickyHeight = window.innerHeight * 5;
-          const headerWidth = stickyHeader ? stickyHeader.offsetWidth : 0;
-          maxTranslate = Math.max(0, headerWidth - window.innerWidth);
-          viewportWidth = window.innerWidth;
+        // Straight line animation - cards slide from right to centered position
+        function positionCards(progress = 0) {
+          const viewportWidth = window.innerWidth;
 
-          if (cards && cards.length > 0 && cards[0]) {
-            const cardRect = cards[0].getBoundingClientRect();
-            cardWidth = cardRect.width || 325;
-          }
+          // Get actual card width from first card (respects CSS media queries)
+          const cardWidth = cards[0]?.offsetWidth || 400;
 
-          const standardViewportWidth = 1920;
-          const standardEndXPercent = -650;
-          const standardTravelPixels = Math.abs(
-            (standardEndXPercent / 100) * cardWidth
-          );
+          // Responsive spacing - ensure all 3 cards fit with padding
+          const sidePadding = 100; // 50px on each side
+          const availableWidth = viewportWidth - sidePadding;
+          // Calculate spacing to evenly distribute cards
+          const cardSpacing = Math.min(450, (availableWidth - cardWidth) / (totalCards - 1));
 
-          const viewportScale = viewportWidth / standardViewportWidth;
-          const requiredTravelPixels =
-            standardTravelPixels * 1.25 * Math.max(1, viewportScale);
+          // Calculate total group width (distance from first card center to last card center)
+          const totalGroupWidth = (totalCards - 1) * cardSpacing;
 
-          cardStartX = 25;
-          cardEndX = -(requiredTravelPixels / cardWidth) * 100;
-        };
-        measure();
+          // Cards are CSS positioned at left:50% with margin-left:-halfWidth
+          // So x=0 means card is centered. For group to be centered:
+          // First card at -totalGroupWidth/2, last card at +totalGroupWidth/2
+          const endX = -totalGroupWidth / 2;
 
-        // Multi-stage transforms for each card [Y positions, Rotations]
-        const transforms = [
-          [
-            [10, 50, -10, 10],
-            [20, -10, -45, 20],
-          ],
-          [
-            [0, 47.5, -10, 15],
-            [-25, 15, -45, 30],
-          ],
-          [
-            [0, 52.5, -10, 5],
-            [15, -5, -40, 60],
-          ],
-        ];
+          // Start: first card off-screen right
+          const startX = viewportWidth / 2 + cardWidth;
+
+          const totalTravel = startX - endX;
+
+          // All cards move together at the same speed
+          const baseX = startX - (progress * totalTravel);
+
+          cards.forEach((card, i) => {
+            // Each card has a fixed offset from the base position
+            const cardOffset = i * cardSpacing;
+            const x = baseX + cardOffset;
+
+            // No rotation for clean straight movement
+            gsap.set(card, {
+              x: x,
+              y: 0,
+              rotation: 0,
+              transformOrigin: 'center center',
+            });
+          });
+        }
+
+        // Initial positioning
+        positionCards(0);
 
         scrollTriggerInstance = ScrollTrigger.create({
           trigger: stickySection,
@@ -85,67 +84,12 @@ export function TeamCardsSticky() {
           pin: true,
           pinSpacing: true,
           onUpdate: (self) => {
-            const progress = self.progress;
-
-            // Parallax background title
-            const translateX = -progress * maxTranslate;
-            gsap.set(stickyHeader, { x: translateX });
-
-            cards.forEach((card, index) => {
-              if (!card) return;
-
-              const delay = index * 0.1125;
-              const cardProgress = Math.max(
-                0,
-                Math.min((progress - delay) * 2, 1)
-              );
-
-              if (cardProgress > 0) {
-                const yPos = transforms[index % transforms.length][0];
-                const rotations = transforms[index % transforms.length][1];
-
-                // X-axis interpolation
-                const cardX = gsap.utils.interpolate(
-                  cardStartX,
-                  cardEndX,
-                  cardProgress
-                );
-
-                // Y-axis multi-stage interpolation
-                const yProgress = cardProgress * 3;
-                const yIndex = Math.min(Math.floor(yProgress), yPos.length - 2);
-                const yInterpolation = yProgress - yIndex;
-                const cardY = gsap.utils.interpolate(
-                  yPos[yIndex],
-                  yPos[yIndex + 1],
-                  yInterpolation
-                );
-
-                // Rotation multi-stage interpolation
-                const cardRotation = gsap.utils.interpolate(
-                  rotations[yIndex],
-                  rotations[yIndex + 1],
-                  yInterpolation
-                );
-
-                gsap.set(card, {
-                  xPercent: cardX,
-                  yPercent: cardY,
-                  rotation: cardRotation,
-                  opacity: 1,
-                });
-              } else {
-                gsap.set(card, { opacity: 0 });
-              }
-            });
+            positionCards(self.progress);
           },
         });
 
-        const onRefreshInit = () => measure();
-        ScrollTrigger.addEventListener('refreshInit', onRefreshInit);
-
         const handleResize = () => {
-          measure();
+          positionCards(0);
           ScrollTrigger.refresh();
         };
         window.addEventListener('resize', handleResize, { passive: true });
@@ -154,18 +98,15 @@ export function TeamCardsSticky() {
 
         return () => {
           if (scrollTriggerInstance) scrollTriggerInstance.kill();
-          ScrollTrigger.removeEventListener('refreshInit', onRefreshInit);
           window.removeEventListener('resize', handleResize);
         };
       });
 
       mm.add('(max-width: 999px)', () => {
         const stickySection = stickyRef.current;
-        const stickyHeader = headerRef.current;
         if (stickySection) gsap.set(stickySection, { clearProps: 'all' });
-        if (stickyHeader) gsap.set(stickyHeader, { clearProps: 'all' });
         cardsRef.current.forEach((card) => {
-          if (card) gsap.set(card, { clearProps: 'all', opacity: 1 });
+          if (card) gsap.set(card, { clearProps: 'all' });
         });
 
         ScrollTrigger.refresh();
@@ -193,52 +134,48 @@ export function TeamCardsSticky() {
 
   return (
     <>
-      {/* Desktop animated section */}
-      <section className="team-cards-section team-desktop" ref={stickyRef}>
-        <div className="sticky-header" ref={headerRef}>
-          <h1>Leadership Team</h1>
+      {/* Desktop animated section with straight line animation */}
+      <section className="team-arc-section team-desktop" ref={stickyRef}>
+        {/* Section Title */}
+        <div className="team-title">
+          <h1>Leadership<br />Team</h1>
         </div>
-        {TEAM_MEMBERS.map((member, idx) => (
-          <div
-            className="team-card"
-            id={`team-card-${idx + 1}`}
-            key={member.id}
-            ref={(el) => {
-              cardsRef.current[idx] = el;
-            }}
-          >
-            <div className="team-card-image">
-              <img src={member.image} alt={member.name} />
-            </div>
-            <div className="team-card-content">
-              <div className="team-card-title">
-                <h2>{member.name}</h2>
+
+        {/* Cards Container */}
+        <div className="cards">
+          {TEAM_MEMBERS.map((member, idx) => (
+            <div
+              className="card"
+              key={member.id}
+              ref={(el) => {
+                cardsRef.current[idx] = el;
+              }}
+            >
+              <div className="card-img">
+                <img src={member.image} alt={member.name} />
               </div>
-              <div className="team-card-description">
-                <p>{member.bio}</p>
+              <div className="card-content">
+                <h3>{member.name}</h3>
+                <p>{member.title}</p>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </section>
 
       {/* Mobile static section */}
-      <section className="team-cards-section team-mobile">
+      <section className="team-arc-section team-mobile">
         <div className="mobile-header">
           <h1>Leadership Team</h1>
         </div>
         {TEAM_MEMBERS.map((member, idx) => (
-          <div className="team-card" id={`team-card-m-${idx + 1}`} key={`m-${member.id}`}>
-            <div className="team-card-image">
+          <div className="mobile-card" key={`m-${member.id}`}>
+            <div className="mobile-card-image">
               <img src={member.image} alt={member.name} />
             </div>
-            <div className="team-card-content">
-              <div className="team-card-title">
-                <h2>{member.name}</h2>
-              </div>
-              <div className="team-card-description">
-                <p>{member.bio}</p>
-              </div>
+            <div className="mobile-card-content">
+              <h2>{member.name}</h2>
+              <p>{member.bio}</p>
             </div>
           </div>
         ))}
