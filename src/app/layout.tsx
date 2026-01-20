@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     default: "TRD Remedial - The Remedial Experts | Structural Solutions Sydney",
     template: "%s | TRD Remedial"
   },
-  description: "Award-winning structural remediation experts in Sydney. Specializing in carbon fibre reinforcement, concrete cutting & coring, crack injection, GPR scanning, and emergency structural solutions. 24/7 response available.",
+  description: "Sydney's leading structural remediation and concrete repair specialists. Expert carbon fibre reinforcement, crack injection, concrete cutting, GPR scanning, and 24/7 emergency structural solutions across NSW. Building compliance guaranteed.",
   keywords: [
     "structural remediation Sydney",
     "concrete repair",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://thetrdgroup.com.au"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://thetrdgroup.com.au"),
   alternates: {
     canonical: "/",
   },

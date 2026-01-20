@@ -71,6 +71,10 @@ const ServicesSpotlight = () => {
         const titleElement = document.createElement("h1");
         titleElement.textContent = item.name;
         if (index === 0) titleElement.style.opacity = "1";
+        titleElement.style.cursor = "pointer";
+        titleElement.onclick = () => {
+          window.location.href = `/services/${SERVICES[index].slug}`;
+        };
         titlesContainer.appendChild(titleElement);
 
         // Create image wrapper

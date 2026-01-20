@@ -1,6 +1,7 @@
 'use client';
 
 import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
+import Link from 'next/link';
 import './Hero.css';
 
 interface HeroProps {
@@ -34,6 +35,17 @@ export function Hero({ showContent = true }: HeroProps) {
           EXPERTS
         </AnimatedCopy>
       </div>
+
+      {showContent && (
+        <div className="hero-cta">
+          <Link href="/services" className="btn btn-primary">
+            Explore Our Services
+          </Link>
+          <Link href="/contact" className="btn btn-secondary">
+            Get Emergency Help
+          </Link>
+        </div>
+      )}
     </section>
   );
 }

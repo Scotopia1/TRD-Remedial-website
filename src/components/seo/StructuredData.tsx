@@ -1,12 +1,14 @@
 export function StructuredData() {
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://thetrdgroup.com.au';
+
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": "https://thetrdgroup.com.au/#organization",
+    "@id": `${SITE_URL}/#organization`,
     name: "TRD Remedial",
     legalName: "Tension Reinforced Developments",
-    url: "https://thetrdgroup.com.au",
-    logo: "https://thetrdgroup.com.au/trd-logo.svg",
+    url: `${SITE_URL}`,
+    logo: `${SITE_URL}/trd-logo.svg`,
     foundingDate: "2017",
     founders: [
       {
@@ -38,9 +40,9 @@ export function StructuredData() {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://thetrdgroup.com.au/#localbusiness",
+    "@id": `${SITE_URL}/#localbusiness`,
     name: "TRD Remedial",
-    image: "https://thetrdgroup.com.au/images/og-image.jpg",
+    image: `${SITE_URL}/images/og-image.jpg`,
     description: "Award-winning structural remediation experts in Sydney. Specializing in carbon fibre reinforcement, concrete cutting, crack injection, and emergency structural solutions.",
     address: {
       "@type": "PostalAddress",
@@ -56,8 +58,8 @@ export function StructuredData() {
       longitude: 151.0500
     },
     telephone: "+61-414-727-167",
-    email: "info@thetrdgroup.com.au",
-    url: "https://thetrdgroup.com.au",
+    email: "contact@trdremedial.com.au",
+    url: `${SITE_URL}`,
     priceRange: "$$",
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
@@ -136,12 +138,12 @@ export function StructuredData() {
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": "https://thetrdgroup.com.au/#website",
-    url: "https://thetrdgroup.com.au",
+    "@id": `${SITE_URL}/#website`,
+    url: `${SITE_URL}`,
     name: "TRD Remedial",
     description: "The Remedial Experts - Structural Solutions Sydney",
     publisher: {
-      "@id": "https://thetrdgroup.com.au/#organization"
+      "@id": `${SITE_URL}/#organization`
     },
     inLanguage: "en-AU"
   };
@@ -154,7 +156,7 @@ export function StructuredData() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://thetrdgroup.com.au"
+        item: `${SITE_URL}`
       }
     ]
   };

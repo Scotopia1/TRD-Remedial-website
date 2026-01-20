@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import SplitType from 'split-type';
+import Link from 'next/link';
 import './IntroStats.css';
 
 export function IntroStats() {
@@ -116,8 +117,11 @@ export function IntroStats() {
         <div ref={copyContainerRef} className="intro-copy">
           <div className="intro-copy-wrapper">
             <h3 ref={copyRef}>
-              We solve structural challenges others can't handle. With 8 years of precision remedial expertise, 24/7 emergency response, and unwavering commitment to building compliance, TRD delivers solutions that last.
+              We solve structural challenges others can't handle. As Sydney's leading structural remediation experts, we deliver precision concrete repair solutions with 8 years of proven expertise, 24/7 emergency response, and unwavering commitment to building compliance. From structural remediation Sydney projects to complex concrete repair Sydney jobs, TRD delivers solutions that last.
             </h3>
+            <Link href="/about" className="intro-learn-more">
+              Learn more about our approach →
+            </Link>
           </div>
         </div>
       </div>

@@ -34,7 +34,7 @@ export const SERVICES: Service[] = [
     slug: 'crack-injection',
     title: 'Crack Injection',
     tagline: 'Precision sealing and structural repair',
-    description: 'Specialized crack injection services to seal and bond concrete cracks. We use high-quality resins and grouts to restore structural integrity and prevent water ingress.',
+    description: 'Professional crack injection and concrete repair services in Sydney. Our expert team delivers structural remediation solutions for residential and commercial properties across NSW, using high-quality resins and grouts to restore structural integrity and prevent water ingress.',
     features: [
       'Epoxy injection',
       'Polyurethane injection',
@@ -70,7 +70,7 @@ export const SERVICES: Service[] = [
     slug: 'concrete-cutting',
     title: 'Concrete Cutting',
     tagline: 'Precision cutting and coring',
-    description: 'Professional concrete cutting services including wall sawing, floor sawing, and core drilling. We deliver precise cuts with minimal dust and disruption.',
+    description: 'Precision concrete cutting and coring services throughout Sydney. Specialized in structural remediation and building compliance for major infrastructure projects, delivering precise cuts with minimal dust and disruption across NSW.',
     features: [
       'Wall sawing',
       'Floor sawing',
@@ -250,7 +250,7 @@ export const SERVICES: Service[] = [
     slug: 'concrete-strengthening',
     title: 'Concrete Strengthening',
     tagline: 'Enhancing load capacity',
-    description: 'Structural strengthening using carbon fibre (CFRP) and steel plate bonding. Increase the load-bearing capacity of existing concrete structures.',
+    description: 'Expert structural strengthening using carbon fibre (CFRP) and steel plate bonding in Sydney. Our structural remediation specialists increase the load-bearing capacity of existing concrete structures across NSW, ensuring building compliance and long-term stability.',
     features: [
       'Carbon fibre wrapping',
       'Steel plate bonding',

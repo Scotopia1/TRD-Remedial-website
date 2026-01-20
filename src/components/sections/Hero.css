@@ -65,9 +65,115 @@
   .hero-header h1 { font-size: clamp(2rem, 15vw, 4rem); line-height: 0.9; letter-spacing: -0.01em; }
 }
 
+/* Hero CTA Buttons */
+.hero-cta {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  z-index: 10;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 20px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.4s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.hero-cta .btn {
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.hero-cta .btn-primary {
+  background: #424242;
+  color: #f5f5f5;
+  border-color: #424242;
+}
+
+.hero-cta .btn-primary:hover {
+  background: #303030;
+  border-color: #303030;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hero-cta .btn-secondary {
+  background: transparent;
+  color: #f5f5f5;
+  border: 2px solid #f5f5f5;
+}
+
+.hero-cta .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive CTA Buttons */
+@media (max-width: 768px) {
+  .hero-cta {
+    bottom: 40px;
+    gap: 12px;
+  }
+
+  .hero-cta .btn {
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-cta {
+    bottom: 30px;
+    flex-direction: column;
+    width: calc(100% - 40px);
+    gap: 10px;
+  }
+
+  .hero-cta .btn {
+    padding: 12px 20px;
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+  }
+}
+
 /* Reduced Motion - Accessibility */
 @media (prefers-reduced-motion: reduce) {
   .hero-video {
     filter: brightness(0.7);
+  }
+
+  .hero-cta {
+    animation: fadeInNoMotion 0.3s ease-out 0.4s forwards;
+  }
+
+  @keyframes fadeInNoMotion {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .hero-cta .btn:hover {
+    transform: none;
   }
 }

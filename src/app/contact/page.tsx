@@ -4,6 +4,7 @@ import './contact.css';
 import { AnimatedH1 } from '@/components/animations/AnimatedH1';
 import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
 import Link from 'next/link';
+import { COMPANY_INFO } from '@/lib/constants';
 
 export default function ContactPage() {
   return (
@@ -35,9 +36,9 @@ export default function ContactPage() {
               <AnimatedCopy tag="p" delay={1} className="contact-label">
                 Phone
               </AnimatedCopy>
-              <a href="tel:+61XXXXXXXXX" className="contact-value">
+              <a href={`tel:${COMPANY_INFO.contact.phone.emergency1.replace(/\s/g, '')}`} className="contact-value">
                 <AnimatedCopy tag="span" delay={1.1}>
-                  +61 XXX XXX XXX
+                  {COMPANY_INFO.contact.phone.emergency1}
                 </AnimatedCopy>
               </a>
             </div>

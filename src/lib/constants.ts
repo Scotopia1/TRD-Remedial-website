@@ -16,13 +16,13 @@ export const COMPANY_INFO = {
       emergency1: '0414 727 167',
       emergency2: '0404 404 422',
     },
-    email: 'info@thetrdgroup.com.au',
+    email: 'contact@trdremedial.com.au',
     address: '2 Beryl Place Greenacre NSW 2190',
   },
 
   // Quick access properties
   emergency_phones: ['0414 727 167', '0404 404 422'],
-  email: 'info@thetrdgroup.com.au',
+  email: 'contact@trdremedial.com.au',
   address: '2 Beryl Place Greenacre NSW 2190',
 
   // Parent Company
