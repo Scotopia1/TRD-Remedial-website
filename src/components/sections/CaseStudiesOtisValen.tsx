@@ -60,7 +60,7 @@ export function CaseStudiesOtisValen() {
     if (!headerContentRef.current) return;
 
     gsap.set(".cs-profile-icon", { scale: 0 });
-    gsap.set(".cs-header-arrow-icon", { scale: 0 });
+    gsap.set(".cs-circular-btn-wrapper", { scale: 0, opacity: 0 });
 
     const introText = new SplitText(".cs-header-content > p", {
       type: "lines",
@@ -106,9 +106,10 @@ export function CaseStudiesOtisValen() {
     );
 
     headerTl.to(
-      ".cs-header-arrow-icon",
+      ".cs-circular-btn-wrapper",
       {
         scale: 1,
+        opacity: 1,
         duration: 0.75,
         ease: "power4.out",
       },
@@ -185,20 +186,24 @@ export function CaseStudiesOtisValen() {
             <h1>Case Studies</h1>
             <h2>Our Work In Action</h2>
           </div>
-          <div className="cs-header-arrow-icon">
-            <span aria-hidden="true">&#8595;</span>
-          </div>
-        </div>
-        <div className="cs-footer">
-          <div className="cs-footer-symbols">
-            <img src="https://raw.githubusercontent.com/twitter/twemoji/master/assets/svg/25fc.svg" alt="Decorative icon" />
-          </div>
-          <div className="cs-footer-scroll-down">
-            <p className="mn">See More Work</p>
-          </div>
-          <div className="cs-footer-tags">
-            <p className="mn">Our Projects / 2025</p>
-          </div>
+          <a href="/projects" className="cs-circular-btn-wrapper">
+            <div className="cs-circular-btn">
+              <svg viewBox="0 0 200 200" className="cs-circular-btn-svg">
+                <defs>
+                  <path
+                    id="csCirclePath"
+                    d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
+                  />
+                </defs>
+                <text className="cs-circular-btn-text">
+                  <textPath href="#csCirclePath" startOffset="0%">
+                    SEE MORE WORK • SEE MORE WORK •
+                  </textPath>
+                </text>
+              </svg>
+              <div className="cs-circular-btn-arrow">↓</div>
+            </div>
+          </a>
         </div>
       </section>
 

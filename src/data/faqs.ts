@@ -2,8 +2,7 @@
  * TRD Remedial - FAQ Data
  * Phase 2 SEO Optimization - Content Expansion
  *
- * 18 FAQs organized by category:
- * - 5 Pricing
+ * 13 FAQs organized by category:
  * - 5 Process
  * - 4 Technical
  * - 4 Services
@@ -13,48 +12,11 @@ export interface FAQItem {
   id: string;
   question: string;
   answer: string;
-  category: 'pricing' | 'process' | 'technical' | 'services';
+  category: 'process' | 'technical' | 'services';
   keywords: string[];
 }
 
 export const FAQS: FAQItem[] = [
-  // ==================== PRICING CATEGORY (5 FAQs) ====================
-  {
-    id: 'crack-injection-cost',
-    question: 'How much does crack injection cost in Sydney?',
-    answer: 'Crack injection costs in Sydney typically range from $150-$400 per linear meter, depending on crack width, depth, structural complexity, and accessibility. Epoxy injection for structural cracks costs more than polyurethane for waterproofing. We provide free quotes after on-site inspection to ensure accurate pricing for your specific concrete repair needs.',
-    category: 'pricing',
-    keywords: ['crack injection cost Sydney', 'crack repair price', 'concrete repair pricing', 'epoxy injection cost']
-  },
-  {
-    id: 'concrete-cutting-rates',
-    question: 'What are your concrete cutting rates?',
-    answer: 'Concrete cutting rates vary by method: wall sawing $180-$250/hour, floor sawing $150-$200/hour, and core drilling $25-$60 per hole depending on diameter. Rates include dust control systems and disposal. Emergency 24/7 services available with premium rates. Contact us for detailed quotes on structural alteration projects.',
-    category: 'pricing',
-    keywords: ['concrete cutting cost', 'wall sawing price', 'core drilling rates', 'Sydney concrete services']
-  },
-  {
-    id: 'payment-methods',
-    question: 'What payment methods do you accept?',
-    answer: 'We accept bank transfer, credit/debit cards (Visa, Mastercard, Amex), and cheque for commercial projects. Payment terms: 50% deposit on job commencement, 50% on completion. For large structural remediation projects over $50,000, we offer progress payment schedules aligned with project milestones.',
-    category: 'pricing',
-    keywords: ['payment options', 'TRD payment methods', 'remedial services payment']
-  },
-  {
-    id: 'insurance-claims',
-    question: 'Do you work with insurance claims?',
-    answer: 'Yes, we have extensive experience working with insurance assessors and provide detailed documentation for structural damage claims. We offer free initial assessments, comprehensive reports with photos and measurements, and can liaise directly with your insurer. Our Building Commissioner-approved team ensures compliance with all insurance requirements.',
-    category: 'pricing',
-    keywords: ['insurance claims concrete', 'structural damage insurance', 'remedial insurance work']
-  },
-  {
-    id: 'free-quotes',
-    question: 'Do you provide free quotes?',
-    answer: 'Yes, we provide free no-obligation quotes for all remedial services across Sydney. Our quotes include on-site inspection, detailed scope of works, materials breakdown, and estimated timeframe. For complex structural repairs, we may conduct slab scanning or structural assessments at cost, credited back if you proceed with the job.',
-    category: 'pricing',
-    keywords: ['free concrete repair quote', 'Sydney remedial quote', 'crack repair estimate']
-  },
-
   // ==================== PROCESS CATEGORY (5 FAQs) ====================
   {
     id: 'project-duration',
@@ -160,14 +122,13 @@ export function getFAQsByCategory(category: FAQItem['category']): FAQItem[] {
 
 // Helper function to get all categories
 export function getFAQCategories(): FAQItem['category'][] {
-  return ['pricing', 'process', 'technical', 'services'];
+  return ['process', 'technical', 'services'];
 }
 
 // Statistics
 export const FAQ_STATS = {
   total: FAQS.length,
   byCategory: {
-    pricing: getFAQsByCategory('pricing').length,
     process: getFAQsByCategory('process').length,
     technical: getFAQsByCategory('technical').length,
     services: getFAQsByCategory('services').length,
