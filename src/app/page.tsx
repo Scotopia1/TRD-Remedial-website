@@ -54,11 +54,11 @@ export default function Home() {
           {/* Customer Feedback - CGMWTMAR2025 Nico Palmer Pattern */}
           <CustomerFeedback />
 
-          {/* FAQ Section - Phase 2 SEO Optimization */}
-          <FAQ />
-
           {/* Emergency CTA */}
           <EmergencyCTA />
+
+          {/* FAQ Section - Phase 2 SEO Optimization */}
+          <FAQ />
 
           {/* Backed by Strength - CGMWTJUNE2025 Wu Wei Studio Pattern */}
           <BackedByStrengthStudio />

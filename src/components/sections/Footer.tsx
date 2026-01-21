@@ -6,9 +6,26 @@ import Link from 'next/link';
 
 export function Footer() {
   return (
-    <div className="footer">
-      {/* Row 1: Contact CTA + Navigation */}
-      <div className="footer-row">
+    <>
+      {/* Sliding Banner */}
+      <div className="footer-banner">
+        <div className="footer-banner-track">
+          <div className="footer-banner-content">
+            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
+            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
+            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
+            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
+            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
+            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
+            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
+            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
+          </div>
+        </div>
+      </div>
+
+      <div className="footer">
+        {/* Row 1: Contact CTA + Navigation */}
+        <div className="footer-row">
         <div className="footer-contact">
           <h3>
             Let&apos;s Build Together <br />
@@ -76,5 +93,6 @@ export function Footer() {
         </div>
       </div>
     </div>
+    </>
   );
 }

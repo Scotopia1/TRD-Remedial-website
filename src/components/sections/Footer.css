@@ -1,5 +1,87 @@
 /* Footer - CGMWTMAR2025 Nico Palmer Pattern with TRD Branding */
 
+/* =====================================================
+   SLIDING BANNER - Above Footer
+   ===================================================== */
+
+.footer-banner {
+  width: 100vw;
+  background-color: #000000;
+  overflow: hidden;
+  padding: 0.1em 0;
+  position: relative;
+}
+
+.footer-banner-track {
+  display: flex;
+  width: 100%;
+}
+
+.footer-banner-content {
+  display: flex;
+  animation: slideLeft 20s linear infinite;
+  white-space: nowrap;
+}
+
+.footer-banner-content span {
+  font-family: "Rader", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Responsive Banner */
+@media (max-width: 1000px) {
+  .footer-banner {
+    padding: 0.1em 0;
+  }
+
+  .footer-banner-content span {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-banner {
+    padding: 0.1em 0;
+  }
+
+  .footer-banner-content span {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-banner {
+    padding: 0.1em 0;
+  }
+
+  .footer-banner-content span {
+    font-size: 1.75rem;
+  }
+}
+
+/* Reduced Motion - Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .footer-banner-content {
+    animation: none;
+  }
+}
+
 .footer {
   width: 100vw;
   height: auto;
