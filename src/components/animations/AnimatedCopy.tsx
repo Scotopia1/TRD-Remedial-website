@@ -21,6 +21,7 @@ interface AnimatedCopyProps {
   direction?: 'top' | 'bottom';
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div';
   trigger?: boolean;
+  instantVisible?: boolean; // Show text immediately, animate later (for LCP optimization)
 }
 
 export function AnimatedCopy({
@@ -35,6 +36,7 @@ export function AnimatedCopy({
   direction = 'bottom',
   tag = 'p',
   trigger = true,
+  instantVisible = false,
 }: AnimatedCopyProps) {
   const copyRef = useRef<HTMLElement>(null);
   const [copyId, setCopyId] = useState<string | null>(null);
@@ -69,7 +71,7 @@ export function AnimatedCopy({
     const initialY = direction === 'top' ? '-100%' : '100%';
 
     gsap.set(`.line-inner-${copyId}`, {
-      y: initialY,
+      y: instantVisible ? '0%' : initialY, // Show immediately if instantVisible
       display: 'block',
     });
 

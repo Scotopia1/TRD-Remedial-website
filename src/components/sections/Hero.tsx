@@ -16,7 +16,7 @@ export function Hero({ showContent = true }: HeroProps) {
         <OptimizedVideo
           src="/videos/hero-video"
           className="hero-video"
-          priority={false}
+          priority={true}
           autoPlay={true}
           loop={true}
           muted={true}
@@ -25,13 +25,31 @@ export function Hero({ showContent = true }: HeroProps) {
       </div>
 
       <div className="hero-header">
-        <AnimatedCopy tag="h1" animateOnScroll={false} delay={0.1} trigger={showContent}>
+        <AnimatedCopy
+          tag="h1"
+          animateOnScroll={false}
+          delay={0.5}
+          trigger={showContent}
+          instantVisible={true}
+        >
           THE
         </AnimatedCopy>
-        <AnimatedCopy tag="h1" animateOnScroll={false} delay={0.2} trigger={showContent}>
+        <AnimatedCopy
+          tag="h1"
+          animateOnScroll={false}
+          delay={0.6}
+          trigger={showContent}
+          instantVisible={true}
+        >
           REMEDIAL
         </AnimatedCopy>
-        <AnimatedCopy tag="h1" animateOnScroll={false} delay={0.3} trigger={showContent}>
+        <AnimatedCopy
+          tag="h1"
+          animateOnScroll={false}
+          delay={0.7}
+          trigger={showContent}
+          instantVisible={true}
+        >
           EXPERTS
         </AnimatedCopy>
       </div>
