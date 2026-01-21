@@ -5,7 +5,7 @@
  * Phase 2 SEO Optimization - Content Expansion
  *
  * Features:
- * - 18 FAQs organized by category (Pricing, Process, Technical, Services)
+ * - 13 FAQs organized by category (Process, Technical, Services)
  * - Accessible accordion interface with ARIA labels
  * - Keyboard navigation support
  * - Mobile-responsive design
@@ -16,7 +16,6 @@ import { useState } from 'react';
 import { FAQS, getFAQsByCategory, getFAQCategories, type FAQItem } from '@/data/faqs';
 
 const categoryLabels: Record<FAQItem['category'], string> = {
-  pricing: 'Pricing & Payment',
   process: 'Process & Timeline',
   technical: 'Technical Information',
   services: 'Our Services',
@@ -24,7 +23,7 @@ const categoryLabels: Record<FAQItem['category'], string> = {
 
 export function FAQ() {
   const [activeId, setActiveId] = useState<string | null>(null);
-  const [activeCategory, setActiveCategory] = useState<FAQItem['category']>('pricing');
+  const [activeCategory, setActiveCategory] = useState<FAQItem['category']>('process');
 
   const toggleFAQ = (id: string) => {
     setActiveId(activeId === id ? null : id);
@@ -172,13 +171,13 @@ export function FAQ() {
         }
 
         .faq-category-btn:hover {
-          border-color: #ff6b00;
-          color: #ff6b00;
+          border-color: #000000;
+          color: #000000;
         }
 
         .faq-category-btn.active {
-          background: #ff6b00;
-          border-color: #ff6b00;
+          background: #000000;
+          border-color: #000000;
           color: #ffffff;
         }
 
@@ -197,7 +196,7 @@ export function FAQ() {
         }
 
         .faq-item:hover {
-          border-color: #ff6b00;
+          border-color: #000000;
         }
 
         .faq-question {
@@ -235,7 +234,7 @@ export function FAQ() {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: #ff6b00;
+          background: #000000;
           color: #ffffff;
           border-radius: 50%;
           font-size: 1.5rem;
@@ -266,49 +265,60 @@ export function FAQ() {
 
         .faq-cta {
           margin-top: 64px;
-          padding: 32px;
+          padding: 40px 32px;
           background: #ffffff;
-          border: 2px solid #ff6b00;
+          border: 2px solid #000000;
           border-radius: 12px;
           text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 24px;
         }
 
         .faq-cta p {
           font-size: 1.25rem;
           font-weight: 600;
           color: #1a1a1a;
-          margin-bottom: 20px;
+          margin: 0;
         }
 
         .faq-cta-btn {
           display: inline-block;
-          padding: 14px 32px;
-          background: #ff6b00;
+          padding: 16px 40px;
+          background: #000000;
           color: #ffffff;
-          font-size: 1rem;
+          font-size: 1.0625rem;
           font-weight: 600;
           text-decoration: none;
           border-radius: 8px;
-          transition: background 0.2s ease;
+          transition: all 0.2s ease;
+          min-width: 180px;
         }
 
         .faq-cta-btn:hover {
-          background: #e05a00;
+          background: #333333;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .faq-cta-divider {
-          margin: 0 16px;
           color: #999;
+          font-size: 0.9375rem;
+          margin: -8px 0;
         }
 
         .faq-cta-phone {
-          font-size: 1.125rem;
+          font-size: 1.25rem;
           font-weight: 600;
-          color: #ff6b00;
+          color: #000000;
           text-decoration: none;
+          transition: color 0.2s ease;
+          letter-spacing: 0.5px;
         }
 
         .faq-cta-phone:hover {
+          color: #333333;
           text-decoration: underline;
         }
 
@@ -335,12 +345,48 @@ export function FAQ() {
           }
 
           .faq-cta {
-            padding: 24px 16px;
+            padding: 32px 20px;
+            gap: 20px;
+          }
+
+          .faq-cta p {
+            font-size: 1.125rem;
+          }
+
+          .faq-cta-btn {
+            padding: 14px 32px;
+            font-size: 1rem;
+            min-width: 160px;
           }
 
           .faq-cta-divider {
-            display: block;
-            margin: 12px 0;
+            font-size: 0.875rem;
+            margin: -6px 0;
+          }
+
+          .faq-cta-phone {
+            font-size: 1.125rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .faq-cta {
+            padding: 28px 16px;
+            gap: 18px;
+          }
+
+          .faq-cta p {
+            font-size: 1rem;
+          }
+
+          .faq-cta-btn {
+            padding: 12px 28px;
+            font-size: 0.9375rem;
+            min-width: 140px;
+          }
+
+          .faq-cta-phone {
+            font-size: 1rem;
           }
         }
       `}</style>

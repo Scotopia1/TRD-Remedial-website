@@ -49,11 +49,15 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Row 2: Massive Typography + Copyright */}
+      {/* Row 2: Logo + Copyright */}
       <div className="footer-row">
         <div className="footer-header">
-          <span className="footer-brand-text" aria-label="TRD Remedial">TRD</span>
-          <span className="footer-brand-text">REMEDIAL</span>
+          <div className="footer-logo">
+            <img
+              src="/trd-logo-black.svg"
+              alt="TRD Remedial"
+            />
+          </div>
         </div>
 
         <div className="footer-copyright-line">

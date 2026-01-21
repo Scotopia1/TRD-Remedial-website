@@ -2,12 +2,12 @@
 
 .footer {
   width: 100vw;
-  height: 100%;
-  min-height: 100svh;
-  padding: 4em 2em 2em 2em;
+  height: auto;
+  padding: 4em 2em 0 2em;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 2em;
   overflow: hidden;
   background-color: var(--trd-secondary);
   color: var(--trd-primary);
@@ -122,24 +122,30 @@
 .footer-row:nth-child(2) {
   display: flex;
   flex-direction: column;
-  gap: 2em;
+  gap: 1.5em;
+  margin-bottom: 0;
 }
 
 .footer-header {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
-.footer-header h1 {
+.footer-logo {
   position: relative;
-  left: -0.5vw;
-  font-family: "Rader", sans-serif;
-  font-size: 15vw;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  color: var(--trd-primary);
-  line-height: 0.9;
+  width: 910px;
+  max-width: 90%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: none;
 }
 
 .footer-copyright-line {
@@ -149,6 +155,7 @@
   justify-content: space-between;
   align-items: flex-start;
   border-top: 1px dashed var(--trd-primary);
+  margin-bottom: 0;
 }
 
 .footer-copyright-line p {
@@ -159,6 +166,7 @@
   letter-spacing: 0.04em;
   color: var(--trd-accent);
   white-space: nowrap;
+  margin: 0;
 }
 
 /* =====================================================
@@ -167,9 +175,8 @@
 
 @media (max-width: 1000px) {
   .footer {
-    padding: 3em 2em 2em 2em;
-    min-height: auto;
-    gap: 3em;
+    padding: 3em 2em 0 2em;
+    gap: 1.5em;
   }
 
   /* Row 1 */
@@ -201,8 +208,9 @@
   }
 
   /* Row 2 */
-  .footer-header h1 {
-    font-size: 14vw;
+  .footer-logo {
+    width: 715px;
+    max-width: 85%;
   }
 
   .footer-copyright-line {
@@ -222,8 +230,8 @@
 
 @media (max-width: 768px) {
   .footer {
-    padding: 2.5em 1.5em 1.5em 1.5em;
-    gap: 2.5em;
+    padding: 2.5em 1.5em 0 1.5em;
+    gap: 1.25em;
   }
 
   .footer-row:nth-child(1) {
@@ -250,9 +258,9 @@
     font-size: 0.9rem;
   }
 
-  .footer-header h1 {
-    font-size: 16vw;
-    line-height: 0.85;
+  .footer-logo {
+    width: 585px;
+    max-width: 80%;
   }
 
   .footer-row:nth-child(2) {
@@ -272,8 +280,8 @@
 
 @media (max-width: 640px) {
   .footer {
-    padding: 2em 1.25em 1.25em 1.25em;
-    gap: 2em;
+    padding: 2em 1.25em 0 1.25em;
+    gap: 1em;
   }
 
   .footer-row:nth-child(1) {
@@ -309,10 +317,9 @@
     font-size: 0.85rem;
   }
 
-  .footer-header h1 {
-    font-size: 18vw;
-    line-height: 0.85;
-    left: -1vw;
+  .footer-logo {
+    width: 494px;
+    max-width: 75%;
   }
 
   .footer-row:nth-child(2) {
@@ -332,8 +339,8 @@
 
 @media (max-width: 480px) {
   .footer {
-    padding: 1.75em 1em 1em 1em;
-    gap: 1.75em;
+    padding: 1.75em 1em 0 1em;
+    gap: 0.875em;
   }
 
   .footer-row:nth-child(1) {
@@ -365,9 +372,9 @@
     font-size: 0.8rem;
   }
 
-  .footer-header h1 {
-    font-size: 20vw;
-    line-height: 0.8;
+  .footer-logo {
+    width: 390px;
+    max-width: 70%;
   }
 
   .footer-row:nth-child(2) {
@@ -390,7 +397,7 @@
 
 @media (max-width: 360px) {
   .footer {
-    padding: 1.5em 0.875em 0.875em 0.875em;
+    padding: 1.5em 0.875em 0 0.875em;
   }
 
   .footer-contact h3 {
@@ -411,8 +418,9 @@
     font-size: 0.75rem;
   }
 
-  .footer-header h1 {
-    font-size: 22vw;
+  .footer-logo {
+    width: 325px;
+    max-width: 65%;
   }
 
   .footer-copyright-line p {
