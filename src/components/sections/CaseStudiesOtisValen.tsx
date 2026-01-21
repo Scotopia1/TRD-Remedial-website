@@ -2,6 +2,7 @@
 import "./CaseStudiesOtisValen.css";
 
 import { useRef } from "react";
+import Image from "next/image";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -182,10 +183,10 @@ export function CaseStudiesOtisValen() {
           <p>Proven Results, Real Projects</p>
           <div className="cs-header-title">
             <h1>Case Studies</h1>
-            <h1>Our Work In Action</h1>
+            <h2>Our Work In Action</h2>
           </div>
           <div className="cs-header-arrow-icon">
-            <h1>&#8595;</h1>
+            <span aria-hidden="true">&#8595;</span>
           </div>
         </div>
         <div className="cs-footer">
@@ -207,10 +208,17 @@ export function CaseStudiesOtisValen() {
           <div className="cs-work-item">
             <div className="cs-work-item-img">
               <a href={caseStudiesData[0].href}>
-                <img
-                  src={caseStudiesData[0].image}
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  <Image
+                    src={caseStudiesData[0].image}
                   alt={caseStudiesData[0].title}
-                />
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    quality={85}
+                    priority={false}
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
               </a>
             </div>
             <div className="cs-work-item-content">
@@ -221,10 +229,17 @@ export function CaseStudiesOtisValen() {
           <div className="cs-work-item">
             <div className="cs-work-item-img">
               <a href={caseStudiesData[1].href}>
-                <img
-                  src={caseStudiesData[1].image}
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  <Image
+                    src={caseStudiesData[1].image}
                   alt={caseStudiesData[1].title}
-                />
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    quality={85}
+                    priority={false}
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
               </a>
             </div>
             <div className="cs-work-item-content">
@@ -237,10 +252,17 @@ export function CaseStudiesOtisValen() {
           <div className="cs-work-item">
             <div className="cs-work-item-img">
               <a href={caseStudiesData[2].href}>
-                <img
-                  src={caseStudiesData[2].image}
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  <Image
+                    src={caseStudiesData[2].image}
                   alt={caseStudiesData[2].title}
-                />
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    quality={85}
+                    priority={false}
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
               </a>
             </div>
             <div className="cs-work-item-content">
@@ -251,10 +273,17 @@ export function CaseStudiesOtisValen() {
           <div className="cs-work-item">
             <div className="cs-work-item-img">
               <a href={caseStudiesData[3].href}>
-                <img
-                  src={caseStudiesData[3].image}
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  <Image
+                    src={caseStudiesData[3].image}
                   alt={caseStudiesData[3].title}
-                />
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    quality={85}
+                    priority={false}
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
               </a>
             </div>
             <div className="cs-work-item-content">
@@ -267,10 +296,17 @@ export function CaseStudiesOtisValen() {
           <div className="cs-work-item">
             <div className="cs-work-item-img">
               <a href={caseStudiesData[4].href}>
-                <img
-                  src={caseStudiesData[4].image}
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  <Image
+                    src={caseStudiesData[4].image}
                   alt={caseStudiesData[4].title}
-                />
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    quality={85}
+                    priority={false}
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
               </a>
             </div>
             <div className="cs-work-item-content">
@@ -281,10 +317,17 @@ export function CaseStudiesOtisValen() {
           <div className="cs-work-item">
             <div className="cs-work-item-img">
               <a href={caseStudiesData[5].href}>
-                <img
-                  src={caseStudiesData[5].image}
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  <Image
+                    src={caseStudiesData[5].image}
                   alt={caseStudiesData[5].title}
-                />
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    quality={85}
+                    priority={false}
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
               </a>
             </div>
             <div className="cs-work-item-content">

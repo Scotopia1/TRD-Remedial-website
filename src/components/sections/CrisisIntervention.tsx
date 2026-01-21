@@ -2,6 +2,7 @@
 
 import './CrisisIntervention.css';
 import { useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -84,14 +85,22 @@ export function CrisisIntervention() {
         {cardsData.map((cardData, index) => (
           <div className="sticky-card" key={index}>
             <div className="sticky-card-index">
-              <h1>{cardData.index}</h1>
+              <span aria-hidden="true">{cardData.index}</span>
             </div>
             <div className="sticky-card-content">
               <div className="sticky-card-content-wrapper">
-                <h1 className="sticky-card-header">{cardData.title}</h1>
+                <h2 className="sticky-card-header">{cardData.title}</h2>
 
                 <div className="sticky-card-img">
-                  <img src={cardData.image} alt={cardData.title} />
+                  <Image
+                    src={cardData.image}
+                    alt={cardData.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 600px"
+                    quality={85}
+                    priority={false}
+                    style={{ objectFit: 'cover' }}
+                  />
                 </div>
 
                 <div className="sticky-card-copy">

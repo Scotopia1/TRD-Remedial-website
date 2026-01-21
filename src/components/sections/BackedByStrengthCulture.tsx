@@ -3,6 +3,7 @@
 import './BackedByStrengthCulture.css';
 
 import { useRef } from 'react';
+import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -31,6 +32,27 @@ const origins = [
   'left', 'right', 'left', 'left', 'left',
   'left', 'left', 'right', 'left', 'left',
   'right', 'left',
+];
+
+// Capability images (Unsplash photo IDs)
+const capabilityImages = [
+  '1541888946425-d81bb19240f5', // 1 - Construction site
+  '1504307651254-35680f356dfd', // 2 - Modern building
+  '1503387762-592deb58ef4e', // 3 - Steel structure
+  '1590856029826-c7a73142bbf1', // 4 - Concrete work
+  '1503328427499-d92d414d0f41', // 5 - Industrial
+  '1541976590-713941681591', // 6 - Architecture
+  '1486406146456-8edd19c34d82', // 7 - Construction equipment
+  '1581092918484-8313e01f50e2', // 8 - Building facade
+  '1504307651254-35680f356dfd', // 9 - Urban development
+  '1503387762-592deb58ef4e', // 10 - Engineering
+  '1590856029826-c7a73142bbf1', // 11 - Infrastructure
+  '1503328427499-d92d414d0f41', // 12 - Construction detail
+  '1541976590-713941681591', // 13 - Architectural detail
+  '1486406146456-8edd19c34d82', // 14 - Heavy machinery
+  '1581092918484-8313e01f50e2', // 15 - Modern construction
+  '1504307651254-35680f356dfd', // 16 - Building project
+  '1541888946425-d81bb19240f5', // 17 - Construction team
 ];
 
 // Company values for split element
@@ -213,7 +235,15 @@ export function BackedByStrengthCulture() {
       {/* Hero Section */}
       <div ref={strengthHeroRef} className="strength-hero">
         <div className="strength-hero-img">
-          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&h=1080&fit=crop" alt="TRD Strength" />
+          <Image
+            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&h=1080&fit=crop"
+            alt="TRD Strength"
+            fill
+            sizes="100vw"
+            quality={85}
+            priority={true}
+            style={{ objectFit: 'cover' }}
+          />
         </div>
 
         <div className="strength-hero-header">
@@ -247,29 +277,14 @@ export function BackedByStrengthCulture() {
                     className="capability-img"
                     data-origin={origins[imageIndex]}
                   >
-                    <img
-                      src={`https://images.unsplash.com/photo-${
-                        [
-                          '1541888946425-d81bb19240f5', // 1 - Construction site
-                          '1504307651254-35680f356dfd', // 2 - Modern building
-                          '1503387762-592deb58ef4e', // 3 - Steel structure
-                          '1590856029826-c7a73142bbf1', // 4 - Concrete work
-                          '1503328427499-d92d414d0f41', // 5 - Industrial
-                          '1541976590-713941681591', // 6 - Architecture
-                          '1486406146456-8edd19c34d82', // 7 - Construction equipment
-                          '1581092918484-8313e01f50e2', // 8 - Building facade
-                          '1504307651254-35680f356dfd', // 9 - Urban development
-                          '1503387762-592deb58ef4e', // 10 - Engineering
-                          '1590856029826-c7a73142bbf1', // 11 - Infrastructure
-                          '1503328427499-d92d414d0f41', // 12 - Construction detail
-                          '1541976590-713941681591', // 13 - Architectural detail
-                          '1486406146456-8edd19c34d82', // 14 - Heavy machinery
-                          '1581092918484-8313e01f50e2', // 15 - Modern construction
-                          '1504307651254-35680f356dfd', // 16 - Building project
-                          '1541888946425-d81bb19240f5', // 17 - Construction team
-                        ][imageIndex]
-                      }?w=800&h=800&fit=crop`}
+                    <Image
+                      src={`https://images.unsplash.com/photo-${capabilityImages[imageIndex]}?w=800&h=800&fit=crop`}
                       alt={`Capability ${imageIndex + 1}`}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      quality={80}
+                      priority={false}
+                      style={{ objectFit: 'cover' }}
                     />
                   </div>
                 )}

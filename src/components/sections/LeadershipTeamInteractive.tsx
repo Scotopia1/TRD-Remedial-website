@@ -3,6 +3,7 @@
 import './LeadershipTeamInteractive.css';
 
 import { useRef } from 'react';
+import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -179,10 +180,16 @@ export function LeadershipTeamInteractive() {
               onMouseEnter={() => !isMobile && setCursorVariant('hover')}
               onMouseLeave={() => !isMobile && setCursorVariant('default')}
             >
-              <img
+              <Image
                 src={member.image}
                 alt={member.name}
                 className="profile-image"
+                width={140}
+                height={140}
+                sizes="140px"
+                quality={85}
+                priority={false}
+                style={{ objectFit: 'cover' }}
               />
             </div>
           ))}
@@ -213,11 +220,11 @@ export function LeadershipTeamInteractive() {
                 nameElementsRef.current[index + 1] = el;
               }}
             >
-              <h1 ref={(el) => {
+              <h3 ref={(el) => {
                 nameHeadingsRef.current[index + 1] = el;
               }}>
                 {member.name}
-              </h1>
+              </h3>
             </div>
           ))}
         </div>
@@ -239,7 +246,15 @@ export function LeadershipTeamInteractive() {
               >
                 {/* Member Image */}
                 <div className="detail-card-image">
-                  <img src={member.image} alt={member.name} />
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    quality={85}
+                    priority={false}
+                    style={{ objectFit: 'cover' }}
+                  />
                   <div className="detail-card-overlay" />
                 </div>
 

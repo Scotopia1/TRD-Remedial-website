@@ -1,6 +1,7 @@
 'use client';
 
 import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
+import { OptimizedVideo } from '@/components/ui/OptimizedVideo';
 import Link from 'next/link';
 import './Hero.css';
 
@@ -12,16 +13,15 @@ export function Hero({ showContent = true }: HeroProps) {
   return (
     <section className="hero">
       <div className="hero-img">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
+        <OptimizedVideo
+          src="/videos/hero-video"
           className="hero-video"
-        >
-          <source src="/videos/hero-video.mp4" type="video/mp4" />
-        </video>
+          priority={false}
+          autoPlay={true}
+          loop={true}
+          muted={true}
+          playsInline={true}
+        />
       </div>
 
       <div className="hero-header">

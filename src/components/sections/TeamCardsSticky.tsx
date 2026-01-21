@@ -2,6 +2,7 @@
 
 import './TeamCardsSticky.css';
 import { useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -152,7 +153,15 @@ export function TeamCardsSticky() {
               }}
             >
               <div className="card-img">
-                <img src={member.image} alt={member.name} />
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  quality={85}
+                  priority={false}
+                  style={{ objectFit: 'cover' }}
+                />
               </div>
               <div className="card-content">
                 <h3>{member.name}</h3>
@@ -166,12 +175,20 @@ export function TeamCardsSticky() {
       {/* Mobile static section */}
       <section className="team-arc-section team-mobile">
         <div className="mobile-header">
-          <h1>Leadership Team</h1>
+          <h2>Leadership Team</h2>
         </div>
         {TEAM_MEMBERS.map((member, idx) => (
           <div className="mobile-card" key={`m-${member.id}`}>
             <div className="mobile-card-image">
-              <img src={member.image} alt={member.name} />
+              <Image
+                src={member.image}
+                alt={member.name}
+                fill
+                sizes="100vw"
+                quality={85}
+                priority={false}
+                style={{ objectFit: 'cover' }}
+              />
             </div>
             <div className="mobile-card-content">
               <h2>{member.name}</h2>

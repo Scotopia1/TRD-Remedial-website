@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { CustomEase } from 'gsap/CustomEase';
@@ -193,8 +194,8 @@ export function AssetPreloader({ onComplete }: AssetPreloaderProps) {
         </div>
 
         <div className="preloader-loader">
-          <h1 className="logo-line-1">TRD</h1>
-          <h1 className="logo-line-2">Remedial</h1>
+          <span className="logo-line-1" data-animate="logo">TRD</span>
+          <span className="logo-line-2" data-animate="logo">Remedial</span>
         </div>
 
         <div className="preloader-categories">
@@ -214,21 +215,45 @@ export function AssetPreloader({ onComplete }: AssetPreloaderProps) {
         <div className="preloader-grid-row">
           {projectImages.slice(0, 3).map((img, index) => (
             <div key={index} className="grid-img">
-              <img src={img} alt="" />
+              <Image
+                src={img}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                quality={75}
+                priority={true}
+                style={{ objectFit: 'cover' }}
+              />
             </div>
           ))}
         </div>
         <div className="preloader-grid-row">
           {projectImages.slice(3, 6).map((img, index) => (
             <div key={index} className="grid-img">
-              <img src={img} alt="" />
+              <Image
+                src={img}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                quality={75}
+                priority={true}
+                style={{ objectFit: 'cover' }}
+              />
             </div>
           ))}
         </div>
         <div className="preloader-grid-row">
           {projectImages.slice(6, 9).map((img, index) => (
             <div key={index} className="grid-img">
-              <img src={img} alt="" />
+              <Image
+                src={img}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                quality={75}
+                priority={true}
+                style={{ objectFit: 'cover' }}
+              />
             </div>
           ))}
         </div>

@@ -3,6 +3,7 @@
 import './TeamScrollReveal.css';
 
 import { useRef } from 'react';
+import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -35,7 +36,7 @@ export function TeamScrollReveal() {
           teamMembers.forEach((member: any) => {
             gsap.set(member, { clearProps: 'all' });
             const teamMemberInitial = member.querySelector(
-              '.team-member-name-initial h1'
+              '.team-member-name-initial [data-animate="initial"]'
             );
             gsap.set(teamMemberInitial, { clearProps: 'all' });
           });
@@ -83,7 +84,7 @@ export function TeamScrollReveal() {
 
                 // Initial letter scale animation (delayed by 0.4)
                 const teamMemberInitial = member.querySelector(
-                  '.team-member-name-initial h1'
+                  '.team-member-name-initial [data-animate="initial"]'
                 );
                 const initialLetterScaleDelay = 0.4;
                 const initialLetterScaleProgress = Math.max(
@@ -98,7 +99,7 @@ export function TeamScrollReveal() {
                 // Set final state after animation completes
                 gsap.set(member, { y: `0%` });
                 const teamMemberInitial = member.querySelector(
-                  '.team-member-name-initial h1'
+                  '.team-member-name-initial [data-animate="initial"]'
                 );
                 gsap.set(teamMemberInitial, { scale: 1 });
               }
@@ -270,20 +271,28 @@ export function TeamScrollReveal() {
               <div key={member.id} className="team-member">
                 {/* Large Initial Letter */}
                 <div className="team-member-name-initial">
-                  <h1>{getInitial(member.name)}</h1>
+                  <span data-animate="initial">{getInitial(member.name)}</span>
                 </div>
 
                 {/* Team Member Card */}
                 <div className="team-member-card">
                   {/* Member Image */}
                   <div className="team-member-img">
-                    <img src={member.image} alt={member.name} />
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 600px"
+                      quality={85}
+                      priority={false}
+                      style={{ objectFit: 'cover' }}
+                    />
                   </div>
 
                   {/* Member Info */}
                   <div className="team-member-info">
                     <p className="team-member-role">( {member.title} )</p>
-                    <h1
+                    <h3
                       className="team-member-name"
                       style={{
                         '--name-font-size-desktop': fontSize.desktop,
@@ -291,7 +300,7 @@ export function TeamScrollReveal() {
                       } as React.CSSProperties}
                     >
                       {nameParts.first} <span>{nameParts.last}</span>
-                    </h1>
+                    </h3>
                   </div>
                 </div>
               </div>
@@ -301,7 +310,7 @@ export function TeamScrollReveal() {
 
         {/* Outro Section */}
         <div className="team-outro">
-          <h1>Building Tomorrow's Structures</h1>
+          <h2>Building Tomorrow's Structures</h2>
         </div>
       </section>
     </>

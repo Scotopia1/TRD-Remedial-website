@@ -52,8 +52,8 @@ export function Footer() {
       {/* Row 2: Massive Typography + Copyright */}
       <div className="footer-row">
         <div className="footer-header">
-          <h1>TRD</h1>
-          <h1>REMEDIAL</h1>
+          <span className="footer-brand-text" aria-label="TRD Remedial">TRD</span>
+          <span className="footer-brand-text">REMEDIAL</span>
         </div>
 
         <div className="footer-copyright-line">
