@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useLenis } from 'lenis/react';
 import { gsap } from 'gsap';
 
@@ -12,7 +13,7 @@ interface ParallaxImageProps {
 }
 
 export function ParallaxImage({ src, alt, speed = 0.3, className = '' }: ParallaxImageProps) {
-  const imageRef = useRef<HTMLImageElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const bounds = useRef<{ top: number; height: number } | null>(null);
   const quickToY = useRef<gsap.QuickToFunc | null>(null);
   const [isDesktop, setIsDesktop] = useState(false);
@@ -35,20 +36,20 @@ export function ParallaxImage({ src, alt, speed = 0.3, className = '' }: Paralla
 
   // Setup GSAP quickTo for smooth interpolation (uses GSAP's unified ticker)
   useEffect(() => {
-    if (!isDesktop || !imageRef.current) return;
+    if (!isDesktop || !wrapperRef.current) return;
 
     // Create quickTo for smooth Y translation
-    quickToY.current = gsap.quickTo(imageRef.current, 'y', {
+    quickToY.current = gsap.quickTo(wrapperRef.current, 'y', {
       duration: 0.6,
       ease: 'power2.out',
     });
 
     // Set initial scale
-    gsap.set(imageRef.current, { scale: 1.5 });
+    gsap.set(wrapperRef.current, { scale: 1.5 });
 
     const updateBounds = () => {
-      if (imageRef.current) {
-        const rect = imageRef.current.getBoundingClientRect();
+      if (wrapperRef.current) {
+        const rect = wrapperRef.current.getBoundingClientRect();
         bounds.current = {
           top: rect.top + window.scrollY,
           height: rect.height,
@@ -79,21 +80,32 @@ export function ParallaxImage({ src, alt, speed = 0.3, className = '' }: Paralla
   });
 
   return (
-    <img
-      ref={imageRef}
-      src={src}
-      alt={alt}
+    <div
+      ref={wrapperRef}
       className={className}
       style={{
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-        willChange: isDesktop ? 'transform' : 'auto',
-        transform: isDesktop ? 'translateY(0) scale(1.5)' : 'none',
         position: 'absolute',
         top: 0,
         left: 0,
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden',
+        willChange: isDesktop ? 'transform' : 'auto',
+        transform: isDesktop ? 'translateY(0) scale(1.5)' : 'none',
       }}
-    />
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 900px) 100vw, 100vw"
+        quality={85}
+        priority={false}
+        style={{
+          objectFit: 'cover',
+          objectPosition: 'center',
+        }}
+      />
+    </div>
   );
 }

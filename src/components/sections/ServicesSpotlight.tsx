@@ -2,6 +2,7 @@
 import "./ServicesSpotlight.css";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -60,12 +61,10 @@ const ServicesSpotlight = () => {
         return false;
       }
 
-      // Clear and rebuild DOM elements
+      // Clear and rebuild title elements only (images are React-rendered)
       titlesContainer.innerHTML = "";
-      imagesContainer.innerHTML = "";
-      imageElements.length = 0;
 
-      // Create title and image elements for each service
+      // Create title elements for each service
       spotlightItems.forEach((item, index) => {
         // Create title element
         const titleElement = document.createElement("h1");
@@ -76,16 +75,6 @@ const ServicesSpotlight = () => {
           window.location.href = `/services/${SERVICES[index].slug}`;
         };
         titlesContainer.appendChild(titleElement);
-
-        // Create image wrapper
-        const imgWrapper = document.createElement("div");
-        imgWrapper.className = "spotlight-img";
-        const imgElement = document.createElement("img");
-        imgElement.src = item.img;
-        imgElement.alt = item.name;
-        imgWrapper.appendChild(imgElement);
-        imagesContainer.appendChild(imgWrapper);
-        imageElements.push(imgWrapper);
       });
 
       const titleElements = titlesContainer.querySelectorAll("h1");
@@ -416,7 +405,18 @@ const ServicesSpotlight = () => {
 
         {/* Background image with synchronized service changes */}
         <div className="spotlight-bg-img">
-          <img src={SERVICES[0].visual} alt="" />
+          <Image
+            src={SERVICES[0].visual}
+            alt=""
+            fill
+            sizes="100vw"
+            quality={85}
+            priority={true}
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center',
+            }}
+          />
         </div>
       </div>
 
@@ -428,8 +428,31 @@ const ServicesSpotlight = () => {
         <div className="spotlight-titles" ref={titlesContainerRef}></div>
       </div>
 
-      {/* Images following Bezier curve */}
-      <div className="spotlight-images" ref={imagesContainerRef}></div>
+      {/* Images following Bezier curve - React-rendered */}
+      <div className="spotlight-images" ref={imagesContainerRef}>
+        {spotlightItems.map((item, index) => (
+          <div
+            key={item.id}
+            className="spotlight-img"
+            ref={(el) => {
+              if (el) imageElementsRef.current[index] = el;
+            }}
+          >
+            <Image
+              src={item.img}
+              alt={item.name}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              quality={85}
+              priority={index === 0}
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center',
+              }}
+            />
+          </div>
+        ))}
+      </div>
 
       {/* "Discover" header text */}
       <div className="spotlight-header" ref={spotlightHeaderRef}>

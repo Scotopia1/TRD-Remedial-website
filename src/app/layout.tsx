@@ -10,6 +10,7 @@ import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { Menu } from "@/components/layout/Menu";
 import { Footer } from "@/components/sections/Footer";
+import { WebVitals } from "@/components/analytics/WebVitals";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -127,10 +128,54 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <StructuredData />
+        {/* Font Preloading - Phase 2.1 SEO Optimization */}
+        <link
+          rel="preload"
+          href="/fonts/messina-sans/MessinaSans-Regular.otf"
+          as="font"
+          type="font/otf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/messina-sans/MessinaSans-SemiBold.otf"
+          as="font"
+          type="font/otf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/messina-sans-mono/MessinaSansMono-Book.otf"
+          as="font"
+          type="font/otf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/messina-sans-mono/MessinaSansMono-SemiBold.otf"
+          as="font"
+          type="font/otf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/rader/PPRader-Regular.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/rader/PPRader-Bold.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <WebVitals />
         <AccessibilityProvider>
           <ScrollToTop />
           <Menu />

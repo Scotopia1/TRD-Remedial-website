@@ -11,6 +11,8 @@ import { TeamScrollReveal } from '@/components/sections/TeamScrollReveal';
 import { CustomerFeedback } from '@/components/sections/CustomerFeedback';
 import { BackedByStrengthStudio } from '@/components/sections/BackedByStrengthStudio';
 import { EmergencyCTA } from '@/components/sections/EmergencyCTA';
+import { FAQ } from '@/components/sections/FAQ';
+import { FAQSchema } from '@/components/seo/FAQSchema';
 
 export default function Home() {
   const [openingComplete, setOpeningComplete] = useState(false);
@@ -21,6 +23,9 @@ export default function Home() {
 
   return (
     <>
+      {/* FAQ Schema for SEO - Phase 2 Optimization */}
+      <FAQSchema />
+
       {/* Blueprint Preloader - SVG animation with T-R-D reveal */}
       <BlueprintPreloader onComplete={handleOpeningComplete} />
 
@@ -48,6 +53,9 @@ export default function Home() {
 
           {/* Customer Feedback - CGMWTMAR2025 Nico Palmer Pattern */}
           <CustomerFeedback />
+
+          {/* FAQ Section - Phase 2 SEO Optimization */}
+          <FAQ />
 
           {/* Emergency CTA */}
           <EmergencyCTA />
