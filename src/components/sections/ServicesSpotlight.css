@@ -92,6 +92,7 @@
   transform: scale(1.5);
   will-change: transform;
   filter: grayscale(0.3) brightness(0.7);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ==================== SCROLLING TITLES (25-95% progress) ==================== */
@@ -157,8 +158,8 @@
 
 .spotlight-titles h1 {
   color: var(--concrete-100);
-  opacity: 0.35;
-  transition: opacity 0.3s ease;
+  opacity: 0.2;
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   font-size: clamp(2.125rem, 4.25vw, 3.4rem); /* Reduced by 0.85x */
   font-weight: 500;
   line-height: 1.1;
@@ -175,6 +176,7 @@
   height: 100%;
   z-index: 102;
   pointer-events: none;
+  display: none; /* Hidden on desktop */
 }
 
 .spotlight-img {
