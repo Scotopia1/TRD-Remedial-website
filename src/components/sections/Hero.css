@@ -113,8 +113,9 @@
 
 .circular-btn {
   position: relative;
-  width: 150px;
-  height: 150px;
+  /* Responsive sizing using clamp for better adaptability across screen ratios */
+  width: clamp(100px, 20vw, 150px);
+  height: clamp(100px, 20vw, 150px);
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
@@ -129,6 +130,9 @@
   /* iOS optimization */
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
+  /* Ensure minimum tap target size for accessibility */
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .circular-btn:hover {
@@ -154,7 +158,8 @@
 
 .circular-btn-text {
   fill: #ffffff;
-  font-size: 16px;
+  /* Responsive font size using clamp for better adaptability */
+  font-size: clamp(12px, 2.5vw, 16px);
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -164,7 +169,8 @@
 .circular-btn-arrow {
   position: relative;
   color: #ffffff;
-  font-size: 32px;
+  /* Responsive arrow size using clamp */
+  font-size: clamp(22px, 5vw, 32px);
   font-weight: 400;
   line-height: 1;
   z-index: 1;
@@ -175,7 +181,7 @@
   transform: scale(1.2);
 }
 
-/* Responsive Circular Button */
+/* Responsive Circular Button - Improved for better mobile readability */
 @media (max-width: 1200px) {
   .hero-cta {
     bottom: 50px;
@@ -201,20 +207,39 @@
   }
 
   .circular-btn {
+    width: 130px;
+    height: 130px;
+  }
+
+  .circular-btn-text {
+    font-size: 14px; /* Increased from 13px */
+  }
+
+  .circular-btn-arrow {
+    font-size: 28px; /* Increased from 26px */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-cta {
+    bottom: 40px;
+  }
+
+  .circular-btn {
     width: 120px;
     height: 120px;
   }
 
   .circular-btn-text {
-    font-size: 13px;
+    font-size: 14px; /* Increased from 12px - better readability */
   }
 
   .circular-btn-arrow {
-    font-size: 26px;
+    font-size: 26px; /* Increased from 24px */
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .hero-cta {
     bottom: 35px;
   }
@@ -225,22 +250,62 @@
   }
 
   .circular-btn-text {
-    font-size: 12px;
+    font-size: 13px; /* Increased from 11px */
   }
 
   .circular-btn-arrow {
-    font-size: 24px;
+    font-size: 24px; /* Increased from 22px */
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 480px) {
   .hero-cta {
     bottom: 30px;
   }
 
   .circular-btn {
-    width: 100px;
+    width: 105px; /* Increased from 90px - better tap target */
+    height: 105px;
+  }
+
+  .circular-btn-text {
+    font-size: 13px; /* Increased from 10px - much more readable */
+  }
+
+  .circular-btn-arrow {
+    font-size: 24px; /* Increased from 20px */
+  }
+}
+
+@media (max-width: 375px) {
+  .hero-cta {
+    bottom: 25px;
+  }
+
+  .circular-btn {
+    width: 100px; /* Increased from 80px - maintains tap target */
     height: 100px;
+  }
+
+  .circular-btn-text {
+    font-size: 12px; /* Increased from 9px - significantly more readable */
+  }
+
+  .circular-btn-arrow {
+    font-size: 22px; /* Increased from 18px */
+  }
+}
+
+/* Landscape orientation on mobile - adjust button positioning */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero-cta {
+    bottom: 20px;
+  }
+
+  .circular-btn {
+    /* Slightly smaller on landscape mobile to save vertical space */
+    width: 90px;
+    height: 90px;
   }
 
   .circular-btn-text {
@@ -248,45 +313,47 @@
   }
 
   .circular-btn-arrow {
-    font-size: 22px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-cta {
-    bottom: 25px;
-  }
-
-  .circular-btn {
-    width: 90px;
-    height: 90px;
-  }
-
-  .circular-btn-text {
-    font-size: 10px;
-  }
-
-  .circular-btn-arrow {
     font-size: 20px;
   }
 }
 
-@media (max-width: 375px) {
-  .hero-cta {
-    bottom: 20px;
-  }
-
+/* Portrait orientation on tablets - optimize button size */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .circular-btn {
-    width: 80px;
-    height: 80px;
+    width: 130px;
+    height: 130px;
   }
 
   .circular-btn-text {
-    font-size: 9px;
+    font-size: 14px;
   }
 
   .circular-btn-arrow {
-    font-size: 18px;
+    font-size: 28px;
+  }
+}
+
+/* Ultra-wide screens - prevent button from getting too large */
+@media (min-aspect-ratio: 21/9) {
+  .circular-btn {
+    max-width: 140px;
+    max-height: 140px;
+  }
+}
+
+/* Very tall/narrow screens - ensure button stays proportional */
+@media (max-aspect-ratio: 9/16) {
+  .circular-btn {
+    width: clamp(90px, 18vw, 120px);
+    height: clamp(90px, 18vw, 120px);
+  }
+
+  .circular-btn-text {
+    font-size: clamp(11px, 2.2vw, 14px);
+  }
+
+  .circular-btn-arrow {
+    font-size: clamp(20px, 4.5vw, 26px);
   }
 }
 
