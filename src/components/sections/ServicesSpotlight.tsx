@@ -432,8 +432,8 @@ const ServicesSpotlight = () => {
         "--after-opacity": "1",
       });
 
-      // Hide floating images on mobile
-      imageElements.forEach((img) => gsap.set(img, { opacity: 0 }));
+      // Set initial state for floating images on mobile (will be animated)
+      imageElements.forEach((img) => gsap.set(img, { opacity: 0, x: "50%", y: "50%" }));
 
       // Create PINNED ScrollTrigger for mobile - simpler progression through services
       scrollTriggerRef.current = ScrollTrigger.create({
@@ -480,6 +480,26 @@ const ServicesSpotlight = () => {
               }
             });
           }
+
+          // Animate floating images on mobile - simple fade in/out with slide
+          imageElements.forEach((img, index: number) => {
+            if (index === clampedIndex) {
+              // Active service image - visible and centered on right side
+              gsap.set(img, {
+                opacity: 0.85,
+                x: "20%",  // Positioned on right side
+                y: "50%",  // Centered vertically
+                scale: 0.9, // Slightly smaller on mobile
+              });
+            } else {
+              // Inactive images - hidden
+              gsap.set(img, {
+                opacity: 0,
+                x: "50%", // Off to the right
+                y: "50%",
+              });
+            }
+          });
 
           // Show header
           if (spotlightHeader) {
