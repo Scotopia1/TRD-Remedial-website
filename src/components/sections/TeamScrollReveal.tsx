@@ -23,6 +23,19 @@ export function TeamScrollReveal() {
       const teamMembers = gsap.utils.toArray('.team-member');
       const teamMemberCards = gsap.utils.toArray('.team-member-card');
 
+      // Wait for images to load before initializing animations
+      function waitForImagesToLoad(): Promise<void> {
+        const images = teamSection?.querySelectorAll('img') || [];
+        const imagePromises = Array.from(images).map((img: any) => {
+          if (img.complete) return Promise.resolve();
+          return new Promise((resolve) => {
+            img.onload = resolve;
+            img.onerror = resolve; // Resolve even on error to not block
+          });
+        });
+        return Promise.all(imagePromises).then(() => {});
+      }
+
       function initTeamAnimations() {
         // Mobile: Disable animations below 1000px
         if (window.innerWidth < 1000) {
@@ -190,8 +203,14 @@ export function TeamScrollReveal() {
       // Add resize listener
       window.addEventListener('resize', handleResize);
 
-      // Initialize animations on mount
-      initTeamAnimations();
+      // Initialize animations after images have loaded
+      waitForImagesToLoad().then(() => {
+        initTeamAnimations();
+        // Refresh ScrollTrigger after a small delay to ensure layout is settled
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 100);
+      });
 
       // Cleanup function
       return () => {

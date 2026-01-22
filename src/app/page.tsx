@@ -15,7 +15,13 @@ import { FAQ } from '@/components/sections/FAQ';
 import { FAQSchema } from '@/components/seo/FAQSchema';
 
 export default function Home() {
-  const [openingComplete, setOpeningComplete] = useState(false);
+  // Check if preloader was already shown in this session to avoid flash
+  const [openingComplete, setOpeningComplete] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('trd-preloader-shown') === 'true';
+    }
+    return false;
+  });
 
   const handleOpeningComplete = useCallback(() => {
     setOpeningComplete(true);
