@@ -161,28 +161,47 @@
 }
 
 /* Responsive Circular Button */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .hero-cta {
-    bottom: 40px;
+    bottom: 50px;
   }
 
   .circular-btn {
-    width: 130px;
-    height: 130px;
+    width: 140px;
+    height: 140px;
   }
 
   .circular-btn-text {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .circular-btn-arrow {
-    font-size: 28px;
+    font-size: 30px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1000px) {
   .hero-cta {
-    bottom: 30px;
+    bottom: 45px;
+  }
+
+  .circular-btn {
+    width: 120px;
+    height: 120px;
+  }
+
+  .circular-btn-text {
+    font-size: 13px;
+  }
+
+  .circular-btn-arrow {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-cta {
+    bottom: 35px;
   }
 
   .circular-btn {
@@ -196,6 +215,63 @@
 
   .circular-btn-arrow {
     font-size: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-cta {
+    bottom: 30px;
+  }
+
+  .circular-btn {
+    width: 100px;
+    height: 100px;
+  }
+
+  .circular-btn-text {
+    font-size: 11px;
+  }
+
+  .circular-btn-arrow {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-cta {
+    bottom: 25px;
+  }
+
+  .circular-btn {
+    width: 90px;
+    height: 90px;
+  }
+
+  .circular-btn-text {
+    font-size: 10px;
+  }
+
+  .circular-btn-arrow {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 375px) {
+  .hero-cta {
+    bottom: 20px;
+  }
+
+  .circular-btn {
+    width: 80px;
+    height: 80px;
+  }
+
+  .circular-btn-text {
+    font-size: 9px;
+  }
+
+  .circular-btn-arrow {
+    font-size: 18px;
   }
 }
 
