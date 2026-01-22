@@ -142,7 +142,7 @@ export function CaseStudiesOtisValen() {
 
         gsap.set(item, {
           x: fromLeft ? -1000 : 1000,
-          rotation: fromLeft ? -50 : 50,
+          rotation: 0,
           transformOrigin: "center center",
         });
       });
