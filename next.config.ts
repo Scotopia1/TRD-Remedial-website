@@ -1,5 +1,10 @@
 import type { NextConfig } from "next";
 
+// Bundle analyzer setup
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 const nextConfig: NextConfig = {
   images: {
     formats: ['image/webp', 'image/avif'],
@@ -36,4 +41,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

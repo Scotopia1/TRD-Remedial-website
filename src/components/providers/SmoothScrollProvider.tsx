@@ -5,6 +5,7 @@ import { ReactLenis, useLenis } from 'lenis/react';
 import { ViewTransitions } from 'next-view-transitions';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,12 +13,7 @@ interface SmoothScrollProviderProps {
   children: ReactNode;
 }
 
-// Detect iOS devices (including iPadOS 13+ which reports as desktop)
-const isIOS = () => {
-  if (typeof window === 'undefined') return false;
-  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-};
+import { isIOS, isMobile as detectMobile } from '@/utils/deviceDetect';
 
 // Shared easing function
 const easeOutExpo = (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t));
@@ -52,6 +48,25 @@ const mobileSettings = {
   lerp: 1,
   wheelMultiplier: 1,
   syncTouch: false,
+};
+
+/**
+ * Initialize CSS-based smooth scroll for iOS
+ *
+ * Uses native CSS scroll-behavior: smooth instead of JavaScript for better performance
+ */
+const initIOSSmoothScroll = () => {
+  if (typeof window === 'undefined' || !isIOS()) return;
+
+  // Apply CSS smooth scroll
+  document.documentElement.style.scrollBehavior = 'smooth';
+  document.body.style.scrollBehavior = 'smooth';
+
+  // Enable hardware acceleration (TypeScript doesn't recognize webkit prefix)
+  (document.documentElement.style as any).webkitOverflowScrolling = 'touch';
+
+  // Prevent overscroll bounce
+  document.body.style.overscrollBehavior = 'none';
 };
 
 /**
@@ -102,9 +117,9 @@ function ScrollTriggerSync() {
       pinType: 'transform',
     });
 
-    // Refresh after setup
+    // Refresh after setup using centralized manager
     const refreshTimeout = setTimeout(() => {
-      ScrollTrigger.refresh();
+      scrollTriggerManager.requestRefresh();
     }, 100);
 
     return () => {
@@ -128,14 +143,20 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
 
   useEffect(() => {
     setIsClient(true);
-    setIsIOSDevice(isIOS());
+    const isIOSDevice = isIOS();
+    setIsIOSDevice(isIOSDevice);
 
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 1000 || isIOS());
+      setIsMobile(detectMobile());
     };
 
     checkMobile();
     window.addEventListener('resize', checkMobile);
+
+    // Initialize iOS smooth scroll if needed
+    if (isIOSDevice) {
+      initIOSSmoothScroll();
+    }
 
     // ScrollTrigger config - optimized for performance
     ScrollTrigger.config({
@@ -145,7 +166,8 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     });
 
     // Optimize GSAP ticker for mobile performance
-    if (isMobile || isIOS()) {
+    const isMobileDevice = detectMobile();
+    if (isMobileDevice || isIOSDevice) {
       gsap.ticker.lagSmoothing(1000, 16); // More forgiving on mobile
     } else {
       gsap.ticker.lagSmoothing(500, 33);
@@ -158,7 +180,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   useEffect(() => {
     if (isClient) {
       const timeoutId = setTimeout(() => {
-        ScrollTrigger.refresh();
+        scrollTriggerManager.requestRefresh();
       }, 150);
       return () => clearTimeout(timeoutId);
     }
@@ -169,10 +191,16 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
 
   return (
     <ViewTransitions>
-      <ReactLenis root options={scrollSettings}>
-        <ScrollTriggerSync />
-        {children}
-      </ReactLenis>
+      {/* Conditionally render ReactLenis only on desktop */}
+      {!isIOSDevice && !isMobile ? (
+        <ReactLenis root options={scrollSettings}>
+          <ScrollTriggerSync />
+          {children}
+        </ReactLenis>
+      ) : (
+        // iOS/Mobile: Use native CSS smooth scroll
+        <>{children}</>
+      )}
     </ViewTransitions>
   );
 }

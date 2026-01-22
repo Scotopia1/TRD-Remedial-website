@@ -113,6 +113,30 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+/* iOS Smooth Scroll - Native CSS Approach */
+/* Use CSS scroll-behavior for smooth scrolling on iOS instead of JavaScript */
+@supports (-webkit-touch-callout: none) {
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body {
+    /* CSS containment for better scroll performance */
+    contain: layout style paint;
+  }
+
+  section {
+    /* Lighter containment for sections to avoid breaking layouts */
+    contain: layout style;
+  }
+}
+
+/* Disable smooth scroll during drag operations */
+html.is-dragging {
+  scroll-behavior: auto !important;
+}
+
 /* Custom Keyframes */
 @keyframes fadeIn {
   from { opacity: 0; }

@@ -3,11 +3,12 @@
 import './TeamScrollReveal.css';
 
 import { useRef } from 'react';
-import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { TEAM_MEMBERS } from '@/data/team';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
+import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -196,7 +197,7 @@ export function TeamScrollReveal() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
           initTeamAnimations();
-          ScrollTrigger.refresh();
+          scrollTriggerManager.requestRefresh();
         }, 250);
       };
 
@@ -208,7 +209,7 @@ export function TeamScrollReveal() {
         initTeamAnimations();
         // Refresh ScrollTrigger after a small delay to ensure layout is settled
         setTimeout(() => {
-          ScrollTrigger.refresh();
+          scrollTriggerManager.requestRefresh();
         }, 100);
       });
 
@@ -297,7 +298,7 @@ export function TeamScrollReveal() {
                 <div className="team-member-card">
                   {/* Member Image */}
                   <div className="team-member-img">
-                    <Image
+                    <OptimizedImage
                       src={member.image}
                       alt={member.name}
                       fill

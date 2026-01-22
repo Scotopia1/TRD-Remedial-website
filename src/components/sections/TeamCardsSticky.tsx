@@ -7,6 +7,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { TEAM_MEMBERS } from '@/data/team';
+import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -91,7 +92,7 @@ export function TeamCardsSticky() {
 
         const handleResize = () => {
           positionCards(0);
-          ScrollTrigger.refresh();
+          scrollTriggerManager.requestRefresh();
         };
         window.addEventListener('resize', handleResize, { passive: true });
 
@@ -113,7 +114,7 @@ export function TeamCardsSticky() {
         ScrollTrigger.refresh();
 
         const refreshHandler = () => {
-          ScrollTrigger.refresh();
+          scrollTriggerManager.requestRefresh();
         };
 
         window.addEventListener('orientationchange', refreshHandler);

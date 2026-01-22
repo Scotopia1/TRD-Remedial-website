@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import SplitType from 'split-type';
 import Link from 'next/link';
+import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
 import './IntroStats.css';
 
 export function IntroStats() {
@@ -22,8 +23,8 @@ export function IntroStats() {
   useGSAP(() => {
     if (!headerRef.current) return;
 
-    // Wait for fonts to load
-    document.fonts.ready.then(() => {
+    // Use ScrollTrigger manager to coordinate timing
+    scrollTriggerManager.onReady(() => {
       const split = new SplitType(headerRef.current!, {
         types: 'lines',
         lineClass: 'line-mask',
@@ -55,6 +56,9 @@ export function IntroStats() {
           toggleActions: 'play none none none',
         },
       });
+
+      // Request refresh after setup
+      scrollTriggerManager.requestRefresh();
     });
   }, []);
 
@@ -62,7 +66,7 @@ export function IntroStats() {
   useGSAP(() => {
     if (!copyRef.current || !copyContainerRef.current) return;
 
-    document.fonts.ready.then(() => {
+    scrollTriggerManager.onReady(() => {
       const split = new SplitType(copyRef.current!, {
         types: 'words',
         wordClass: 'word',
@@ -100,6 +104,8 @@ export function IntroStats() {
           });
         },
       });
+
+      scrollTriggerManager.requestRefresh();
     });
   }, []);
 

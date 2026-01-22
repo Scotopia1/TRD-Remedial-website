@@ -6,6 +6,7 @@ import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -109,7 +110,7 @@ export function CustomerFeedback() {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
         moveDistance = calculateDimensions();
-        ScrollTrigger.refresh();
+        scrollTriggerManager.requestRefresh();
       }, 250);
     };
 

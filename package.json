@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
+    "build:analyze": "set ANALYZE=true && next build",
     "start": "next start",
     "test:responsive": "playwright test",
     "test:responsive:ui": "playwright test --ui",
@@ -40,6 +41,7 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.1.4",
     "@playwright/test": "^1.56.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",

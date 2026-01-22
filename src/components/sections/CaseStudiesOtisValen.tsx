@@ -8,6 +8,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
+import { scrollTriggerManager } from "@/utils/scrollTriggerManager";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -166,7 +167,7 @@ export function CaseStudiesOtisValen() {
 
     return () => {
       scrollTriggerInstances.forEach((instance) => instance.kill());
-      ScrollTrigger.refresh();
+      scrollTriggerManager.requestRefresh();
     };
   }, { scope: workItemsRef });
 

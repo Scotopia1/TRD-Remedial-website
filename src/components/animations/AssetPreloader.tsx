@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { CustomEase } from 'gsap/CustomEase';
+import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import './AssetPreloader.css';
 
 if (typeof window !== 'undefined') {
@@ -215,7 +215,7 @@ export function AssetPreloader({ onComplete }: AssetPreloaderProps) {
         <div className="preloader-grid-row">
           {projectImages.slice(0, 3).map((img, index) => (
             <div key={index} className="grid-img">
-              <Image
+              <OptimizedImage
                 src={img}
                 alt=""
                 fill
@@ -230,7 +230,7 @@ export function AssetPreloader({ onComplete }: AssetPreloaderProps) {
         <div className="preloader-grid-row">
           {projectImages.slice(3, 6).map((img, index) => (
             <div key={index} className="grid-img">
-              <Image
+              <OptimizedImage
                 src={img}
                 alt=""
                 fill
@@ -245,7 +245,7 @@ export function AssetPreloader({ onComplete }: AssetPreloaderProps) {
         <div className="preloader-grid-row">
           {projectImages.slice(6, 9).map((img, index) => (
             <div key={index} className="grid-img">
-              <Image
+              <OptimizedImage
                 src={img}
                 alt=""
                 fill
