@@ -17,12 +17,22 @@ export const isIOS = (): boolean => {
 };
 
 /**
- * Detect if device is mobile (width-based + iOS check)
+ * Detect if device is mobile (CGMWTAUG2025 pattern: pure width-based)
+ * Uses 1000px breakpoint - iPads and tablets with width > 1000px get desktop experience
  */
 export const isMobile = (): boolean => {
   if (typeof window === 'undefined') return false;
 
-  return window.innerWidth <= 1000 || isIOS();
+  return window.innerWidth <= 1000;
+};
+
+/**
+ * Detect if device is tablet (between mobile and desktop)
+ */
+export const isTablet = (): boolean => {
+  if (typeof window === 'undefined') return false;
+
+  return window.innerWidth > 1000 && window.innerWidth <= 1200;
 };
 
 /**

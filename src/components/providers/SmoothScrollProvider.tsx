@@ -15,59 +15,45 @@ interface SmoothScrollProviderProps {
 
 import { isIOS, isMobile as detectMobile } from '@/utils/deviceDetect';
 
-// Shared easing function
+// Shared easing function (CGMWTAUG2025 pattern)
 const easeOutExpo = (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t));
 
-// Default desktop settings - optimized for performance
-const desktopSettings = {
-  duration: 1.0,
+// Mobile-optimized settings - Keep Lenis running with faster, touch-friendly config
+// CRITICAL: smoothTouch: true enables smooth scrolling on mobile while maintaining ScrollTrigger proxy
+const mobileSettings = {
+  duration: 0.8,              // Faster animations for mobile
   easing: easeOutExpo,
   direction: 'vertical' as const,
   orientation: 'vertical' as const,
   gestureOrientation: 'vertical' as const,
+  smooth: true,               // Keep smooth scroll enabled
   smoothWheel: true,
-  smoothTouch: false,
-  touchMultiplier: 2,
+  smoothTouch: true,          // CRITICAL: Enable touch scrolling (CGMWTAUG2025 pattern)
+  touchMultiplier: 1.5,       // More responsive to swipes
   infinite: false,
-  lerp: 0.08,
+  lerp: 0.09,                 // Faster interpolation for mobile
   wheelMultiplier: 1,
-  syncTouch: false,
+  syncTouch: true,
 };
 
-// iOS/Mobile settings - NATIVE SCROLL ONLY (smooth scroll disabled for performance)
-const mobileSettings = {
-  duration: 0,
-  easing: (t: number) => t,
+// Desktop settings - Slower, more deliberate animations
+const desktopSettings = {
+  duration: 1.2,              // Slower animations for desktop
+  easing: easeOutExpo,
   direction: 'vertical' as const,
   orientation: 'vertical' as const,
   gestureOrientation: 'vertical' as const,
-  smoothWheel: false,
-  smoothTouch: false,
-  touchMultiplier: 1,
+  smooth: true,
+  smoothWheel: true,
+  smoothTouch: false,         // Native scroll better on desktop
+  touchMultiplier: 2,
   infinite: false,
-  lerp: 1,
+  lerp: 0.1,
   wheelMultiplier: 1,
-  syncTouch: false,
+  syncTouch: true,
 };
 
-/**
- * Initialize CSS-based smooth scroll for iOS
- *
- * Uses native CSS scroll-behavior: smooth instead of JavaScript for better performance
- */
-const initIOSSmoothScroll = () => {
-  if (typeof window === 'undefined' || !isIOS()) return;
-
-  // Apply CSS smooth scroll
-  document.documentElement.style.scrollBehavior = 'smooth';
-  document.body.style.scrollBehavior = 'smooth';
-
-  // Enable hardware acceleration (TypeScript doesn't recognize webkit prefix)
-  (document.documentElement.style as any).webkitOverflowScrolling = 'touch';
-
-  // Prevent overscroll bounce
-  document.body.style.overscrollBehavior = 'none';
-};
+// NOTE: iOS CSS smooth scroll initialization removed - using Lenis on all devices
 
 /**
  * ScrollTrigger Integration Component
@@ -134,29 +120,22 @@ function ScrollTriggerSync() {
 /**
  * Smooth Scroll Provider
  * Uses ReactLenis with scroller proxy for proper GSAP integration
- * PERFORMANCE OPTIMIZED: Disables smooth scroll on iOS/mobile for native performance
+ * CGMWTAUG2025 PATTERN: Keep Lenis running on ALL devices with optimized settings
  */
 export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   const [isMobile, setIsMobile] = useState(false);
-  const [isIOSDevice, setIsIOSDevice] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
-    const isIOSDevice = isIOS();
-    setIsIOSDevice(isIOSDevice);
 
+    // CGMWTAUG2025 pattern: Use 1000px breakpoint for mobile detection
     const checkMobile = () => {
-      setIsMobile(detectMobile());
+      setIsMobile(window.innerWidth <= 1000);
     };
 
     checkMobile();
     window.addEventListener('resize', checkMobile);
-
-    // Initialize iOS smooth scroll if needed
-    if (isIOSDevice) {
-      initIOSSmoothScroll();
-    }
 
     // ScrollTrigger config - optimized for performance
     ScrollTrigger.config({
@@ -166,8 +145,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     });
 
     // Optimize GSAP ticker for mobile performance
-    const isMobileDevice = detectMobile();
-    if (isMobileDevice || isIOSDevice) {
+    if (window.innerWidth <= 1000) {
       gsap.ticker.lagSmoothing(1000, 16); // More forgiving on mobile
     } else {
       gsap.ticker.lagSmoothing(500, 33);
@@ -186,21 +164,16 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     }
   }, [isMobile, isClient]);
 
-  // Use native scroll on iOS and mobile for better performance
-  const scrollSettings = (isMobile || isIOSDevice) ? mobileSettings : desktopSettings;
+  // Select settings based on viewport width (CGMWTAUG2025 pattern)
+  const scrollSettings = isMobile ? mobileSettings : desktopSettings;
 
+  // CRITICAL: ALWAYS render ReactLenis to maintain ScrollTrigger proxy on all devices
   return (
     <ViewTransitions>
-      {/* Conditionally render ReactLenis only on desktop */}
-      {!isIOSDevice && !isMobile ? (
-        <ReactLenis root options={scrollSettings}>
-          <ScrollTriggerSync />
-          {children}
-        </ReactLenis>
-      ) : (
-        // iOS/Mobile: Use native CSS smooth scroll
-        <>{children}</>
-      )}
+      <ReactLenis root options={scrollSettings}>
+        <ScrollTriggerSync />
+        {children}
+      </ReactLenis>
     </ViewTransitions>
   );
 }

@@ -113,22 +113,11 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-/* iOS Smooth Scroll - Native CSS Approach */
-/* Use CSS scroll-behavior for smooth scrolling on iOS instead of JavaScript */
+/* iOS Optimizations - Safe Touch Scrolling Only */
+/* NOTE: Aggressive CSS containment removed - was breaking layouts and positioning */
 @supports (-webkit-touch-callout: none) {
   html {
-    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-  }
-
-  body {
-    /* CSS containment for better scroll performance */
-    contain: layout style paint;
-  }
-
-  section {
-    /* Lighter containment for sections to avoid breaking layouts */
-    contain: layout style;
   }
 }
 
@@ -223,7 +212,7 @@ html {
    MOBILE SCROLL FIXES - iOS & Android
    ===================================================== */
 
-/* Prevent iOS rubber-banding/bounce + Performance Optimizations */
+/* Prevent iOS rubber-banding/bounce - Safe optimizations only */
 @supports (-webkit-touch-callout: none) {
   html, body {
     height: 100%;
@@ -232,17 +221,19 @@ html {
     overscroll-behavior: none;
   }
 
-  /* iOS Performance: Force hardware acceleration */
-  * {
+  /* NOTE: Universal hardware acceleration removed - was causing GPU memory pressure */
+  /* Hardware acceleration now applied selectively to animated elements only */
+
+  /* Selective hardware acceleration for animated elements */
+  .animated-element,
+  .parallax-image,
+  .scroll-reveal,
+  .team-member-image-container,
+  [data-magnetic],
+  .service-card,
+  .case-study-card {
     -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
-  }
-
-  /* Reduce paint complexity on iOS */
-  video, img {
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
   }
 }
 

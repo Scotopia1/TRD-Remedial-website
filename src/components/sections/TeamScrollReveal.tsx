@@ -2,7 +2,7 @@
 
 import './TeamScrollReveal.css';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -16,6 +16,20 @@ export function TeamScrollReveal() {
   const teamSectionRef = useRef<HTMLDivElement>(null);
   const cardPlaceholderEntranceRef = useRef<ScrollTrigger | null>(null);
   const cardSlideInAnimationRef = useRef<ScrollTrigger | null>(null);
+
+  // CGMWTAUG2025 pattern: Mobile detection for conditional ScrollTrigger
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1000);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Phase 2: Animation Implementation
   useGSAP(
@@ -38,8 +52,8 @@ export function TeamScrollReveal() {
       }
 
       function initTeamAnimations() {
-        // Mobile: Disable animations below 1000px
-        if (window.innerWidth < 1000) {
+        // CGMWTAUG2025 pattern: Disable complex animations on mobile
+        if (isMobile) {
           // Kill existing ScrollTriggers
           if (cardPlaceholderEntranceRef.current)
             cardPlaceholderEntranceRef.current.kill();
@@ -222,7 +236,7 @@ export function TeamScrollReveal() {
           cardSlideInAnimationRef.current.kill();
       };
     },
-    { scope: teamSectionRef }
+    { scope: teamSectionRef, dependencies: [isMobile] } // Re-run when mobile state changes
   );
 
   // Extract first initial from each team member name

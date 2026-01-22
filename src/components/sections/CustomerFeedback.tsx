@@ -2,7 +2,7 @@
 
 import './CustomerFeedback.css';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -36,6 +36,20 @@ export function CustomerFeedback() {
   const sectionRef = useRef<HTMLElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
+
+  // CGMWTAUG2025 pattern: Mobile detection for conditional ScrollTrigger
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1000);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Create progress indicators on mount
   useEffect(() => {
@@ -71,8 +85,10 @@ export function CustomerFeedback() {
     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-    // Create horizontal scroll animation
-    ScrollTrigger.create({
+    // CGMWTAUG2025 pattern: Only create horizontal scroll pin on desktop
+    if (!isMobile) {
+      // Create horizontal scroll animation
+      ScrollTrigger.create({
       trigger: sectionRef.current,
       start: 'top top',
       end: () => `+=${window.innerHeight * 5}px`,
@@ -103,6 +119,7 @@ export function CustomerFeedback() {
         }
       },
     });
+    } // End desktop-only horizontal scroll
 
     // Handle resize and orientation change
     let resizeTimeout: NodeJS.Timeout;
@@ -140,7 +157,7 @@ export function CustomerFeedback() {
       window.removeEventListener('resize', handleResize);
       clearTimeout(resizeTimeout);
     };
-  }, { scope: sectionRef });
+  }, { scope: sectionRef, dependencies: [isMobile] }); // Re-run when mobile state changes
 
   return (
     <section ref={sectionRef} className="feedback-scroll-section">

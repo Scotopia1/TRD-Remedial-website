@@ -29,6 +29,20 @@ const ServicesSpotlight = () => {
   // State for background image
   const [activeBgImage, setActiveBgImage] = useState(SERVICES[0].visual);
 
+  // CGMWTAUG2025 pattern: Mobile detection for conditional ScrollTrigger
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
+
+  // Check mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobileDevice(window.innerWidth <= 1000);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   // Configuration for synchronized title and image timing
   // Adjusted for perfect alignment when title reaches "OUR SERVICES" position
   const config = {
@@ -164,8 +178,11 @@ const ServicesSpotlight = () => {
     // Set all images to invisible initially
     imageElements.forEach((img) => gsap.set(img, { opacity: 0 }));
 
-    // Create ScrollTrigger - dynamic duration based on service count
-    scrollTriggerRef.current = ScrollTrigger.create({
+    // CGMWTAUG2025 pattern: Only create complex ScrollTrigger on desktop
+    // Mobile gets simpler, non-pinned experience
+    if (!isMobileDevice) {
+      // Create ScrollTrigger - dynamic duration based on service count
+      scrollTriggerRef.current = ScrollTrigger.create({
       trigger: ".services-spotlight",
       start: "top top",
       end: `+=${window.innerHeight * spotlightItems.length * 1.5}px`, // Increased for better timing sync
@@ -397,6 +414,7 @@ const ServicesSpotlight = () => {
         }
       },
     });
+    } // End desktop-only ScrollTrigger
 
     // Cleanup function
     return () => {
@@ -404,7 +422,7 @@ const ServicesSpotlight = () => {
         scrollTriggerRef.current.kill();
       }
     };
-  }, []);
+  }, [isMobileDevice]); // Re-run when mobile state changes
 
   return (
     <section className="services-spotlight" ref={spotlightRef}>
