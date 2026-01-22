@@ -175,12 +175,12 @@ const ServicesSpotlight = () => {
       return (overallProgress - startTime) / config.speed;
     }
 
-    // Set all images to invisible initially
-    imageElements.forEach((img) => gsap.set(img, { opacity: 0 }));
-
     // CGMWTAUG2025 pattern: Only create complex ScrollTrigger on desktop
     // Mobile gets simpler, non-pinned experience
     if (!isMobileDevice) {
+      // Desktop: Set all images to invisible initially (will be animated)
+      imageElements.forEach((img) => gsap.set(img, { opacity: 0 }));
+
       // Create ScrollTrigger - dynamic duration based on service count
       scrollTriggerRef.current = ScrollTrigger.create({
       trigger: ".services-spotlight",
@@ -414,13 +414,106 @@ const ServicesSpotlight = () => {
         }
       },
     });
-    } // End desktop-only ScrollTrigger
+    } else {
+      // Mobile: Simplified static experience
+      // Show background image at full scale
+      gsap.set(".spotlight-bg-img", { transform: "scale(1)" });
+      gsap.set(".spotlight-bg-img img", { transform: "scale(1)" });
+
+      // Hide intro text on mobile (takes up too much space)
+      gsap.set(introTextElements[0], { opacity: 0 });
+      gsap.set(introTextElements[1], { opacity: 0 });
+
+      // Show header with first service name
+      if (spotlightHeader) {
+        spotlightHeader.style.opacity = "1";
+        const serviceName = spotlightItems[0].name;
+        const words = serviceName.split(" ");
+        let formattedName = "";
+        for (let i = 0; i < words.length; i += 2) {
+          if (i > 0) formattedName += "<br>";
+          formattedName += words.slice(i, i + 2).join(" ");
+        }
+        spotlightHeader.innerHTML = `<p>${formattedName}</p>`;
+      }
+
+      // Show decorative lines
+      gsap.set(titlesContainerElement, {
+        "--before-opacity": "1",
+        "--after-opacity": "1",
+      });
+
+      // Create simple scroll reveals for each service title (non-pinned)
+      if (titleElements) {
+        titleElements.forEach((title: any, index: number) => {
+        ScrollTrigger.create({
+          trigger: title,
+          start: "top 80%",
+          end: "top 20%",
+          onEnter: () => {
+            gsap.to(title, { opacity: 1, duration: 0.5 });
+            // Update background image and header when entering service
+            setActiveBgImage(spotlightItems[index].img);
+            if (spotlightHeader) {
+              const serviceName = spotlightItems[index].name;
+              const words = serviceName.split(" ");
+              let formattedName = "";
+              for (let i = 0; i < words.length; i += 2) {
+                if (i > 0) formattedName += "<br>";
+                formattedName += words.slice(i, i + 2).join(" ");
+              }
+              spotlightHeader.innerHTML = `<p>${formattedName}</p>`;
+            }
+          },
+          onLeave: () => {
+            gsap.to(title, { opacity: 0.3, duration: 0.3 });
+          },
+          onEnterBack: () => {
+            gsap.to(title, { opacity: 1, duration: 0.5 });
+            // Update background image and header when scrolling back
+            setActiveBgImage(spotlightItems[index].img);
+            if (spotlightHeader) {
+              const serviceName = spotlightItems[index].name;
+              const words = serviceName.split(" ");
+              let formattedName = "";
+              for (let i = 0; i < words.length; i += 2) {
+                if (i > 0) formattedName += "<br>";
+                formattedName += words.slice(i, i + 2).join(" ");
+              }
+              spotlightHeader.innerHTML = `<p>${formattedName}</p>`;
+            }
+          },
+          onLeaveBack: () => {
+            gsap.to(title, { opacity: 0.3, duration: 0.3 });
+          },
+        });
+      });
+
+        // Set initial title opacity
+        titleElements.forEach((title: any, index: number) => {
+          if (index === 0) {
+            gsap.set(title, { opacity: 1 });
+          } else {
+            gsap.set(title, { opacity: 0.3 });
+          }
+        });
+      } // End titleElements null check
+
+      // Hide floating images on mobile (they're distracting and don't work well)
+      imageElements.forEach((img) => gsap.set(img, { opacity: 0 }));
+    } // End mobile-only experience
 
     // Cleanup function
     return () => {
       if (scrollTriggerRef.current) {
         scrollTriggerRef.current.kill();
       }
+      // Kill all ScrollTriggers in this section (including mobile ones)
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.trigger && trigger.trigger.closest('.services-spotlight')) {
+          trigger.kill();
+        }
+      });
     };
   }, [isMobileDevice]); // Re-run when mobile state changes
 
