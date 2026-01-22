@@ -199,13 +199,26 @@ html {
    MOBILE SCROLL FIXES - iOS & Android
    ===================================================== */
 
-/* Prevent iOS rubber-banding/bounce */
+/* Prevent iOS rubber-banding/bounce + Performance Optimizations */
 @supports (-webkit-touch-callout: none) {
   html, body {
     height: 100%;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: none;
+  }
+
+  /* iOS Performance: Force hardware acceleration */
+  * {
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+  }
+
+  /* Reduce paint complexity on iOS */
+  video, img {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 }
 

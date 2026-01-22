@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, ReactNode, useRef, useCallback } from 'react';
+import { useEffect, useState, ReactNode, useRef } from 'react';
 import { ReactLenis, useLenis } from 'lenis/react';
 import { ViewTransitions } from 'next-view-transitions';
 import { gsap } from 'gsap';
@@ -12,12 +12,19 @@ interface SmoothScrollProviderProps {
   children: ReactNode;
 }
 
+// Detect iOS devices (including iPadOS 13+ which reports as desktop)
+const isIOS = () => {
+  if (typeof window === 'undefined') return false;
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+};
+
 // Shared easing function
 const easeOutExpo = (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t));
 
-// Default desktop settings
+// Default desktop settings - optimized for performance
 const desktopSettings = {
-  duration: 1.2,
+  duration: 1.0,
   easing: easeOutExpo,
   direction: 'vertical' as const,
   orientation: 'vertical' as const,
@@ -26,25 +33,25 @@ const desktopSettings = {
   smoothTouch: false,
   touchMultiplier: 2,
   infinite: false,
-  lerp: 0.1,
+  lerp: 0.08,
   wheelMultiplier: 1,
-  syncTouch: true,
+  syncTouch: false,
 };
 
-// Mobile settings
+// iOS/Mobile settings - NATIVE SCROLL ONLY (smooth scroll disabled for performance)
 const mobileSettings = {
-  duration: 0.8,
-  easing: easeOutExpo,
+  duration: 0,
+  easing: (t: number) => t,
   direction: 'vertical' as const,
   orientation: 'vertical' as const,
   gestureOrientation: 'vertical' as const,
-  smoothWheel: true,
-  smoothTouch: true,
-  touchMultiplier: 1.5,
+  smoothWheel: false,
+  smoothTouch: false,
+  touchMultiplier: 1,
   infinite: false,
-  lerp: 0.09,
+  lerp: 1,
   wheelMultiplier: 1,
-  syncTouch: true,
+  syncTouch: false,
 };
 
 /**
@@ -112,29 +119,37 @@ function ScrollTriggerSync() {
 /**
  * Smooth Scroll Provider
  * Uses ReactLenis with scroller proxy for proper GSAP integration
+ * PERFORMANCE OPTIMIZED: Disables smooth scroll on iOS/mobile for native performance
  */
 export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   const [isMobile, setIsMobile] = useState(false);
+  const [isIOSDevice, setIsIOSDevice] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
+    setIsIOSDevice(isIOS());
 
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 1000);
+      setIsMobile(window.innerWidth <= 1000 || isIOS());
     };
 
     checkMobile();
     window.addEventListener('resize', checkMobile);
 
-    // ScrollTrigger config
+    // ScrollTrigger config - optimized for performance
     ScrollTrigger.config({
       ignoreMobileResize: true,
       autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
+      limitCallbacks: true, // Reduce callback frequency
     });
 
-    // Disable GSAP's lag smoothing for consistent frame delivery
-    gsap.ticker.lagSmoothing(0);
+    // Optimize GSAP ticker for mobile performance
+    if (isMobile || isIOS()) {
+      gsap.ticker.lagSmoothing(1000, 16); // More forgiving on mobile
+    } else {
+      gsap.ticker.lagSmoothing(500, 33);
+    }
 
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
@@ -149,7 +164,8 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     }
   }, [isMobile, isClient]);
 
-  const scrollSettings = isMobile ? mobileSettings : desktopSettings;
+  // Use native scroll on iOS and mobile for better performance
+  const scrollSettings = (isMobile || isIOSDevice) ? mobileSettings : desktopSettings;
 
   return (
     <ViewTransitions>
