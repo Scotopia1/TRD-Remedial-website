@@ -22,6 +22,10 @@
     "@react-three/drei": "^10.7.6",
     "@react-three/fiber": "^9.3.0",
     "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "^0.180.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dotenv": "^17.2.3",
@@ -42,19 +46,14 @@
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4",
     "three": "^0.180.0",
+    "typescript": "^5",
     "zod": "^4.1.12",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.1.4",
     "@playwright/test": "^1.56.1",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@types/three": "^0.180.0",
     "prisma": "^6.19.0",
-    "puppeteer": "^24.26.1",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "puppeteer": "^24.26.1"
   }
 }
