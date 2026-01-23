@@ -176,7 +176,7 @@
   height: 100%;
   z-index: 102;
   pointer-events: none;
-  display: none; /* Hidden on desktop */
+  display: flex; /* Visible on desktop for Bezier curve animation */
 }
 
 .spotlight-img {
