@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Headers for video files
+  // Headers for video and image files
   async headers() {
     return [
       {
@@ -30,6 +30,19 @@ const nextConfig: NextConfig = {
           {
             key: 'Accept-Ranges',
             value: 'bytes',
+          },
+        ],
+      },
+      {
+        source: '/images/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
           },
         ],
       },

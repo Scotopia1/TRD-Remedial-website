@@ -40,7 +40,7 @@ export default function ServicesPage() {
             {/* Parallax Background Image */}
             <div className="service-card-image">
               <ParallaxImage
-                src={service.visual}
+                src={service.heroImage || service.visual}
                 alt={service.title}
                 speed={0.2}
               />

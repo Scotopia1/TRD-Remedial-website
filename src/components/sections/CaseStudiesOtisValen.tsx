@@ -9,48 +9,34 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
 import { scrollTriggerManager } from "@/utils/scrollTriggerManager";
+import { PROJECTS } from "@/data/projects";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export function CaseStudiesOtisValen() {
-  const caseStudiesData = [
-    {
-      title: "Carbon Fibre Bridge Repair",
-      category: "Structural Reinforcement",
-      image: "https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=800&h=600&fit=crop",
-      href: "/projects/westfield-carpark-carbon-fibre-strengthening",
-    },
-    {
-      title: "Sydney Tower GPR Scanning",
-      category: "Non-Destructive Testing",
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop",
-      href: "/projects/bondi-apartment-slab-scanning",
-    },
-    {
-      title: "Warehouse Floor Crack Injection",
-      category: "Concrete Repair",
-      image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop",
-      href: "/projects/greenacre-plaza-post-tension-repair",
-    },
-    {
-      title: "Parking Structure Reinforcement",
-      category: "Carbon Fibre Systems",
-      image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=600&fit=crop",
-      href: "/projects/penrith-warehouse-carbon-fibre-upgrade",
-    },
-    {
-      title: "Retail Complex Line Marking",
-      category: "Traffic Management",
-      image: "https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=800&h=600&fit=crop",
-      href: "/projects/liverpool-shopping-precinct-carpark",
-    },
-    {
-      title: "Industrial Safety Fixtures",
-      category: "Fall Protection",
-      image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop",
-      href: "/projects/olympic-park-safety-handrails",
-    },
+  // Select 6 diverse real projects representing different services and categories
+  const featuredProjectIds = [
+    'project-001', // Caringbah Pavilion - Carbon Fibre, Heritage
+    'project-006', // Rouse Hill - Slab Scanning, Diagnostic
+    'project-007', // Pelican Road - Residential Estate
+    'project-003', // Enfield - Curtain Wall, Commercial
+    'project-005', // Northbridge - Structural Wall, Heritage
+    'project-012', // Zetland - Surelock System, Precision
   ];
+
+  const caseStudiesData = featuredProjectIds
+    .map(id => PROJECTS.find(p => p.id === id))
+    .filter((project): project is NonNullable<typeof project> => project !== undefined)
+    .map(project => ({
+      title: project.name,
+      category: project.serviceType,
+      image: project.thumbnailImage || project.featuredImage,
+      href: `/projects/${project.slug}`,
+    }));
+
+  // Debug: Log image paths
+  console.log('Case Studies Images:', caseStudiesData.map(d => d.image));
 
   const containerRef = useRef(null);
   const headerContentRef = useRef(null);
@@ -214,17 +200,13 @@ export function CaseStudiesOtisValen() {
           <div className="cs-work-item">
             <div className="cs-work-item-img">
               <a href={caseStudiesData[0].href}>
-                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                  <Image
-                    src={caseStudiesData[0].image}
+                <OptimizedImage
+                  src={caseStudiesData[0].image}
                   alt={caseStudiesData[0].title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    quality={85}
-                    priority={false}
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
+                  width={1200}
+                  height={800}
+                  priority={true}
+                />
               </a>
             </div>
             <div className="cs-work-item-content">
@@ -235,17 +217,13 @@ export function CaseStudiesOtisValen() {
           <div className="cs-work-item">
             <div className="cs-work-item-img">
               <a href={caseStudiesData[1].href}>
-                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                  <Image
-                    src={caseStudiesData[1].image}
+                <OptimizedImage
+                  src={caseStudiesData[1].image}
                   alt={caseStudiesData[1].title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    quality={85}
-                    priority={false}
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
+                  width={1200}
+                  height={800}
+                  priority={false}
+                />
               </a>
             </div>
             <div className="cs-work-item-content">
@@ -258,17 +236,13 @@ export function CaseStudiesOtisValen() {
           <div className="cs-work-item">
             <div className="cs-work-item-img">
               <a href={caseStudiesData[2].href}>
-                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                  <Image
-                    src={caseStudiesData[2].image}
+                <OptimizedImage
+                  src={caseStudiesData[2].image}
                   alt={caseStudiesData[2].title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    quality={85}
-                    priority={false}
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
+                  width={1200}
+                  height={800}
+                  priority={false}
+                />
               </a>
             </div>
             <div className="cs-work-item-content">
@@ -279,17 +253,13 @@ export function CaseStudiesOtisValen() {
           <div className="cs-work-item">
             <div className="cs-work-item-img">
               <a href={caseStudiesData[3].href}>
-                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                  <Image
-                    src={caseStudiesData[3].image}
+                <OptimizedImage
+                  src={caseStudiesData[3].image}
                   alt={caseStudiesData[3].title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    quality={85}
-                    priority={false}
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
+                  width={1200}
+                  height={800}
+                  priority={false}
+                />
               </a>
             </div>
             <div className="cs-work-item-content">
@@ -302,17 +272,13 @@ export function CaseStudiesOtisValen() {
           <div className="cs-work-item">
             <div className="cs-work-item-img">
               <a href={caseStudiesData[4].href}>
-                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                  <Image
-                    src={caseStudiesData[4].image}
+                <OptimizedImage
+                  src={caseStudiesData[4].image}
                   alt={caseStudiesData[4].title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    quality={85}
-                    priority={false}
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
+                  width={1200}
+                  height={800}
+                  priority={false}
+                />
               </a>
             </div>
             <div className="cs-work-item-content">
@@ -323,17 +289,13 @@ export function CaseStudiesOtisValen() {
           <div className="cs-work-item">
             <div className="cs-work-item-img">
               <a href={caseStudiesData[5].href}>
-                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                  <Image
-                    src={caseStudiesData[5].image}
+                <OptimizedImage
+                  src={caseStudiesData[5].image}
                   alt={caseStudiesData[5].title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    quality={85}
-                    priority={false}
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
+                  width={1200}
+                  height={800}
+                  priority={false}
+                />
               </a>
             </div>
             <div className="cs-work-item-content">

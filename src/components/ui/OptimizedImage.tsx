@@ -50,14 +50,24 @@ export function OptimizedImage({
   blurDataURL,
   ...props
 }: OptimizedImageProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
+  // Priority images should be visible immediately (above-the-fold)
+  const [isLoaded, setIsLoaded] = useState(priority);
 
   // Try to load blur placeholder from JSON
   let finalBlurDataURL = blurDataURL;
 
   // If no explicit blurDataURL provided, try to get from blurPlaceholders.json
   if (!finalBlurDataURL && typeof src === 'string') {
-    finalBlurDataURL = (blurPlaceholders as Record<string, string>)[src];
+    // Parse the src path to extract category, project/service name, and filename
+    // Expected format: /images/projects/project-name/filename.jpg or /images/services/service-name/filename.jpg
+    const match = src.match(/^\/images\/(projects|services)\/([^\/]+)\/([^\/]+?)(\.(jpg|jpeg|png|webp))?$/);
+    if (match) {
+      const [, category, name, filename] = match;
+      const placeholders = blurPlaceholders as any;
+      if (placeholders[category] && placeholders[category][name] && placeholders[category][name][filename]) {
+        finalBlurDataURL = placeholders[category][name][filename];
+      }
+    }
   }
 
   return (

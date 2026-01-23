@@ -27,7 +27,8 @@ const ServicesSpotlight = () => {
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
   // State for background image
-  const [activeBgImage, setActiveBgImage] = useState(SERVICES[0].visual);
+  // Use heroImage (real project images) with visual (Unsplash) as fallback
+  const [activeBgImage, setActiveBgImage] = useState(SERVICES[0].heroImage || SERVICES[0].visual);
 
   // CGMWTAUG2025 pattern: Mobile detection for conditional ScrollTrigger
   const [isMobileDevice, setIsMobileDevice] = useState(false);
@@ -52,9 +53,10 @@ const ServicesSpotlight = () => {
   };
 
   // Convert TRD services to spotlight items
+  // Use heroImage (real project images) with visual (Unsplash) as fallback
   const spotlightItems: SpotlightItem[] = SERVICES.map((service) => ({
     name: service.title,
-    img: service.visual,
+    img: service.heroImage || service.visual,
     id: service.id,
   }));
 
