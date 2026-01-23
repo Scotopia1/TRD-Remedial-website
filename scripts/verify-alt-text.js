@@ -11,10 +11,21 @@ function verifyAltText() {
 
   const projectsContent = fs.readFileSync(projectsPath, 'utf8');
 
-  // Find images without alt text (simple regex check)
-  // Looks for image objects with url but no alt property
-  const missingAltPattern = /{[^}]*url:\s*['"][^'"]+['"][^}]*}(?![^{]*alt:)/g;
-  const matches = projectsContent.match(missingAltPattern);
+  // Find images without alt text
+  // Parse the file to find image objects with url but no alt property
+  // Handle multi-line objects properly
+  const imageObjectPattern = /\{\s*url:\s*['"]([^'"]+)['"]\s*,?\s*(?:alt:\s*['"]([^'"]*)['"]\s*,?\s*)?\s*(?:caption:[^}]*)?\}/gs;
+  const matches = [];
+  let match;
+
+  while ((match = imageObjectPattern.exec(projectsContent)) !== null) {
+    const url = match[1];
+    const alt = match[2];
+
+    if (!alt || alt.trim() === '') {
+      matches.push(`{ url: '${url}', alt: '' }`);
+    }
+  }
 
   if (matches && matches.length > 0) {
     console.error(`\n✗ Found ${matches.length} potential images without alt text:\n`);
@@ -33,10 +44,10 @@ function verifyAltText() {
   // Additional check: Find very short alt text (< 10 chars)
   const shortAltPattern = /alt:\s*['"](.{1,9})['"] /g;
   const shortMatches = [];
-  let match;
+  let shortMatch;
 
-  while ((match = shortAltPattern.exec(projectsContent)) !== null) {
-    shortMatches.push(match[1]);
+  while ((shortMatch = shortAltPattern.exec(projectsContent)) !== null) {
+    shortMatches.push(shortMatch[1]);
   }
 
   if (shortMatches.length > 0) {

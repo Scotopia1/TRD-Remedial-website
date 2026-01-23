@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { AnimatedH1 } from '@/components/animations/AnimatedH1';
 import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
 import { ParallaxImage } from '@/components/animations/ParallaxImage';
+import { ImageCarousel } from '@/components/ImageCarousel';
+import { ProjectSchema } from '@/components/seo/ProjectSchema';
 import { useStore } from '@/stores/useStore';
 import type { Project } from '@/data/projects';
 
@@ -12,6 +14,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
 
   return (
     <div className="project-detail-page">
+      <ProjectSchema project={project} />
       {/* Hero Section */}
       <section className="project-hero">
         <div className="project-hero-image">
@@ -81,23 +84,14 @@ export function ProjectDetailClient({ project }: { project: Project }) {
         )}
       </section>
 
-      {/* Before/After Comparison */}
-      {project.beforeImage && project.afterImage && (
-        <section className="project-section project-comparison">
+      {/* Project Gallery Carousel */}
+      {project.galleryImages && project.galleryImages.length > 0 && (
+        <section className="project-section project-gallery">
           <div className="project-content-wide">
             <AnimatedH1 animateOnScroll={true} className="section-title text-center">
-              Before & After
+              Project Gallery
             </AnimatedH1>
-            <div className="comparison-grid">
-              <div className="comparison-image">
-                <img src={project.beforeImage.url} alt={project.beforeImage.alt} />
-                <p className="comparison-caption">Before</p>
-              </div>
-              <div className="comparison-image">
-                <img src={project.afterImage.url} alt={project.afterImage.alt} />
-                <p className="comparison-caption">After</p>
-              </div>
-            </div>
+            <ImageCarousel images={project.galleryImages} projectName={project.name} />
           </div>
         </section>
       )}

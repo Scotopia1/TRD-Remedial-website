@@ -1,0 +1,1424 @@
+{
+  "version": "1.0",
+  "created": "2026-01-22",
+  "description": "Image selections for TRD website project population. Maps source images from TRD-content to optimized website images.",
+  "usage": "Used by optimize-images.js, copy-project-images.js, and generate-alt-text-suggestions.js",
+  "projects": [
+    {
+      "name": "Caringbah Pavilion Carbon Fibre Reinforcement",
+      "slug": "caringbah-pavilion",
+      "serviceType": "Carbon Fibre Reinforcement",
+      "serviceId": "concrete-strengthening",
+      "sourceFolder": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION",
+      "totalSourceFiles": 82,
+      "images": [
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION/IMG_0671.JPG",
+          "targetFilename": "hero.jpg",
+          "purpose": "hero",
+          "dimensions": "1920x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "1.3M",
+          "captureDate": "2025-10-30",
+          "alt": "Wide-angle landscape view of completed carbon fibre reinforcement at Caringbah Pavilion showing CFRP wrap patterns on heritage building structural members"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION/IMG_0684.JPG",
+          "targetFilename": "featured.jpg",
+          "purpose": "featured",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "captureDate": "2025-10-30",
+          "alt": "Close-up detail of carbon fibre wrap application technique at Caringbah Pavilion showing advanced CFRP reinforcement craftsmanship"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION/IMG_0671.JPG",
+          "targetFilename": "thumbnail.jpg",
+          "purpose": "thumbnail",
+          "dimensions": "800x600",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "1.3M",
+          "alt": "Caringbah Pavilion carbon fibre reinforcement project thumbnail showing completed CFRP work"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION/IMG_0539.JPG",
+          "targetFilename": "before-01.jpg",
+          "purpose": "before",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "627K",
+          "captureDate": "2024-03-06",
+          "alt": "Before carbon fibre reinforcement: Original structural condition at Caringbah Pavilion showing deteriorated beam requiring strengthening"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION/IMG_0683.JPG",
+          "targetFilename": "after-01.jpg",
+          "purpose": "after",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "973K",
+          "captureDate": "2025-10-30",
+          "alt": "After carbon fibre reinforcement: Completed CFRP wrap installation at Caringbah Pavilion showing strengthened structural member"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION/IMG_0540.JPG",
+          "targetFilename": "gallery-01.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "677K",
+          "captureDate": "2024-03-06",
+          "alt": "Initial structural assessment phase at Caringbah Pavilion showing areas requiring carbon fibre reinforcement"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION/IMG_0541.JPG",
+          "targetFilename": "gallery-02.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "628K",
+          "captureDate": "2024-03-06",
+          "alt": "Carbon fibre fabric preparation and surface treatment at Caringbah Pavilion"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION/IMG_0569.JPG",
+          "targetFilename": "gallery-03.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "830K",
+          "captureDate": "2024-03-06",
+          "alt": "Mid-project CFRP wrap application showing resin saturation technique at Caringbah Pavilion"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION/IMG_0672.JPG",
+          "targetFilename": "gallery-04.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "1.3M",
+          "captureDate": "2025-10-30",
+          "alt": "Wide-angle view of completed carbon fibre wrap patterns on multiple structural members at Caringbah"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION/IMG_0673.JPG",
+          "targetFilename": "gallery-05.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "1.3M",
+          "captureDate": "2025-10-30",
+          "alt": "Completed CFRP reinforcement system at Caringbah Pavilion showing comprehensive structural strengthening"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION/IMG_0685.JPG",
+          "targetFilename": "gallery-06.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.2M",
+          "captureDate": "2025-10-30",
+          "alt": "Close-up detail of precision carbon fibre wrap installation on heritage pavilion structural beam"
+        }
+      ],
+      "notes": "FLAGSHIP PROJECT - 82 files available. Review all images and select best quality for hero/featured. Consider using video frames for process shots."
+    },
+    {
+      "name": "Structural Remediation - 54 Advanced Street Schofields",
+      "slug": "schofields-54-advanced",
+      "serviceType": "Structural Remediation",
+      "serviceId": "structural-alterations",
+      "sourceFolder": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL REMEDIATION - 54 ADVANCED STREET SCHOFIELDS",
+      "totalSourceFiles": 57,
+      "images": [
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL REMEDIATION - 54 ADVANCED STREET SCHOFIELDS/IMG_5790.JPG",
+          "targetFilename": "hero.jpg",
+          "purpose": "hero",
+          "dimensions": "1920x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "900K",
+          "captureDate": "2025-06-23",
+          "alt": "Wide-angle landscape view of completed structural remediation at 54 Advanced Street Schofields showing comprehensive repair work"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL REMEDIATION - 54 ADVANCED STREET SCHOFIELDS/IMG_5788.JPG",
+          "targetFilename": "featured.jpg",
+          "purpose": "featured",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "911K",
+          "captureDate": "2025-06-23",
+          "alt": "Close-up detail of precision structural alteration work at Schofields residential project showing completed remediation"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL REMEDIATION - 54 ADVANCED STREET SCHOFIELDS/IMG_5790.JPG",
+          "targetFilename": "thumbnail.jpg",
+          "purpose": "thumbnail",
+          "dimensions": "800x600",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "900K",
+          "alt": "Schofields structural remediation project thumbnail showing completed work"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL REMEDIATION - 54 ADVANCED STREET SCHOFIELDS/IMG_5515.JPG",
+          "targetFilename": "before-01.jpg",
+          "purpose": "before",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "812K",
+          "captureDate": "2023-04-11",
+          "alt": "Before structural remediation: Original condition at 54 Advanced Street Schofields showing structural defects requiring repair"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL REMEDIATION - 54 ADVANCED STREET SCHOFIELDS/IMG_5531.JPG",
+          "targetFilename": "after-01.jpg",
+          "purpose": "after",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "862K",
+          "captureDate": "2025-05-27",
+          "alt": "After structural remediation: Completed repairs at Schofields residential property showing restored structural integrity"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL REMEDIATION - 54 ADVANCED STREET SCHOFIELDS/IMG_5516.JPG",
+          "targetFilename": "gallery-01.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "763K",
+          "captureDate": "2023-04-11",
+          "alt": "Initial structural assessment and defect identification at 54 Advanced Street Schofields"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL REMEDIATION - 54 ADVANCED STREET SCHOFIELDS/IMG_5517.JPG",
+          "targetFilename": "gallery-02.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "813K",
+          "captureDate": "2023-04-11",
+          "alt": "Structural modification planning and preparation phase at Schofields project"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL REMEDIATION - 54 ADVANCED STREET SCHOFIELDS/IMG_5518.JPG",
+          "targetFilename": "gallery-03.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "833K",
+          "captureDate": "2023-04-11",
+          "alt": "Active remediation work showing structural alteration techniques at Schofields"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL REMEDIATION - 54 ADVANCED STREET SCHOFIELDS/IMG_5755.JPG",
+          "targetFilename": "gallery-04.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "922K",
+          "captureDate": "2023-05-08",
+          "alt": "Mid-project structural repair progress showing precision remediation work"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL REMEDIATION - 54 ADVANCED STREET SCHOFIELDS/IMG_5756.JPG",
+          "targetFilename": "gallery-05.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "860K",
+          "captureDate": "2023-05-08",
+          "alt": "Detailed view of structural alteration methodology at 54 Advanced Street"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL REMEDIATION - 54 ADVANCED STREET SCHOFIELDS/IMG_5532.JPG",
+          "targetFilename": "gallery-06.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "828K",
+          "captureDate": "2025-05-27",
+          "alt": "Near-completion structural remediation work at Schofields residential property"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL REMEDIATION - 54 ADVANCED STREET SCHOFIELDS/IMG_5789.JPG",
+          "targetFilename": "gallery-07.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "891K",
+          "captureDate": "2025-06-23",
+          "alt": "Wide-angle view of completed structural modifications showing project scope and quality"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL REMEDIATION - 54 ADVANCED STREET SCHOFIELDS/IMG_5788.JPG",
+          "targetFilename": "gallery-08.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "911K",
+          "captureDate": "2025-06-23",
+          "alt": "Final quality control and project completion at 54 Advanced Street Schofields"
+        }
+      ],
+      "notes": "57 files available (51 JPGs, 6 MP4s). High image count - select best wide-angle shots for hero. Consider extracting process frames from videos."
+    },
+    {
+      "name": "Curtain Wall Injection - Enfield",
+      "slug": "enfield-curtain-wall",
+      "serviceType": "Curtain Wall Crack Injection",
+      "serviceId": "curtain-wall-injection",
+      "sourceFolder": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CURTAIN WALL INJECTION - ENFIELD",
+      "totalSourceFiles": 37,
+      "images": [
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CURTAIN WALL INJECTION - ENFIELD/IMG_0811.JPG",
+          "targetFilename": "hero.jpg",
+          "purpose": "hero",
+          "dimensions": "1920x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "1.3M",
+          "captureDate": "2025-11-13",
+          "alt": "Wide-angle landscape view of curtain wall crack injection project at Enfield commercial building showing comprehensive repair scope"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CURTAIN WALL INJECTION - ENFIELD/IMG_0906.JPG",
+          "targetFilename": "featured.jpg",
+          "purpose": "featured",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.5M",
+          "captureDate": "2025-11-20",
+          "alt": "Close-up premium quality detail of curtain wall injection port installation at Enfield showing precision technique and craftsmanship"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CURTAIN WALL INJECTION - ENFIELD/IMG_0811.JPG",
+          "targetFilename": "thumbnail.jpg",
+          "purpose": "thumbnail",
+          "dimensions": "800x600",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "1.3M",
+          "alt": "Enfield curtain wall injection project thumbnail"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CURTAIN WALL INJECTION - ENFIELD/IMG_0800.JPG",
+          "targetFilename": "before-01.jpg",
+          "purpose": "before",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "captureDate": "2025-11-13",
+          "alt": "Before curtain wall injection: Crack in curtain wall system at Enfield commercial building requiring specialized repair"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CURTAIN WALL INJECTION - ENFIELD/IMG_0907.JPG",
+          "targetFilename": "after-01.jpg",
+          "purpose": "after",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.4M",
+          "captureDate": "2025-11-20",
+          "alt": "After curtain wall injection: Completed crack repair in curtain wall system at Enfield showing restored integrity"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CURTAIN WALL INJECTION - ENFIELD/IMG_0801.JPG",
+          "targetFilename": "gallery-01.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "captureDate": "2025-11-13",
+          "alt": "Initial curtain wall crack inspection and defect assessment at Enfield commercial building"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CURTAIN WALL INJECTION - ENFIELD/IMG_0806.JPG",
+          "targetFilename": "gallery-02.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.3M",
+          "captureDate": "2025-11-13",
+          "alt": "Precision injection port installation in curtain wall system at Enfield"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CURTAIN WALL INJECTION - ENFIELD/IMG_0808.JPG",
+          "targetFilename": "gallery-03.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.5M",
+          "captureDate": "2025-11-13",
+          "alt": "High-resolution view of epoxy injection equipment setup for curtain wall repair at Enfield"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CURTAIN WALL INJECTION - ENFIELD/IMG_0809.JPG",
+          "targetFilename": "gallery-04.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.2M",
+          "captureDate": "2025-11-13",
+          "alt": "Curtain wall crack injection process in progress at Enfield commercial project showing technique"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CURTAIN WALL INJECTION - ENFIELD/IMG_0854.JPG",
+          "targetFilename": "gallery-05.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.5M",
+          "captureDate": "2025-11-15",
+          "alt": "Premium quality detail of mid-project curtain wall injection work at Enfield"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CURTAIN WALL INJECTION - ENFIELD/IMG_0856.JPG",
+          "targetFilename": "gallery-06.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.3M",
+          "captureDate": "2025-11-15",
+          "alt": "Quality control verification and final inspection of completed curtain wall crack repair at Enfield"
+        }
+      ],
+      "notes": "FLAGSHIP QUALITY - 37 files with HIGHEST average image quality (1091KB). 23 JPGs + 14 MP4s. Premium visuals - perfect for service page showcase."
+    },
+    {
+      "name": "Waitara Multi-Service Remediation",
+      "slug": "waitara-multi-service",
+      "serviceType": "Slab Injection & Steel Reinforcing",
+      "serviceId": "crack-injection",
+      "sourceFolders": [
+        "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB ON GROUND CRACK INJECTION - WAITARA",
+        "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL STEEL REINFORCING - WAITARA"
+      ],
+      "totalSourceFiles": 25,
+      "images": [
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB ON GROUND CRACK INJECTION - WAITARA/IMG_3658.JPG",
+          "targetFilename": "hero.jpg",
+          "purpose": "hero",
+          "dimensions": "1920x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "992K",
+          "captureDate": "2024-10-29",
+          "alt": "Wide-angle landscape view of slab on ground crack injection work at Waitara residential project showing comprehensive remediation scope"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL STEEL REINFORCING - WAITARA/IMG_4125.JPG",
+          "targetFilename": "featured.jpg",
+          "purpose": "featured",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "751K",
+          "captureDate": "2024-12-03",
+          "alt": "Close-up detail of precision structural steel reinforcing installation at Waitara showing advanced remediation technique"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB ON GROUND CRACK INJECTION - WAITARA/IMG_3710.JPG",
+          "targetFilename": "thumbnail.jpg",
+          "purpose": "thumbnail",
+          "dimensions": "800x600",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "956K",
+          "alt": "Waitara multi-service remediation project thumbnail showing slab crack injection work"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB ON GROUND CRACK INJECTION - WAITARA/IMG_3654.JPG",
+          "targetFilename": "before-01.jpg",
+          "purpose": "before",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "952K",
+          "captureDate": "2024-10-29",
+          "alt": "Before remediation: Slab on ground cracks at Waitara residential property requiring injection and reinforcing"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL STEEL REINFORCING - WAITARA/IMG_4126.JPG",
+          "targetFilename": "after-01.jpg",
+          "purpose": "after",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "705K",
+          "captureDate": "2024-12-03",
+          "alt": "After remediation: Completed structural steel reinforcing and crack injection at Waitara showing restored structural integrity"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB ON GROUND CRACK INJECTION - WAITARA/IMG_3656.JPG",
+          "targetFilename": "gallery-01.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "910K",
+          "captureDate": "2024-10-29",
+          "alt": "Initial slab crack injection phase at Waitara showing epoxy preparation and port installation"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB ON GROUND CRACK INJECTION - WAITARA/IMG_3657.JPG",
+          "targetFilename": "gallery-02.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "984K",
+          "captureDate": "2024-10-29",
+          "alt": "Wide-angle view of crack injection equipment setup at Waitara residential slab"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB ON GROUND CRACK INJECTION - WAITARA/IMG_3682.JPG",
+          "targetFilename": "gallery-03.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "832K",
+          "captureDate": "2024-10-31",
+          "alt": "Mid-project slab injection work at Waitara showing progression of remediation"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB ON GROUND CRACK INJECTION - WAITARA/IMG_3700.JPG",
+          "targetFilename": "gallery-04.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "935K",
+          "captureDate": "2024-10-31",
+          "alt": "Detail view of slab crack injection technique showing precision port placement at Waitara"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB ON GROUND CRACK INJECTION - WAITARA/IMG_3701.JPG",
+          "targetFilename": "gallery-05.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "912K",
+          "captureDate": "2024-10-31",
+          "alt": "Close-up of epoxy injection process in slab cracks at Waitara residential project"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB ON GROUND CRACK INJECTION - WAITARA/IMG_3709.JPG",
+          "targetFilename": "gallery-06.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "905K",
+          "captureDate": "2024-10-31",
+          "alt": "Advanced slab injection work nearing completion at Waitara showing quality craftsmanship"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL STEEL REINFORCING - WAITARA/IMG_4125.JPG",
+          "targetFilename": "gallery-07.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "751K",
+          "captureDate": "2024-12-03",
+          "alt": "Structural steel reinforcing phase at Waitara showing secondary remediation service integration"
+        }
+      ],
+      "notes": "MULTI-SERVICE PROJECT - Consolidates 2 folders (23 slab injection + 2 steel reinforcing JPGs). Showcases service diversity: slab crack injection (Oct 29-31) + structural steel reinforcing (Dec 3). Timeline demonstrates phased approach."
+    },
+    {
+      "name": "Northbridge Structural Wall Repairs",
+      "slug": "northbridge-structural-wall",
+      "serviceType": "Structural Wall Repairs",
+      "serviceId": "structural-alterations",
+      "sourceFolder": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE",
+      "totalSourceFiles": 32,
+      "images": [
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE/IMG_5493.JPG",
+          "targetFilename": "hero.jpg",
+          "purpose": "hero",
+          "dimensions": "1920x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "1.2M",
+          "captureDate": "2024-03-01",
+          "alt": "Wide-angle landscape view of structural wall repairs at Northbridge heritage location showing comprehensive remediation work"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE/IMG_5494.JPG",
+          "targetFilename": "featured.jpg",
+          "purpose": "featured",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.2M",
+          "captureDate": "2024-03-01",
+          "alt": "Close-up premium quality detail of precision structural wall repair technique at Northbridge showing expert craftsmanship"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE/IMG_0505.JPG",
+          "targetFilename": "thumbnail.jpg",
+          "purpose": "thumbnail",
+          "dimensions": "800x600",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "926K",
+          "alt": "Northbridge structural wall repairs project thumbnail"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE/IMG_0502.JPG",
+          "targetFilename": "before-01.jpg",
+          "purpose": "before",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "831K",
+          "captureDate": "2024-02-20",
+          "alt": "Before structural wall repairs: Deteriorated wall condition at Northbridge requiring comprehensive remediation"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE/IMG_0670.JPG",
+          "targetFilename": "after-01.jpg",
+          "purpose": "after",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "987K",
+          "captureDate": "2024-03-07",
+          "alt": "After structural wall repairs: Completed restoration at Northbridge showing restored wall integrity and heritage preservation"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE/IMG_0503.JPG",
+          "targetFilename": "gallery-01.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "748K",
+          "captureDate": "2024-02-20",
+          "alt": "Initial structural wall assessment and defect identification at Northbridge heritage location"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE/IMG_0505.JPG",
+          "targetFilename": "gallery-02.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "926K",
+          "captureDate": "2024-02-20",
+          "alt": "Wide-angle view of initial wall repair planning and preparation at Northbridge"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE/IMG_0521.JPG",
+          "targetFilename": "gallery-03.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "captureDate": "2024-02-22",
+          "alt": "Mid-project structural wall repair work in progress at Northbridge showing remediation technique"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE/IMG_0527.JPG",
+          "targetFilename": "gallery-04.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "921K",
+          "captureDate": "2024-02-22",
+          "alt": "Landscape view of mid-project structural repairs showing scope of Northbridge wall restoration"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE/IMG_0528.JPG",
+          "targetFilename": "gallery-05.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "942K",
+          "captureDate": "2024-02-22",
+          "alt": "Detailed view of precision wall repair methodology at Northbridge heritage property"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE/IMG_0588.JPG",
+          "targetFilename": "gallery-06.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1013K",
+          "captureDate": "2024-03-01",
+          "alt": "Advanced stage structural wall repair showing progression toward completion at Northbridge"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE/IMG_0591.JPG",
+          "targetFilename": "gallery-07.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "captureDate": "2024-03-01",
+          "alt": "Near-completion structural wall repairs at Northbridge showing quality restoration work"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE/IMG_5492.JPG",
+          "targetFilename": "gallery-08.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "captureDate": "2024-03-01",
+          "alt": "Final quality inspection of completed structural wall repairs at Northbridge"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE/IMG_0668.JPG",
+          "targetFilename": "gallery-09.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "836K",
+          "captureDate": "2024-03-07",
+          "alt": "Completion verification and heritage preservation compliance at Northbridge wall repair project"
+        }
+      ],
+      "notes": "HERITAGE LOCATION - 32 files (18 JPGs + 14 MP4s). Timeline Feb 20 - Mar 7 (16 days). Best landscape: IMG_5493.JPG (1.2M). Showcases heritage-sensitive structural repair expertise."
+    },
+    {
+      "name": "Rouse Hill Slab Scanning - Post-Tension Truncation",
+      "slug": "rousehill-slab-scanning",
+      "serviceType": "Slab Scanning (GPR)",
+      "serviceId": "slab-scanning",
+      "sourceFolder": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL",
+      "totalSourceFiles": 34,
+      "images": [
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5814.JPG",
+          "targetFilename": "hero.jpg",
+          "purpose": "hero",
+          "dimensions": "1920x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "1006K",
+          "captureDate": "2025-06-25",
+          "alt": "Wide-angle landscape view of GPR slab scanning equipment in operation at Rouse Hill post-tension truncation project"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5823.JPG",
+          "targetFilename": "featured.jpg",
+          "purpose": "featured",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1007K",
+          "captureDate": "2025-06-25",
+          "alt": "Close-up detail of ground penetrating radar equipment detecting post-tension cables at Rouse Hill slab scanning project"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5815.JPG",
+          "targetFilename": "thumbnail.jpg",
+          "purpose": "thumbnail",
+          "dimensions": "800x600",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "907K",
+          "alt": "Rouse Hill GPR slab scanning project thumbnail showing diagnostic equipment"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5812.JPG",
+          "targetFilename": "before-01.jpg",
+          "purpose": "before",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "917K",
+          "captureDate": "2025-06-25",
+          "alt": "Before slab scanning: Slab surface requiring GPR investigation for post-tension cable location at Rouse Hill"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5908.JPG",
+          "targetFilename": "after-01.jpg",
+          "purpose": "after",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "922K",
+          "captureDate": "2025-07-03",
+          "alt": "After GPR scanning: Marked slab surface showing identified post-tension cable locations for safe truncation at Rouse Hill"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5813.JPG",
+          "targetFilename": "gallery-01.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "912K",
+          "captureDate": "2025-06-25",
+          "alt": "GPR slab scanning equipment setup and calibration at Rouse Hill post-tension investigation"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5815.JPG",
+          "targetFilename": "gallery-02.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "907K",
+          "captureDate": "2025-06-25",
+          "alt": "Wide-angle view of GPR scanning area showing comprehensive post-tension cable detection at Rouse Hill"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5817.JPG",
+          "targetFilename": "gallery-03.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "924K",
+          "captureDate": "2025-06-25",
+          "alt": "Ground penetrating radar in operation detecting post-tension cables at Rouse Hill residential slab"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5818.JPG",
+          "targetFilename": "gallery-04.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "951K",
+          "captureDate": "2025-06-25",
+          "alt": "GPR data collection and real-time cable location verification at Rouse Hill slab scanning project"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5820.JPG",
+          "targetFilename": "gallery-05.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "967K",
+          "captureDate": "2025-06-25",
+          "alt": "Post-tension cable detection and mapping using advanced GPR technology at Rouse Hill"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5822.JPG",
+          "targetFilename": "gallery-06.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "989K",
+          "captureDate": "2025-06-25",
+          "alt": "GPR scan results verification and accuracy confirmation for post-tension cable locations"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5908.JPG",
+          "targetFilename": "gallery-07.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "922K",
+          "captureDate": "2025-07-03",
+          "alt": "Follow-up inspection and final verification of post-tension cable mapping at Rouse Hill project"
+        }
+      ],
+      "notes": "DIAGNOSTIC SHOWCASE - 34 files (25 JPGs + 9 MP4s). Timeline Jun 25 - Jul 3 (1-week follow-up). GPR/Post-tension expertise demonstration. Safety-critical work showing advanced scanning technology."
+    },
+    {
+      "name": "Pelican Road Schofields - Residential Estate Remediation",
+      "slug": "pelican-road-schofields",
+      "serviceType": "Comprehensive Crack Injection & Repairs",
+      "serviceId": "crack-injection",
+      "sourceFolders": [
+        "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/12C PELICAN ROAD SCHOFIELDS - SLAB ON GROUND CRACK INJECTION",
+        "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/16A PELICAN ROAD SCHOFIELDS - CONCRETE CRACK REPAIR",
+        "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/16B PELICAN ROAD SCHOFIELDS - CRACK INJECTIONS",
+        "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SHORING WALL INECTION - 12C PELICAN ROAD",
+        "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SHORING WALLA REPAIRS - PELICAN ROAD SCHOFIELDS"
+      ],
+      "totalSourceFiles": 88,
+      "images": [
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/12C PELICAN ROAD SCHOFIELDS - SLAB ON GROUND CRACK INJECTION/IMG_3090.JPG",
+          "targetFilename": "hero.jpg",
+          "purpose": "hero",
+          "dimensions": "1920x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "1.1M",
+          "captureDate": "2024-09-25",
+          "alt": "Wide-angle landscape view of comprehensive crack injection remediation across Pelican Road Schofields residential estate"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/16A PELICAN ROAD SCHOFIELDS - CONCRETE CRACK REPAIR/IMG_5288.JPG",
+          "targetFilename": "featured.jpg",
+          "purpose": "featured",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.3M",
+          "captureDate": "2025-04-22",
+          "alt": "Close-up premium quality detail of concrete crack repair technique at Pelican Road Schofields showing expert craftsmanship"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/12C PELICAN ROAD SCHOFIELDS - SLAB ON GROUND CRACK INJECTION/IMG_3092.JPG",
+          "targetFilename": "thumbnail.jpg",
+          "purpose": "thumbnail",
+          "dimensions": "800x600",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "1.1M",
+          "alt": "Pelican Road Schofields comprehensive remediation project thumbnail"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/16A PELICAN ROAD SCHOFIELDS - CONCRETE CRACK REPAIR/IMG_5175.JPG",
+          "targetFilename": "before-01.jpg",
+          "purpose": "before",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "1.1M",
+          "captureDate": "2023-03-13",
+          "alt": "Before remediation: Original crack condition at Pelican Road Schofields requiring estate-wide repairs"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/16A PELICAN ROAD SCHOFIELDS - CONCRETE CRACK REPAIR/IMG_5320.JPG",
+          "targetFilename": "after-01.jpg",
+          "purpose": "after",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "captureDate": "2025-04-28",
+          "alt": "After remediation: Completed crack repairs across Pelican Road Schofields showing restored structural integrity"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/12C PELICAN ROAD SCHOFIELDS - SLAB ON GROUND CRACK INJECTION/IMG_3037.JPG",
+          "targetFilename": "gallery-01.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "937K",
+          "captureDate": "2024-09-24",
+          "alt": "Slab on ground crack injection preparation at 12C Pelican Road Schofields"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/12C PELICAN ROAD SCHOFIELDS - SLAB ON GROUND CRACK INJECTION/IMG_3085.JPG",
+          "targetFilename": "gallery-02.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "952K",
+          "captureDate": "2024-09-25",
+          "alt": "Epoxy injection process in progress at 12C Pelican Road residential slab"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/16A PELICAN ROAD SCHOFIELDS - CONCRETE CRACK REPAIR/IMG_5223.JPG",
+          "targetFilename": "gallery-03.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "captureDate": "2023-03-14",
+          "alt": "Initial concrete crack repair assessment at 16A Pelican Road address"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/16A PELICAN ROAD SCHOFIELDS - CONCRETE CRACK REPAIR/IMG_5289.JPG",
+          "targetFilename": "gallery-04.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.2M",
+          "captureDate": "2025-04-22",
+          "alt": "Advanced crack repair technique demonstration at 16A Pelican Road"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/16B PELICAN ROAD SCHOFIELDS - CRACK INJECTIONS/IMG_5386.JPG",
+          "targetFilename": "gallery-05.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "alt": "Crack injection work at 16B Pelican Road showing comprehensive estate coverage"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SHORING WALLA REPAIRS - PELICAN ROAD SCHOFIELDS/IMG_5880.JPG",
+          "targetFilename": "gallery-06.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "803K",
+          "alt": "Shoring wall repairs completing comprehensive Pelican Road Schofields remediation project"
+        }
+      ],
+      "notes": "ESTATE-WIDE CONSOLIDATION - Merges 5 addresses (88 total JPGs). Timeline: March 2023 - April 2025 (2+ year project). Services: slab crack injection, concrete crack repair, shoring wall repairs. Demonstrates comprehensive estate remediation capability."
+    },
+    {
+      "name": "Marsden Park Development - Structural Wall Works",
+      "slug": "marsden-park-development",
+      "serviceType": "Structural Wall Repairs & Injection",
+      "serviceId": "structural-alterations",
+      "sourceFolders": [
+        "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SHORING WALL REPAIRS - LOT 5 MARSDEN PARK",
+        "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL INJECTION - LOT 9 MARSDEN PARK",
+        "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - LOT 11 MARSDEN PARK"
+      ],
+      "totalSourceFiles": 45,
+      "images": [
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SHORING WALL REPAIRS - LOT 5 MARSDEN PARK/IMG_0284.JPG",
+          "targetFilename": "hero.jpg",
+          "purpose": "hero",
+          "dimensions": "1920x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.7M",
+          "alt": "Wide-angle view of shoring wall repairs at Marsden Park development showing large-scale structural remediation"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SHORING WALL REPAIRS - LOT 5 MARSDEN PARK/IMG_0288.JPG",
+          "targetFilename": "featured.jpg",
+          "purpose": "featured",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.3M",
+          "alt": "Close-up premium quality detail of structural wall repair technique at Marsden Park Lot 5"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - LOT 11 MARSDEN PARK/IMG_0320.JPG",
+          "targetFilename": "thumbnail.jpg",
+          "purpose": "thumbnail",
+          "dimensions": "800x600",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "898K",
+          "alt": "Marsden Park structural wall works project thumbnail"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - LOT 11 MARSDEN PARK/IMG_0315.JPG",
+          "targetFilename": "before-01.jpg",
+          "purpose": "before",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "809K",
+          "alt": "Before structural wall repairs: Original wall condition at Marsden Park Lot 11"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SHORING WALL REPAIRS - LOT 5 MARSDEN PARK/IMG_0282.JPG",
+          "targetFilename": "after-01.jpg",
+          "purpose": "after",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.2M",
+          "alt": "After structural wall repairs: Completed remediation at Marsden Park Lot 5"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SHORING WALL REPAIRS - LOT 5 MARSDEN PARK/IMG_0285.JPG",
+          "targetFilename": "gallery-01.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "alt": "Shoring wall repair preparation at Lot 5 Marsden Park development"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SHORING WALL REPAIRS - LOT 5 MARSDEN PARK/IMG_0287.JPG",
+          "targetFilename": "gallery-02.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "alt": "Structural wall remediation in progress at Marsden Park Lot 5"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - LOT 11 MARSDEN PARK/IMG_0322.JPG",
+          "targetFilename": "gallery-03.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "839K",
+          "alt": "Precision structural wall repair work at Lot 11 Marsden Park"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL WALL REPAIRS - LOT 11 MARSDEN PARK/IMG_0316.JPG",
+          "targetFilename": "gallery-04.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "810K",
+          "alt": "Detail view of structural remediation technique at Marsden Park development"
+        }
+      ],
+      "notes": "DEVELOPMENT-WIDE CONSOLIDATION - Merges 3 lots (45 total JPGs). Highest quality hero: 1.7M. Focus on Lots 5, 9, 11 structural wall works. Demonstrates large-scale development remediation capability."
+    },
+    {
+      "name": "Jacaranda Construction Joints Repairs",
+      "slug": "jacaranda-construction-joints",
+      "serviceType": "Construction Joints Repairs",
+      "serviceId": "crack-repairs",
+      "sourceFolder": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CONSTRUCTION JOINTS REPAIRS - JACARANDA_",
+      "totalSourceFiles": 22,
+      "images": [
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CONSTRUCTION JOINTS REPAIRS - JACARANDA_/IMG_0358.JPG",
+          "targetFilename": "hero.jpg",
+          "purpose": "hero",
+          "dimensions": "1920x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.5M",
+          "captureDate": "2024-01-29",
+          "alt": "Wide-angle view of construction joints repairs at Jacaranda project showing specialized remediation technique"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CONSTRUCTION JOINTS REPAIRS - JACARANDA_/IMG_0359.JPG",
+          "targetFilename": "featured.jpg",
+          "purpose": "featured",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.5M",
+          "captureDate": "2024-01-29",
+          "alt": "Close-up premium quality detail of construction joint repair at Jacaranda showing expert precision"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CONSTRUCTION JOINTS REPAIRS - JACARANDA_/IMG_0360.JPG",
+          "targetFilename": "thumbnail.jpg",
+          "purpose": "thumbnail",
+          "dimensions": "800x600",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.3M",
+          "alt": "Jacaranda construction joints repairs project thumbnail"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CONSTRUCTION JOINTS REPAIRS - JACARANDA_/IMG_0356.JPG",
+          "targetFilename": "before-01.jpg",
+          "purpose": "before",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.2M",
+          "captureDate": "2024-01-29",
+          "alt": "Before construction joint repair: Original joint condition at Jacaranda project"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CONSTRUCTION JOINTS REPAIRS - JACARANDA_/IMG_0409.JPG",
+          "targetFilename": "after-01.jpg",
+          "purpose": "after",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.2M",
+          "alt": "After construction joint repair: Completed remediation at Jacaranda showing restored joint integrity"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CONSTRUCTION JOINTS REPAIRS - JACARANDA_/IMG_0357.JPG",
+          "targetFilename": "gallery-01.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.2M",
+          "captureDate": "2024-01-29",
+          "alt": "Initial construction joint assessment at Jacaranda project"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CONSTRUCTION JOINTS REPAIRS - JACARANDA_/IMG_0362.JPG",
+          "targetFilename": "gallery-02.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.2M",
+          "captureDate": "2024-01-29",
+          "alt": "Construction joint repair preparation and cleaning at Jacaranda"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/CONSTRUCTION JOINTS REPAIRS - JACARANDA_/IMG_0406.JPG",
+          "targetFilename": "gallery-03.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "alt": "Advanced construction joint remediation technique at Jacaranda project"
+        }
+      ],
+      "notes": "PREMIUM QUALITY - 22 JPGs with highest quality images (1.5M hero/featured). Captured Jan 29, 2024. Demonstrates specialized construction joint repair expertise. All portrait orientation."
+    },
+    {
+      "name": "Pemulwuy Suspended Slab Crack Injection",
+      "slug": "pemulwuy-suspended-slab",
+      "serviceType": "Suspended Slab Crack Injection",
+      "serviceId": "crack-injection",
+      "sourceFolder": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SUSPENDED SLAB CRACK INJECTION - PEMULWAY",
+      "totalSourceFiles": 30,
+      "images": [
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SUSPENDED SLAB CRACK INJECTION - PEMULWAY/IMG_0998.JPG",
+          "targetFilename": "hero.jpg",
+          "purpose": "hero",
+          "dimensions": "1920x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.3M",
+          "captureDate": "2025-11-27",
+          "alt": "Wide-angle view of suspended slab crack injection at Pemulwuy showing comprehensive overhead remediation"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SUSPENDED SLAB CRACK INJECTION - PEMULWAY/IMG_0999.JPG",
+          "targetFilename": "featured.jpg",
+          "purpose": "featured",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.2M",
+          "captureDate": "2025-11-27",
+          "alt": "Close-up detail of suspended slab crack injection technique at Pemulwuy showing precision port placement"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SUSPENDED SLAB CRACK INJECTION - PEMULWAY/IMG_0972.JPG",
+          "targetFilename": "thumbnail.jpg",
+          "purpose": "thumbnail",
+          "dimensions": "800x600",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "alt": "Pemulwuy suspended slab crack injection project thumbnail"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SUSPENDED SLAB CRACK INJECTION - PEMULWAY/IMG_0973.JPG",
+          "targetFilename": "before-01.jpg",
+          "purpose": "before",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "830K",
+          "captureDate": "2025-11-26",
+          "alt": "Before suspended slab injection: Overhead crack requiring specialized injection at Pemulwuy"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SUSPENDED SLAB CRACK INJECTION - PEMULWAY/IMG_1019.JPG",
+          "targetFilename": "after-01.jpg",
+          "purpose": "after",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "900K",
+          "captureDate": "2025-11-27",
+          "alt": "After suspended slab injection: Completed overhead crack repair at Pemulwuy showing restored slab integrity"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SUSPENDED SLAB CRACK INJECTION - PEMULWAY/IMG_1008.JPG",
+          "targetFilename": "gallery-01.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "824K",
+          "captureDate": "2025-11-27",
+          "alt": "Suspended slab crack injection equipment setup at Pemulwuy residential project"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SUSPENDED SLAB CRACK INJECTION - PEMULWAY/IMG_1012.JPG",
+          "targetFilename": "gallery-02.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "876K",
+          "captureDate": "2025-11-27",
+          "alt": "Epoxy injection process in progress for overhead suspended slab crack at Pemulwuy"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SUSPENDED SLAB CRACK INJECTION - PEMULWAY/IMG_1010.JPG",
+          "targetFilename": "gallery-03.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "826K",
+          "captureDate": "2025-11-27",
+          "alt": "Detailed view of suspended slab injection port installation technique at Pemulwuy"
+        }
+      ],
+      "notes": "RECENT PROJECT - 30 JPGs captured Nov 26-27, 2025. Premium quality 1.3M hero. Demonstrates specialized suspended slab crack injection expertise for overhead work. All portrait orientation."
+    },
+    {
+      "name": "Florence & Capri Complex - Structural Alterations",
+      "slug": "florence-capri-complex",
+      "serviceType": "Structural Alterations",
+      "serviceId": "structural-alterations",
+      "sourceFolder": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL ALTERATIONS - FLORENCE AND CARPI WENTWORTHPOINT_",
+      "totalSourceFiles": 20,
+      "images": [
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL ALTERATIONS - FLORENCE AND CARPI WENTWORTHPOINT_/IMG_1361.JPG",
+          "targetFilename": "hero.jpg",
+          "purpose": "hero",
+          "dimensions": "1920x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.2M",
+          "alt": "Wide-angle view of structural alterations at Florence & Capri residential complex in Wentworth Point"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL ALTERATIONS - FLORENCE AND CARPI WENTWORTHPOINT_/IMG_1320.JPG",
+          "targetFilename": "featured.jpg",
+          "purpose": "featured",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "alt": "Close-up detail of precision structural alteration work at Florence & Capri complex"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL ALTERATIONS - FLORENCE AND CARPI WENTWORTHPOINT_/IMG_1322.JPG",
+          "targetFilename": "thumbnail.jpg",
+          "purpose": "thumbnail",
+          "dimensions": "800x600",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "alt": "Florence & Capri structural alterations project thumbnail"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL ALTERATIONS - FLORENCE AND CARPI WENTWORTHPOINT_/IMG_1434.JPG",
+          "targetFilename": "before-01.jpg",
+          "purpose": "before",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "547K",
+          "alt": "Before structural alterations: Original structural configuration at Florence & Capri Wentworth Point"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL ALTERATIONS - FLORENCE AND CARPI WENTWORTHPOINT_/IMG_1438.JPG",
+          "targetFilename": "after-01.jpg",
+          "purpose": "after",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "alt": "After structural alterations: Completed modifications at Florence & Capri residential complex"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL ALTERATIONS - FLORENCE AND CARPI WENTWORTHPOINT_/IMG_1321.JPG",
+          "targetFilename": "gallery-01.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "alt": "Structural alteration planning and preparation at Florence & Capri complex"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL ALTERATIONS - FLORENCE AND CARPI WENTWORTHPOINT_/IMG_1430.JPG",
+          "targetFilename": "gallery-02.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "alt": "Precision structural modification work in progress at Wentworth Point complex"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/STRUCTURAL ALTERATIONS - FLORENCE AND CARPI WENTWORTHPOINT_/IMG_1436.JPG",
+          "targetFilename": "gallery-03.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1015K",
+          "alt": "Advanced structural alteration technique at Florence & Capri residential project"
+        }
+      ],
+      "notes": "RESIDENTIAL COMPLEX - 20 JPGs, 1.2M hero quality. Wentworth Point premium location. Focus on structural alterations service. All portrait orientation."
+    },
+    {
+      "name": "Zetland Surelock System Installation",
+      "slug": "zetland-surelock",
+      "serviceType": "Temporary Moving Joints (Surelock)",
+      "serviceId": "temporary-moving-joints",
+      "sourceFolder": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SURELOCK SYSTEM INSTALLATION - ZETLAND",
+      "totalSourceFiles": 12,
+      "images": [
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SURELOCK SYSTEM INSTALLATION - ZETLAND/IMG_4018.JPG",
+          "targetFilename": "hero.jpg",
+          "purpose": "hero",
+          "dimensions": "1920x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "1.1M",
+          "captureDate": "2024-11-27",
+          "alt": "Wide-angle view of Surelock system installation at Zetland showing temporary moving joint solution"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SURELOCK SYSTEM INSTALLATION - ZETLAND/IMG_4024.JPG",
+          "targetFilename": "featured.jpg",
+          "purpose": "featured",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "1.1M",
+          "captureDate": "2024-11-27",
+          "alt": "Close-up detail of Surelock temporary moving joint system components at Zetland project"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SURELOCK SYSTEM INSTALLATION - ZETLAND/IMG_4027.JPG",
+          "targetFilename": "thumbnail.jpg",
+          "purpose": "thumbnail",
+          "dimensions": "800x600",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "1.1M",
+          "captureDate": "2024-11-27",
+          "alt": "Zetland Surelock system installation project thumbnail"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SURELOCK SYSTEM INSTALLATION - ZETLAND/IMG_4019.JPG",
+          "targetFilename": "before-01.jpg",
+          "purpose": "before",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "837K",
+          "captureDate": "2024-11-27",
+          "alt": "Before Surelock installation: Original joint condition requiring temporary moving joint at Zetland"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SURELOCK SYSTEM INSTALLATION - ZETLAND/IMG_4023.JPG",
+          "targetFilename": "after-01.jpg",
+          "purpose": "after",
+          "dimensions": "1200x800",
+          "sourceResolution": "1536x2048",
+          "sourceSize": "913K",
+          "captureDate": "2024-11-27",
+          "alt": "After Surelock installation: Completed temporary moving joint system at Zetland showing functional solution"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SURELOCK SYSTEM INSTALLATION - ZETLAND/IMG_4020.JPG",
+          "targetFilename": "gallery-01.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "622K",
+          "captureDate": "2024-11-27",
+          "alt": "Surelock system preparation and component layout at Zetland project"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SURELOCK SYSTEM INSTALLATION - ZETLAND/IMG_4021.JPG",
+          "targetFilename": "gallery-02.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "463K",
+          "captureDate": "2024-11-27",
+          "alt": "Surelock temporary moving joint installation in progress at Zetland"
+        },
+        {
+          "sourcePath": "C:/Users/johnn/Documents/Private-work/The Elites/Partnerships/TRD/TRD-content/SURELOCK SYSTEM INSTALLATION - ZETLAND/IMG_4022.JPG",
+          "targetFilename": "gallery-03.jpg",
+          "purpose": "gallery",
+          "dimensions": "1200x800",
+          "sourceResolution": "2048x1536",
+          "sourceSize": "464K",
+          "captureDate": "2024-11-27",
+          "alt": "Detailed view of Surelock system components and installation technique at Zetland"
+        }
+      ],
+      "notes": "SPECIALIZED SYSTEM - 12 JPGs showcasing unique Surelock temporary moving joint service. Minimal but sufficient content for demonstration of specialized capability."
+    }
+  ],
+  "optimization_specs": {
+    "hero": {
+      "width": 1920,
+      "height": 800,
+      "quality": 85,
+      "format": "jpeg"
+    },
+    "featured": {
+      "width": 1200,
+      "height": 800,
+      "quality": 85,
+      "format": "jpeg"
+    },
+    "thumbnail": {
+      "width": 800,
+      "height": 600,
+      "quality": 80,
+      "format": "jpeg"
+    },
+    "gallery": {
+      "width": 1200,
+      "height": 800,
+      "quality": 85,
+      "format": "jpeg"
+    },
+    "before_after": {
+      "width": 1200,
+      "height": 800,
+      "quality": 85,
+      "format": "jpeg"
+    }
+  },
+  "instructions": {
+    "manual_review_required": "IMPORTANT: These image selections are TEMPLATE PLACEHOLDERS based on sequential file order. You MUST manually review all source images and update sourcePath values to point to the best quality images for each purpose.",
+    "selection_criteria": {
+      "hero": "Wide-angle, dramatic, shows completed work, good composition, 1920px+ width",
+      "featured": "Close-up technical detail, clear subject, shows technique/quality",
+      "before": "Clear documentation of problem/condition before work",
+      "after": "Matching angle to before image, shows completed repair/work",
+      "gallery": "Variety of phases, techniques, perspectives - tell project story"
+    },
+    "alt_text_guidelines": "50-125 characters, descriptive, include service type and location, avoid 'image of' or 'photo of' prefix",
+    "next_steps": [
+      "1. Manually review all source images in each project folder",
+      "2. Update sourcePath values to point to best images for each purpose",
+      "3. Verify alt text is descriptive and SEO-optimized",
+      "4. Add remaining 9 projects (Waitara, Kingswood, Zetland, Northbridge, Florence & Capri, Marsden Park 1 & 2, Coles, Toongabie, Jacaranda)",
+      "5. Run optimize-images.js to process and optimize all selected images",
+      "6. Run copy-project-images.js to copy images to public/images/ directories",
+      "7. Run generate-alt-text-suggestions.js to verify alt text coverage",
+      "8. Run verify-alt-text.js to ensure all images have proper alt text"
+    ]
+  }
+}

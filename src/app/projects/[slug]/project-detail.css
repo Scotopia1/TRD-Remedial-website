@@ -292,4 +292,40 @@
     flex-direction: column;
     width: 100%;
   }
+
+  .project-gallery {
+    padding: 4rem 0 6rem 0;
+  }
+
+  .project-gallery .project-content-wide {
+    width: 100%;
+    padding: 0 5%;
+    box-sizing: border-box;
+  }
+
+  .project-gallery .section-title {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+  }
+}
+
+/* Project Gallery Section */
+.project-gallery {
+  background: var(--concrete-800);
+  width: 100%;
+  overflow-x: hidden;
+  padding: 6rem 0 8rem 0;
+}
+
+.project-gallery .project-content-wide {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.project-gallery .section-title {
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
 }
