@@ -188,14 +188,29 @@
    ============================================ */
 @media (max-width: 1000px) {
   /* Keep horizontal scroll on mobile - just adjust sizing */
+  .feedback-scroll-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .feedback-scroll-wrapper {
+    position: static;
+    height: auto;
+    min-height: calc(100svh - 10rem); /* Leave space for top/bottom bars */
+    flex: 1;
+  }
+
   .feedback-card {
     padding: 2rem 1rem;
+    height: auto;
+    min-height: auto;
   }
 
   .feedback-card-content {
-    width: 80%;
+    width: 85%;
     max-width: 600px;
-    padding: 2.5rem 1.5rem;
+    padding: 2rem 1.5rem;
+    margin: 2rem auto;
   }
 
   /* Typography - Mobile */
@@ -213,6 +228,20 @@
   }
 
   /* Decorative Bars - Mobile */
+  .feedback-top-bar,
+  .feedback-bottom-bar {
+    position: relative;
+    background-color: var(--concrete-100);
+  }
+
+  .feedback-top-bar {
+    border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+  }
+
+  .feedback-bottom-bar {
+    border-top: 1px solid rgba(26, 26, 26, 0.1);
+  }
+
   .feedback-top-bar-content,
   .feedback-bottom-bar-content {
     padding: 1rem;
@@ -230,26 +259,40 @@
   .feedback-progress-bar {
     width: 30%;
     min-width: 200px;
-    bottom: 2rem;
+    bottom: 5.5rem; /* Position above the bottom bar */
   }
 }
 
 @media (max-width: 640px) {
   .feedback-card-content {
-    padding: 2rem 1rem;
+    width: 90%;
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+    margin: 1rem auto;
   }
 
   .feedback-copy p {
-    font-size: 1.125rem;
+    font-size: 1rem;
+    line-height: 1.5;
   }
 
   .feedback-author h4 {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
+  }
+
+  .feedback-author p.mono {
+    font-size: 0.7rem;
   }
 
   .feedback-quote-icon svg {
     width: 40px;
     height: 40px;
+  }
+
+  /* Ensure progress bar stays above bottom bar on small screens */
+  .feedback-progress-bar {
+    bottom: 4.5rem;
+    min-width: 150px;
   }
 }
 
