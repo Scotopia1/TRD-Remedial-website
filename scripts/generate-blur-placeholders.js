@@ -1,114 +1,166 @@
-const sharp = require('sharp');
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
+const sharp = require('sharp');
 
 /**
- * Generates Low Quality Image Placeholders (LQIP) for all optimized images
- * Creates 10px wide base64-encoded blur placeholders for 0 CLS (Cumulative Layout Shift)
+ * Generate Low Quality Image Placeholder (LQIP) for zero CLS
+ * @param {string} imagePath - Absolute path to image file
+ * @returns {Promise<string>} Base64 data URI
  */
-
 async function generateBlurPlaceholder(imagePath) {
   try {
     const buffer = await sharp(imagePath)
-      .resize(10) // 10px width, height auto-calculated
-      .blur(2) // Blur for LQIP effect
-      .jpeg({ quality: 50 }) // Low quality for small file size
+      .resize(10, null, {
+        fit: 'inside',
+        withoutEnlargement: true
+      })
+      .jpeg({
+        quality: 50,
+        mozjpeg: true
+      })
       .toBuffer();
 
-    const base64 = `data:image/jpeg;base64,${buffer.toString('base64')}`;
-    return base64;
+    const base64 = buffer.toString('base64');
+    return `data:image/jpeg;base64,${base64}`;
   } catch (error) {
-    console.error(`✗ Error generating placeholder for ${path.basename(imagePath)}:`, error.message);
+    console.error(`✗ Failed to process ${path.basename(imagePath)}:`, error.message);
     return null;
   }
 }
 
-async function generateAllPlaceholders() {
-  const projectsDir = path.join(__dirname, '..', 'public', 'images', 'projects');
-  const blurPlaceholdersPath = path.join(__dirname, '..', 'src', 'data', 'blurPlaceholders.json');
+/**
+ * Recursively get all image files from a directory
+ * @param {string} dir - Directory path
+ * @returns {Promise<string[]>} Array of image file paths
+ */
+async function getImageFiles(dir) {
+  const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp'];
+  const files = [];
 
-  // Initialize or load existing placeholders
-  let placeholders = {};
-  if (fs.existsSync(blurPlaceholdersPath)) {
-    placeholders = JSON.parse(fs.readFileSync(blurPlaceholdersPath, 'utf8'));
-    console.log(`Loaded existing placeholders file with ${Object.keys(placeholders).length} entries\n`);
-  }
+  try {
+    const entries = await fs.readdir(dir, { withFileTypes: true });
 
-  // Get all project directories
-  const projectDirs = fs.readdirSync(projectsDir, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => dirent.name);
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
 
-  let generatedCount = 0;
-  let skippedCount = 0;
-  let errorCount = 0;
-
-  console.log(`Processing ${projectDirs.length} project directories...\n`);
-
-  for (const projectSlug of projectDirs) {
-    const projectPath = path.join(projectsDir, projectSlug);
-    const imageFiles = fs.readdirSync(projectPath).filter(file => file.endsWith('.jpg'));
-
-    if (imageFiles.length === 0) {
-      console.log(`⊘ ${projectSlug}: No images found, skipping...`);
-      continue;
-    }
-
-    console.log(`📦 ${projectSlug} (${imageFiles.length} images):`);
-
-    for (const imageFile of imageFiles) {
-      const imagePath = path.join(projectPath, imageFile);
-      const placeholderKey = `/images/projects/${projectSlug}/${imageFile}`;
-
-      // Skip if placeholder already exists
-      if (placeholders[placeholderKey]) {
-        console.log(`  ⊘ ${imageFile}: Placeholder exists, skipping...`);
-        skippedCount++;
-        continue;
-      }
-
-      // Generate placeholder
-      const placeholder = await generateBlurPlaceholder(imagePath);
-
-      if (placeholder) {
-        placeholders[placeholderKey] = placeholder;
-        console.log(`  ✓ ${imageFile}: Placeholder generated`);
-        generatedCount++;
-      } else {
-        console.log(`  ✗ ${imageFile}: Failed to generate placeholder`);
-        errorCount++;
+      if (entry.isDirectory()) {
+        const subFiles = await getImageFiles(fullPath);
+        files.push(...subFiles);
+      } else if (imageExtensions.includes(path.extname(entry.name).toLowerCase())) {
+        files.push(fullPath);
       }
     }
-
-    console.log('');
+  } catch (error) {
+    console.error(`✗ Failed to read directory ${dir}:`, error.message);
   }
 
-  // Save updated placeholders
-  fs.writeFileSync(
-    blurPlaceholdersPath,
-    JSON.stringify(placeholders, null, 2),
-    'utf8'
-  );
+  return files;
+}
 
-  console.log('═══════════════════════════════════════════════════════════');
-  console.log('BLUR PLACEHOLDER GENERATION COMPLETE');
-  console.log('═══════════════════════════════════════════════════════════');
-  console.log(`✓ Generated:  ${generatedCount} new placeholders`);
-  console.log(`⊘ Skipped:    ${skippedCount} existing placeholders`);
-  console.log(`✗ Errors:     ${errorCount} failed generations`);
-  console.log(`📊 Total:      ${Object.keys(placeholders).length} placeholders in database`);
-  console.log(`💾 Saved to:   ${blurPlaceholdersPath}`);
-  console.log('═══════════════════════════════════════════════════════════\n');
+/**
+ * Extract project slug and image name from file path
+ * @param {string} filePath - Full file path
+ * @param {string} baseDir - Base directory path
+ * @returns {{projectSlug: string, imageName: string}}
+ */
+function parseImagePath(filePath, baseDir) {
+  const relativePath = path.relative(baseDir, filePath);
+  const parts = relativePath.split(path.sep);
 
-  // Show sample placeholder
-  const sampleKey = Object.keys(placeholders)[0];
-  if (sampleKey) {
-    const samplePlaceholder = placeholders[sampleKey];
-    const sampleSize = Buffer.from(samplePlaceholder.split(',')[1], 'base64').length;
-    console.log(`Sample placeholder: ${sampleKey}`);
-    console.log(`Sample size: ${(sampleSize / 1024).toFixed(2)} KB`);
-    console.log(`Sample data: ${samplePlaceholder.substring(0, 100)}...`);
+  return {
+    projectSlug: parts[0],
+    imageName: path.basename(filePath, path.extname(filePath))
+  };
+}
+
+/**
+ * Main function to generate all blur placeholders
+ */
+async function main() {
+  console.log('🖼️  TRD Blur Placeholder Generator\n');
+  console.log('━'.repeat(50));
+
+  const projectRoot = path.join(__dirname, '..');
+  const imagesDir = path.join(projectRoot, 'public', 'images', 'projects');
+  const outputPath = path.join(projectRoot, 'src', 'data', 'blurPlaceholders.json');
+
+  // Check if images directory exists
+  try {
+    await fs.access(imagesDir);
+  } catch (error) {
+    console.error(`✗ Images directory not found: ${imagesDir}`);
+    process.exit(1);
+  }
+
+  // Get all image files
+  console.log(`📂 Scanning: ${imagesDir}\n`);
+  const imageFiles = await getImageFiles(imagesDir);
+
+  if (imageFiles.length === 0) {
+    console.log('⚠️  No images found');
+    process.exit(0);
+  }
+
+  console.log(`Found ${imageFiles.length} images\n`);
+  console.log('━'.repeat(50) + '\n');
+
+  // Generate placeholders
+  const placeholders = {
+    projects: {}
+  };
+
+  let successCount = 0;
+  let failCount = 0;
+
+  for (const imagePath of imageFiles) {
+    const { projectSlug, imageName } = parseImagePath(imagePath, imagesDir);
+
+    const placeholder = await generateBlurPlaceholder(imagePath);
+
+    if (placeholder) {
+      if (!placeholders.projects[projectSlug]) {
+        placeholders.projects[projectSlug] = {};
+      }
+      placeholders.projects[projectSlug][imageName] = placeholder;
+      console.log(`✓ Generated placeholder for: ${projectSlug}/${imageName}`);
+      successCount++;
+    } else {
+      console.log(`✗ Failed: ${projectSlug}/${imageName}`);
+      failCount++;
+    }
+  }
+
+  // Ensure output directory exists
+  const outputDir = path.dirname(outputPath);
+  try {
+    await fs.mkdir(outputDir, { recursive: true });
+  } catch (error) {
+    console.error(`✗ Failed to create output directory: ${error.message}`);
+    process.exit(1);
+  }
+
+  // Write output file
+  try {
+    await fs.writeFile(
+      outputPath,
+      JSON.stringify(placeholders, null, 2),
+      'utf8'
+    );
+    console.log('\n' + '━'.repeat(50));
+    console.log(`\n✅ Success! Generated ${successCount} placeholders`);
+    if (failCount > 0) {
+      console.log(`⚠️  Failed: ${failCount} images`);
+    }
+    console.log(`\n📄 Output: ${outputPath}`);
+    console.log('\n' + '━'.repeat(50));
+  } catch (error) {
+    console.error(`\n✗ Failed to write output file: ${error.message}`);
+    process.exit(1);
   }
 }
 
-generateAllPlaceholders().catch(console.error);
+// Run script
+main().catch(error => {
+  console.error('\n💥 Script failed:', error);
+  process.exit(1);
+});

@@ -9,17 +9,35 @@ async function optimizeImage(inputPath, outputPath, width, height, quality = 85)
       fs.mkdirSync(dir, { recursive: true });
     }
 
+    // Get base filename without extension
+    const ext = path.extname(outputPath);
+    const baseOutputPath = outputPath.slice(0, -ext.length);
+
+    // Generate WebP version
+    const webpPath = `${baseOutputPath}.webp`;
+    await sharp(inputPath)
+      .resize(width, height, {
+        fit: 'cover',
+        position: 'center'
+      })
+      .webp({ quality })
+      .toFile(webpPath);
+
+    // Generate JPEG version
+    const jpgPath = `${baseOutputPath}.jpg`;
     await sharp(inputPath)
       .resize(width, height, {
         fit: 'cover',
         position: 'center'
       })
       .jpeg({ quality, mozjpeg: true })
-      .toFile(outputPath);
+      .toFile(jpgPath);
 
-    console.log(`✓ Optimized: ${path.basename(outputPath)}`);
+    console.log(`✓ Optimized: ${path.basename(baseOutputPath)} (WebP + JPG)`);
+    return { webp: webpPath, jpg: jpgPath };
   } catch (error) {
     console.error(`✗ Error optimizing ${inputPath}:`, error.message);
+    return null;
   }
 }
 

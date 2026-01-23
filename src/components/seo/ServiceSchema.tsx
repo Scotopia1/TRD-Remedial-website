@@ -22,8 +22,19 @@ export function ServiceSchema({ service }: ServiceSchemaProps) {
     "serviceType": service.title,
     "name": service.title,
     "description": service.description,
+    "additionalType": "https://schema.org/ProfessionalService",
     "provider": {
-      "@id": `${SITE_URL}/#organization`
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      "name": "TRD Remedial",
+      "telephone": "+61414727167",
+      "url": "https://thetrdgroup.com.au",
+      "logo": "https://thetrdgroup.com.au/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "NSW",
+        "addressCountry": "AU"
+      }
     },
     "areaServed": {
       "@type": "State",
@@ -37,7 +48,20 @@ export function ServiceSchema({ service }: ServiceSchemaProps) {
         "@type": "Language",
         "name": "English"
       }
-    }
+    },
+    "keywords": [service.title, "Sydney", "NSW"],
+    "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "priceCurrency": "AUD",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "priceCurrency": "AUD"
+      }
+    },
+    ...(service.heroImage && {
+      "image": service.heroImage
+    })
   };
 
   return (

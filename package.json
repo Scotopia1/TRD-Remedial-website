@@ -10,7 +10,10 @@
     "test:responsive": "playwright test",
     "test:responsive:ui": "playwright test --ui",
     "test:responsive:headed": "playwright test --headed",
-    "test:overflow": "node tests/animation-overflow-check.js"
+    "test:overflow": "node tests/animation-overflow-check.js",
+    "validate:services": "node scripts/validate-service-schema.js",
+    "verify:service-faqs": "node scripts/verify-service-faqs.js",
+    "generate:placeholders": "node scripts/generate-blur-placeholders.js"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

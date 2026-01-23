@@ -4,11 +4,19 @@ import Link from 'next/link';
 import { AnimatedH1 } from '@/components/animations/AnimatedH1';
 import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
 import { ParallaxImage } from '@/components/animations/ParallaxImage';
+import { ProjectCard } from '@/components/ui/ProjectCard';
+import { FAQItem } from '@/components/ui/FAQItem';
+import { ServiceCard } from '@/components/ui/ServiceCard';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { useStore } from '@/stores/useStore';
 import type { Service } from '@/data/services';
+import { PROJECTS } from '@/data/projects';
+import { SERVICES } from '@/data/services';
+import { useRouter } from 'next/navigation';
 
 export function ServiceDetailClient({ service }: { service: Service }) {
   const setCursorVariant = useStore((state) => state.setCursorVariant);
+  const router = useRouter();
 
   return (
     <div className="service-detail-page">
@@ -32,6 +40,17 @@ export function ServiceDetailClient({ service }: { service: Service }) {
           </div>
         </div>
       </section>
+
+      {/* Breadcrumbs Navigation */}
+      <div className="breadcrumbs-container">
+        <Breadcrumbs
+          items={[
+            { label: 'Home', href: '/' },
+            { label: 'Services', href: '/services' },
+            { label: service.title }
+          ]}
+        />
+      </div>
 
       {/* 2. Overview Section */}
       <section className="service-section service-overview">
@@ -142,6 +161,123 @@ export function ServiceDetailClient({ service }: { service: Service }) {
                   <AnimatedCopy delay={i * 0.1 + 0.1} tag="p" className="step-description">
                     {step.description}
                   </AnimatedCopy>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Related Case Studies */}
+      {service.relatedProjects && service.relatedProjects.length > 0 && (
+        <section className="service-section service-case-studies">
+          <div className="service-content">
+            <AnimatedH1 animateOnScroll={true} className="section-title">
+              Featured Case Studies
+            </AnimatedH1>
+            <div className="case-studies-grid">
+              {service.relatedProjects.slice(0, 3).map((projectId, i) => {
+                const project = PROJECTS.find(p => p.id === projectId);
+                if (!project) return null;
+
+                return (
+                  <ProjectCard
+                    key={projectId}
+                    project={project}
+                    index={i}
+                  />
+                );
+              })}
+            </div>
+            <Link
+              href="/projects"
+              className="button-secondary"
+              style={{ marginTop: '2rem', display: 'inline-block' }}
+              onMouseEnter={() => setCursorVariant('link')}
+              onMouseLeave={() => setCursorVariant('default')}
+            >
+              View All Projects
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* Complementary Services */}
+      {service.relatedServices && service.relatedServices.length > 0 && (
+        <section className="service-section service-related">
+          <div className="service-content">
+            <AnimatedH1 animateOnScroll={true} className="section-title">
+              You Might Also Need
+            </AnimatedH1>
+            <div className="related-services-grid">
+              {service.relatedServices.map((serviceSlug, i) => {
+                const relatedService = SERVICES.find(s => s.slug === serviceSlug);
+                if (!relatedService) return null;
+
+                return (
+                  <ServiceCard
+                    key={serviceSlug}
+                    service={relatedService}
+                    onClick={() => router.push(`/services/${serviceSlug}`)}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* FAQs */}
+      {service.faqs && service.faqs.length > 0 && (
+        <section className="service-section service-faqs">
+          <div className="service-content">
+            <AnimatedH1 animateOnScroll={true} className="section-title">
+              Frequently Asked Questions
+            </AnimatedH1>
+            <div className="faq-list">
+              {service.faqs.map((faq, i) => (
+                <FAQItem
+                  key={i}
+                  question={faq.question}
+                  answer={faq.answer}
+                  index={i}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Client Testimonials */}
+      {service.testimonials && service.testimonials.length > 0 && (
+        <section className="service-section service-testimonials">
+          <div className="service-content">
+            <AnimatedH1 animateOnScroll={true} className="section-title">
+              What Our Clients Say
+            </AnimatedH1>
+            <div className="testimonials-carousel">
+              {service.testimonials.map((testimonial, i) => (
+                <div key={i} className="testimonial-card">
+                  <div className="testimonial-quote">
+                    <span className="quote-mark">"</span>
+                    <AnimatedCopy delay={i * 0.1} tag="p" className="testimonial-text">
+                      {testimonial.quote}
+                    </AnimatedCopy>
+                    <span className="quote-mark">"</span>
+                  </div>
+                  <div className="testimonial-author">
+                    <AnimatedCopy delay={i * 0.1 + 0.05} tag="p" className="author-name">
+                      {testimonial.author}
+                    </AnimatedCopy>
+                    <AnimatedCopy delay={i * 0.1 + 0.1} tag="p" className="author-role">
+                      {testimonial.role} - {testimonial.company}
+                    </AnimatedCopy>
+                    {testimonial.projectType && (
+                      <AnimatedCopy delay={i * 0.1 + 0.15} tag="p" className="author-project">
+                        {testimonial.projectType}
+                      </AnimatedCopy>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

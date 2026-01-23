@@ -16,15 +16,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   const description = `${project.tagline} - ${project.challenge.substring(0, 120)}...`;
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://thetrdgroup.com.au';
+  const canonicalUrl = `${baseUrl}/projects/${slug}`;
 
   return {
     title: `${project.name} | TRD Remedial Case Study`,
     description: description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: project.name,
       description: project.tagline,
       images: [{ url: project.heroImage, width: 1920, height: 800, alt: project.name }],
       type: 'website',
+      url: canonicalUrl,
     },
     twitter: {
       card: 'summary_large_image',
