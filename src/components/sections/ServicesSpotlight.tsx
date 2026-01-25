@@ -33,6 +33,15 @@ const ServicesSpotlight = () => {
   // CGMWTAUG2025 pattern: Mobile detection for conditional ScrollTrigger
   const [isMobileDevice, setIsMobileDevice] = useState(false);
 
+  // Track hydration state to prevent DOM manipulation during React hydration
+  const [isHydrated, setIsHydrated] = useState(false);
+  const hasInitializedRef = useRef(false);
+
+  // Wait for hydration before DOM manipulation
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
   // Check mobile on mount and resize
   useEffect(() => {
     const checkMobile = () => {
@@ -68,6 +77,11 @@ const ServicesSpotlight = () => {
   }));
 
   useEffect(() => {
+    // Wait for hydration and prevent duplicate initialization
+    if (!isHydrated || hasInitializedRef.current) {
+      return;
+    }
+
     gsap.registerPlugin(ScrollTrigger);
 
     const initializeSpotlight = () => {
@@ -87,8 +101,8 @@ const ServicesSpotlight = () => {
         return false;
       }
 
-      // Clear and rebuild title elements only if not already initialized
-      // This prevents DOM conflicts during React re-renders
+      // Clear and rebuild title elements only once after hydration
+      // This prevents DOM conflicts during React hydration
       if (titlesContainer.children.length !== spotlightItems.length) {
         titlesContainer.innerHTML = "";
 
@@ -104,6 +118,9 @@ const ServicesSpotlight = () => {
           };
           titlesContainer.appendChild(titleElement);
         });
+
+        // Mark as initialized to prevent duplicate runs
+        hasInitializedRef.current = true;
       }
 
       const titleElements = titlesContainer.querySelectorAll("h1");
@@ -566,8 +583,11 @@ const ServicesSpotlight = () => {
       if (titleElementsRef.current) {
         titleElementsRef.current = null;
       }
+
+      // Reset initialization flag on cleanup
+      hasInitializedRef.current = false;
     };
-  }, [isMobileDevice]); // Re-run when mobile state changes
+  }, [isHydrated, isMobileDevice]); // Re-run when hydration or mobile state changes
 
   return (
     <section className="services-spotlight" ref={spotlightRef}>
