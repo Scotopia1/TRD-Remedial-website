@@ -96,12 +96,15 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  height: 100%; /* Ensure full height of parent */
+  min-height: 600px; /* Minimum height for consistent display */
 }
 
 .mission-intro-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Cover the frame while maintaining aspect ratio */
+  object-position: center; /* Center the image in the frame */
   filter: grayscale(100%) brightness(0.9) contrast(1.1);
 }
 

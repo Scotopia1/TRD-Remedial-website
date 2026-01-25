@@ -6,12 +6,10 @@ import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
 import { ParallaxImage } from '@/components/animations/ParallaxImage';
 import { ProjectCard } from '@/components/ui/ProjectCard';
 import { FAQItem } from '@/components/ui/FAQItem';
-import { ServiceCard } from '@/components/ui/ServiceCard';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { useStore } from '@/stores/useStore';
 import type { Service } from '@/data/services';
 import { PROJECTS } from '@/data/projects';
-import { SERVICES } from '@/data/services';
 import { useRouter } from 'next/navigation';
 
 export function ServiceDetailClient({ service }: { service: Service }) {
@@ -198,31 +196,6 @@ export function ServiceDetailClient({ service }: { service: Service }) {
             >
               View All Projects
             </Link>
-          </div>
-        </section>
-      )}
-
-      {/* Complementary Services */}
-      {service.relatedServices && service.relatedServices.length > 0 && (
-        <section className="service-section service-related">
-          <div className="service-content">
-            <AnimatedH1 animateOnScroll={true} className="section-title">
-              You Might Also Need
-            </AnimatedH1>
-            <div className="related-services-grid">
-              {service.relatedServices.map((serviceSlug, i) => {
-                const relatedService = SERVICES.find(s => s.slug === serviceSlug);
-                if (!relatedService) return null;
-
-                return (
-                  <ServiceCard
-                    key={serviceSlug}
-                    service={relatedService}
-                    onClick={() => router.push(`/services/${serviceSlug}`)}
-                  />
-                );
-              })}
-            </div>
           </div>
         </section>
       )}

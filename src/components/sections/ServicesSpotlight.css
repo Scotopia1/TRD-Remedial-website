@@ -297,8 +297,10 @@
 
   .spotlight-img {
     display: block !important;
-    width: 140px;
-    height: 105px;
+    width: 180px;
+    height: 135px;  /* Maintain 4:3 aspect ratio - increased for better visibility */
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);  /* Force GPU acceleration */
   }
 }
 
@@ -314,8 +316,8 @@
 
   .spotlight-img {
     display: block !important;
-    width: 100px;
-    height: 75px;
+    width: 160px;   /* Slightly smaller on very small screens */
+    height: 120px;  /* Maintain 4:3 aspect ratio */
   }
 
   /* Adjust intro text for small screens */

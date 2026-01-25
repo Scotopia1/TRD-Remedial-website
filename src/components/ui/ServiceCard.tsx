@@ -36,42 +36,39 @@ export function ServiceCard({ service, onClick }: ServiceCardProps) {
             }}
           >
             <div className="h-full flex flex-col justify-end p-6">
-              {/* Service Icon */}
-              <div className="mb-4 w-16 h-16 bg-white/10 backdrop-blur-sm rounded-xl
-                           flex items-center justify-center">
-                <div className="text-3xl">
-                  {/* Placeholder emoji - replace with actual icon */}
-                  {service.id === 'structural-remedial' && '🔨'}
-                  {service.id === 'concrete-cutting' && '⚙️'}
-                  {service.id === 'carbon-fibre' && '🧬'}
-                  {service.id === 'slab-scanning' && '📡'}
-                  {service.id === 'safety-fixtures' && '🛡️'}
-                  {service.id === 'carpark-solutions' && '🚗'}
-                </div>
-              </div>
-
-              <h3 className="text-2xl font-bold text-white mb-2">
+              <h3 className="text-sm font-bold text-white mb-3 uppercase leading-tight">
                 {service.title}
               </h3>
-              <p className="text-white/80 text-sm">
-                {service.description}
-              </p>
 
-              <div className="mt-4 text-trd-accent font-semibold flex items-center">
-                Learn More
-                <svg
-                  className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
+              {/* Features List */}
+              {service.features && service.features.length > 0 && (
+                <ul className="mb-4 space-y-1">
+                  {service.features.slice(0, 4).map((feature, idx) => (
+                    <li key={idx} className="text-white/90 text-sm">
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              <div className="mt-auto pt-4">
+                <div className="inline-flex items-center text-trd-accent font-semibold text-sm
+                             px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
+                  View Details
+                  <svg
+                    className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
@@ -82,7 +79,7 @@ export function ServiceCard({ service, onClick }: ServiceCardProps) {
           <div className="h-full rounded-2xl bg-gradient-to-br from-trd-primary to-industrial-800
                        shadow-lg p-6 flex flex-col justify-between">
             <div>
-              <h3 className="text-xl font-bold text-white mb-4">
+              <h3 className="text-sm font-bold text-white mb-4">
                 {service.title}
               </h3>
               <ul className="space-y-2">

@@ -59,9 +59,10 @@ export function BackedByStrengthStudio() {
       <section className="mission-intro">
         <div className="mission-intro-col-sm">
           <img
-            src="https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=600&h=800&fit=crop"
-            alt="Structural reinforcement work"
+            src="/images/projects/northbridge-structural-wall/gallery-05.jpg"
+            alt="TRD structural wall reinforcement project at Northbridge"
             className="mission-intro-image"
+            loading="lazy"
           />
         </div>
         <div className="mission-intro-col-lg">

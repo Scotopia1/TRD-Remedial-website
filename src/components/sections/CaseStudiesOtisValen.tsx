@@ -49,21 +49,23 @@ export function CaseStudiesOtisValen() {
     gsap.set(".cs-profile-icon", { scale: 0 });
     gsap.set(".cs-circular-btn-wrapper", { scale: 0, opacity: 0 });
 
-    const introText = new SplitText(".cs-header-content > p", {
-      type: "lines",
-      linesClass: "line-wrapper",
-    });
+    // Wait for fonts to load before splitting text
+    document.fonts.ready.then(() => {
+      const introText = new SplitText(".cs-header-content > p", {
+        type: "lines",
+        linesClass: "line-wrapper",
+      });
 
-    const titleText = new SplitText(".cs-header-title h1", {
-      type: "lines",
-      linesClass: "line-wrapper",
-    });
+      const titleText = new SplitText(".cs-header-title h1", {
+        type: "lines",
+        linesClass: "line-wrapper",
+      });
 
-    gsap.set([introText.lines, titleText.lines], {
-      y: "120%",
-    });
+      gsap.set([introText.lines, titleText.lines], {
+        y: "120%",
+      });
 
-    const headerTl = gsap.timeline({ delay: 0.75 });
+      const headerTl = gsap.timeline({ delay: 0.75 });
 
     headerTl.to(".cs-profile-icon", {
       scale: 1,
@@ -92,20 +94,26 @@ export function CaseStudiesOtisValen() {
       "-=0.9"
     );
 
-    headerTl.to(
-      ".cs-circular-btn-wrapper",
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 0.75,
-        ease: "power4.out",
-      },
-      "-=0.9"
-    );
+      headerTl.to(
+        ".cs-circular-btn-wrapper",
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.75,
+          ease: "power4.out",
+        },
+        "-=0.9"
+      );
+    }); // Close document.fonts.ready promise
 
     return () => {
-      introText.revert();
-      titleText.revert();
+      // Cleanup function will only run if fonts are loaded
+      document.fonts.ready.then(() => {
+        const introText = document.querySelector(".cs-header-content > p");
+        const titleText = document.querySelector(".cs-header-title h1");
+        if (introText) gsap.set(introText, { clearProps: "all" });
+        if (titleText) gsap.set(titleText, { clearProps: "all" });
+      });
     };
   }, { scope: headerContentRef });
 

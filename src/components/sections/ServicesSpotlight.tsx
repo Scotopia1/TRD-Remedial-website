@@ -45,11 +45,18 @@ const ServicesSpotlight = () => {
   }, []);
 
   // Configuration for synchronized title and image timing
-  // Adjusted for perfect alignment when title reaches "OUR SERVICES" position
-  const config = {
+  // Desktop config - Adjusted for perfect alignment when title reaches "OUR SERVICES" position
+  const desktopConfig = {
     gap: 0.12,        // Increased gap for better spacing between service reveals
     speed: 0.4,       // Longer duration for smoother image transitions
     arcRadius: 500,   // Maintained from reference
+  };
+
+  // Mobile config - Optimized for smaller screens with very tight arc
+  const mobileConfig = {
+    gap: 0.08,        // Same as CGMWTAUG2025 standard - faster progression
+    speed: 0.3,       // Balanced animation duration for mobile
+    arcRadius: 40,    // Very tight arc to keep images close to text and fully on-screen
   };
 
   // Convert TRD services to spotlight items
@@ -80,21 +87,24 @@ const ServicesSpotlight = () => {
         return false;
       }
 
-      // Clear and rebuild title elements only (images are React-rendered)
-      titlesContainer.innerHTML = "";
+      // Clear and rebuild title elements only if not already initialized
+      // This prevents DOM conflicts during React re-renders
+      if (titlesContainer.children.length !== spotlightItems.length) {
+        titlesContainer.innerHTML = "";
 
-      // Create title elements for each service
-      spotlightItems.forEach((item, index) => {
-        // Create title element
-        const titleElement = document.createElement("h1");
-        titleElement.textContent = item.name;
-        if (index === 0) titleElement.style.opacity = "1";
-        titleElement.style.cursor = "pointer";
-        titleElement.onclick = () => {
-          window.location.href = `/services/${SERVICES[index].slug}`;
-        };
-        titlesContainer.appendChild(titleElement);
-      });
+        // Create title elements for each service
+        spotlightItems.forEach((item, index) => {
+          // Create title element
+          const titleElement = document.createElement("h1");
+          titleElement.textContent = item.name;
+          if (index === 0) titleElement.style.opacity = "1";
+          titleElement.style.cursor = "pointer";
+          titleElement.onclick = () => {
+            window.location.href = `/services/${SERVICES[index].slug}`;
+          };
+          titlesContainer.appendChild(titleElement);
+        });
+      }
 
       const titleElements = titlesContainer.querySelectorAll("h1");
       titleElementsRef.current = titleElements;
@@ -135,45 +145,69 @@ const ServicesSpotlight = () => {
     const titleElements = titleElementsRef.current;
     let currentActiveIndex = 0;
 
-    // Bezier curve calculations for image movement (responsive)
-    const isMobile = window.innerWidth < 1000;
-    const containerWidth = isMobile ? window.innerWidth * 0.5 : window.innerWidth * 0.3;
-    const containerHeight = window.innerHeight;
-    // On mobile: push images further right to avoid text collision
-    const arcStartX = isMobile ? containerWidth + 20 : containerWidth - 220;
-    const arcStartY = -200;
-    const arcEndY = containerHeight + 200;
-    const arcRadius = isMobile ? 150 : config.arcRadius;
-    const arcControlPointX = arcStartX + arcRadius;
-    const arcControlPointY = containerHeight / 2;
-
     /**
      * Calculate position along quadratic Bezier curve
      * Creates the smooth arc motion for service images
+     * @param t - Progress value 0-1 along the curve
+     * @param isMobile - Whether to use mobile-optimized arc
      */
-    function getBezierPosition(t: number) {
-      const x =
-        (1 - t) * (1 - t) * arcStartX +
-        2 * (1 - t) * t * arcControlPointX +
-        t * t * arcStartX;
-      const y =
-        (1 - t) * (1 - t) * arcStartY +
-        2 * (1 - t) * t * arcControlPointY +
-        t * t * arcEndY;
+    function getBezierPosition(t: number, isMobile: boolean = false) {
+      const config = isMobile ? mobileConfig : desktopConfig;
+      const containerWidth = window.innerWidth;
+      const containerHeight = window.innerHeight;
+
+      // Mobile arc: very compact positioning to keep images fully visible
+      // Position images safely within viewport with generous margins
+      const imageSize = containerWidth <= 640 ? 160 : 180;
+      const safeMargin = 30; // 30px padding from edge
+      const arcRadiusMargin = config.arcRadius; // Account for curve bulge
+
+      const arcStartX = isMobile
+        ? Math.min(
+            containerWidth * 0.45,                                    // 45% of viewport (more centered)
+            containerWidth - imageSize - safeMargin - arcRadiusMargin // Full image + margin + curve
+          )
+        : containerWidth * 0.9;
+
+      const arcStartY = isMobile
+        ? -150                   // Start slightly above viewport
+        : -200;
+
+      const arcEndY = isMobile
+        ? containerHeight + 150  // End slightly below viewport
+        : containerHeight + 200;
+
+      const controlPointX = arcStartX + config.arcRadius;
+      const controlPointY = containerHeight / 2;
+
+      // Quadratic Bezier formula
+      const x = (1 - t) * (1 - t) * arcStartX +
+                2 * (1 - t) * t * controlPointX +
+                t * t * arcStartX;
+
+      const y = (1 - t) * (1 - t) * arcStartY +
+                2 * (1 - t) * t * controlPointY +
+                t * t * arcEndY;
+
       return { x, y };
     }
 
     /**
      * Calculate progress state for individual image
      * Returns -1 (before), 0-1 (animating), or 2 (after)
+     * @param index - Index of the image/service
+     * @param overallProgress - Overall scroll progress 0-1
+     * @param isMobile - Whether to use mobile timing configuration
      */
-    function getImgProgressState(index: number, overallProgress: number) {
-      const startTime = index * config.gap;
-      const endTime = startTime + config.speed;
+    function getImgProgressState(index: number, overallProgress: number, isMobile: boolean = false) {
+      const config = isMobile ? mobileConfig : desktopConfig;
+      const startTime = index * config.gap;      // Each image starts staggered
+      const endTime = startTime + config.speed;   // Animation duration
 
-      if (overallProgress < startTime) return -1;
-      if (overallProgress > endTime) return 2;
+      if (overallProgress < startTime) return -1;  // Not started
+      if (overallProgress > endTime) return 2;     // Finished (hidden)
 
+      // Return normalized progress 0-1 for Bezier calculation
       return (overallProgress - startTime) / config.speed;
     }
 
@@ -286,15 +320,16 @@ const ServicesSpotlight = () => {
           });
 
           // Animate images along Bezier curve
+          const isMobile = false; // Desktop mode
           imageElements.forEach((img, index) => {
-            const imageProgress = getImgProgressState(index, switchProgress);
+            const imageProgress = getImgProgressState(index, switchProgress, isMobile);
 
             if (imageProgress < 0 || imageProgress > 1) {
               // Image not yet visible or already passed
               gsap.set(img, { opacity: 0 });
             } else {
               // Image is animating along curve
-              const pos = getBezierPosition(imageProgress);
+              const pos = getBezierPosition(imageProgress, isMobile);
               gsap.set(img, {
                 x: pos.x - 100,
                 y: pos.y - 75,
@@ -326,7 +361,7 @@ const ServicesSpotlight = () => {
             // Sync floating images to match the selected title
             // When title is aligned, its corresponding image should be at peak visibility
             imageElements.forEach((_, index) => {
-              const imageProgress = getImgProgressState(index, switchProgress);
+              const imageProgress = getImgProgressState(index, switchProgress, false);
 
               if (index === closestIndex) {
                 // Active service image should be visible and prominent
@@ -344,7 +379,7 @@ const ServicesSpotlight = () => {
             let bestMatchScore = -1;
 
             imageElements.forEach((_, index) => {
-              const imageProgress = getImgProgressState(index, switchProgress);
+              const imageProgress = getImgProgressState(index, switchProgress, true);
 
               if (imageProgress >= 0 && imageProgress <= 1) {
                 const score = 1 - Math.abs(imageProgress - 0.5);
@@ -483,23 +518,32 @@ const ServicesSpotlight = () => {
             });
           }
 
-          // Animate floating images on mobile - simple fade in/out with slide
+          // Animate floating images on mobile - Bezier curve animation
+          // Calculate scroll progress for image animation (same approach as desktop)
+          const isMobile = true;
+          const containerWidth = window.innerWidth;
+
+          // Responsive image offset based on viewport (matches CSS breakpoints)
+          const imageSize = containerWidth <= 640 ? 160 : 180; // Small mobile: 160px, Regular mobile: 180px
+          const imageOffset = imageSize / 2; // Center offset (half of image dimensions)
+
           imageElements.forEach((img, index: number) => {
-            if (index === clampedIndex) {
-              // Active service image - visible and centered on right side
+            const imageProgress = getImgProgressState(index, progress, isMobile);
+
+            if (imageProgress >= 0 && imageProgress <= 1) {
+              // Image is animating along Bezier curve
+              const pos = getBezierPosition(imageProgress, isMobile);
+              const activeOpacity = 0.85;
+
               gsap.set(img, {
-                opacity: 0.85,
-                x: "20%",  // Positioned on right side
-                y: "50%",  // Centered vertically
-                scale: 0.9, // Slightly smaller on mobile
+                x: pos.x - imageOffset,   // Center horizontally on curve
+                y: pos.y - imageOffset,   // Center vertically on curve
+                opacity: activeOpacity,
+                scale: 0.95,              // Slight scale for depth on mobile
               });
             } else {
-              // Inactive images - hidden
-              gsap.set(img, {
-                opacity: 0,
-                x: "50%", // Off to the right
-                y: "50%",
-              });
+              // Image not yet visible or already passed
+              gsap.set(img, { opacity: 0 });
             }
           });
 
@@ -515,6 +559,12 @@ const ServicesSpotlight = () => {
     return () => {
       if (scrollTriggerRef.current) {
         scrollTriggerRef.current.kill();
+        scrollTriggerRef.current = null;
+      }
+
+      // Clear title elements to prevent memory leaks
+      if (titleElementsRef.current) {
+        titleElementsRef.current = null;
       }
     };
   }, [isMobileDevice]); // Re-run when mobile state changes
@@ -529,7 +579,7 @@ const ServicesSpotlight = () => {
             className="spotlight-intro-text"
             ref={(el) => { introTextElementsRef.current[0] = el; }}
           >
-            <p>Comprehensive</p>
+            <p>Innovative</p>
           </div>
           <div
             className="spotlight-intro-text"

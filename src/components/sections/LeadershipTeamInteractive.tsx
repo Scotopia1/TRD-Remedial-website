@@ -34,20 +34,23 @@ export function LeadershipTeamInteractive() {
       const nameElements = nameElementsRef.current.filter(Boolean);
       const nameHeadings = nameHeadingsRef.current.filter(Boolean);
 
-      // Split text for name headings
-      nameHeadings.forEach((heading) => {
-        if (!heading) return;
-        const split = new SplitText(heading, { type: 'chars' });
-        split.chars.forEach((char) => {
-          char.classList.add('letter');
+      // Wait for fonts to load before splitting text
+      document.fonts.ready.then(() => {
+        // Split text for name headings
+        nameHeadings.forEach((heading) => {
+          if (!heading) return;
+          const split = new SplitText(heading, { type: 'chars' });
+          split.chars.forEach((char) => {
+            char.classList.add('letter');
+          });
         });
-      });
 
-      // Set default state (first name element is "The Experts")
-      if (nameElements[0]) {
-        const defaultLetters = nameElements[0].querySelectorAll('.letter');
-        gsap.set(defaultLetters, { y: '100%' });
-      }
+        // Set default state (first name element is "The Experts")
+        if (nameElements[0]) {
+          const defaultLetters = nameElements[0].querySelectorAll('.letter');
+          gsap.set(defaultLetters, { y: '100%' });
+        }
+      });
 
       // Only enable interactive hover on desktop
       if (window.innerWidth >= 900) {
