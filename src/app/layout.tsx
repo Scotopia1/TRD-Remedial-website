@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
+import { ScrollUnlockProvider } from "@/components/providers/ScrollUnlockProvider";
 import { AccessibilityProvider } from "@/components/providers/AccessibilityProvider";
 import { TransitionProvider } from "@/components/providers/TransitionProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
@@ -178,19 +179,21 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <WebVitals />
-        <AccessibilityProvider>
-          <ScrollToTop />
-          <Menu />
-          <CustomCursor />
-          <ScrollProgress />
-          <TransitionProvider>
-            <SmoothScrollProvider>
-              {children}
-            </SmoothScrollProvider>
-            <Footer />
-          </TransitionProvider>
-        </AccessibilityProvider>
+        <ScrollUnlockProvider>
+          <WebVitals />
+          <AccessibilityProvider>
+            <ScrollToTop />
+            <Menu />
+            <CustomCursor />
+            <ScrollProgress />
+            <TransitionProvider>
+              <SmoothScrollProvider>
+                {children}
+              </SmoothScrollProvider>
+              <Footer />
+            </TransitionProvider>
+          </AccessibilityProvider>
+        </ScrollUnlockProvider>
       </body>
     </html>
   );
