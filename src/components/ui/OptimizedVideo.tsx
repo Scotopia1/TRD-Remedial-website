@@ -102,8 +102,6 @@ export function OptimizedVideo({
       // iOS optimization: disable remote playback
       x-webkit-airplay="deny"
       disableRemotePlayback
-      // Improve loading performance
-      loading="lazy"
     >
       {isLoaded && (
         <>
