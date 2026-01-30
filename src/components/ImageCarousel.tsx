@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import type { ProjectImage } from '@/data/projects';
+import { useScrollLock } from '@/hooks/useScrollLock';
 import './ImageCarousel.css';
 
 interface ImageCarouselProps {
@@ -12,6 +13,9 @@ interface ImageCarouselProps {
 export function ImageCarousel({ images, projectName }: ImageCarouselProps) {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Use centralized scroll lock management
+  useScrollLock(isLightboxOpen);
 
   const openLightbox = (index: number) => {
     setCurrentImageIndex(index);
@@ -47,16 +51,6 @@ export function ImageCarousel({ images, projectName }: ImageCarouselProps) {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isLightboxOpen, goToPrevious, goToNext]);
-
-  // Prevent body scroll when lightbox is open
-  useEffect(() => {
-    if (isLightboxOpen) {
-      document.body.style.overflow = 'hidden';
-      return () => {
-        document.body.style.overflow = '';
-      };
-    }
-  }, [isLightboxOpen]);
 
   if (!images || images.length === 0) {
     return null;

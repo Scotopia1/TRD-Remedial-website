@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useStore } from '@/stores/useStore';
+import { useScrollLock } from '@/hooks/useScrollLock';
 import './BlueprintPreloader.css';
 
 interface BlueprintPreloaderProps {
@@ -15,9 +16,13 @@ const PRELOADER_SESSION_KEY = 'trd-preloader-shown';
 export function BlueprintPreloader({ onComplete }: BlueprintPreloaderProps) {
   const [phase, setPhase] = useState<Phase>(0);
   const [isVisible, setIsVisible] = useState(true);
+  const [shouldLockScroll, setShouldLockScroll] = useState(true);
   const { setIsLoading } = useStore();
   const hasStarted = useRef(false);
   const onCompleteRef = useRef(onComplete);
+
+  // Use centralized scroll lock management
+  useScrollLock(shouldLockScroll);
 
   // Keep ref updated
   onCompleteRef.current = onComplete;
@@ -33,15 +38,13 @@ export function BlueprintPreloader({ onComplete }: BlueprintPreloaderProps) {
       // Skip animation - immediately complete
       setIsVisible(false);
       setIsLoading(false);
+      setShouldLockScroll(false); // Don't lock if skipping
       onCompleteRef.current();
       return;
     }
 
     // Mark as shown for this session
     sessionStorage.setItem(PRELOADER_SESSION_KEY, 'true');
-
-    // Lock body scroll during animation
-    document.body.style.overflow = 'hidden';
 
     // Start phase 1 after a brief delay to let components render
     const startTimer = setTimeout(() => setPhase(1), 300);
@@ -61,8 +64,8 @@ export function BlueprintPreloader({ onComplete }: BlueprintPreloaderProps) {
     // Phase 4: Complete and fade out (at 5.5s)
     const phase4Timer = setTimeout(() => {
       setPhase(4);
-      // Restore body scroll
-      document.body.style.overflow = 'auto';
+      // Release scroll lock
+      setShouldLockScroll(false);
     }, 5500);
 
     // Hide loader after fade completes (at 6s)
@@ -77,7 +80,6 @@ export function BlueprintPreloader({ onComplete }: BlueprintPreloaderProps) {
       clearTimeout(contentTimer);
       clearTimeout(phase4Timer);
       clearTimeout(hideTimer);
-      document.body.style.overflow = 'auto';
     };
   }, [setIsLoading]);
 

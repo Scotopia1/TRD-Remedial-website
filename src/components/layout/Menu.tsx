@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
 import { useStore } from '@/stores/useStore';
+import { useScrollLock } from '@/hooks/useScrollLock';
 
 export function Menu() {
   const menuLinks = [
@@ -32,6 +33,9 @@ export function Menu() {
   const scrollPositionRef = useRef(0);
   const [showMenuHint, setShowMenuHint] = useState(false);
 
+  // Use centralized scroll lock management
+  useScrollLock(isMenuOpen);
+
   // Initialize window width on client
   useEffect(() => {
     setWindowWidth(window.innerWidth);
@@ -51,33 +55,12 @@ export function Menu() {
     }
   }, [isLoading]);
 
-  const toggleBodyScroll = (disableScroll: boolean) => {
-    if (disableScroll) {
-      // Save current scroll position
-      scrollPositionRef.current = window.pageYOffset;
-
-      // Prevent scroll without position: fixed (avoids visual jump)
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = `${window.innerWidth - document.documentElement.clientWidth}px`;
-    } else {
-      // Restore scroll
-      document.documentElement.style.removeProperty('overflow');
-      document.body.style.removeProperty('overflow');
-      document.body.style.removeProperty('padding-right');
-
-      // No need to restore scroll position - user stays where they were
-    }
-  };
-
   const toggleMenu = () => {
     const logoButton = document.querySelector('.logo-menu-button');
     if (logoButton) {
       logoButton.classList.toggle('active');
     }
-    const newMenuState = !isMenuOpen;
-    setIsMenuOpen(newMenuState);
-    toggleBodyScroll(newMenuState);
+    setIsMenuOpen(!isMenuOpen);
   };
 
   const closeMenu = () => {
@@ -87,7 +70,6 @@ export function Menu() {
         logoButton.classList.remove('active');
       }
       setIsMenuOpen(false);
-      toggleBodyScroll(false);
     }
   };
 
@@ -182,14 +164,6 @@ export function Menu() {
     };
   }, [isMenuOpen]);
 
-  useEffect(() => {
-    return () => {
-      // Cleanup: restore scroll if component unmounts with menu open
-      if (document.body.style.overflow === 'hidden') {
-        toggleBodyScroll(false);
-      }
-    };
-  }, []);
 
   // Only hide menu during loading on homepage (where preloader exists)
   const isHomePage = pathname === '/';

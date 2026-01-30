@@ -221,9 +221,9 @@ body {
   touch-action: pan-y pinch-zoom; /* Allow pinch zoom but maintain vertical scrolling */
   -webkit-overflow-scrolling: touch;
 
-  /* Prevent overscroll bounce */
-  overscroll-behavior: none;
-  overscroll-behavior-y: none;
+  /* iOS fix: Allow overscroll on body to prevent scroll lockup */
+  overscroll-behavior: auto;
+  overscroll-behavior-y: contain; /* Prevent full-page bounce but allow scroll */
 }
 
 /* =====================================================
@@ -234,9 +234,9 @@ html {
   touch-action: pan-y pinch-zoom; /* Allow pinch zoom but maintain vertical scrolling */
   -webkit-overflow-scrolling: touch;
 
-  /* Prevent overscroll bounce */
-  overscroll-behavior: none;
-  overscroll-behavior-y: none;
+  /* iOS fix: Allow overscroll to prevent scroll lockup */
+  overscroll-behavior: auto;
+  overscroll-behavior-y: contain;
 }
 
 /* Reduced motion preference */
