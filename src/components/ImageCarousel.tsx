@@ -14,8 +14,8 @@ export function ImageCarousel({ images, projectName }: ImageCarouselProps) {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Use centralized scroll lock management
-  useScrollLock(isLightboxOpen);
+  // TEMP DISABLED - Testing if this is causing issues
+  // useScrollLock(isLightboxOpen);
 
   const openLightbox = (index: number) => {
     setCurrentImageIndex(index);

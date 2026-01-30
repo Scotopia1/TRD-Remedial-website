@@ -33,8 +33,8 @@ export function Menu() {
   const scrollPositionRef = useRef(0);
   const [showMenuHint, setShowMenuHint] = useState(false);
 
-  // Use centralized scroll lock management
-  useScrollLock(isMenuOpen);
+  // TEMP DISABLED - Testing if this is causing issues
+  // useScrollLock(isMenuOpen);
 
   // Initialize window width on client
   useEffect(() => {

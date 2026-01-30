@@ -21,8 +21,8 @@ export function BlueprintPreloader({ onComplete }: BlueprintPreloaderProps) {
   const hasStarted = useRef(false);
   const onCompleteRef = useRef(onComplete);
 
-  // Use centralized scroll lock management
-  useScrollLock(shouldLockScroll);
+  // TEMP DISABLED - Testing if this is causing issues
+  // useScrollLock(shouldLockScroll);
 
   // Keep ref updated
   onCompleteRef.current = onComplete;

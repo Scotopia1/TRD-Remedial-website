@@ -101,11 +101,17 @@
   display: none; /* Chrome, Safari, Opera */
 }
 
-html,
-body {
-  overflow-x: hidden; /* Prevent horizontal scroll */
+/* MOBILE FIX: Don't set overflow on html/body globally - causes scroll issues on iOS */
+/* Only hide scrollbars, don't restrict overflow */
+html {
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* overflow-x: hidden removed - was blocking scroll on mobile */
 }
 
 html::-webkit-scrollbar,

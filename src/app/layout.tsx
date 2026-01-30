@@ -179,21 +179,20 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ScrollUnlockProvider>
-          <WebVitals />
-          <AccessibilityProvider>
-            <ScrollToTop />
-            <Menu />
-            <CustomCursor />
-            <ScrollProgress />
-            <TransitionProvider>
-              <SmoothScrollProvider>
-                {children}
-              </SmoothScrollProvider>
-              <Footer />
-            </TransitionProvider>
-          </AccessibilityProvider>
-        </ScrollUnlockProvider>
+        {/* TEMP REMOVED ScrollUnlockProvider - Testing */}
+        <WebVitals />
+        <AccessibilityProvider>
+          <ScrollToTop />
+          <Menu />
+          <CustomCursor />
+          <ScrollProgress />
+          <TransitionProvider>
+            <SmoothScrollProvider>
+              {children}
+            </SmoothScrollProvider>
+            <Footer />
+          </TransitionProvider>
+        </AccessibilityProvider>
       </body>
     </html>
   );
