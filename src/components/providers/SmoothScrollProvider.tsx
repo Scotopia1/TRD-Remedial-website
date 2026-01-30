@@ -19,22 +19,24 @@ import { isIOS, isMobile as detectMobile } from '@/utils/deviceDetect';
 const easeOutExpo = (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t));
 
 // Mobile-optimized settings - Keep Lenis running with faster, touch-friendly config
-// CRITICAL: smoothTouch: true enables smooth scrolling on mobile while maintaining ScrollTrigger proxy
-const mobileSettings = {
-  duration: 0.8,              // Faster animations for mobile
+// iOS FIX: Aggressive optimization for truly native-feeling scroll on iOS
+const getMobileSettings = (isIOSDevice: boolean) => ({
+  duration: isIOSDevice ? 0.5 : 0.8,  // Much faster on iOS for instant feedback
   easing: easeOutExpo,
   direction: 'vertical' as const,
   orientation: 'vertical' as const,
   gestureOrientation: 'vertical' as const,
-  smooth: true,               // Keep smooth scroll enabled
-  smoothWheel: true,
-  smoothTouch: true,          // CRITICAL: Enable touch scrolling (CGMWTAUG2025 pattern)
-  touchMultiplier: 1.5,       // More responsive to swipes
+  smooth: !isIOSDevice,       // CRITICAL: Disable smooth scroll entirely on iOS, use native
+  smoothWheel: !isIOSDevice,  // Native wheel behavior on iOS
+  smoothTouch: false,         // Always disable touch smoothing for native feel
+  touchMultiplier: 1,         // Native multiplier - don't amplify touch
   infinite: false,
-  lerp: 0.09,                 // Faster interpolation for mobile
+  lerp: isIOSDevice ? 0.25 : 0.09,  // Very fast lerp on iOS for instant response
   wheelMultiplier: 1,
-  syncTouch: true,
-};
+  syncTouch: false,           // Never sync touch - let browser handle it
+  touchInertiaMultiplier: isIOSDevice ? 1 : 35,  // Minimal inertia on iOS
+  eventsTarget: isIOSDevice ? window : undefined,  // Use window for iOS passive listeners
+});
 
 // Desktop settings - Slower, more deliberate animations
 const desktopSettings = {
@@ -84,32 +86,48 @@ function ScrollTriggerSync() {
   }, []);
 
   useEffect(() => {
-    // Set up scroller proxy to tell ScrollTrigger about Lenis scroll position
-    ScrollTrigger.scrollerProxy(document.documentElement, {
-      scrollTop(value?: number) {
-        if (arguments.length && lenisRef.current) {
-          lenisRef.current.scrollTo(value, { immediate: true });
-        }
-        return scrollRef.current;
-      },
-      getBoundingClientRect() {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-      },
-      pinType: 'transform',
-    });
+    // Defer scroller proxy setup to improve initial load performance
+    const setupProxy = () => {
+      // Set up scroller proxy to tell ScrollTrigger about Lenis scroll position
+      ScrollTrigger.scrollerProxy(document.documentElement, {
+        scrollTop(value?: number) {
+          if (arguments.length && lenisRef.current) {
+            lenisRef.current.scrollTo(value, { immediate: true });
+          }
+          return scrollRef.current;
+        },
+        getBoundingClientRect() {
+          return {
+            top: 0,
+            left: 0,
+            width: window.innerWidth,
+            height: window.innerHeight,
+          };
+        },
+        pinType: 'transform',
+      });
 
-    // Refresh after setup using centralized manager
-    const refreshTimeout = setTimeout(() => {
+      // Refresh after setup using centralized manager
       scrollTriggerManager.requestRefresh();
-    }, 100);
+    };
+
+    // Use requestIdleCallback when available (better performance)
+    // Falls back to requestAnimationFrame on unsupported browsers
+    const requestIdleCallbackPolyfill =
+      typeof window !== 'undefined' && 'requestIdleCallback' in window
+        ? window.requestIdleCallback
+        : (cb: IdleRequestCallback) => setTimeout(cb, 1);
+
+    const cancelIdleCallbackPolyfill =
+      typeof window !== 'undefined' && 'cancelIdleCallback' in window
+        ? window.cancelIdleCallback
+        : clearTimeout;
+
+    // Defer setup during idle time for faster initial paint
+    const idleId = requestIdleCallbackPolyfill(setupProxy, { timeout: 2000 });
 
     return () => {
-      clearTimeout(refreshTimeout);
+      cancelIdleCallbackPolyfill(idleId);
       ScrollTrigger.clearScrollMemory();
     };
   }, []);
@@ -125,9 +143,11 @@ function ScrollTriggerSync() {
 export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [isIOSDevice, setIsIOSDevice] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
+    setIsIOSDevice(isIOS());
 
     // CGMWTAUG2025 pattern: Use 1000px breakpoint for mobile detection
     const checkMobile = () => {
@@ -135,21 +155,35 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
+    window.addEventListener('resize', checkMobile, { passive: true });
 
-    // ScrollTrigger config - optimized for performance
-    ScrollTrigger.config({
-      ignoreMobileResize: true,
-      autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
-      limitCallbacks: true, // Reduce callback frequency
-    });
+    // Defer GSAP/ScrollTrigger setup to idle time for better FCP
+    const setupGSAP = () => {
+      // ScrollTrigger config - optimized for performance
+      ScrollTrigger.config({
+        ignoreMobileResize: true,
+        autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
+        limitCallbacks: true, // Reduce callback frequency
+        syncInterval: isIOS() ? 100 : 60, // iOS: sync less frequently for better performance
+      });
 
-    // Optimize GSAP ticker for mobile performance
-    if (window.innerWidth <= 1000) {
-      gsap.ticker.lagSmoothing(1000, 16); // More forgiving on mobile
-    } else {
-      gsap.ticker.lagSmoothing(500, 33);
-    }
+      // Optimize GSAP ticker for mobile performance
+      const isMobileWidth = window.innerWidth <= 1000;
+      if (isMobileWidth) {
+        // More forgiving on mobile, especially iOS
+        gsap.ticker.lagSmoothing(isIOS() ? 1500 : 1000, isIOS() ? 20 : 16);
+      } else {
+        gsap.ticker.lagSmoothing(500, 33);
+      }
+    };
+
+    // Defer GSAP setup during idle time
+    const requestIdleCallbackPolyfill =
+      'requestIdleCallback' in window
+        ? window.requestIdleCallback
+        : (cb: IdleRequestCallback) => setTimeout(cb, 1);
+
+    requestIdleCallbackPolyfill(setupGSAP, { timeout: 1000 });
 
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
@@ -164,8 +198,8 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     }
   }, [isMobile, isClient]);
 
-  // Select settings based on viewport width (CGMWTAUG2025 pattern)
-  const scrollSettings = isMobile ? mobileSettings : desktopSettings;
+  // Select settings based on viewport width and device type
+  const scrollSettings = isMobile ? getMobileSettings(isIOSDevice) : desktopSettings;
 
   // CRITICAL: ALWAYS render ReactLenis to maintain ScrollTrigger proxy on all devices
   return (

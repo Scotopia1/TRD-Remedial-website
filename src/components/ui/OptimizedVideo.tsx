@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
+import { isIOS, isMobile } from '@/utils/deviceDetect';
 
 interface OptimizedVideoProps {
   src: string; // base path without extension (e.g., "/videos/hero-video")
@@ -24,10 +25,42 @@ export function OptimizedVideo({
   playsInline = true,
 }: OptimizedVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isLoaded, setIsLoaded] = useState(priority);
+  const [isClient, setIsClient] = useState(false);
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
+  const [isIOSDevice, setIsIOSDevice] = useState(false);
+
+  // On mobile/iOS: defer video loading to improve first paint
+  // On desktop: respect priority prop
+  const shouldDeferLoad = isClient && (isMobileDevice || isIOSDevice);
+  const [isLoaded, setIsLoaded] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return priority && !shouldDeferLoad;
+  });
 
   useEffect(() => {
-    if (priority || !videoRef.current) return;
+    setIsClient(true);
+    setIsMobileDevice(isMobile());
+    setIsIOSDevice(isIOS());
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+
+    // On mobile/iOS: delay video load for better initial performance
+    if (shouldDeferLoad) {
+      // Wait for idle time to load video
+      const timeoutId = setTimeout(() => {
+        setIsLoaded(true);
+      }, 1500); // Load after 1.5s to allow page to render first
+
+      return () => clearTimeout(timeoutId);
+    }
+
+    // Desktop or priority: use intersection observer
+    if (priority || !videoRef.current) {
+      setIsLoaded(true);
+      return;
+    }
 
     // Lazy load video using Intersection Observer
     const observer = new IntersectionObserver(
@@ -45,7 +78,16 @@ export function OptimizedVideo({
     observer.observe(videoRef.current);
 
     return () => observer.disconnect();
-  }, [priority]);
+  }, [priority, isClient, shouldDeferLoad]);
+
+  // Optimize preload based on device
+  const preloadStrategy = isClient
+    ? shouldDeferLoad
+      ? 'none' // Don't preload on mobile/iOS
+      : priority
+      ? 'metadata' // Changed from 'auto' to 'metadata' for faster FCP
+      : 'none'
+    : 'none';
 
   return (
     <video
@@ -55,15 +97,22 @@ export function OptimizedVideo({
       loop={loop}
       muted={muted}
       playsInline={playsInline}
-      preload={priority ? 'auto' : 'metadata'}
+      preload={preloadStrategy}
       poster={poster}
+      // iOS optimization: disable remote playback
+      x-webkit-airplay="deny"
+      disableRemotePlayback
+      // Improve loading performance
+      loading="lazy"
     >
       {isLoaded && (
         <>
+          {/* Prioritize MP4 for Safari/iOS (native codec, better performance) */}
+          {isIOSDevice && <source src={`${src}-optimized.mp4`} type="video/mp4" />}
           {/* WebM for modern browsers (Chrome, Firefox, Edge) */}
-          <source src={`${src}.webm`} type="video/webm" />
+          {!isIOSDevice && <source src={`${src}.webm`} type="video/webm" />}
           {/* MP4 fallback for Safari and older browsers */}
-          <source src={`${src}-optimized.mp4`} type="video/mp4" />
+          {!isIOSDevice && <source src={`${src}-optimized.mp4`} type="video/mp4" />}
         </>
       )}
       Your browser does not support the video tag.

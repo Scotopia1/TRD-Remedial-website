@@ -128,7 +128,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <StructuredData />
-        {/* Font Preloading - Phase 2.1 SEO Optimization */}
+        {/* Font Preloading - Optimized for Performance (Only critical fonts preloaded) */}
+        {/* PRIMARY FONT: Messina Sans Regular - Used for main body text */}
         <link
           rel="preload"
           href="/fonts/messina-sans/MessinaSans-Regular.otf"
@@ -136,36 +137,38 @@ export default function RootLayout({
           type="font/otf"
           crossOrigin="anonymous"
         />
+        {/* SECONDARY FONTS: Loaded with lower priority for faster FCP */}
+        {/* These will load after initial render using font-display: swap in CSS */}
         <link
-          rel="preload"
+          rel="prefetch"
           href="/fonts/messina-sans/MessinaSans-SemiBold.otf"
           as="font"
           type="font/otf"
           crossOrigin="anonymous"
         />
         <link
-          rel="preload"
+          rel="prefetch"
           href="/fonts/messina-sans-mono/MessinaSansMono-Book.otf"
           as="font"
           type="font/otf"
           crossOrigin="anonymous"
         />
         <link
-          rel="preload"
+          rel="prefetch"
           href="/fonts/messina-sans-mono/MessinaSansMono-SemiBold.otf"
           as="font"
           type="font/otf"
           crossOrigin="anonymous"
         />
         <link
-          rel="preload"
+          rel="prefetch"
           href="/fonts/rader/PPRader-Regular.ttf"
           as="font"
           type="font/ttf"
           crossOrigin="anonymous"
         />
         <link
-          rel="preload"
+          rel="prefetch"
           href="/fonts/rader/PPRader-Bold.ttf"
           as="font"
           type="font/ttf"

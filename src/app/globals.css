@@ -113,11 +113,49 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-/* iOS Optimizations - Safe Touch Scrolling Only */
+/* iOS Optimizations - Native Momentum Scrolling & Hardware Acceleration */
 /* NOTE: Aggressive CSS containment removed - was breaking layouts and positioning */
 @supports (-webkit-touch-callout: none) {
   html {
     -webkit-overflow-scrolling: touch;
+    /* iOS scrolling fix: Ensure smooth momentum scrolling */
+    scroll-behavior: auto; /* Let iOS handle smooth scrolling natively */
+
+    /* Hardware acceleration for smoother scrolling */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+  }
+
+  body {
+    /* iOS scrolling fix: Improve touch responsiveness */
+    -webkit-overflow-scrolling: touch;
+
+    /* Optimize rendering on iOS */
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+
+  /* Optimize touch event handling - prevent delay */
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+
+  /* Interactive elements should respond immediately */
+  a, button, [role="button"], [tabindex]:not([tabindex="-1"]) {
+    touch-action: manipulation; /* Prevents double-tap zoom delay */
+    cursor: pointer;
+  }
+
+  /* Improve scrolling performance */
+  [data-scroll-section], section, main {
+    will-change: auto; /* Let browser optimize */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 }
 
@@ -180,7 +218,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   /* iOS/Android Touch Optimization */
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom; /* Allow pinch zoom but maintain vertical scrolling */
   -webkit-overflow-scrolling: touch;
 
   /* Prevent overscroll bounce */
@@ -193,7 +231,7 @@ body {
    ===================================================== */
 html {
   /* scroll-behavior: smooth; -- REMOVED: Lenis handles smooth scrolling */
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom; /* Allow pinch zoom but maintain vertical scrolling */
   -webkit-overflow-scrolling: touch;
 
   /* Prevent overscroll bounce */
@@ -234,6 +272,25 @@ html {
   .case-study-card {
     -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;
+    /* Optimize composite layers for better scrolling performance */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* Optimize images for iOS scrolling performance */
+  img {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    /* Prevent image decoding lag during scroll */
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  /* Optimize video elements for iOS */
+  video {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    /* Improve video playback during scroll */
+    object-fit: cover;
   }
 }
 
@@ -473,6 +530,23 @@ body {
 /* Utility Classes */
 .text-balance {
   text-wrap: balance;
+}
+
+/* Performance Optimization - Content Visibility for Off-Screen Elements */
+/* Reduces initial layout work by skipping rendering of off-screen content */
+@supports (content-visibility: auto) {
+  section:not(:first-of-type) {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px; /* Estimated section height */
+  }
+
+  /* iOS-specific: More aggressive containment for better scroll performance */
+  @supports (-webkit-touch-callout: none) {
+    section:not(:first-of-type) {
+      content-visibility: auto;
+      contain-intrinsic-size: 0 600px;
+    }
+  }
 }
 
 /* 3D Transform Utilities for Flip Cards */
