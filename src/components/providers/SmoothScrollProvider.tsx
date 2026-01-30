@@ -143,11 +143,17 @@ function ScrollTriggerSync() {
 export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const [isIOSDevice, setIsIOSDevice] = useState(false);
+  const [isIOSDevice, setIsIOSDevice] = useState<boolean | null>(null); // null = not detected yet
 
   useEffect(() => {
     setIsClient(true);
     setIsIOSDevice(isIOS());
+
+    // CRITICAL FIX: Ensure scroll is unlocked on initial page load
+    // This prevents any scroll lock from persisting across page loads
+    document.body.style.removeProperty('overflow');
+    document.documentElement.style.removeProperty('overflow');
+    document.body.style.removeProperty('padding-right');
 
     // CGMWTAUG2025 pattern: Use 1000px breakpoint for mobile detection
     const checkMobile = () => {
@@ -199,7 +205,17 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   }, [isMobile, isClient]);
 
   // Select settings based on viewport width and device type
-  const scrollSettings = isMobile ? getMobileSettings(isIOSDevice) : desktopSettings;
+  const scrollSettings = isMobile ? getMobileSettings(isIOSDevice === true) : desktopSettings;
+
+  // HYDRATION FIX: Don't render until we know if it's iOS (prevents server/client mismatch)
+  // Server doesn't know device type, so we wait for client detection
+  if (!isClient || isIOSDevice === null) {
+    return (
+      <ViewTransitions>
+        {children}
+      </ViewTransitions>
+    );
+  }
 
   // iOS FIX: Don't render Lenis on iOS - it blocks native scrolling even with smooth: false
   // iOS Safari has excellent native smooth scrolling, Lenis is unnecessary and causes conflicts
