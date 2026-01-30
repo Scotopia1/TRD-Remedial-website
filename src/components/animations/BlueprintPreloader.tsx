@@ -16,7 +16,7 @@ const PRELOADER_SESSION_KEY = 'trd-preloader-shown';
 export function BlueprintPreloader({ onComplete }: BlueprintPreloaderProps) {
   const [phase, setPhase] = useState<Phase>(0);
   const [isVisible, setIsVisible] = useState(true);
-  const [shouldLockScroll, setShouldLockScroll] = useState(true);
+  const [shouldLockScroll, setShouldLockScroll] = useState(false); // Initialize to false
   const { setIsLoading } = useStore();
   const hasStarted = useRef(false);
   const onCompleteRef = useRef(onComplete);
@@ -38,13 +38,16 @@ export function BlueprintPreloader({ onComplete }: BlueprintPreloaderProps) {
       // Skip animation - immediately complete
       setIsVisible(false);
       setIsLoading(false);
-      setShouldLockScroll(false); // Don't lock if skipping
+      // shouldLockScroll already false, no need to set
       onCompleteRef.current();
       return;
     }
 
     // Mark as shown for this session
     sessionStorage.setItem(PRELOADER_SESSION_KEY, 'true');
+
+    // Now lock scroll for the animation
+    setShouldLockScroll(true);
 
     // Start phase 1 after a brief delay to let components render
     const startTimer = setTimeout(() => setPhase(1), 300);
