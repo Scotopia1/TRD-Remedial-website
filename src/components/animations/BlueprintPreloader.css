@@ -234,7 +234,8 @@
 
 /* Mobile-first touch and scroll handling */
 .blueprint-loader-container {
-  touch-action: none;
+  /* REMOVED touch-action: none - was blocking all scrolling on mobile */
+  /* Preloader is position: fixed so it doesn't need to block touch */
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: none;
 }

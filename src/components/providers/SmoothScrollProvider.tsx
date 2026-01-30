@@ -201,7 +201,17 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   // Select settings based on viewport width and device type
   const scrollSettings = isMobile ? getMobileSettings(isIOSDevice) : desktopSettings;
 
-  // CRITICAL: ALWAYS render ReactLenis to maintain ScrollTrigger proxy on all devices
+  // iOS FIX: Don't render Lenis on iOS - it blocks native scrolling even with smooth: false
+  // iOS Safari has excellent native smooth scrolling, Lenis is unnecessary and causes conflicts
+  if (isIOSDevice && isMobile) {
+    return (
+      <ViewTransitions>
+        {children}
+      </ViewTransitions>
+    );
+  }
+
+  // Render ReactLenis on desktop and non-iOS mobile devices
   return (
     <ViewTransitions>
       <ReactLenis root options={scrollSettings}>
