@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, ReactNode } from 'react';
+import { useRef, ReactNode, memo } from 'react';
 import { gsap } from 'gsap';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { cn } from '@/lib/utils';
@@ -23,7 +23,7 @@ interface MagneticButtonProps {
  * - Disabled on mobile for performance
  * - Supports different visual variants
  */
-export function MagneticButton({
+const MagneticButtonInternal = function MagneticButton({
   children,
   className = '',
   href,
@@ -117,4 +117,6 @@ export function MagneticButton({
       {children}
     </button>
   );
-}
+};
+
+export const MagneticButton = memo(MagneticButtonInternal);

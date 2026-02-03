@@ -1,6 +1,36 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Optimize production builds
+  productionBrowserSourceMaps: false,
+
+  // Webpack configuration for bundle analysis and optimization
+  webpack: (config, { isServer }) => {
+    // Add bundle analyzer in production when ANALYZE env var is set
+    if (process.env.ANALYZE === 'true') {
+      // eslint-disable-next-line global-require
+      const BundleAnalyzerPlugin = require('@next/bundle-analyzer')({
+        enabled: true,
+        openAnalyzer: !isServer,
+      });
+      config.plugins.push(BundleAnalyzerPlugin);
+    }
+
+    // Tree-shaking optimization for three.js
+    config.module.rules.push({
+      test: /three\.module\.js$/,
+      sideEffects: false,
+    });
+
+    // Optimize GSAP imports (tree-shakeable)
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'gsap': 'gsap/dist/gsap.js',
+    };
+
+    return config;
+  },
+
   images: {
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -11,7 +41,14 @@ const nextConfig: NextConfig = {
         hostname: '**',
       },
     ],
+    // Enhanced image optimization
+    minimumCacheTTL: 31536000, // 1 year
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Aggressive image compression for production
+    unoptimized: false,
   },
+
   // Headers for video and image files
   async headers() {
     return [
@@ -41,11 +78,41 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Compression headers for all assets
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+        ],
+      },
     ];
   },
+
+  // Compression settings
+  compress: true,
+
   // Experimental features for better performance
   experimental: {
-    optimizePackageImports: ['three', '@react-three/fiber', '@react-three/drei'],
+    optimizePackageImports: [
+      'three',
+      '@react-three/fiber',
+      '@react-three/drei',
+      'gsap',
+      '@gsap/react',
+      'framer-motion',
+    ],
+    optimizeCss: true,
   },
 };
 

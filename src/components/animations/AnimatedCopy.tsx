@@ -1,7 +1,7 @@
 'use client';
 
 import './AnimatedCopy.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -24,7 +24,7 @@ interface AnimatedCopyProps {
   instantVisible?: boolean; // Show text immediately, animate later (for LCP optimization)
 }
 
-export function AnimatedCopy({
+const AnimatedCopyComponent = function AnimatedCopy({
   children,
   className = '',
   delay = 0,
@@ -149,4 +149,6 @@ export function AnimatedCopy({
       {children}
     </Tag>
   );
-}
+};
+
+export const AnimatedCopy = memo(AnimatedCopyComponent);

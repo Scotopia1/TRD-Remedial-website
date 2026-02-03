@@ -13,7 +13,9 @@
     "test:overflow": "node tests/animation-overflow-check.js",
     "validate:services": "node scripts/validate-service-schema.js",
     "verify:service-faqs": "node scripts/verify-service-faqs.js",
-    "generate:placeholders": "node scripts/generate-blur-placeholders.js"
+    "generate:placeholders": "node scripts/generate-blur-placeholders.js",
+    "convert:webp": "node scripts/convert-images-to-webp.js",
+    "optimize:webp": "node scripts/optimize-webp-conversions.js"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

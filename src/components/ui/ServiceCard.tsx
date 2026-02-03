@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { motion } from 'framer-motion';
 import { Service } from '@/data/services';
 
@@ -9,7 +9,7 @@ interface ServiceCardProps {
   onClick: () => void;
 }
 
-export function ServiceCard({ service, onClick }: ServiceCardProps) {
+const ServiceCardInternal = function ServiceCard({ service, onClick }: ServiceCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
 
   return (
@@ -104,4 +104,6 @@ export function ServiceCard({ service, onClick }: ServiceCardProps) {
       </motion.div>
     </div>
   );
-}
+};
+
+export const ServiceCard = memo(ServiceCardInternal);

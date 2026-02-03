@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 import { gsap } from 'gsap';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
 
@@ -10,7 +10,7 @@ import { useScrollProgress } from '@/hooks/useScrollProgress';
  * - Shows reading progress percentage
  * - Smooth GSAP animation
  */
-export function ScrollProgress() {
+const ScrollProgressInternal = function ScrollProgress() {
   const progressRef = useRef<HTMLDivElement>(null);
   const scrollProgress = useScrollProgress();
 
@@ -43,4 +43,6 @@ export function ScrollProgress() {
       />
     </div>
   );
-}
+};
+
+export const ScrollProgress = memo(ScrollProgressInternal);

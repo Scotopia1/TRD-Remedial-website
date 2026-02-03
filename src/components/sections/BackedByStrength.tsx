@@ -1,12 +1,10 @@
 'use client';
 
-import { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useInView } from '@/hooks/use-in-view';
+import { useInView } from '@/hooks/useInView';
 
 export function BackedByStrength() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { threshold: 0.2, triggerOnce: true });
+  const [sectionRef, isInView] = useInView<HTMLElement>({ threshold: 0.2, triggerOnce: true });
 
   const companyValues = [
     {

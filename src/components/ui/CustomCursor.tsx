@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 import { gsap } from 'gsap';
 import { MdOutlineArrowOutward } from 'react-icons/md';
 
@@ -11,7 +11,7 @@ import { MdOutlineArrowOutward } from 'react-icons/md';
  * - Hidden on mobile/touch devices
  * - Respects prefers-reduced-motion
  */
-export function CustomCursor() {
+const CustomCursorInternal = function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLDivElement>(null);
 
@@ -149,4 +149,6 @@ export function CustomCursor() {
       </div>
     </div>
   );
-}
+};
+
+export const CustomCursor = memo(CustomCursorInternal);

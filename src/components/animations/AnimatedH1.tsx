@@ -1,7 +1,7 @@
 'use client';
 
 import './AnimatedH1.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -21,7 +21,7 @@ interface AnimatedH1Props {
   direction?: 'bottom' | 'top';
 }
 
-export function AnimatedH1({
+const AnimatedH1Component = function AnimatedH1({
   children,
   className = '',
   delay = 0,
@@ -143,4 +143,6 @@ export function AnimatedH1({
       {children}
     </h1>
   );
-}
+};
+
+export const AnimatedH1 = memo(AnimatedH1Component);

@@ -1,7 +1,7 @@
 'use client';
 
 import Image, { ImageProps } from 'next/image';
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import blurPlaceholders from '@/data/blurPlaceholders.json';
 
 /**
@@ -42,7 +42,7 @@ interface OptimizedImageProps extends Omit<ImageProps, 'placeholder' | 'blurData
   blurDataURL?: string;
 }
 
-export function OptimizedImage({
+const OptimizedImageComponent = function OptimizedImage({
   src,
   alt,
   priority = false,
@@ -86,4 +86,6 @@ export function OptimizedImage({
       {...props}
     />
   );
-}
+};
+
+export const OptimizedImage = memo(OptimizedImageComponent);

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, ReactNode } from 'react';
+import { useRef, ReactNode, memo } from 'react';
 import { gsap } from 'gsap';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
@@ -16,7 +16,7 @@ interface MagneticTextProps {
  * - Returns to original position with elastic ease
  * - Disabled on mobile for performance
  */
-export function MagneticText({ children, className = '', strength = 0.3 }: MagneticTextProps) {
+const MagneticTextInternal = function MagneticText({ children, className = '', strength = 0.3 }: MagneticTextProps) {
   const textRef = useRef<HTMLSpanElement>(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
@@ -75,4 +75,6 @@ export function MagneticText({ children, className = '', strength = 0.3 }: Magne
       </span>
     </span>
   );
-}
+};
+
+export const MagneticText = memo(MagneticTextInternal);
