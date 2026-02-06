@@ -1,5 +1,3 @@
-'use client';
-
 import './EmergencyCTA.css';
 
 import Link from 'next/link';

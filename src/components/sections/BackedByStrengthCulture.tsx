@@ -298,11 +298,11 @@ export function BackedByStrengthCulture() {
       <div className="split-element">
         <div className="container">
           <div className="split-img split-top">
-            <img src="/trd-logo.svg" alt="TRD" />
+            <Image src="/trd-logo.svg" alt="TRD" width={200} height={80} unoptimized />
           </div>
 
           <div className="split-img split-bottom">
-            <img src="/trd-logo.svg" alt="TRD" />
+            <Image src="/trd-logo.svg" alt="TRD" width={200} height={80} unoptimized />
           </div>
         </div>
 

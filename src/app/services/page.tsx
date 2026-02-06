@@ -1,12 +1,17 @@
 'use client';
 
 import './services.css';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { SERVICES } from '@/data/services';
 import { AnimatedH1 } from '@/components/animations/AnimatedH1';
 import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
-import { ParallaxImage } from '@/components/animations/ParallaxImage';
 import { useStore } from '@/stores/useStore';
+
+const ParallaxImage = dynamic(
+  () => import('@/components/animations/ParallaxImage').then(mod => mod.ParallaxImage),
+  { ssr: false }
+);
 
 export default function ServicesPage() {
   const setCursorVariant = useStore((state) => state.setCursorVariant);

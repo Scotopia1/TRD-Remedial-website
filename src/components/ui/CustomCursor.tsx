@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, memo } from 'react';
 import { gsap } from 'gsap';
-import { MdOutlineArrowOutward } from 'react-icons/md';
 
 /**
  * Custom cursor component - CGMWTDEC2024 "Origin" Style
@@ -145,7 +144,9 @@ const CustomCursorInternal = function CustomCursor() {
   return (
     <div className="cursor" ref={cursorRef}>
       <div className="cursor-icon" ref={iconRef}>
-        <MdOutlineArrowOutward size={28} />
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6 6v2h8.59L5 17.59 6.41 19 16 9.41V18h2V6z" />
+        </svg>
       </div>
     </div>
   );

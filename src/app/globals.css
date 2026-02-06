@@ -45,8 +45,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Messina Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Messina Sans Mono", ui-monospace, monospace;
 
   /* TRD Custom Colors */
   --color-trd-primary: var(--trd-primary);

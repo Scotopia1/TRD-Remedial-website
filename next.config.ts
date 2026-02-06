@@ -32,7 +32,7 @@ const nextConfig: NextConfig = {
   },
 
   images: {
-    formats: ['image/webp', 'image/avif'],
+    formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
@@ -53,7 +53,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: '/videos/:path*',
+        source: '/videos/:path*.mp4',
         headers: [
           {
             key: 'Content-Type',
@@ -62,6 +62,36 @@ const nextConfig: NextConfig = {
           {
             key: 'Accept-Ranges',
             value: 'bytes',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/videos/:path*.webm',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'video/webm',
+          },
+          {
+            key: 'Accept-Ranges',
+            value: 'bytes',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/videos/:path*.webp',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
@@ -78,7 +108,36 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // Compression headers for all assets
+      {
+        source: '/fonts/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Static JS/CSS immutable caching
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // API routes with stale-while-revalidate
+      {
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=60, s-maxage=300, stale-while-revalidate=60',
+          },
+        ],
+      },
+      // Security headers for all assets
       {
         source: '/:path*',
         headers: [

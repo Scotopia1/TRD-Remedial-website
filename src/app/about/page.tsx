@@ -1,11 +1,21 @@
 'use client';
 
 import './about.css';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { AnimatedH1 } from '@/components/animations/AnimatedH1';
 import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
-import { TeamCardsSticky } from '@/components/sections/TeamCardsSticky';
-import { ValuesSpotlight } from '@/components/sections/ValuesSpotlight';
 import Link from 'next/link';
+
+const TeamCardsSticky = dynamic(
+  () => import('@/components/sections/TeamCardsSticky').then(mod => mod.TeamCardsSticky),
+  { ssr: false }
+);
+
+const ValuesSpotlight = dynamic(
+  () => import('@/components/sections/ValuesSpotlight').then(mod => mod.ValuesSpotlight),
+  { ssr: false }
+);
 
 export default function AboutPage() {
   return (
@@ -30,9 +40,13 @@ export default function AboutPage() {
       <section className="about-description">
         <div className="about-description-content">
           <div className="about-description-image">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=600&fit=crop"
               alt="TRD Remedial at work"
+              width={800}
+              height={600}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
 

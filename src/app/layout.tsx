@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { ScrollUnlockProvider } from "@/components/providers/ScrollUnlockProvider";
@@ -12,16 +11,6 @@ import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { Menu } from "@/components/layout/Menu";
 import { Footer } from "@/components/sections/Footer";
 import { WebVitals } from "@/components/analytics/WebVitals";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const viewport = {
   width: 'device-width',
@@ -113,10 +102,10 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: "google-site-verification-code", // To be replaced with actual code
-    yandex: "yandex-verification-code",
-  },
+  // verification: {
+  //   google: "YOUR_GOOGLE_VERIFICATION_CODE",
+  //   yandex: "YOUR_YANDEX_VERIFICATION_CODE",
+  // },
   category: "construction",
 };
 
@@ -133,51 +122,36 @@ export default function RootLayout({
         {/* PRIMARY FONT: Messina Sans Regular - Used for main body text */}
         <link
           rel="preload"
-          href="/fonts/messina-sans/MessinaSans-Regular.otf"
+          href="/fonts/messina-sans/MessinaSans-Regular.woff2"
           as="font"
-          type="font/otf"
+          type="font/woff2"
           crossOrigin="anonymous"
         />
         {/* SECONDARY FONTS: Loaded with lower priority for faster FCP */}
-        {/* These will load after initial render using font-display: swap in CSS */}
         <link
           rel="prefetch"
-          href="/fonts/messina-sans/MessinaSans-SemiBold.otf"
+          href="/fonts/messina-sans/MessinaSans-SemiBold.woff2"
           as="font"
-          type="font/otf"
+          type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="prefetch"
-          href="/fonts/messina-sans-mono/MessinaSansMono-Book.otf"
+          href="/fonts/rader/PPRader-Regular.woff2"
           as="font"
-          type="font/otf"
+          type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="prefetch"
-          href="/fonts/messina-sans-mono/MessinaSansMono-SemiBold.otf"
+          href="/fonts/rader/PPRader-Bold.woff2"
           as="font"
-          type="font/otf"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="prefetch"
-          href="/fonts/rader/PPRader-Regular.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="prefetch"
-          href="/fonts/rader/PPRader-Bold.ttf"
-          as="font"
-          type="font/ttf"
+          type="font/woff2"
           crossOrigin="anonymous"
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className="antialiased"
       >
         {/* TEMP REMOVED ScrollUnlockProvider - Testing */}
         <WebVitals />

@@ -15,6 +15,7 @@ export function Hero({ showContent = true }: HeroProps) {
       <div className="hero-img">
         <OptimizedVideo
           src="/videos/hero-video"
+          poster="/videos/hero-poster.webp"
           className="hero-video"
           priority={true}
           autoPlay={true}

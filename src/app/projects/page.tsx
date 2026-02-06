@@ -2,6 +2,7 @@
 
 import './projects.css';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -78,7 +79,14 @@ export default function ProjectsPage() {
           >
             {/* Featured Image - Ultra-wide 16:4 */}
             <div className="project-image">
-              <img src={project.featuredImage} alt={project.name} />
+              <Image
+                src={project.featuredImage}
+                alt={project.name}
+                width={1200}
+                height={300}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
             </div>
 
             {/* Info Section - 2:5 Column Ratio */}
