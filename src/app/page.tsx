@@ -13,7 +13,7 @@ import { FAQSchema } from '@/components/seo/FAQSchema';
 const ServicesSpotlight = dynamic(
   () => import('@/components/sections/ServicesSpotlight'),
   {
-    loading: () => <div className="h-screen bg-gray-50 animate-pulse" />,
+    loading: () => <div className="h-dvh bg-gray-50 animate-pulse" />,
     ssr: false,
   }
 );
@@ -21,7 +21,7 @@ const ServicesSpotlight = dynamic(
 const CaseStudiesOtisValen = dynamic(
   () => import('@/components/sections/CaseStudiesOtisValen').then(mod => mod.CaseStudiesOtisValen),
   {
-    loading: () => <div className="h-screen bg-gray-50 animate-pulse" />,
+    loading: () => <div className="h-dvh bg-gray-50 animate-pulse" />,
     ssr: false,
   }
 );
@@ -29,7 +29,7 @@ const CaseStudiesOtisValen = dynamic(
 const TeamScrollReveal = dynamic(
   () => import('@/components/sections/TeamScrollReveal').then(mod => mod.TeamScrollReveal),
   {
-    loading: () => <div className="h-screen bg-gray-50 animate-pulse" />,
+    loading: () => <div className="h-dvh bg-gray-50 animate-pulse" />,
     ssr: false,
   }
 );
@@ -37,7 +37,7 @@ const TeamScrollReveal = dynamic(
 const CustomerFeedback = dynamic(
   () => import('@/components/sections/CustomerFeedback').then(mod => mod.CustomerFeedback),
   {
-    loading: () => <div className="h-screen bg-gray-50 animate-pulse" />,
+    loading: () => <div className="h-dvh bg-gray-50 animate-pulse" />,
     ssr: false,
   }
 );
@@ -45,7 +45,7 @@ const CustomerFeedback = dynamic(
 const EmergencyCTA = dynamic(
   () => import('@/components/sections/EmergencyCTA').then(mod => mod.EmergencyCTA),
   {
-    loading: () => <div className="h-[50vh] bg-gray-50 animate-pulse" />,
+    loading: () => <div className="h-[50dvh] bg-gray-50 animate-pulse" />,
     ssr: false,
   }
 );
@@ -53,7 +53,7 @@ const EmergencyCTA = dynamic(
 const FAQ = dynamic(
   () => import('@/components/sections/FAQ').then(mod => mod.FAQ),
   {
-    loading: () => <div className="h-screen bg-gray-50 animate-pulse" />,
+    loading: () => <div className="h-dvh bg-gray-50 animate-pulse" />,
     ssr: false,
   }
 );
@@ -61,7 +61,7 @@ const FAQ = dynamic(
 const BackedByStrengthStudio = dynamic(
   () => import('@/components/sections/BackedByStrengthStudio').then(mod => mod.BackedByStrengthStudio),
   {
-    loading: () => <div className="h-screen bg-gray-50 animate-pulse" />,
+    loading: () => <div className="h-dvh bg-gray-50 animate-pulse" />,
     ssr: false,
   }
 );

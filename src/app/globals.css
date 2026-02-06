@@ -308,13 +308,6 @@ html {
   }
 }
 
-/* Fix iOS Safari 100vh issue */
-@supports (-webkit-touch-callout: none) {
-  .full-height {
-    min-height: -webkit-fill-available;
-  }
-}
-
 /* Prevent text selection during scroll on mobile */
 @media (hover: none) and (pointer: coarse) {
   * {
@@ -734,6 +727,7 @@ body.keyboard-nav *:focus {
   left: 0;
   width: 100%;
   height: 100svh;
+  height: 100dvh;
   pointer-events: none;
   z-index: 9999;
   overflow: hidden;

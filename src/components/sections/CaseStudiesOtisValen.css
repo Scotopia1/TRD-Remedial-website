@@ -4,7 +4,8 @@
 .cs-header {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
+  height: 100dvh;
   padding: 2em;
   display: flex;
   justify-content: center;

@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { TEAM_MEMBERS } from '@/data/team';
 import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
+import { getStableHeight } from '@/utils/deviceDetect';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -29,7 +30,7 @@ export function TeamCardsSticky() {
           return () => {};
         }
 
-        const stickyHeight = window.innerHeight * 3; // Shorter scroll since we stop at center
+        const stickyHeight = getStableHeight() * 3; // Shorter scroll since we stop at center
         const totalCards = cards.length;
 
         // Straight line animation - cards slide from right to centered position

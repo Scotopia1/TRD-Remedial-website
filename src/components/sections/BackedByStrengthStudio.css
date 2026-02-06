@@ -82,6 +82,7 @@
   position: relative;
   width: 100vw;
   height: 100svh;
+  height: 100dvh;
   padding: 1.5rem;
   background-color: var(--trd-primary);
   color: var(--trd-secondary);
@@ -172,6 +173,7 @@
   position: relative;
   width: 100%;
   height: 100svh;
+  height: 100dvh;
   padding: 1.5rem;
   background-color: var(--trd-secondary);
   color: var(--trd-primary);
@@ -236,6 +238,7 @@
   /* Mission Intro */
   .mission-intro {
     min-height: 100svh;
+    min-height: 100dvh;
     height: 100%;
   }
 

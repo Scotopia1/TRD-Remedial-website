@@ -3,7 +3,8 @@
 .three-d-showcase-pinned {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100svh;
+  height: 100dvh;
   background-color: var(--concrete-900);
   overflow: hidden;
   will-change: transform;
@@ -233,7 +234,8 @@
 @media (max-width: 768px) {
   .three-d-showcase-pinned {
     height: auto;
-    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
   }
 
   .showcase-container {

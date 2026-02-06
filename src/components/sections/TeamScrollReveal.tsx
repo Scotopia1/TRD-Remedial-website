@@ -9,6 +9,7 @@ import { useGSAP } from '@gsap/react';
 import { TEAM_MEMBERS } from '@/data/team';
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
+import { getStableHeight } from '@/utils/deviceDetect';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -140,7 +141,7 @@ export function TeamScrollReveal() {
         cardSlideInAnimationRef.current = ScrollTrigger.create({
           trigger: teamSection,
           start: 'top top', // Start when section is pinned at top
-          end: `+=${window.innerHeight * 3}`, // 3x viewport height scroll
+          end: `+=${getStableHeight() * 3}`, // 3x viewport height scroll
           pin: true, // Pin section during scroll
           scrub: 1, // Smooth sync with scroll
           refreshPriority: 7,

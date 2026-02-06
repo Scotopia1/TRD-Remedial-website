@@ -125,6 +125,7 @@
   left: 0;
   width: calc(100% - 4em);
   height: calc(100svh - 4em);
+  height: calc(100dvh - 4em);
   background: transparent;
   border-radius: 1rem;
   overflow: hidden;
@@ -178,6 +179,7 @@
   .menu {
     width: calc(100% - 2.5em);
     height: calc(100svh - 2.5em);
+    height: calc(100dvh - 2.5em);
     margin: 1.25em;
   }
 

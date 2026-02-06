@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useStore } from '@/stores/useStore';
+import { getStableHeight } from '@/utils/deviceDetect';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,7 +91,7 @@ export function WhyTRD() {
     ScrollTrigger.create({
       trigger: containerRef.current,
       start: 'top top',
-      end: () => `+=${(differentiators.length - 1) * window.innerHeight}`,
+      end: () => `+=${(differentiators.length - 1) * getStableHeight()}`,
       pin: true,
       scrub: true,
       onUpdate: (self) => {
@@ -114,7 +115,7 @@ export function WhyTRD() {
         ScrollTrigger.create({
           trigger: containerRef.current,
           start: 'top top',
-          end: () => `+=${(differentiators.length - 1) * window.innerHeight}`,
+          end: () => `+=${(differentiators.length - 1) * getStableHeight()}`,
           scrub: true,
           onUpdate: (self) => {
             if (self.progress >= start && self.progress < end) {
@@ -129,7 +130,7 @@ export function WhyTRD() {
         ScrollTrigger.create({
           trigger: containerRef.current,
           start: 'top top',
-          end: () => `+=${(differentiators.length - 1) * window.innerHeight}`,
+          end: () => `+=${(differentiators.length - 1) * getStableHeight()}`,
           scrub: true,
           onUpdate: (self) => {
             const progress = self.progress;

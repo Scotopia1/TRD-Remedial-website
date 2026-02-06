@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { getStableHeight } from '@/utils/deviceDetect';
 import './WhyChooseTRD.css';
 
 export function WhyChooseTRD() {
@@ -64,7 +65,7 @@ export function WhyChooseTRD() {
     ScrollTrigger.create({
       trigger: sectionRef.current,
       start: 'top top',
-      end: `+=${window.innerHeight * 2}`,
+      end: `+=${getStableHeight() * 2}`,
       pin: true,
       scrub: 1,
       pinSpacing: false,
@@ -102,7 +103,7 @@ export function WhyChooseTRD() {
         trigger: textContainerRef.current,
         pin: textContainerRef.current,
         start: 'top top',
-        end: `+=${window.innerHeight * 3}`,
+        end: `+=${getStableHeight() * 3}`,
         pinSpacing: true,
         scrub: 1,
         refreshPriority: 10,

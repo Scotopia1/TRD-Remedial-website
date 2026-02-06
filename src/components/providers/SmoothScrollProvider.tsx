@@ -13,7 +13,7 @@ interface SmoothScrollProviderProps {
   children: ReactNode;
 }
 
-import { isIOS, isMobile as detectMobile } from '@/utils/deviceDetect';
+import { isIOS, isMobile as detectMobile, setStableHeight, getStableHeight } from '@/utils/deviceDetect';
 
 // Shared easing function (CGMWTAUG2025 pattern)
 const easeOutExpo = (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t));
@@ -101,7 +101,7 @@ function ScrollTriggerSync() {
             top: 0,
             left: 0,
             width: window.innerWidth,
-            height: window.innerHeight,
+            height: getStableHeight(),
           };
         },
         pinType: 'transform',
@@ -148,6 +148,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   useEffect(() => {
     setIsClient(true);
     setIsIOSDevice(isIOS());
+    setStableHeight();
 
     // CRITICAL FIX: Ensure scroll is unlocked on initial page load
     // This prevents any scroll lock from persisting across page loads
@@ -162,6 +163,12 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
 
     checkMobile();
     window.addEventListener('resize', checkMobile, { passive: true });
+
+    // Update stable height on orientation change (delayed for viewport settle)
+    const handleOrientationChange = () => {
+      setTimeout(() => setStableHeight(), 500);
+    };
+    window.addEventListener('orientationchange', handleOrientationChange);
 
     // Defer GSAP/ScrollTrigger setup to idle time for better FCP
     const setupGSAP = () => {
@@ -191,7 +198,10 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
 
     requestIdleCallbackPolyfill(setupGSAP, { timeout: 1000 });
 
-    return () => window.removeEventListener('resize', checkMobile);
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('orientationchange', handleOrientationChange);
+    };
   }, []);
 
   // Refresh ScrollTrigger when mobile state changes

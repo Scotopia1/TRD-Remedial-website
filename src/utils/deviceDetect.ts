@@ -99,3 +99,25 @@ export const isStandalone = (): boolean => {
     window.matchMedia('(display-mode: standalone)').matches
   );
 };
+
+/**
+ * Stable viewport height for GSAP ScrollTrigger calculations.
+ * Captured once on mount to prevent animation recalculations
+ * when mobile browser chrome toggles during scroll.
+ */
+let _stableHeight: number = 0;
+
+export const setStableHeight = (): void => {
+  if (typeof window === 'undefined') return;
+  if (isIOS() && window.visualViewport) {
+    _stableHeight = window.visualViewport.height;
+  } else {
+    _stableHeight = window.innerHeight;
+  }
+};
+
+export const getStableHeight = (): number => {
+  if (_stableHeight > 0) return _stableHeight;
+  if (typeof window === 'undefined') return 0;
+  return window.innerHeight;
+};

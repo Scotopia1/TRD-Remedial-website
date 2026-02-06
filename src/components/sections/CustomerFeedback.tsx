@@ -7,6 +7,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
+import { getStableHeight } from '@/utils/deviceDetect';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -91,7 +92,7 @@ export function CustomerFeedback() {
       ScrollTrigger.create({
       trigger: sectionRef.current,
       start: 'top top',
-      end: () => `+=${window.innerHeight * 5}px`,
+      end: () => `+=${getStableHeight() * 5}px`,
       pin: true,
       pinSpacing: true,
       scrub: isSafari && isIOS ? 0.5 : 1,
@@ -135,22 +136,6 @@ export function CustomerFeedback() {
     window.addEventListener('orientationchange', () => {
       setTimeout(handleResize, 500);
     });
-
-    // iOS viewport height fix
-    if (isIOS) {
-      const setViewportHeight = () => {
-        document.documentElement.style.setProperty(
-          '--vh',
-          `${window.innerHeight * 0.01}px`
-        );
-      };
-
-      setViewportHeight();
-      window.addEventListener('resize', setViewportHeight);
-      window.addEventListener('orientationchange', () => {
-        setTimeout(setViewportHeight, 500);
-      });
-    }
 
     // Cleanup
     return () => {

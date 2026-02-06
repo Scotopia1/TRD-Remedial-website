@@ -13,7 +13,8 @@
 .strength-hero {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100svh;
+  height: 100dvh;
   overflow: hidden;
 }
 
@@ -122,7 +123,8 @@
   left: 0;
   z-index: 1;
   width: 100%;
-  height: 100vh;
+  height: 100svh;
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -146,7 +148,8 @@
 .split-element {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100svh;
+  height: 100dvh;
   background-color: var(--trd-secondary);
   overflow: hidden;
 }

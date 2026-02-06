@@ -47,6 +47,7 @@
    ============================================ */
 .team-hero {
   height: 100svh;
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,6 +70,7 @@
    ============================================ */
 .team-reveal {
   height: 100svh;
+  height: 100dvh;
   display: flex;
   gap: 1rem;
   background-color: var(--team-bg-dark);
@@ -236,6 +238,7 @@
    ============================================ */
 .team-outro {
   height: 100svh;
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -278,6 +281,7 @@
   /* Team Section - Stack Vertically */
   .team-reveal {
     height: 250svh;
+    height: 250dvh;
     flex-direction: column;
     align-items: center;
   }

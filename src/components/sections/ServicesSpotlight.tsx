@@ -7,6 +7,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SERVICES } from "@/data/services";
+import { getStableHeight } from '@/utils/deviceDetect';
 
 interface SpotlightItem {
   name: string;
@@ -238,7 +239,7 @@ const ServicesSpotlight = () => {
       scrollTriggerRef.current = ScrollTrigger.create({
       trigger: ".services-spotlight",
       start: "top top",
-      end: `+=${window.innerHeight * spotlightItems.length * 1.5}px`, // Increased for better timing sync
+      end: `+=${getStableHeight() * spotlightItems.length * 1.5}px`, // Increased for better timing sync
       pin: true,
       pinSpacing: true, // Enable spacing to prevent content skipping
       scrub: 1,
@@ -493,7 +494,7 @@ const ServicesSpotlight = () => {
       scrollTriggerRef.current = ScrollTrigger.create({
         trigger: ".services-spotlight",
         start: "top top",
-        end: `+=${window.innerHeight * spotlightItems.length * 1.2}px`,
+        end: `+=${getStableHeight() * spotlightItems.length * 1.2}px`,
         pin: true,
         pinSpacing: true,
         scrub: 0.5, // Faster scrub for mobile

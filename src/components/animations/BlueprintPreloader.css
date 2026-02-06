@@ -14,7 +14,8 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
+  height: 100dvh;
   z-index: 9999;
   pointer-events: all;
   background-color: transparent;
@@ -250,15 +251,15 @@
   }
 }
 
-/* Use svh for better mobile viewport handling */
-@supports (height: 100svh) {
+/* Use dvh for better mobile viewport handling */
+@supports (height: 100dvh) {
   .blueprint-loader-container {
-    height: 100svh;
+    height: 100dvh;
   }
 
   .backdrop-blur-layer,
   .initial-black-cover {
-    height: 100svh;
+    height: 100dvh;
   }
 }
 
@@ -358,8 +359,8 @@
 /* Landscape orientation on mobile */
 @media (max-width: 896px) and (orientation: landscape) {
   .blueprint-loader-container {
-    height: 100vh;
     height: 100svh;
+    height: 100dvh;
   }
 
   /* Reduce blur for landscape as content is more visible */

@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useStore } from '@/stores/useStore';
+import { getStableHeight } from '@/utils/deviceDetect';
 import dynamic from 'next/dynamic';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -102,7 +103,7 @@ export function ThreeDShowcasePinned() {
     ScrollTrigger.create({
       trigger: sectionRef.current,
       start: 'top top',
-      end: `+=${window.innerHeight * 3}`, // 3x viewport for 5 phases
+      end: `+=${getStableHeight() * 3}`, // 3x viewport for 5 phases
       pin: true,
       scrub: 0.5, // Smooth scroll sync
       pinSpacing: true,

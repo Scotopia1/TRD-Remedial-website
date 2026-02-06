@@ -11,6 +11,7 @@
   position: relative;
   width: 100vw;
   height: 100svh;
+  height: 100dvh;
   background-color: var(--concrete-100);
   color: var(--concrete-900);
   overflow: hidden;
@@ -66,6 +67,7 @@
   position: relative;
   width: 300vw; /* 3 cards × 100vw */
   height: 100svh;
+  height: 100dvh;
   display: flex;
   overflow: hidden;
   transform: translateX(0%);
@@ -196,7 +198,8 @@
   .feedback-scroll-wrapper {
     position: static;
     height: auto;
-    min-height: calc(100svh - 10rem); /* Leave space for top/bottom bars */
+    min-height: calc(100svh - 10rem);
+    min-height: calc(100dvh - 10rem); /* Leave space for top/bottom bars */
     flex: 1;
   }
 
@@ -309,6 +312,7 @@
   .feedback-card {
     height: auto;
     min-height: 100svh;
+    min-height: 100dvh;
   }
 
   .progress-bar {
