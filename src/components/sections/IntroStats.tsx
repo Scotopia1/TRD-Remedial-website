@@ -96,11 +96,7 @@ export function IntroStats() {
               opacity = fadeProgress;
             }
 
-            gsap.to(word, {
-              opacity: opacity,
-              duration: 0.1,
-              overwrite: true,
-            });
+            gsap.set(word, { opacity });
           });
         },
       });

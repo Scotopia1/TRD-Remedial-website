@@ -27,9 +27,8 @@ const ServicesSpotlight = () => {
   const currentActiveIndexRef = useRef(0);
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
-  // State for background image
-  // Use heroImage (real project images) with visual (Unsplash) as fallback
-  const [activeBgImage, setActiveBgImage] = useState(SERVICES[0].heroImage || SERVICES[0].visual);
+  // Ref for active background index - direct DOM manipulation avoids React re-renders
+  const activeBgIndexRef = useRef(0);
 
   // CGMWTAUG2025 pattern: Mobile detection for conditional ScrollTrigger
   const [isMobileDevice, setIsMobileDevice] = useState(false);
@@ -138,16 +137,15 @@ const ServicesSpotlight = () => {
     let initialized = initializeSpotlight();
 
     if (!initialized) {
-      const initInterval = setInterval(() => {
+      // Wait for next frame when DOM should be ready
+      const rafId = requestAnimationFrame(() => {
         initialized = initializeSpotlight();
-        if (initialized) {
-          clearInterval(initInterval);
+        if (!initialized) {
+          // One more try after a short delay
+          setTimeout(() => initializeSpotlight(), 100);
         }
-      }, 10);
-
-      setTimeout(() => {
-        clearInterval(initInterval);
-      }, 2000);
+      });
+      return () => cancelAnimationFrame(rafId);
     }
 
     if (!initialized) {
@@ -356,26 +354,11 @@ const ServicesSpotlight = () => {
             }
           });
 
-          // Detect active service - based on title alignment with "OUR SERVICES" label
-          let closestIndex = currentActiveIndex;
+          // Calculate active index from scroll progress instead of DOM query
+          const rawIndex = Math.floor(switchProgress * spotlightItems.length);
+          let closestIndex = Math.max(0, Math.min(rawIndex, spotlightItems.length - 1));
 
           if (!isMobile && titleElements) {
-            // Desktop: Find title that aligns with "OUR SERVICES" (50% viewport height)
-            const alignmentPoint = viewportHeight * 0.5; // Center of viewport where "OUR SERVICES" is
-            let closestDistance = Infinity;
-
-            titleElements.forEach((title, index) => {
-              const titleRect = title.getBoundingClientRect();
-              const titleCenter = titleRect.top + titleRect.height / 2;
-              const distanceFromAlignment = Math.abs(titleCenter - alignmentPoint);
-
-              // Find the closest title to the alignment point
-              if (distanceFromAlignment < closestDistance) {
-                closestDistance = distanceFromAlignment;
-                closestIndex = index;
-              }
-            });
-
             // Sync floating images to match the selected title
             // When title is aligned, its corresponding image should be at peak visibility
             imageElements.forEach((_, index) => {
@@ -409,30 +392,20 @@ const ServicesSpotlight = () => {
             });
           }
 
-          // Update title opacity continuously on desktop (titles hidden on mobile)
+          // Update title opacity based on index distance (no DOM query)
           if (!isMobile && titleElements) {
-            // Update all titles based on their distance from alignment point
-            const alignmentPoint = viewportHeight * 0.5;
-
             titleElements.forEach((title, index) => {
-              const titleRect = title.getBoundingClientRect();
-              const titleCenter = titleRect.top + titleRect.height / 2;
-              const distance = Math.abs(titleCenter - alignmentPoint);
-              const maxDistance = viewportHeight * 0.3; // 30% of viewport
-
-              if (index === closestIndex && distance < maxDistance * 0.5) {
-                // Active title - fully opaque when well-aligned
+              if (index === closestIndex) {
                 title.style.opacity = "1";
-              } else if (index === closestIndex) {
-                // Active but not perfectly aligned
-                title.style.opacity = "0.8";
-              } else if (distance < maxDistance) {
-                // Nearby inactive titles - partially visible
-                const proximityOpacity = 0.35 + (0.25 * (1 - distance / maxDistance));
-                title.style.opacity = proximityOpacity.toString();
               } else {
-                // Far away titles - dim
-                title.style.opacity = "0.2";
+                const distance = Math.abs(index - closestIndex);
+                if (distance === 1) {
+                  title.style.opacity = "0.5";
+                } else if (distance === 2) {
+                  title.style.opacity = "0.3";
+                } else {
+                  title.style.opacity = "0.2";
+                }
               }
             });
           }
@@ -440,7 +413,12 @@ const ServicesSpotlight = () => {
           // Change background image when active service changes
           if (closestIndex !== currentActiveIndex) {
             if (closestIndex >= 0 && closestIndex < spotlightItems.length) {
-              setActiveBgImage(spotlightItems[closestIndex].img);
+              activeBgIndexRef.current = closestIndex;
+              // Direct DOM: show current bg, hide others
+              const bgImages = document.querySelectorAll('.spotlight-bg-img-item');
+              bgImages.forEach((img, i) => {
+                (img as HTMLElement).style.opacity = i === closestIndex ? '1' : '0';
+              });
             }
 
             // On mobile: update header text to show service name
@@ -509,7 +487,12 @@ const ServicesSpotlight = () => {
           // Update background image and header when active service changes
           if (clampedIndex !== currentActiveIndex) {
             currentActiveIndex = clampedIndex;
-            setActiveBgImage(spotlightItems[clampedIndex].img);
+            activeBgIndexRef.current = clampedIndex;
+              // Direct DOM: show current bg, hide others
+              const bgImages = document.querySelectorAll('.spotlight-bg-img-item');
+              bgImages.forEach((img, i) => {
+                (img as HTMLElement).style.opacity = i === clampedIndex ? '1' : '0';
+              });
 
             if (spotlightHeader) {
               const serviceName = spotlightItems[clampedIndex].name;
@@ -610,20 +593,29 @@ const ServicesSpotlight = () => {
           </div>
         </div>
 
-        {/* Background image with synchronized service changes */}
+        {/* Background images - all stacked, opacity toggled via DOM */}
         <div className="spotlight-bg-img">
-          <Image
-            src={activeBgImage}
-            alt=""
-            fill
-            sizes="100vw"
-            quality={85}
-            priority={true}
-            style={{
-              objectFit: 'cover',
-              objectPosition: 'center',
-            }}
-          />
+          {spotlightItems.map((item, index) => (
+            <Image
+              key={item.id}
+              className="spotlight-bg-img-item"
+              src={item.img}
+              alt=""
+              fill
+              sizes="100vw"
+              quality={85}
+              priority={index === 0}
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center',
+                opacity: index === 0 ? 1 : 0,
+                transition: 'opacity 0.3s ease',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+              }}
+            />
+          ))}
         </div>
       </div>
 

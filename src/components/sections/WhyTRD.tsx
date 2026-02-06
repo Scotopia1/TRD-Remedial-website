@@ -18,6 +18,7 @@ export function WhyTRD() {
   const reasonsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const activeIndexRef = useRef(0);
   const isMobile = useMediaQuery('(max-width: 1024px)');
   const setCursorVariant = useStore((state) => state.setCursorVariant);
 
@@ -99,7 +100,15 @@ export function WhyTRD() {
           Math.floor(self.progress * differentiators.length),
           differentiators.length - 1
         );
-        setActiveIndex(index);
+        if (index !== activeIndexRef.current) {
+          activeIndexRef.current = index;
+          // Direct DOM update for background color — no React re-render
+          if (sectionRef.current) {
+            sectionRef.current.style.backgroundColor = differentiators[index]?.bgColor || '#ffffff';
+          }
+          // Throttled React update for ShuffleText (only fires on actual index change)
+          setActiveIndex(index);
+        }
       },
     });
 
@@ -141,28 +150,13 @@ export function WhyTRD() {
               const opacity = Math.min(localProgress * 3, 1);
               const y = (1 - Math.min(localProgress * 2, 1)) * 50;
 
-              gsap.to(reason, {
-                opacity,
-                y,
-                duration: 0.1,
-                overwrite: true,
-              });
+              gsap.set(reason, { opacity, y });
             } else if (progress < start) {
               // Before this reason
-              gsap.to(reason, {
-                opacity: 0,
-                y: 50,
-                duration: 0.1,
-                overwrite: true,
-              });
+              gsap.set(reason, { opacity: 0, y: 50 });
             } else {
               // After this reason
-              gsap.to(reason, {
-                opacity: 0,
-                y: -50,
-                duration: 0.1,
-                overwrite: true,
-              });
+              gsap.set(reason, { opacity: 0, y: -50 });
             }
           },
         });
@@ -196,7 +190,7 @@ export function WhyTRD() {
       ref={sectionRef}
       className="relative overflow-hidden"
       style={{
-        backgroundColor: isMobile ? '#ffffff' : differentiators[activeIndex]?.bgColor || '#ffffff',
+        backgroundColor: isMobile ? '#ffffff' : differentiators[0]?.bgColor || '#ffffff',
         transition: 'background-color 0.5s ease',
       }}
     >
@@ -287,31 +281,36 @@ interface ShuffleTextProps {
 
 function ShuffleText({ text, active }: ShuffleTextProps) {
   const [displayText, setDisplayText] = useState(text);
-  const frameRef = useRef(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const hasShuffledRef = useRef(false);
 
   useEffect(() => {
     if (!active) {
+      // Clear any running interval
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
       setDisplayText(text);
+      hasShuffledRef.current = false;
       return;
     }
+
+    // Only shuffle once per activation (prevents re-triggering during scroll)
+    if (hasShuffledRef.current) return;
+    hasShuffledRef.current = true;
 
     const characters = '0123456789';
     let iterations = 0;
     const maxIterations = 10;
 
-    const interval = setInterval(() => {
-      setDisplayText((prev) =>
+    intervalRef.current = setInterval(() => {
+      setDisplayText(
         text
           .split('')
           .map((char, index) => {
-            if (iterations >= maxIterations) {
-              return text[index];
-            }
-
-            if (index < iterations) {
-              return text[index];
-            }
-
+            if (iterations >= maxIterations) return text[index];
+            if (index < iterations) return text[index];
             return characters[Math.floor(Math.random() * characters.length)];
           })
           .join('')
@@ -320,12 +319,18 @@ function ShuffleText({ text, active }: ShuffleTextProps) {
       iterations += 0.5;
 
       if (iterations >= maxIterations + 2) {
-        clearInterval(interval);
+        if (intervalRef.current) clearInterval(intervalRef.current);
+        intervalRef.current = null;
         setDisplayText(text);
       }
     }, 50);
 
-    return () => clearInterval(interval);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, [text, active]);
 
   return <span>{displayText}</span>;

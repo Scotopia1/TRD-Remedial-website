@@ -126,23 +126,14 @@ body::-webkit-scrollbar {
     -webkit-overflow-scrolling: touch;
     /* iOS scrolling fix: Ensure smooth momentum scrolling */
     scroll-behavior: auto; /* Let iOS handle smooth scrolling natively */
-
-    /* Hardware acceleration for smoother scrolling */
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    perspective: 1000px;
-    -webkit-perspective: 1000px;
+    /* GPU promotion (translateZ, perspective, backface-visibility) REMOVED from root elements
+       — was promoting entire page to multiple GPU layers, causing memory pressure on mobile */
   }
 
   body {
     /* iOS scrolling fix: Improve touch responsiveness */
     -webkit-overflow-scrolling: touch;
-
-    /* Optimize rendering on iOS */
-    transform: translate3d(0, 0, 0);
-    -webkit-transform: translate3d(0, 0, 0);
+    /* translate3d(0,0,0) REMOVED — redundant GPU promotion on body element */
   }
 
   /* Optimize touch event handling - prevent delay */
@@ -350,7 +341,6 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  will-change: transform;
 }
 
 /* Typography System - CGMWTMAR2025 */
@@ -531,22 +521,10 @@ body {
   text-wrap: balance;
 }
 
-/* Performance Optimization - Content Visibility for Off-Screen Elements */
-/* Reduces initial layout work by skipping rendering of off-screen content */
-@supports (content-visibility: auto) {
-  section:not(:first-of-type) {
-    content-visibility: auto;
-    contain-intrinsic-size: 0 500px; /* Estimated section height */
-  }
-
-  /* iOS-specific: More aggressive containment for better scroll performance */
-  @supports (-webkit-touch-callout: none) {
-    section:not(:first-of-type) {
-      content-visibility: auto;
-      contain-intrinsic-size: 0 600px;
-    }
-  }
-}
+/* content-visibility: auto REMOVED — conflicts with ScrollTrigger pinned sections.
+   ScrollTrigger pre-calculates trigger positions on init; content-visibility skips
+   rendering off-screen pin-spacer elements, causing compounding height miscalculations
+   and layout shifts (200-700px jumps) on mobile. */
 
 /* 3D Transform Utilities for Flip Cards */
 .perspective-1000 {

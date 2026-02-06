@@ -111,23 +111,13 @@ function ScrollTriggerSync() {
       scrollTriggerManager.requestRefresh();
     };
 
-    // Use requestIdleCallback when available (better performance)
-    // Falls back to requestAnimationFrame on unsupported browsers
-    const requestIdleCallbackPolyfill =
-      typeof window !== 'undefined' && 'requestIdleCallback' in window
-        ? window.requestIdleCallback
-        : (cb: IdleRequestCallback) => setTimeout(cb, 1);
-
-    const cancelIdleCallbackPolyfill =
-      typeof window !== 'undefined' && 'cancelIdleCallback' in window
-        ? window.cancelIdleCallback
-        : clearTimeout;
-
-    // Defer setup during idle time for faster initial paint
-    const idleId = requestIdleCallbackPolyfill(setupProxy, { timeout: 2000 });
+    // Set up proxy immediately (single frame delay for DOM readiness)
+    // Previously used requestIdleCallback with 2s timeout, which caused scroll position
+    // mismatch between Lenis and ScrollTrigger for up to 2 seconds after mount
+    const rafId = requestAnimationFrame(setupProxy);
 
     return () => {
-      cancelIdleCallbackPolyfill(idleId);
+      cancelAnimationFrame(rafId);
       ScrollTrigger.clearScrollMemory();
     };
   }, []);
