@@ -189,24 +189,32 @@
    RESPONSIVE - MOBILE
    ============================================ */
 @media (max-width: 1000px) {
-  /* Keep horizontal scroll on mobile - just adjust sizing */
+  /* Mobile: stack cards vertically (no horizontal scroll, no pin) */
   .feedback-scroll-section {
     display: flex;
     flex-direction: column;
+    height: auto;
+    overflow: visible;
   }
 
   .feedback-scroll-wrapper {
     position: static;
+    width: 100%;
     height: auto;
-    min-height: calc(100svh - 10rem);
-    min-height: calc(100dvh - 10rem); /* Leave space for top/bottom bars */
+    min-height: auto;
     flex: 1;
+    flex-direction: column;
+    transform: none;
+    will-change: auto;
+    overflow: visible;
   }
 
   .feedback-card {
+    width: 100%;
     padding: 2rem 1rem;
     height: auto;
     min-height: auto;
+    flex: none;
   }
 
   .feedback-card-content {

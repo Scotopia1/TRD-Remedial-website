@@ -217,9 +217,14 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     );
   }
 
-  // iOS FIX: Don't render Lenis on iOS - it blocks native scrolling even with smooth: false
-  // iOS Safari has excellent native smooth scrolling, Lenis is unnecessary and causes conflicts
-  if (isIOSDevice && isMobile) {
+  // MOBILE FIX: Don't render Lenis on ANY mobile device.
+  // Lenis's scroller proxy uses pinType:'transform' which causes touch jitter
+  // with ScrollTrigger pinned sections — the proxy's smoothed position fights
+  // the native scroll position, creating visible shaking on finger scroll.
+  // Without Lenis, ScrollTrigger uses native scroll with position:fixed pins
+  // (browser compositor) — zero jitter on touch.
+  // Touch doesn't benefit from Lenis anyway (smoothTouch:false, syncTouch:false).
+  if (isMobile) {
     return (
       <ViewTransitions>
         {children}
@@ -227,7 +232,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     );
   }
 
-  // Render ReactLenis on desktop and non-iOS mobile devices
+  // Render ReactLenis on desktop only
   return (
     <ViewTransitions>
       <ReactLenis root options={scrollSettings}>
