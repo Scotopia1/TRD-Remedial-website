@@ -32,10 +32,8 @@ export function OptimizedVideo({
   // On mobile/iOS: defer video loading to improve first paint
   // On desktop: respect priority prop
   const shouldDeferLoad = isClient && (isMobileDevice || isIOSDevice);
-  const [isLoaded, setIsLoaded] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return priority && !shouldDeferLoad;
-  });
+  // Always start false to match server render and avoid hydration mismatch
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
