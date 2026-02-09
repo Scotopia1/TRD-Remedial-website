@@ -86,11 +86,11 @@
 }
 
 .feedback-card-content {
-  width: 65%;
-  max-width: 800px;
+  width: 80%;
+  max-width: 900px;
   padding: 4rem;
   background-color: var(--concrete-900);
-  border: 2px dashed var(--concrete-100);
+  border: 2px dashed rgba(233, 236, 239, 0.25);
   border-radius: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -135,7 +135,7 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  color: var(--trd-accent);
+  color: var(--concrete-100);
   line-height: 1;
 }
 
@@ -266,11 +266,9 @@
     font-size: 0.75rem;
   }
 
-  /* Progress Bar - Keep visible but smaller */
+  /* Progress Bar - Hide on mobile (not functional without GSAP scroll) */
   .feedback-progress-bar {
-    width: 30%;
-    min-width: 200px;
-    bottom: 5.5rem; /* Position above the bottom bar */
+    display: none;
   }
 }
 
@@ -300,10 +298,9 @@
     height: 40px;
   }
 
-  /* Ensure progress bar stays above bottom bar on small screens */
+  /* Progress bar hidden on mobile */
   .feedback-progress-bar {
-    bottom: 4.5rem;
-    min-width: 150px;
+    display: none;
   }
 }
 

@@ -96,6 +96,11 @@ export function CustomerFeedback() {
       pin: true,
       pinSpacing: true,
       scrub: isSafari && isIOS ? 0.5 : 1,
+      snap: {
+        snapTo: 1 / (customerFeedback.length - 1), // Snap to each card position
+        duration: { min: 0.2, max: 0.6 },
+        ease: 'power2.inOut',
+      },
       invalidateOnRefresh: true,
       refreshPriority: 6,
       onRefresh: () => {
