@@ -335,16 +335,31 @@ const ServicesSpotlight = () => {
             transform: `translateY(${currentY}px)`,
           });
 
+          // Determine active index by which title is closest to viewport center
+          const viewportCenter = viewportHeight / 2;
+          let closestIndex = 0;
+          let closestDistance = Infinity;
+
+          if (titleElements) {
+            titleElements.forEach((title, index) => {
+              const rect = title.getBoundingClientRect();
+              const titleCenter = rect.top + rect.height / 2;
+              const distance = Math.abs(titleCenter - viewportCenter);
+              if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+              }
+            });
+          }
+
           // Animate images along Bezier curve
           const isMobile = false; // Desktop mode
           imageElements.forEach((img, index) => {
             const imageProgress = getImgProgressState(index, switchProgress, isMobile);
 
             if (imageProgress < 0 || imageProgress > 1) {
-              // Image not yet visible or already passed
               gsap.set(img, { opacity: 0 });
             } else {
-              // Image is animating along curve
               const pos = getBezierPosition(imageProgress, isMobile);
               gsap.set(img, {
                 x: pos.x - 100,
@@ -353,44 +368,6 @@ const ServicesSpotlight = () => {
               });
             }
           });
-
-          // Calculate active index from scroll progress instead of DOM query
-          const rawIndex = Math.floor(switchProgress * spotlightItems.length);
-          let closestIndex = Math.max(0, Math.min(rawIndex, spotlightItems.length - 1));
-
-          if (!isMobile && titleElements) {
-            // Sync floating images to match the selected title
-            // When title is aligned, its corresponding image should be at peak visibility
-            imageElements.forEach((_, index) => {
-              const imageProgress = getImgProgressState(index, switchProgress, false);
-
-              if (index === closestIndex) {
-                // Active service image should be visible and prominent
-                // Adjust timing so image peaks when title aligns
-                if (imageProgress >= 0.3 && imageProgress <= 0.7) {
-                  // Image is at good visibility - keep this selection
-                } else if (imageProgress < 0.3 || imageProgress > 0.7) {
-                  // Image timing is off - might need to adjust scroll position
-                  // but keep the selection based on title alignment
-                }
-              }
-            });
-          } else if (isMobile) {
-            // Mobile: sync with bezier image timing
-            let bestMatchScore = -1;
-
-            imageElements.forEach((_, index) => {
-              const imageProgress = getImgProgressState(index, switchProgress, true);
-
-              if (imageProgress >= 0 && imageProgress <= 1) {
-                const score = 1 - Math.abs(imageProgress - 0.5);
-                if (score > bestMatchScore) {
-                  bestMatchScore = score;
-                  closestIndex = index;
-                }
-              }
-            });
-          }
 
           // Update title opacity based on index distance (no DOM query)
           if (!isMobile && titleElements) {
