@@ -2,7 +2,7 @@
 
 import './CustomerFeedback.css';
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -38,20 +38,6 @@ export function CustomerFeedback() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
 
-  // CGMWTAUG2025 pattern: Mobile detection for conditional ScrollTrigger
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Check mobile on mount and resize
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 1000);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
   // Create progress indicators on mount
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -86,21 +72,14 @@ export function CustomerFeedback() {
     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-    // CGMWTAUG2025 pattern: Only create horizontal scroll pin on desktop
-    if (!isMobile) {
-      // Create horizontal scroll animation
-      ScrollTrigger.create({
+    // Create horizontal scroll animation (works on all screen sizes)
+    ScrollTrigger.create({
       trigger: sectionRef.current,
       start: 'top top',
       end: () => `+=${getStableHeight() * 5}px`,
       pin: true,
       pinSpacing: true,
       scrub: isSafari && isIOS ? 0.5 : 1,
-      snap: {
-        snapTo: 1 / (customerFeedback.length - 1), // Snap to each card position
-        duration: { min: 0.2, max: 0.6 },
-        ease: 'power2.inOut',
-      },
       invalidateOnRefresh: true,
       refreshPriority: 6,
       onRefresh: () => {
@@ -125,7 +104,6 @@ export function CustomerFeedback() {
         }
       },
     });
-    } // End desktop-only horizontal scroll
 
     // Handle resize and orientation change
     let resizeTimeout: NodeJS.Timeout;
@@ -147,7 +125,7 @@ export function CustomerFeedback() {
       window.removeEventListener('resize', handleResize);
       clearTimeout(resizeTimeout);
     };
-  }, { scope: sectionRef, dependencies: [isMobile] }); // Re-run when mobile state changes
+  }, { scope: sectionRef });
 
   return (
     <section ref={sectionRef} className="feedback-scroll-section">

@@ -189,39 +189,15 @@
    RESPONSIVE - MOBILE
    ============================================ */
 @media (max-width: 1000px) {
-  /* Mobile: stack cards vertically (no horizontal scroll, no pin) */
-  .feedback-scroll-section {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    overflow: visible;
-  }
-
-  .feedback-scroll-wrapper {
-    position: static;
-    width: 100%;
-    height: auto;
-    min-height: auto;
-    flex: 1;
-    flex-direction: column;
-    transform: none;
-    will-change: auto;
-    overflow: visible;
-  }
-
+  /* Keep horizontal scroll on mobile - just adjust sizing */
   .feedback-card {
-    width: 100%;
     padding: 2rem 1rem;
-    height: auto;
-    min-height: auto;
-    flex: none;
   }
 
   .feedback-card-content {
-    width: 85%;
+    width: 80%;
     max-width: 600px;
-    padding: 2rem 1.5rem;
-    margin: 2rem auto;
+    padding: 2.5rem 1.5rem;
   }
 
   /* Typography - Mobile */
@@ -239,20 +215,6 @@
   }
 
   /* Decorative Bars - Mobile */
-  .feedback-top-bar,
-  .feedback-bottom-bar {
-    position: relative;
-    background-color: var(--concrete-100);
-  }
-
-  .feedback-top-bar {
-    border-bottom: 1px solid rgba(26, 26, 26, 0.1);
-  }
-
-  .feedback-bottom-bar {
-    border-top: 1px solid rgba(26, 26, 26, 0.1);
-  }
-
   .feedback-top-bar-content,
   .feedback-bottom-bar-content {
     padding: 1rem;
@@ -266,41 +228,30 @@
     font-size: 0.75rem;
   }
 
-  /* Progress Bar - Hide on mobile (not functional without GSAP scroll) */
+  /* Progress Bar - Keep visible but smaller */
   .feedback-progress-bar {
-    display: none;
+    width: 30%;
+    min-width: 200px;
+    bottom: 2rem;
   }
 }
 
 @media (max-width: 640px) {
   .feedback-card-content {
-    width: 90%;
-    padding: 1.5rem 1rem;
-    gap: 1.5rem;
-    margin: 1rem auto;
+    padding: 2rem 1rem;
   }
 
   .feedback-copy p {
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: 1.125rem;
   }
 
   .feedback-author h4 {
     font-size: 1.125rem;
   }
 
-  .feedback-author p.mono {
-    font-size: 0.7rem;
-  }
-
   .feedback-quote-icon svg {
     width: 40px;
     height: 40px;
-  }
-
-  /* Progress bar hidden on mobile */
-  .feedback-progress-bar {
-    display: none;
   }
 }
 
