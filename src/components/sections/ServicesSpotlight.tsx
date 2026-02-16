@@ -445,6 +445,19 @@ const ServicesSpotlight = () => {
       // Set initial state for floating images on mobile (will be animated)
       imageElements.forEach((img) => gsap.set(img, { opacity: 0, x: "50%", y: "50%" }));
 
+      // Set initial header to first service name
+      if (spotlightHeader) {
+        const firstName = spotlightItems[0].name;
+        const words = firstName.split(" ");
+        let formattedName = "";
+        for (let i = 0; i < words.length; i += 2) {
+          if (i > 0) formattedName += "<br>";
+          formattedName += words.slice(i, i + 2).join(" ");
+        }
+        spotlightHeader.innerHTML = `<p>${formattedName}</p>`;
+        spotlightHeader.style.opacity = "1";
+      }
+
       // Create PINNED ScrollTrigger for mobile - simpler progression through services
       scrollTriggerRef.current = ScrollTrigger.create({
         trigger: ".services-spotlight",
@@ -456,23 +469,54 @@ const ServicesSpotlight = () => {
         refreshPriority: 9,
         onUpdate: (self) => {
           const progress = self.progress;
+          const isMobile = true;
+          const containerWidth = window.innerWidth;
+          const viewportCenter = window.innerHeight / 2;
 
-          // Calculate which service should be active based on progress
-          const serviceIndex = Math.floor(progress * spotlightItems.length);
-          const clampedIndex = Math.min(serviceIndex, spotlightItems.length - 1);
+          // Responsive image offset based on viewport (matches CSS breakpoints)
+          const imageSize = containerWidth <= 640 ? 160 : 180;
+          const imageOffset = imageSize / 2;
 
-          // Update background image and header when active service changes
-          if (clampedIndex !== currentActiveIndex) {
-            currentActiveIndex = clampedIndex;
-            activeBgIndexRef.current = clampedIndex;
-              // Direct DOM: show current bg, hide others
-              const bgImages = document.querySelectorAll('.spotlight-bg-img-item');
-              bgImages.forEach((img, i) => {
-                (img as HTMLElement).style.opacity = i === clampedIndex ? '1' : '0';
+          // Animate floating images along Bezier curve and find which is closest to center
+          let closestIndex = currentActiveIndex;
+          let closestDistance = Infinity;
+
+          imageElements.forEach((img, index: number) => {
+            const imageProgress = getImgProgressState(index, progress, isMobile);
+
+            if (imageProgress >= 0 && imageProgress <= 1) {
+              const pos = getBezierPosition(imageProgress, isMobile);
+
+              gsap.set(img, {
+                x: pos.x - imageOffset,
+                y: pos.y - imageOffset,
+                opacity: 0.85,
+                scale: 0.95,
               });
 
+              // Check which image center is closest to viewport center
+              const imgCenterY = pos.y;
+              const distance = Math.abs(imgCenterY - viewportCenter);
+              if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+              }
+            } else {
+              gsap.set(img, { opacity: 0 });
+            }
+          });
+
+          // Update background image and header when active service changes
+          if (closestIndex !== currentActiveIndex) {
+            currentActiveIndex = closestIndex;
+            activeBgIndexRef.current = closestIndex;
+            const bgImages = document.querySelectorAll('.spotlight-bg-img-item');
+            bgImages.forEach((img, i) => {
+              (img as HTMLElement).style.opacity = i === closestIndex ? '1' : '0';
+            });
+
             if (spotlightHeader) {
-              const serviceName = spotlightItems[clampedIndex].name;
+              const serviceName = spotlightItems[closestIndex].name;
               const words = serviceName.split(" ");
               let formattedName = "";
               for (let i = 0; i < words.length; i += 2) {
@@ -483,47 +527,12 @@ const ServicesSpotlight = () => {
             }
           }
 
-          // Animate titles based on their distance from active service
+          // Animate titles based on active service
           if (titleElements) {
             titleElements.forEach((title: any, index: number) => {
-              if (index === clampedIndex) {
-                // Active service - fully visible
-                gsap.set(title, { opacity: 1 });
-              } else {
-                // Inactive services - dimmed
-                gsap.set(title, { opacity: 0.2 });
-              }
+              gsap.set(title, { opacity: index === closestIndex ? 1 : 0.2 });
             });
           }
-
-          // Animate floating images on mobile - Bezier curve animation
-          // Calculate scroll progress for image animation (same approach as desktop)
-          const isMobile = true;
-          const containerWidth = window.innerWidth;
-
-          // Responsive image offset based on viewport (matches CSS breakpoints)
-          const imageSize = containerWidth <= 640 ? 160 : 180; // Small mobile: 160px, Regular mobile: 180px
-          const imageOffset = imageSize / 2; // Center offset (half of image dimensions)
-
-          imageElements.forEach((img, index: number) => {
-            const imageProgress = getImgProgressState(index, progress, isMobile);
-
-            if (imageProgress >= 0 && imageProgress <= 1) {
-              // Image is animating along Bezier curve
-              const pos = getBezierPosition(imageProgress, isMobile);
-              const activeOpacity = 0.85;
-
-              gsap.set(img, {
-                x: pos.x - imageOffset,   // Center horizontally on curve
-                y: pos.y - imageOffset,   // Center vertically on curve
-                opacity: activeOpacity,
-                scale: 0.95,              // Slight scale for depth on mobile
-              });
-            } else {
-              // Image not yet visible or already passed
-              gsap.set(img, { opacity: 0 });
-            }
-          });
 
           // Show header
           if (spotlightHeader) {
