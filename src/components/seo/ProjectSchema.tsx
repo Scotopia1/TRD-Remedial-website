@@ -9,7 +9,7 @@ export function ProjectSchema({ project }: ProjectSchemaProps) {
     '@context': 'https://schema.org',
     '@type': 'Project',
     name: project.name,
-    description: project.challenge,
+    description: project.metaDescription || project.challenge,
     image: project.heroImage,
     mainEntityOfPage: {
       '@type': 'WebPage',

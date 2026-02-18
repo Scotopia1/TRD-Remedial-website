@@ -45,62 +45,66 @@ export interface Project {
   budget?: string;
   teamMembers?: string[];
   relatedProjects?: string[];
+  metaTitle?: string;
+  metaDescription?: string;
 }
 
 export const PROJECTS: Project[] = [
   {
     id: 'project-001',
     slug: 'caringbah-pavilion-carbon-fibre',
-    name: 'Caringbah Pavilion Carbon Fibre Reinforcement',
-    location: 'Caringbah, NSW',
-    date: 'October 30, 2025',
-    serviceType: 'Carbon Fibre Reinforcement',
+    name: 'Carbon Fibre Structural Strengthening – Caringbah Pavilion',
+    location: '41–51 President Avenue, Caringbah NSW',
+    date: '2026',
+    serviceType: 'Carbon Fibre Design, Supply & Installation',
     serviceId: 'concrete-strengthening',
-    category: ['Community', 'Heritage', 'Structural'],
+    category: ['Commercial', 'Structural', 'Construction'],
     featuredImage: '/images/projects/caringbah-pavilion/featured.jpg',
     thumbnailImage: '/images/projects/caringbah-pavilion/thumbnail.jpg',
     heroImage: '/images/projects/caringbah-pavilion/hero.jpg',
-    tagline: 'Carbon fibre strengthening for heritage community pavilion',
-    challenge: 'The Caringbah Pavilion\'s main beams had lost 60% of load-bearing capacity due to termite damage and weathering. With 200+ community events booked annually, closure wasn\'t an option. Traditional steel reinforcement would cost $400,000 and close the facility for 6+ months, devastating the community calendar. The heritage-listed building required any solution to preserve its original appearance while meeting modern structural standards. Council requirements mandated evening-only work to protect $45,000 in confirmed event bookings.',
-    solution: 'We applied carbon fibre reinforced polymer wraps using multi-directional patterns engineered to restore full structural capacity. The CFRP system added zero dead load while increasing beam strength by 300%. All work occurred during evening hours between bookings, ensuring zero event cancellations. Custom wrap positioning stayed within architectural features to maintain heritage character. The lightweight, non-invasive technology completed in 3 weeks versus 6+ months for steel alternatives. Heritage officers approved the approach as model-worthy for future projects.',
-    results: 'The CFRP solution restored structural capacity to 150% of original specification, future-proofing the building for 60+ years. Zero events were cancelled during the 3-week installation, preserving $45,000 in revenue. The $180,000 solution saved 55% versus the $400,000 steel alternative while finishing 8 weeks faster. Comprehensive certification enabled the pavilion to host 400+ events since completion with zero structural concerns. Heritage NSW commended the project as exemplary conservation work.',
+    tagline: 'Carbon fibre strengthening enabling major mid-construction design changes without steel beams, demolition, or delays',
+    challenge: 'During construction, the developer approved a ~40% increase in unit yield and the addition of a large communal pool and amenities zone at ground level. These changes introduced significant new structural loads not included in the original design, particularly at slab, beam, and column–slab connection zones. The project structural engineer required a strengthening system capable of delivering high stiffness and load capacity within very limited head-height clearances. Conventional steel strengthening was ruled out due to clearance, constructability, and aesthetic limitations. The project presented multiple constraints typical of complex live construction environments: structure already under construction, double-height basement conditions, fire-rated boards installed prior to strengthening, strict program deadlines, and no allowance for additional structural depth.',
+    solution: 'TRD Remedial proposed, engineered, supplied, and installed a bespoke Carbon Fibre Reinforced Polymer (CFRP) strengthening system tailored to the revised load demands. The scope included strengthening of suspended slabs, carbon fibre reinforcement to beams, and localised strengthening of drop panels at column–slab connections. Carbon fibre was selected due to its high strength-to-weight ratio, minimal impact on head height, rapid installation timeframe, and compatibility with fire-rated and architectural finishes. TRD Remedial coordinated directly with the project engineer, delivering full QA documentation and compliance support through to approval.',
+    results: 'From concept to completion, the entire carbon fibre strengthening scope was delivered in approximately two weeks. The solution required minimal surface preparation, caused no disruption to parallel trades, had no impact to the overall construction program, and eliminated the need for steel fabrication or heavy lifting. The carbon fibre strengthening works enabled the developer to increase residential unit numbers, add a pool and communal amenities area, achieve full structural compliance, avoid steel strengthening systems, and maintain architectural intent and clearance requirements. The solution delivered exceptional value, unlocking substantial development upside with minimal time and cost impact.',
     stats: [
-      { value: '300%', label: 'Strength Increase' },
-      { value: '0', label: 'Event Cancellations' },
-      { value: '60yr', label: 'Design Life Extension' },
+      { value: '~40%', label: 'Unit Yield Increase' },
+      { value: '2wk', label: 'Concept to Completion' },
+      { value: '0', label: 'Steel Beams Required' },
     ],
     galleryImages: [
       {
         url: '/images/projects/caringbah-pavilion/gallery-01.jpg',
-        alt: 'Initial structural assessment and beam preparation at Caringbah Pavilion',
+        alt: 'Carbon fibre reinforcement applied to suspended slab to accommodate increased structural loads',
       },
       {
         url: '/images/projects/caringbah-pavilion/gallery-02.jpg',
-        alt: 'Epoxy resin application to beam surface before carbon fibre installation',
+        alt: 'CFRP installation at slab and beam zones where additional residential units were introduced',
       },
       {
         url: '/images/projects/caringbah-pavilion/gallery-03.jpg',
-        alt: 'Carbon fibre sheet application using multi-directional wrap pattern',
+        alt: 'Carbon fibre strengthening at column–slab connection and drop panel location',
       },
       {
         url: '/images/projects/caringbah-pavilion/gallery-04.jpg',
-        alt: 'CFRP wrap installation in progress on pavilion support beam',
+        alt: 'Low-profile carbon fibre solution installed beneath fire-rated construction with no loss of head height',
       },
       {
         url: '/images/projects/caringbah-pavilion/gallery-05.jpg',
-        alt: 'Completed carbon fibre reinforcement maintaining heritage aesthetic',
+        alt: 'In-progress CFRP installation within a live construction environment',
       },
       {
         url: '/images/projects/caringbah-pavilion/gallery-06.jpg',
-        alt: 'Final structural inspection and certification of CFRP system',
+        alt: 'Completed carbon fibre structural strengthening system at Caringbah Pavilion',
       },
       {
         url: '/images/projects/caringbah-pavilion/before-01.jpg',
-        alt: 'Completed pavilion ready for continued community service',
+        alt: 'Bespoke CFRP strengthening solution enabling mid-construction design changes',
       },
     ],
-    timeline: '3 weeks (between community bookings)',
+    timeline: 'Approximately 2 weeks (concept to completion)',
     relatedProjects: ['project-002', 'project-003'],
+    metaTitle: 'Carbon Fibre Structural Strengthening – Caringbah Pavilion NSW | TRD Remedial',
+    metaDescription: 'TRD Remedial delivered CFRP structural strengthening at Caringbah Pavilion, enabling a ~40% unit yield increase and ground-floor pool addition during live construction — completed in 2 weeks with zero steel beams or delays.',
   },
   {
     id: 'project-002',
