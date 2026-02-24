@@ -65,8 +65,8 @@ export function ThreeDShowcasePinned() {
     {
       id: 'carbon',
       serviceId: 'carbon-fiber',
-      title: 'Carbon Fibre Reinforcement',
-      description: 'High-strength composite systems for structural strengthening without adding weight or bulk',
+      title: 'Structural Strengthening',
+      description: 'Carbon fibre reinforcement and high-strength composite systems without adding weight or bulk',
       startProgress: 0.2,
       endProgress: 0.4,
     },
@@ -81,7 +81,7 @@ export function ThreeDShowcasePinned() {
     {
       id: 'cutting',
       serviceId: 'cutting',
-      title: 'Concrete Cutting & Coring',
+      title: 'Concrete Cutting',
       description: 'Diamond blade precision cutting with minimal disruption and dust',
       startProgress: 0.6,
       endProgress: 0.8,
@@ -89,7 +89,7 @@ export function ThreeDShowcasePinned() {
     {
       id: 'scanning',
       serviceId: 'scanning',
-      title: 'GPR Scanning',
+      title: 'Slab Scanning',
       description: 'Non-destructive Ground Penetrating Radar technology for safe drilling operations',
       startProgress: 0.8,
       endProgress: 1.0,

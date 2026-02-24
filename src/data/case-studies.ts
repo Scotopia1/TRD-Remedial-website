@@ -84,4 +84,28 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     visual: '3d-visualization',
   },
+  {
+    id: 'florence-capri-structural',
+    title: 'Florence & Capri Complex Structural Alterations',
+    location: 'Wentworth Point, Sydney',
+    challenge: 'Large-scale structural alterations required across multiple levels of a residential complex, including shoring wall modifications and suspended slab reinforcement',
+    solution: [
+      'Comprehensive structural assessment and engineering review',
+      'Precision concrete cutting for wall modifications',
+      'Carbon fibre reinforcement installation',
+      'Shoring wall repair and waterproofing',
+    ],
+    result: 'All structural modifications completed on schedule with full engineering certification and zero defects',
+    metrics: [
+      { label: 'Levels Modified', value: '4' },
+      { label: 'Structural Cert', value: '100%' },
+    ],
+    images: [
+      {
+        before: '/images/projects/florence-capri-complex/before-01.jpg',
+        after: '/images/projects/florence-capri-complex/after-01.jpg',
+      },
+    ],
+    visual: 'slider',
+  },
 ];

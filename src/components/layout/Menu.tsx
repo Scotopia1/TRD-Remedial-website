@@ -32,13 +32,18 @@ export function Menu() {
   const previousPathRef = useRef(pathname);
   const scrollPositionRef = useRef(0);
   const [showMenuHint, setShowMenuHint] = useState(false);
+  const [showMenuLabel, setShowMenuLabel] = useState(false);
+  const [menuLabelFading, setMenuLabelFading] = useState(false);
 
   // TEMP DISABLED - Testing if this is causing issues
   // useScrollLock(isMenuOpen);
 
-  // Initialize window width on client
+  // Initialize window width on client + check if menu label should show
   useEffect(() => {
     setWindowWidth(window.innerWidth);
+    if (!localStorage.getItem('trd-menu-opened')) {
+      setShowMenuLabel(true);
+    }
   }, []);
 
   // Show menu hint for 3 seconds AFTER loading completes
@@ -60,6 +65,17 @@ export function Menu() {
     if (logoButton) {
       logoButton.classList.toggle('active');
     }
+
+    // First time opening: persist and fade out the label
+    if (!isMenuOpen && showMenuLabel) {
+      localStorage.setItem('trd-menu-opened', 'true');
+      setMenuLabelFading(true);
+      setTimeout(() => {
+        setShowMenuLabel(false);
+        setMenuLabelFading(false);
+      }, 500);
+    }
+
     setIsMenuOpen(!isMenuOpen);
   };
 
@@ -182,15 +198,22 @@ export function Menu() {
               <button
                 className={`logo-menu-button ${showMenuHint ? 'menu-hint' : ''}`}
                 onClick={toggleMenu}
+                aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={isMenuOpen}
               >
                 <img
                   src="/trd-logo.svg"
-                  alt="TRD Menu"
+                  alt="TRD"
                   className="logo-icon"
                   style={{
                     filter: 'drop-shadow(1px 1px 2px rgba(0,0,0,0.5))',
                   }}
                 />
+                {showMenuLabel && (
+                  <span className={`menu-label ${menuLabelFading ? 'menu-label-fade-out' : ''}`}>
+                    MENU
+                  </span>
+                )}
               </button>
             </div>
           </div>

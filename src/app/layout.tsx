@@ -28,22 +28,24 @@ export const metadata: Metadata = {
     default: "TRD Remedial - The Remedial Experts | Structural Solutions Sydney",
     template: "%s | TRD Remedial"
   },
-  description: "Sydney's leading structural remediation and concrete repair specialists. Expert carbon fibre reinforcement, crack injection, concrete cutting, GPR scanning, and 24/7 emergency structural solutions across NSW. Building compliance guaranteed.",
+  description: "Sydney's leading structural remediation and concrete repair specialists. Expert structural strengthening, crack injection, concrete cutting, concrete repairs, post tension truncation, slab scanning, and 24/7 emergency structural solutions across NSW. Building compliance guaranteed.",
   keywords: [
     "structural remediation Sydney",
     "concrete repair",
-    "carbon fiber reinforcement",
+    "structural strengthening",
     "building compliance",
     "structural engineering",
     "crack injection",
     "concrete cutting",
     "GPR scanning",
     "slab scanning",
+    "concrete repairs",
+    "post tension truncation",
     "emergency structural repair",
     "building commissioner approved",
     "Sydney construction",
-    "carpark line marking",
-    "safety fixture installation"
+    "curtain wall injection",
+    "structural alterations"
   ],
   authors: [{ name: "TRD Remedial", url: "https://thetrdgroup.com.au" }],
   creator: "TRD Remedial",
@@ -70,7 +72,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "TRD Remedial - The Remedial Experts | Structural Solutions Sydney",
-    description: "We solve structural challenges others can't handle. Expert remediation services: carbon fibre reinforcement, concrete cutting, crack injection, GPR scanning. 24/7 emergency response.",
+    description: "We solve structural challenges others can't handle. Expert remediation services: structural strengthening, concrete cutting, crack injection, concrete repairs, post tension truncation, slab scanning. 24/7 emergency response.",
     url: "https://thetrdgroup.com.au",
     siteName: "TRD Remedial",
     locale: "en_AU",

@@ -34,8 +34,8 @@ export function GuidedTour({ controlsRef }: GuidedTourProps) {
     {
       position: [0, 3, 10],
       lookAt: [0, 2, 0],
-      title: 'Carbon Fiber Reinforcement',
-      description: 'Floor 2 slab strengthened with carbon fiber application',
+      title: 'Structural Strengthening',
+      description: 'Floor 2 slab strengthened with carbon fibre reinforcement',
       duration: 4,
     },
     {
@@ -48,14 +48,14 @@ export function GuidedTour({ controlsRef }: GuidedTourProps) {
     {
       position: [6, 2, -2],
       lookAt: [2, 1, -1],
-      title: 'Precision Cutting',
-      description: 'Concrete cutting and coring for service installation',
+      title: 'Concrete Cutting',
+      description: 'Precision concrete cutting and coring for service installation',
       duration: 4,
     },
     {
       position: [0, 8, 0],
       lookAt: [0, 4, 0],
-      title: 'GPR Scanning',
+      title: 'Slab Scanning',
       description: 'Ground-penetrating radar reveals hidden structural elements',
       duration: 4,
     },

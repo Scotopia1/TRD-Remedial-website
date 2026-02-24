@@ -78,7 +78,7 @@ export const COMPANY_VALUES: CompanyValue[] = [
     id: 'value-002',
     title: '',
     description: '',
-    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=600&fit=crop',
+    image: '/images/projects/pelican-road-schofields/featured.jpg',
   },
   {
     id: 'value-003',
@@ -90,7 +90,7 @@ export const COMPANY_VALUES: CompanyValue[] = [
     id: 'value-004',
     title: '',
     description: '',
-    image: 'https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=800&h=600&fit=crop',
+    image: '/images/projects/waitara-multi-service/featured.jpg',
   },
   {
     id: 'value-005',
@@ -102,7 +102,7 @@ export const COMPANY_VALUES: CompanyValue[] = [
     id: 'value-006',
     title: '',
     description: '',
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop',
+    image: '/images/projects/rouse-hill-slab-scanning/featured.jpg',
   },
   {
     id: 'value-007',
@@ -114,6 +114,6 @@ export const COMPANY_VALUES: CompanyValue[] = [
     id: 'value-008',
     title: '',
     description: '',
-    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop',
+    image: '/images/projects/enfield-curtain-wall/featured.jpg',
   },
 ];

@@ -41,8 +41,8 @@ export default function AboutPage() {
         <div className="about-description-content">
           <div className="about-description-image">
             <Image
-              src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=600&fit=crop"
-              alt="TRD Remedial at work"
+              src="/images/projects/caringbah-pavilion/hero.jpg"
+              alt="TRD Remedial carbon fibre reinforcement at Caringbah Pavilion"
               width={800}
               height={600}
               sizes="(max-width: 768px) 100vw, 50vw"

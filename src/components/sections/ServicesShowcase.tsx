@@ -176,8 +176,8 @@ export function ServicesShowcase() {
             className="text-xl text-concrete-600 max-w-3xl mx-auto"
           >
             {isMobile
-              ? 'Six core services designed to solve your most challenging structural problems'
-              : 'Scroll through our six core services → designed to solve your most challenging structural problems'}
+              ? 'Nine core services designed to solve your most challenging structural problems'
+              : 'Scroll through our nine core services → designed to solve your most challenging structural problems'}
           </p>
         </div>
 

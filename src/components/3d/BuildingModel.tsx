@@ -55,8 +55,8 @@ export function BuildingModel({ activeService, scrollProgress, tourActive }: Bui
     {
       position: [0, 2, 2],
       service: 'carbon-fiber',
-      label: 'Carbon Fiber Reinforcement',
-      description: 'Slab strengthening with carbon fiber application',
+      label: 'Structural Strengthening',
+      description: 'Slab strengthening with carbon fibre reinforcement',
     },
     {
       position: [-2, 3, 0],
@@ -68,12 +68,12 @@ export function BuildingModel({ activeService, scrollProgress, tourActive }: Bui
       position: [2, 1, -1],
       service: 'cutting',
       label: 'Concrete Cutting',
-      description: 'Precision cutting and coring work',
+      description: 'Precision concrete cutting and coring work',
     },
     {
       position: [0, 4, -2],
       service: 'scanning',
-      label: 'GPR Scanning',
+      label: 'Slab Scanning',
       description: 'Ground-penetrating radar analysis',
     },
   ];

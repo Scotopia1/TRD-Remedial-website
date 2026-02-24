@@ -59,8 +59,8 @@ export function BackedByStrengthStudio() {
       <section className="mission-intro">
         <div className="mission-intro-col-sm">
           <img
-            src="/images/projects/northbridge-structural-wall/gallery-05.jpg"
-            alt="TRD structural wall reinforcement project at Northbridge"
+            src="/images/projects/florence-capri-complex/hero.jpg"
+            alt="TRD structural alterations project at Florence & Capri Complex, Wentworth Point"
             className="mission-intro-image"
             loading="lazy"
           />

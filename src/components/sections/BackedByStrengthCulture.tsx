@@ -34,25 +34,25 @@ const origins = [
   'right', 'left',
 ];
 
-// Capability images (Unsplash photo IDs)
+// Capability images (local project paths)
 const capabilityImages = [
-  '1541888946425-d81bb19240f5', // 1 - Construction site
-  '1504307651254-35680f356dfd', // 2 - Modern building
-  '1503387762-592deb58ef4e', // 3 - Steel structure
-  '1590856029826-c7a73142bbf1', // 4 - Concrete work
-  '1503328427499-d92d414d0f41', // 5 - Industrial
-  '1541976590-713941681591', // 6 - Architecture
-  '1486406146456-8edd19c34d82', // 7 - Construction equipment
-  '1581092918484-8313e01f50e2', // 8 - Building facade
-  '1504307651254-35680f356dfd', // 9 - Urban development
-  '1503387762-592deb58ef4e', // 10 - Engineering
-  '1590856029826-c7a73142bbf1', // 11 - Infrastructure
-  '1503328427499-d92d414d0f41', // 12 - Construction detail
-  '1541976590-713941681591', // 13 - Architectural detail
-  '1486406146456-8edd19c34d82', // 14 - Heavy machinery
-  '1581092918484-8313e01f50e2', // 15 - Modern construction
-  '1504307651254-35680f356dfd', // 16 - Building project
-  '1541888946425-d81bb19240f5', // 17 - Construction team
+  '/images/projects/caringbah-pavilion/gallery-01.jpg',
+  '/images/projects/waitara-multi-service/gallery-01.jpg',
+  '/images/projects/florence-capri-complex/gallery-01.jpg',
+  '/images/projects/pelican-road-schofields/gallery-01.jpg',
+  '/images/projects/enfield-curtain-wall/gallery-01.jpg',
+  '/images/projects/rouse-hill-slab-scanning/gallery-01.jpg',
+  '/images/projects/marsden-park-suspended-slab/gallery-01.jpg',
+  '/images/projects/jacaranda-construction-joints/gallery-01.jpg',
+  '/images/projects/pemulwuy-suspended-slab/gallery-01.jpg',
+  '/images/projects/northbridge-structural-wall/gallery-01.jpg',
+  '/images/projects/zetland-surelock/gallery-01.jpg',
+  '/images/projects/caringbah-pavilion/gallery-02.jpg',
+  '/images/projects/waitara-multi-service/gallery-02.jpg',
+  '/images/projects/florence-capri-complex/gallery-02.jpg',
+  '/images/projects/pelican-road-schofields/gallery-02.jpg',
+  '/images/projects/enfield-curtain-wall/gallery-02.jpg',
+  '/images/projects/rouse-hill-slab-scanning/gallery-02.jpg',
 ];
 
 // Company values for split element
@@ -236,7 +236,7 @@ export function BackedByStrengthCulture() {
       <div ref={strengthHeroRef} className="strength-hero">
         <div className="strength-hero-img">
           <Image
-            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&h=1080&fit=crop"
+            src="/images/projects/caringbah-pavilion/hero.jpg"
             alt="TRD Strength"
             fill
             sizes="100vw"
@@ -278,7 +278,7 @@ export function BackedByStrengthCulture() {
                     data-origin={origins[imageIndex]}
                   >
                     <Image
-                      src={`https://images.unsplash.com/photo-${capabilityImages[imageIndex]}?w=800&h=800&fit=crop`}
+                      src={capabilityImages[imageIndex]}
                       alt={`Capability ${imageIndex + 1}`}
                       fill
                       sizes="(max-width: 768px) 50vw, 25vw"

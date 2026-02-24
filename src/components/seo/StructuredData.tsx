@@ -43,7 +43,7 @@ export function StructuredData() {
     "@id": `${SITE_URL}/#localbusiness`,
     name: "TRD Remedial",
     image: `${SITE_URL}/images/og-image.jpg`,
-    description: "Award-winning structural remediation experts in Sydney. Specializing in carbon fibre reinforcement, concrete cutting, crack injection, and emergency structural solutions.",
+    description: "Award-winning structural remediation experts in Sydney. Specializing in structural strengthening, concrete cutting, crack injection, concrete repairs, and emergency structural solutions.",
     address: {
       "@type": "PostalAddress",
       streetAddress: "2 Beryl Place",
@@ -83,15 +83,31 @@ export function StructuredData() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Structural Remedial Works",
-            description: "Comprehensive crack injection, concrete patching, and surface restoration services"
+            name: "Structural Strengthening",
+            description: "Carbon fibre reinforcement and advanced structural strengthening solutions"
           }
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Concrete Cutting & Coring",
+            name: "Structural Alterations",
+            description: "Precision structural modifications and load-bearing alterations"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Crack Injection",
+            description: "Epoxy and polyurethane injection for structural crack repair and waterproofing"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Concrete Cutting",
             description: "Precision wall sawing, floor cutting, and coring services"
           }
         },
@@ -99,32 +115,40 @@ export function StructuredData() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Carbon Fibre Reinforcement",
-            description: "Advanced structural strengthening using carbon fiber technology"
+            name: "Concrete Repairs",
+            description: "Comprehensive concrete patching, spalling repair, and surface restoration"
           }
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Slab Scanning & Concrete Imaging",
-            description: "GPR scanning and non-invasive diagnostic services"
+            name: "Slab Scanning",
+            description: "GPR scanning and non-invasive concrete diagnostic services"
           }
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Safety Fixture Installation",
-            description: "Professional installation of handrails and height safety systems"
+            name: "Curtain Wall Injection",
+            description: "Waterproofing injection for curtain wall systems and facade sealing"
           }
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Carpark Line Marking & Fit-outs",
-            description: "Complete carpark solutions and line marking services"
+            name: "Temporary Moving Joints",
+            description: "Installation and management of temporary construction joint systems"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Post Tension Truncation",
+            description: "Safe truncation and repair of post-tensioned cable systems"
           }
         }
       ]

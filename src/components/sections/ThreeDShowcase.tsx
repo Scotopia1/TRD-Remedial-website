@@ -48,9 +48,9 @@ export function ThreeDShowcase() {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   const services = [
-    { id: 'carbon-fiber' as const, label: 'Carbon Fiber', color: 'from-blue-500 to-cyan-500' },
+    { id: 'carbon-fiber' as const, label: 'Structural Strengthening', color: 'from-blue-500 to-cyan-500' },
     { id: 'crack-injection' as const, label: 'Crack Injection', color: 'from-red-500 to-orange-500' },
-    { id: 'cutting' as const, label: 'Cutting & Coring', color: 'from-yellow-500 to-amber-500' },
+    { id: 'cutting' as const, label: 'Concrete Cutting', color: 'from-yellow-500 to-amber-500' },
     { id: 'scanning' as const, label: 'Slab Scanning', color: 'from-green-500 to-emerald-500' },
   ];
 

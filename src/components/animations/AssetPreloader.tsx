@@ -18,25 +18,25 @@ interface AssetPreloaderProps {
 
 // TRD Services Data
 const servicesData = [
-  { name: 'Carbon Fibre', category: 'Reinforcement' },
-  { name: 'Concrete Cutting', category: 'Precision Work' },
+  { name: 'Structural Strengthening', category: 'Reinforcement' },
+  { name: 'Structural Alterations', category: 'Modifications' },
   { name: 'Crack Injection', category: 'Repair Solutions' },
-  { name: 'GPR Scanning', category: 'Non-Destructive' },
-  { name: 'Line Marking', category: 'Safety Standards' },
-  { name: 'Safety Fixtures', category: 'Fall Protection' },
-  { name: 'Structural Repair', category: 'Remediation' },
-  { name: 'Emergency Response', category: '24/7 Available' },
+  { name: 'Concrete Cutting', category: 'Precision Work' },
+  { name: 'Concrete Repairs', category: 'Remediation' },
+  { name: 'Slab Scanning', category: 'Non-Destructive' },
+  { name: 'Curtain Wall Injection', category: 'Waterproofing' },
+  { name: 'Post Tension Truncation', category: 'Cable Systems' },
 ];
 
 // TRD Project Images
 const projectImages = [
-  'https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop',
+  '/images/projects/caringbah-pavilion/featured.jpg',
+  '/images/projects/waitara-multi-service/featured.jpg',
+  '/images/projects/florence-capri-complex/featured.jpg',
+  '/images/projects/pelican-road-schofields/featured.jpg',
+  '/images/projects/enfield-curtain-wall/featured.jpg',
+  '/images/projects/rouse-hill-slab-scanning/featured.jpg',
+  '/images/projects/marsden-park-suspended-slab/featured.jpg',
   '/images/team/christopher-nassif.png',
   '/images/team/charly-nassif.png',
 ];

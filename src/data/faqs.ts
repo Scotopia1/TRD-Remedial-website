@@ -81,7 +81,7 @@ export const FAQS: FAQItem[] = [
     question: 'How does carbon fibre strengthening work?',
     answer: 'Carbon Fibre Reinforced Polymer (CFRP) wrapping/plating bonds high-strength carbon fibres to concrete using structural epoxy adhesive. It increases load capacity by 50-200% while adding minimal weight. Ideal for columns, beams, and slabs requiring strength upgrades without increasing dimensions. Provides superior corrosion resistance compared to steel plate bonding.',
     category: 'technical',
-    keywords: ['carbon fibre concrete', 'CFRP strengthening', 'concrete strengthening Sydney']
+    keywords: ['carbon fibre concrete', 'CFRP strengthening', 'structural strengthening Sydney']
   },
 
   // ==================== SERVICES CATEGORY (4 FAQs) ====================

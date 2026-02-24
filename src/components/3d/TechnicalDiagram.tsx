@@ -26,7 +26,7 @@ export function TechnicalDiagram({ activeService }: TechnicalDiagramProps) {
       x: 300,
       y: 250,
       service: 'carbon-fiber',
-      label: 'Carbon Fiber Reinforcement',
+      label: 'Structural Strengthening',
       description: 'Floor 2 - Slab strengthening',
     },
     {
@@ -43,14 +43,14 @@ export function TechnicalDiagram({ activeService }: TechnicalDiagramProps) {
       y: 350,
       service: 'cutting',
       label: 'Concrete Cutting',
-      description: 'Floor 1 - Precision coring',
+      description: 'Floor 1 - Precision cutting and coring',
     },
     {
       id: 'scan1',
       x: 300,
       y: 150,
       service: 'scanning',
-      label: 'GPR Scanning',
+      label: 'Slab Scanning',
       description: 'Floor 3 - Subsurface analysis',
     },
   ];
@@ -241,10 +241,10 @@ export function TechnicalDiagram({ activeService }: TechnicalDiagramProps) {
           <text x="15" y="25" fill="white" fontSize="14" fontWeight="bold">Service Locations</text>
 
           {[
-            { service: 'carbon-fiber' as const, label: 'Carbon Fiber' },
+            { service: 'carbon-fiber' as const, label: 'Structural Strengthening' },
             { service: 'crack-injection' as const, label: 'Crack Injection' },
-            { service: 'cutting' as const, label: 'Cutting & Coring' },
-            { service: 'scanning' as const, label: 'GPR Scanning' },
+            { service: 'cutting' as const, label: 'Concrete Cutting' },
+            { service: 'scanning' as const, label: 'Slab Scanning' },
           ].map((item, idx) => (
             <g key={item.service} transform={`translate(15, ${45 + idx * 22})`}>
               <circle cx="8" cy="0" r="6" fill={getServiceColor(item.service)} />

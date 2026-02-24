@@ -15,8 +15,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function TeamScrollReveal() {
   const teamSectionRef = useRef<HTMLDivElement>(null);
-  const cardPlaceholderEntranceRef = useRef<ScrollTrigger | null>(null);
-  const cardSlideInAnimationRef = useRef<ScrollTrigger | null>(null);
+  const entranceAnimationRef = useRef<ScrollTrigger | null>(null);
+  const slideInAnimationRef = useRef<ScrollTrigger | null>(null);
 
   // CGMWTAUG2025 pattern: Mobile detection for conditional ScrollTrigger
   const [isMobile, setIsMobile] = useState(false);
@@ -37,7 +37,7 @@ export function TeamScrollReveal() {
     () => {
       const teamSection = teamSectionRef.current;
       const teamMembers = gsap.utils.toArray('.team-member');
-      const teamMemberCards = gsap.utils.toArray('.team-member-card');
+      const teamMemberImages = gsap.utils.toArray('.team-member-img');
 
       // Wait for images to load before initializing animations
       function waitForImagesToLoad(): Promise<void> {
@@ -55,11 +55,10 @@ export function TeamScrollReveal() {
       function initTeamAnimations() {
         // CGMWTAUG2025 pattern: Disable complex animations on mobile
         if (isMobile) {
-          // Kill existing ScrollTriggers
-          if (cardPlaceholderEntranceRef.current)
-            cardPlaceholderEntranceRef.current.kill();
-          if (cardSlideInAnimationRef.current)
-            cardSlideInAnimationRef.current.kill();
+          if (entranceAnimationRef.current)
+            entranceAnimationRef.current.kill();
+          if (slideInAnimationRef.current)
+            slideInAnimationRef.current.kill();
 
           // Clear all transforms on team members
           teamMembers.forEach((member: any) => {
@@ -70,23 +69,23 @@ export function TeamScrollReveal() {
             gsap.set(teamMemberInitial, { clearProps: 'all' });
           });
 
-          // Clear all transforms on cards
-          teamMemberCards.forEach((card: any) => {
-            gsap.set(card, { clearProps: 'all' });
+          // Clear all transforms on images
+          teamMemberImages.forEach((img: any) => {
+            gsap.set(img, { clearProps: 'all' });
           });
 
           return;
         }
 
         // Desktop: Kill existing animations before creating new ones
-        if (cardPlaceholderEntranceRef.current)
-          cardPlaceholderEntranceRef.current.kill();
-        if (cardSlideInAnimationRef.current)
-          cardSlideInAnimationRef.current.kill();
+        if (entranceAnimationRef.current)
+          entranceAnimationRef.current.kill();
+        if (slideInAnimationRef.current)
+          slideInAnimationRef.current.kill();
 
-        // Animation 1: Placeholder Entrance Animation
-        // Triggered when section enters viewport (40% of scroll progress)
-        cardPlaceholderEntranceRef.current = ScrollTrigger.create({
+        // Animation: Placeholder Entrance Animation
+        // Triggered when section enters viewport
+        entranceAnimationRef.current = ScrollTrigger.create({
           trigger: teamSection,
           start: 'top bottom', // Start when section enters viewport
           end: 'top top', // End when section reaches top
@@ -136,9 +135,9 @@ export function TeamScrollReveal() {
           },
         });
 
-        // Animation 2: Card Slide-In Animation
-        // Cards slide from right with rotation (60% of scroll progress)
-        cardSlideInAnimationRef.current = ScrollTrigger.create({
+        // Animation 2: Image Slide-In Animation
+        // Images slide from right with scale (pinned scroll)
+        slideInAnimationRef.current = ScrollTrigger.create({
           trigger: teamSection,
           start: 'top top', // Start when section is pinned at top
           end: `+=${getStableHeight() * 3}`, // 3x viewport height scroll
@@ -148,58 +147,42 @@ export function TeamScrollReveal() {
           onUpdate: (self) => {
             const progress = self.progress;
 
-            teamMemberCards.forEach((card: any, index: number) => {
-              // Phase A: Rotation & Slide Animation (40%-70% progress)
-              const slideInStagger = 0.075; // Stagger delay per card
-              const xRotationDuration = 0.4; // Duration of slide/rotation
-              const xRotationStart = index * slideInStagger;
-              const xRotationEnd = xRotationStart + xRotationDuration;
+            teamMemberImages.forEach((img: any, index: number) => {
+              // Phase A: Slide Animation
+              const slideInStagger = 0.075;
+              const xDuration = 0.4;
+              const xStart = index * slideInStagger;
+              const xEnd = xStart + xDuration;
 
-              if (progress >= xRotationStart && progress <= xRotationEnd) {
-                const cardProgress =
-                  (progress - xRotationStart) / xRotationDuration;
+              if (progress >= xStart && progress <= xEnd) {
+                const imgProgress = (progress - xStart) / xDuration;
 
-                // Calculate slide-in X position
-                // Member 1: 300% -> -50%
-                // Member 2: 200% -> -50%
-                // Member 3: 100% -> -50%
-                const cardInitialX = 300 - index * 100;
-                const cardTargetX = -50;
-                const cardSlideInX =
-                  cardInitialX + cardProgress * (cardTargetX - cardInitialX);
+                // Slide from right to center
+                const initialX = 300 - index * 100;
+                const targetX = 0;
+                const slideX = initialX + imgProgress * (targetX - initialX);
 
-                // No rotation - cards stay straight (0deg) throughout animation
-                gsap.set(card, {
-                  x: `${cardSlideInX}%`,
-                  rotation: 0,
+                gsap.set(img, {
+                  x: `${slideX}%`,
                 });
-              } else if (progress > xRotationEnd) {
-                // Set final position after slide completes
-                gsap.set(card, {
-                  x: `-50%`,
-                  rotation: 0,
+              } else if (progress > xEnd) {
+                gsap.set(img, {
+                  x: `0%`,
                 });
               }
 
-              // Phase B: Scale Animation (40%-100% progress)
-              const cardScaleStagger = 0.12; // Stagger delay per card
-              const cardScaleStart = 0.4 + index * cardScaleStagger;
-              const cardScaleEnd = 1;
+              // Phase B: Scale Animation
+              const scaleStagger = 0.12;
+              const scaleStart = 0.4 + index * scaleStagger;
+              const scaleEnd = 1;
 
-              if (progress >= cardScaleStart && progress <= cardScaleEnd) {
+              if (progress >= scaleStart && progress <= scaleEnd) {
                 const scaleProgress =
-                  (progress - cardScaleStart) / (cardScaleEnd - cardScaleStart);
-                // Scale: 0.75 -> 1
+                  (progress - scaleStart) / (scaleEnd - scaleStart);
                 const scaleValue = 0.75 + scaleProgress * 0.25;
-
-                gsap.set(card, {
-                  scale: scaleValue,
-                });
-              } else if (progress > cardScaleEnd) {
-                // Set final scale after animation completes
-                gsap.set(card, {
-                  scale: 1,
-                });
+                gsap.set(img, { scale: scaleValue });
+              } else if (progress > scaleEnd) {
+                gsap.set(img, { scale: 1 });
               }
             });
           },
@@ -231,10 +214,10 @@ export function TeamScrollReveal() {
       // Cleanup function
       return () => {
         window.removeEventListener('resize', handleResize);
-        if (cardPlaceholderEntranceRef.current)
-          cardPlaceholderEntranceRef.current.kill();
-        if (cardSlideInAnimationRef.current)
-          cardSlideInAnimationRef.current.kill();
+        if (entranceAnimationRef.current)
+          entranceAnimationRef.current.kill();
+        if (slideInAnimationRef.current)
+          slideInAnimationRef.current.kill();
       };
     },
     { scope: teamSectionRef, dependencies: [isMobile] } // Re-run when mobile state changes
@@ -243,49 +226,6 @@ export function TeamScrollReveal() {
   // Extract first initial from each team member name
   const getInitial = (name: string): string => {
     return name.charAt(0).toUpperCase();
-  };
-
-  // Split name into first and last for styling
-  const splitName = (name: string): { first: string; last: string } => {
-    const parts = name.split(' ');
-    return {
-      first: parts[0],
-      last: parts.slice(1).join(' '),
-    };
-  };
-
-  // Calculate responsive font size based on name length
-  const calculateFontSize = (name: string): { desktop: string; mobile: string } => {
-    const totalLength = name.length;
-
-    // Base sizes
-    const baseDesktop = 6.5; // rem
-    const baseMobile = 5; // rem
-
-    // Character thresholds
-    const shortThreshold = 12; // e.g., "Fahed Nassif"
-    const longThreshold = 15; // e.g., "Christopher Nassif"
-
-    let desktopSize = baseDesktop;
-    let mobileSize = baseMobile;
-
-    if (totalLength > longThreshold) {
-      // Long names: scale down proportionally
-      const scaleFactor = shortThreshold / totalLength;
-      desktopSize = baseDesktop * scaleFactor;
-      mobileSize = baseMobile * scaleFactor;
-    } else if (totalLength > shortThreshold) {
-      // Medium names: slight reduction
-      const scaleFactor = 0.85;
-      desktopSize = baseDesktop * scaleFactor;
-      mobileSize = baseMobile * scaleFactor;
-    }
-    // Short names keep base size
-
-    return {
-      desktop: `${desktopSize.toFixed(2)}rem`,
-      mobile: `${mobileSize.toFixed(2)}rem`,
-    };
   };
 
   return (
@@ -300,8 +240,6 @@ export function TeamScrollReveal() {
         {/* Team Reveal Section */}
         <div className="team-reveal" ref={teamSectionRef}>
           {TEAM_MEMBERS.map((member, index) => {
-            const nameParts = splitName(member.name);
-            const fontSize = calculateFontSize(member.name);
             return (
               <div key={member.id} className="team-member">
                 {/* Large Initial Letter */}
@@ -309,34 +247,17 @@ export function TeamScrollReveal() {
                   <span data-animate="initial">{getInitial(member.name)}</span>
                 </div>
 
-                {/* Team Member Card */}
-                <div className="team-member-card">
-                  {/* Member Image */}
-                  <div className="team-member-img">
-                    <OptimizedImage
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 600px"
-                      quality={85}
-                      priority={false}
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </div>
-
-                  {/* Member Info */}
-                  <div className="team-member-info">
-                    <p className="team-member-role">( {member.title} )</p>
-                    <h3
-                      className="team-member-name"
-                      style={{
-                        '--name-font-size-desktop': fontSize.desktop,
-                        '--name-font-size-mobile': fontSize.mobile,
-                      } as React.CSSProperties}
-                    >
-                      {nameParts.first} <span>{nameParts.last}</span>
-                    </h3>
-                  </div>
+                {/* Member Image */}
+                <div className="team-member-img">
+                  <OptimizedImage
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 600px"
+                    quality={85}
+                    priority={false}
+                    style={{ objectFit: 'cover' }}
+                  />
                 </div>
               </div>
             );

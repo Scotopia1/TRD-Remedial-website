@@ -123,86 +123,21 @@
 }
 
 /* ============================================
-   TEAM MEMBER CARD
+   TEAM MEMBER IMAGE
    ============================================ */
-.team-member-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  background-color: var(--team-card-bg);
-  border-radius: 1.5rem;
-  will-change: transform;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-/* Member Image */
 .team-member-img {
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: 1rem;
+  position: absolute;
+  inset: 0;
+  border-radius: 1.5rem;
   overflow: hidden;
-  margin-bottom: 1rem;
 }
 
 .team-member-img img {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
   object-fit: cover;
-}
-
-/* Member Info */
-.team-member-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1rem;
-  width: 100%;
-  overflow: hidden;
-}
-
-.team-member-role {
-  text-transform: uppercase;
-  font-family: "Messina Sans Mono", monospace;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--team-card-text);
-  line-height: 1;
-}
-
-.team-member-name {
-  font-size: var(--name-font-size-desktop, 6.5rem);
-  font-weight: 800;
-  text-transform: uppercase;
-  line-height: 0.9;
-  color: var(--team-accent);
-  font-family: "Rader", sans-serif;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  hyphens: manual;
-  max-width: 100%;
-  width: 100%;
-  display: block;
-  white-space: normal;
-  text-align: center;
-}
-
-.team-member-name span {
-  color: var(--team-card-text);
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  display: inline;
-  white-space: normal;
 }
 
 /* ============================================
@@ -220,17 +155,17 @@
   transform: scale(0);
 }
 
-/* Cards start off-screen right with 0deg rotation (rotation applied during animation) */
-.team-member:nth-child(1) .team-member-card {
-  transform: translate(300%, -50%) scale(0.75) rotate(0deg);
+/* Images start off-screen right with reduced scale */
+.team-member:nth-child(1) .team-member-img {
+  transform: translateX(300%) scale(0.75);
 }
 
-.team-member:nth-child(2) .team-member-card {
-  transform: translate(200%, -50%) scale(0.75) rotate(0deg);
+.team-member:nth-child(2) .team-member-img {
+  transform: translateX(200%) scale(0.75);
 }
 
-.team-member:nth-child(3) .team-member-card {
-  transform: translate(100%, -50%) scale(0.75) rotate(0deg);
+.team-member:nth-child(3) .team-member-img {
+  transform: translateX(100%) scale(0.75);
 }
 
 /* ============================================
@@ -298,15 +233,11 @@
     font-size: 12rem;
   }
 
-  /* Cards - Centered on Mobile */
-  .team-member .team-member-card {
-    transform: translate(-50%, -50%) scale(1) rotate(0deg) !important;
+  /* Images - Reset transforms on Mobile */
+  .team-member .team-member-img {
+    transform: none !important;
   }
 
-  /* Member Name - Smaller on Mobile */
-  .team-member-name {
-    font-size: var(--name-font-size-mobile, 5rem);
-  }
 }
 
 /* ============================================
@@ -316,14 +247,14 @@
   /* Reset all transforms for reduced motion */
   .team-member,
   .team-member-name-initial h1,
-  .team-member-card {
+  .team-member-img {
     transform: none !important;
   }
 
   /* Disable will-change */
   .team-member,
   .team-member-name-initial h1,
-  .team-member-card {
+  .team-member-img {
     will-change: auto !important;
   }
 }

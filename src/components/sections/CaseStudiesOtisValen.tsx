@@ -21,7 +21,7 @@ export function CaseStudiesOtisValen() {
     'project-006', // Rouse Hill - Slab Scanning, Diagnostic
     'project-007', // Pelican Road - Residential Estate
     'project-003', // Enfield - Curtain Wall, Commercial
-    'project-005', // Northbridge - Structural Wall, Heritage
+    'project-011', // Florence & Capri - Structural Alterations
     'project-012', // Zetland - Surelock System, Precision
   ];
 
@@ -34,9 +34,6 @@ export function CaseStudiesOtisValen() {
       image: project.thumbnailImage || project.featuredImage,
       href: `/projects/${project.slug}`,
     }));
-
-  // Debug: Log image paths
-  console.log('Case Studies Images:', caseStudiesData.map(d => d.image));
 
   const containerRef = useRef(null);
   const headerContentRef = useRef(null);

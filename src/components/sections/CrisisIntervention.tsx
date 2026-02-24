@@ -14,7 +14,7 @@ export function CrisisIntervention() {
     {
       index: '01',
       title: 'The Crisis',
-      image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=600&fit=crop',
+      image: '/images/projects/caringbah-pavilion/featured.jpg',
       label: '(The Problem)',
       description:
         "Stop-work orders halting multi-million dollar developments. Structural compliance failures threatening project viability. Contractors who couldn't deliver on complex remedial requirements.",
@@ -22,7 +22,7 @@ export function CrisisIntervention() {
     {
       index: '02',
       title: 'The Solution',
-      image: 'https://images.unsplash.com/photo-1503328427499-d92d414d0f41?w=800&h=600&fit=crop',
+      image: '/images/projects/waitara-multi-service/featured.jpg',
       label: '(TRD Remedial)',
       description:
         'Full structural compliance achieved. Stop-work orders lifted. Projects back on track with Building Commissioner approval. Development proceeding successfully.',
