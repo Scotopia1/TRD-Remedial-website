@@ -196,67 +196,113 @@
   color: var(--concrete-300);
 }
 
-/* 7. Process Visual */
-.service-process-visual {
-  width: 100vw;
-  height: 100svh;
-  padding: 0;
-  position: relative;
-}
-
-.process-image-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-/* 8. Process Steps */
+/* 8. Process Section — Two-Column Pinned Grid + Scrolling Steps */
 .service-process {
   background: var(--concrete-900);
 }
 
-.process-steps {
+.process-layout {
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  gap: 4rem;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Left: Image panel (centered within pinned grid) */
+.process-sticky-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+  height: 100%;
+}
+
+/* Image viewer with cross-fade */
+.process-image-viewer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.process-image-viewer img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.process-image-viewer img:first-child {
+  opacity: 1;
+}
+
+/* Right: Scrolling Steps */
+.process-steps-scroll {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
 }
 
-.process-step {
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 2rem;
-  padding-bottom: 3rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.process-step-panel {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 0;
+  position: relative;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
-.process-step:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
+.step-ghost-number {
+  font-family: "Rader", sans-serif;
+  font-size: clamp(6rem, 15vw, 12rem);
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.06);
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 1;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.step-content {
+  position: relative;
+  z-index: 1;
 }
 
 .step-number {
   font-family: "Messina Sans Mono", monospace;
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--trd-accent);
-  line-height: 1;
+  font-size: 1rem;
+  color: var(--concrete-400);
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
 }
 
 .step-title {
   font-family: "Rader", sans-serif;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 700;
   text-transform: uppercase;
   color: var(--concrete-100);
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
 }
 
 .step-description {
   font-family: "Messina Sans", sans-serif;
   font-size: 1.125rem;
-  line-height: 1.6;
+  line-height: 1.7;
   color: var(--concrete-300);
+  max-width: 500px;
 }
 
 /* 9. CTA Section */
@@ -397,13 +443,48 @@
     font-size: 4rem;
   }
 
-  .process-step {
+  /* Process section mobile */
+  .process-layout {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 2rem;
+    height: auto;
+    overflow: visible;
+  }
+
+  .process-sticky-panel {
+    height: auto;
+  }
+
+  .process-image-viewer {
+    aspect-ratio: 16 / 9;
+  }
+
+  /* On mobile: show only the process image statically */
+  .process-image-viewer img {
+    opacity: 0;
+  }
+
+  .process-image-viewer img:last-child {
+    opacity: 1;
+  }
+
+
+  .process-step-panel {
+    min-height: auto;
+    padding: 3rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .process-step-panel:last-child {
+    border-bottom: none;
+  }
+
+  .step-ghost-number {
+    display: none;
   }
 
   .step-number {
-    font-size: 2rem;
+    font-size: 0.875rem;
   }
 
   .step-title {
@@ -435,8 +516,7 @@
 
 /* Tablet */
 @media (max-width: 640px) {
-  .service-features-visual,
-  .service-process-visual {
+  .service-features-visual {
     height: 60svh;
   }
 

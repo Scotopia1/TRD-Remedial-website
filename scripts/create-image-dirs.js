@@ -17,15 +17,15 @@ const projects = [
 ];
 
 const services = [
+  'structural-strengthening',
+  'structural-alterations',
   'crack-injection',
   'concrete-cutting',
-  'crack-repairs',
-  'structural-alterations',
+  'concrete-repairs',
   'slab-scanning',
-  'temporary-moving-joints',
-  'concrete-strengthening',
   'curtain-wall-injection',
-  'shoring-wall-repairs',
+  'temporary-moving-joints',
+  'post-tension-truncation',
 ];
 
 const baseDir = path.join(__dirname, '..', 'public', 'images');

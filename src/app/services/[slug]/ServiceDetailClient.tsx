@@ -1,6 +1,10 @@
 'use client';
 
+import { useRef } from 'react';
 import Link from 'next/link';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { AnimatedH1 } from '@/components/animations/AnimatedH1';
 import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
 import { ParallaxImage } from '@/components/animations/ParallaxImage';
@@ -10,11 +14,122 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { useStore } from '@/stores/useStore';
 import type { Service } from '@/data/services';
 import { PROJECTS } from '@/data/projects';
-import { useRouter } from 'next/navigation';
+import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function ServiceDetailClient({ service }: { service: Service }) {
   const setCursorVariant = useStore((state) => state.setCursorVariant);
-  const router = useRouter();
+
+  // Process section refs
+  const processSectionRef = useRef<HTMLElement>(null);
+  const layoutRef = useRef<HTMLDivElement>(null);
+  const stepsRef = useRef<HTMLDivElement>(null);
+  const imageRefs = useRef<HTMLImageElement[]>([]);
+
+  // Build image array from available service images (3 unique images, cycled for N steps)
+  const processImages = [
+    service.visual,
+    service.featureImage,
+    service.processImage,
+  ].filter(Boolean) as string[];
+
+  // GSAP: pin entire grid layout, timeline-drive steps translateY + image cross-fade
+  // Fixes: pinning grid child caused image drift and overlap issues
+  useGSAP(() => {
+    if (!layoutRef.current || !stepsRef.current) return;
+    if (!service.process || service.process.length === 0) return;
+
+    const mm = gsap.matchMedia();
+
+    // Desktop only (>=901px)
+    mm.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
+      const imgs = imageRefs.current;
+      const numSteps = service.process!.length;
+      const numImages = imgs.length;
+      const viewportH = window.innerHeight;
+      const moveDistance = viewportH * (numSteps - 1);
+
+      // Initial state: first image visible, rest hidden + slightly zoomed
+      if (imgs[0]) gsap.set(imgs[0], { opacity: 1, scale: 1 });
+      if (imgs.length > 1) gsap.set(imgs.slice(1), { opacity: 0, scale: 1.05 });
+
+      // Single timeline: pin the grid, scroll steps, cross-fade images
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: layoutRef.current,
+          start: 'top top',
+          end: `+=${moveDistance}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      // Translate steps column upward (each step = 100vh, moves N-1 steps)
+      tl.to(stepsRef.current, {
+        y: -moveDistance,
+        ease: 'none',
+        duration: numSteps - 1,
+      }, 0);
+
+      // Cross-fade images at step transitions
+      for (let i = 1; i < numSteps; i++) {
+        const prevImgIdx = (i - 1) % numImages;
+        const currImgIdx = i % numImages;
+        if (prevImgIdx === currImgIdx) continue;
+
+        // Position the fade at 35% into each step transition
+        const fadePos = (i - 1) + 0.35;
+
+        tl.to(imgs[prevImgIdx], {
+          opacity: 0, scale: 0.98, ease: 'none', force3D: true, duration: 0.3,
+        }, fadePos);
+
+        tl.fromTo(imgs[currImgIdx],
+          { opacity: 0, scale: 1.05 },
+          { opacity: 1, scale: 1, ease: 'none', force3D: true, duration: 0.3 },
+          fadePos,
+        );
+      }
+
+      scrollTriggerManager.requestRefresh();
+    });
+
+    // Desktop with reduced motion — pin only, no animations
+    mm.add('(min-width: 901px) and (prefers-reduced-motion: reduce)', () => {
+      const numSteps = service.process!.length;
+      const viewportH = window.innerHeight;
+      const moveDistance = viewportH * (numSteps - 1);
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: layoutRef.current,
+          start: 'top top',
+          end: `+=${moveDistance}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      tl.to(stepsRef.current, {
+        y: -moveDistance,
+        ease: 'none',
+        duration: numSteps - 1,
+      }, 0);
+
+      scrollTriggerManager.requestRefresh();
+    });
+
+    // Mobile (<=900px) — no pinning, static layout
+    mm.add('(max-width: 900px)', () => {
+      // Static image, no animations
+    });
+
+  }, { scope: processSectionRef });
 
   return (
     <div className="service-detail-page">
@@ -129,38 +244,50 @@ export function ServiceDetailClient({ service }: { service: Service }) {
         </section>
       )}
 
-      {/* 7. Process Image - 100svh */}
-      <section className="service-section service-process-visual">
-        <div className="process-image-container">
-          <ParallaxImage
-            src={service.processImage || service.visual}
-            alt={`${service.title} process`}
-            speed={0.2}
-          />
-        </div>
-      </section>
-
-      {/* 8. Process Steps */}
+      {/* 8. Process Steps — Two-Column Sticky Image + Scrolling Steps */}
       {service.process && service.process.length > 0 && (
-        <section className="service-section service-process">
+        <section ref={processSectionRef} className="service-section service-process">
           <div className="service-content">
             <AnimatedH1 animateOnScroll={true} className="section-title">
               Our Process
             </AnimatedH1>
-            <div className="process-steps">
-              {service.process.map((step, i) => (
-                <div key={i} className="process-step">
-                  <AnimatedCopy delay={i * 0.1} tag="div" className="step-number">
-                    {String(step.step).padStart(2, '0')}
-                  </AnimatedCopy>
-                  <AnimatedCopy delay={i * 0.1 + 0.05} tag="h3" className="step-title">
-                    {step.title}
-                  </AnimatedCopy>
-                  <AnimatedCopy delay={i * 0.1 + 0.1} tag="p" className="step-description">
-                    {step.description}
-                  </AnimatedCopy>
+
+            <div ref={layoutRef} className="process-layout">
+              {/* LEFT: Image panel (centered within pinned grid) */}
+              <div className="process-sticky-panel">
+                <div className="process-image-viewer">
+                  {processImages.map((img, idx) => (
+                    <img
+                      key={idx}
+                      src={img}
+                      alt={`${service.title} process step ${idx + 1}`}
+                      ref={(el) => { if (el) imageRefs.current[idx] = el; }}
+                    />
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              {/* RIGHT: Scrolling step panels */}
+              <div ref={stepsRef} className="process-steps-scroll">
+                {service.process.map((step, i) => (
+                  <div key={i} className="process-step-panel">
+                    <div className="step-ghost-number" aria-hidden="true">
+                      {String(step.step).padStart(2, '0')}
+                    </div>
+                    <div className="step-content">
+                      <AnimatedCopy delay={0.05} tag="div" className="step-number" animateOnScroll={true}>
+                        STEP {String(step.step).padStart(2, '0')}
+                      </AnimatedCopy>
+                      <AnimatedCopy delay={0.1} tag="h3" className="step-title" animateOnScroll={true}>
+                        {step.title}
+                      </AnimatedCopy>
+                      <AnimatedCopy delay={0.15} tag="p" className="step-description" animateOnScroll={true}>
+                        {step.description}
+                      </AnimatedCopy>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>

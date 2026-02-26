@@ -14,19 +14,19 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'one-the-waterfront',
     title: 'One The Waterfront',
-    location: 'Sydney Olympic Park',
-    challenge: 'Stalled development with Building Commissioner stop-work order due to structural compliance issues',
+    location: 'Wentworth Point, Sydney',
+    challenge: 'Masscon acquired an abandoned, partially completed complex requiring full structural reconfiguration — more levels, more units, column removals, and new vertical circulation — with neighbouring buildings fully occupied',
     solution: [
-      '40 columns removed with precision',
-      '4 slabs cut to specifications',
-      '3,000m of drainage system installed',
-      'Comprehensive structural remediation',
+      '2,000 core holes drilled across the project',
+      '5,000 linear metres of concrete cutting through 5 levels',
+      '40 columns removed with full propping and temporary works',
+      'Full stormwater pipe relining in Basement 4',
     ],
-    result: 'Stop-work order lifted, development proceeding successfully',
+    result: 'Completed in 5 weeks — zero incidents, zero delays, zero disruption to neighbouring occupied buildings',
     metrics: [
+      { label: 'Core Holes', value: '2,000' },
+      { label: 'Linear Metres Cut', value: '5,000' },
       { label: 'Columns Removed', value: '40' },
-      { label: 'Slabs Cut', value: '4' },
-      { label: 'Drainage Installed', value: '3,000m' },
     ],
     images: [
       {
@@ -83,29 +83,5 @@ export const CASE_STUDIES: CaseStudy[] = [
       },
     ],
     visual: '3d-visualization',
-  },
-  {
-    id: 'florence-capri-structural',
-    title: 'Florence & Capri Complex Structural Alterations',
-    location: 'Wentworth Point, Sydney',
-    challenge: 'Large-scale structural alterations required across multiple levels of a residential complex, including shoring wall modifications and suspended slab reinforcement',
-    solution: [
-      'Comprehensive structural assessment and engineering review',
-      'Precision concrete cutting for wall modifications',
-      'Carbon fibre reinforcement installation',
-      'Shoring wall repair and waterproofing',
-    ],
-    result: 'All structural modifications completed on schedule with full engineering certification and zero defects',
-    metrics: [
-      { label: 'Levels Modified', value: '4' },
-      { label: 'Structural Cert', value: '100%' },
-    ],
-    images: [
-      {
-        before: '/images/projects/florence-capri-complex/before-01.jpg',
-        after: '/images/projects/florence-capri-complex/after-01.jpg',
-      },
-    ],
-    visual: 'slider',
   },
 ];

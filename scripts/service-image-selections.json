@@ -1,0 +1,241 @@
+{
+  "_metadata": {
+    "generated": "2026-02-21",
+    "total_services": 9,
+    "note": "All source paths are under C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/. No two services share the same source image. Scores are out of 60 (6 criteria x 10 max)."
+  },
+  "structural-strengthening": {
+    "hero": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION/IMG_0671.JPG",
+      "folder": "CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION",
+      "filename": "IMG_0671.JPG",
+      "file_size_bytes": 1317190,
+      "score": 44,
+      "reason": "Wide upward-looking shot of an entire large pavilion ceiling covered with a dramatic grid of black carbon-fibre reinforcement strips. A worker in hi-vis orange stands on a scissor lift providing scale. Excellent depth, industrial drama, and clear service identity."
+    },
+    "feature": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION/IMG_0685.JPG",
+      "folder": "CARBON FIBRE REINFORCEMENT - CARINGBAH PAVILION",
+      "filename": "IMG_0685.JPG",
+      "file_size_bytes": 1160620,
+      "score": 41,
+      "reason": "Close-up of the completed CF strip cross-pattern on a concrete wall, showing the precision and craftsmanship of the bonded reinforcement layout. Clear product detail without clutter."
+    },
+    "process": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/STRUCTURAL STEEL REINFORCING - WAITARA/IMG_4125.JPG",
+      "folder": "STRUCTURAL STEEL REINFORCING - WAITARA",
+      "filename": "IMG_4125.JPG",
+      "file_size_bytes": 768461,
+      "score": 52,
+      "reason": "Dramatic welding shot of a worker in orange hi-vis with welding shield; a cascade of bright orange sparks radiates across the frame against a dark background. Outstanding visual drama — the single best action shot in the entire library. Perfectly represents the structural steel reinforcement process."
+    }
+  },
+  "structural-alterations": {
+    "hero": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/STRUCTURAL ALTERATIONS - FLORENCE AND CARPI WENTWORTHPOINT_/IMG_1436.JPG",
+      "folder": "STRUCTURAL ALTERATIONS - FLORENCE AND CARPI WENTWORTHPOINT_",
+      "filename": "IMG_1436.JPG",
+      "file_size_bytes": 1038474,
+      "score": 51,
+      "reason": "Massive concrete panel suspended by chains while a worker in yellow hi-vis supervises; grinder sparks fly in the background. Entire scene framed by yellow temporary support props. Open sky above. Outstanding scale, drama, and authenticity. Best hero in the alterations set."
+    },
+    "feature": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/STRUCTURAL ALTERATIONS - FLORENCE AND CARPI WENTWORTHPOINT_/IMG_1432.JPG",
+      "folder": "STRUCTURAL ALTERATIONS - FLORENCE AND CARPI WENTWORTHPOINT_",
+      "filename": "IMG_1432.JPG",
+      "file_size_bytes": 1022681,
+      "score": 50,
+      "reason": "Cut concrete panel lifted by chain crane; worker directing the lift. Strong composition showcasing the precision required for structural alteration work. Clear feature-level detail of the key moment."
+    },
+    "process": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/FLORENCE & CAPRI WENTWORTHPOINT/IMG_2795.JPG",
+      "folder": "FLORENCE & CAPRI WENTWORTHPOINT",
+      "filename": "IMG_2795.JPG",
+      "file_size_bytes": 207495,
+      "score": 51,
+      "reason": "Low-angle outdoor shot of a worker using a core drill on a concrete retaining wall, shot from below against a bright sky with city skyline visible. Excellent composition, dramatic lighting, strong colour contrast between orange hi-vis and blue sky. Unique outdoor setting distinguishes it from all other process shots."
+    }
+  },
+  "crack-injection": {
+    "hero": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/12C PELICAN ROAD SCHOFIELDS - SLAB ON GROUND CRACK INJECTION/IMG_3085.JPG",
+      "folder": "12C PELICAN ROAD SCHOFIELDS - SLAB ON GROUND CRACK INJECTION",
+      "filename": "IMG_3085.JPG",
+      "file_size_bytes": 974268,
+      "score": 50,
+      "reason": "Wide horizontal shot of a long carpark wall entirely covered with crack injection treatment — multiple crack paths stitched with injection ports spanning the full width of the image. A green exit sign adds environmental context. Exceptional scale and documentary power. Perfect hero to establish service scope."
+    },
+    "feature": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/STRUCTURAL WALL INJECTION - LOT 9 MARSDEN PARK/IMG_0928.JPG",
+      "folder": "STRUCTURAL WALL INJECTION - LOT 9 MARSDEN PARK",
+      "filename": "IMG_0928.JPG",
+      "file_size_bytes": 924870,
+      "score": 45,
+      "reason": "Abstract, almost artistic shot of a shoring wall covered with CFRP injection strips in sweeping curved branches across the full panel. The branching pattern is visually striking and communicates the complexity and coverage of a professional injection treatment."
+    },
+    "process": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/16B PELICAN ROAD SCHOFIELDS - CRACK INJECTIONS/IMG_5386.JPG",
+      "folder": "16B PELICAN ROAD SCHOFIELDS - CRACK INJECTIONS",
+      "filename": "IMG_5386.JPG",
+      "file_size_bytes": 1117090,
+      "score": 48,
+      "reason": "Extreme close-up of an injection port with tubing inserted directly into the crack, epoxy resin visible. Shows the exact technique of pressure injection in compelling detail. Best process shot in the crack-injection library."
+    }
+  },
+  "concrete-cutting": {
+    "hero": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/WALL CUTTING - FLORENCE & CAPRI WENTWORTHPOINT/IMG_5431.JPG",
+      "folder": "WALL CUTTING - FLORENCE & CAPRI WENTWORTHPOINT",
+      "filename": "IMG_5431.JPG",
+      "file_size_bytes": 1016859,
+      "score": 53,
+      "reason": "Outstanding hero: worker in lime-green hi-vis using a wall saw to cut through a concrete lift-well opening; set against a dramatic brooding Sydney skyline with heavy clouds. The framing through the opening creates a powerful picture-within-a-picture effect. Highest overall score in the entire library."
+    },
+    "feature": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/WALL CUTTING - FLORENCE & CAPRI WENTWORTHPOINT/IMG_5433.JPG",
+      "folder": "WALL CUTTING - FLORENCE & CAPRI WENTWORTHPOINT",
+      "filename": "IMG_5433.JPG",
+      "file_size_bytes": 842839,
+      "score": 39,
+      "reason": "Lower-angle shot of the same wall cutting job; shows the saw blade engaged and the full depth of cut visible. Good feature detail of equipment and technique. Used because the folder has only 3 images and the other two are allocated to hero and process roles."
+    },
+    "process": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/WALL CUTTING - FLORENCE & CAPRI WENTWORTHPOINT/IMG_5432.JPG",
+      "folder": "WALL CUTTING - FLORENCE & CAPRI WENTWORTHPOINT",
+      "filename": "IMG_5432.JPG",
+      "file_size_bytes": 977474,
+      "score": 51,
+      "reason": "Slightly wider version of the hero shot with the same dramatic sky; worker fully visible in action. Works as the process shot showing the actual cutting operation in progress. Note: concrete-cutting folder has only video files or a scan readout as alternatives, so all 3 picks come from the same Florence & Capri folder — noted as a limitation."
+    }
+  },
+  "concrete-repairs": {
+    "hero": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/SHORING WALLA REPAIRS - PELICAN ROAD SCHOFIELDS/IMG_5880.JPG",
+      "folder": "SHORING WALLA REPAIRS - PELICAN ROAD SCHOFIELDS",
+      "filename": "IMG_5880.JPG",
+      "file_size_bytes": 821892,
+      "score": 47,
+      "reason": "Wide underground carpark shot showing a wall covered in dramatic branching crack repair patterns — black injection stitching contrasts against the sandy-coloured concrete wall under green-tinted emergency lighting. Ladder, buckets, and materials show active work. Strong visual atmosphere and excellent scope."
+    },
+    "feature": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/STRUCTURAL WALL REPAIRS - NORTHBRIDGE/IMG_0521.JPG",
+      "folder": "STRUCTURAL WALL REPAIRS - NORTHBRIDGE",
+      "filename": "IMG_0521.JPG",
+      "file_size_bytes": 1104145,
+      "score": 49,
+      "reason": "Dramatic macro of a row of injection ports on a dark rough concrete wall shot at low angle, creating a strong receding perspective. The metallic ports are crisp and clearly detailed. Almost photographic-art quality — best feature image in the concrete-repairs library."
+    },
+    "process": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/16A PELICAN ROAD SCHOFIELDS - CONCRETE CRACK REPAIR/IMG_5288.JPG",
+      "folder": "16A PELICAN ROAD SCHOFIELDS - CONCRETE CRACK REPAIR",
+      "filename": "IMG_5288.JPG",
+      "file_size_bytes": 1268566,
+      "score": 48,
+      "reason": "Overhead view of a worker with a core drill in a tight stitch-drilling pattern around a concrete opening. The circular sequence of drill holes is visually striking and clearly shows the technique used for structural repair. Excellent process documentation."
+    }
+  },
+  "slab-scanning": {
+    "hero": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5814.JPG",
+      "folder": "SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL",
+      "filename": "IMG_5814.JPG",
+      "file_size_bytes": 1030071,
+      "score": 51,
+      "reason": "Wide shot of a technician kneeling over a GPR scanner on a slab, with vivid blue paint-marked scan lines clearly visible. Metal stud framing in background gives industrial context. Good composition with warm vs cool colour contrast. Largest file in slab-scanning set."
+    },
+    "feature": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5812.JPG",
+      "folder": "SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL",
+      "filename": "IMG_5812.JPG",
+      "file_size_bytes": 938683,
+      "score": 49,
+      "reason": "Close-up view of the GPR scanner device being operated; the scanning unit, tablet, and marked slab are all clearly visible. Best image for showcasing the technology and equipment used in slab scanning."
+    },
+    "process": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5820.JPG",
+      "folder": "SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL",
+      "filename": "IMG_5820.JPG",
+      "file_size_bytes": 989934,
+      "score": 49,
+      "reason": "Technician in orange hi-vis actively pushing the GPR scanner unit with real-time readout visible on the tablet. Blue scan marks on the slab show previous passes. Strong action and process narrative."
+    }
+  },
+  "curtain-wall-injection": {
+    "hero": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/CURTAIN WALL INJECTION - ENFIELD/IMG_0808.JPG",
+      "folder": "CURTAIN WALL INJECTION - ENFIELD",
+      "filename": "IMG_0808.JPG",
+      "file_size_bytes": 1489386,
+      "score": 52,
+      "reason": "Wide-angle perspective along a long brick wall with injection ports marked at regular intervals in two columns. A worker in yellow hi-vis crouches at the base actively working. The receding perspective down the wall is dramatic and gives excellent depth for a hero image."
+    },
+    "feature": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/CURTAIN WALL INJECTION - ENFIELD/IMG_0854.JPG",
+      "folder": "CURTAIN WALL INJECTION - ENFIELD",
+      "filename": "IMG_0854.JPG",
+      "file_size_bytes": 1521067,
+      "score": 46,
+      "reason": "Close-up looking up at a brick wall densely covered with injection ports in a systematic grid. The repeating geometric pattern clearly showcases the thoroughness and methodology of curtain wall injection treatment."
+    },
+    "process": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/CURTAIN WALL INJECTION - ENFIELD/IMG_0806.JPG",
+      "folder": "CURTAIN WALL INJECTION - ENFIELD",
+      "filename": "IMG_0806.JPG",
+      "file_size_bytes": 1263012,
+      "score": 49,
+      "reason": "Worker actively crouched at the base of the brick wall during the injection process; injection equipment and hoses visible. Shows the technique in situ with strong contextual atmosphere."
+    }
+  },
+  "temporary-moving-joints": {
+    "hero": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/SURELOCK SYSTEM INSTALLATION - ZETLAND/IMG_4024.JPG",
+      "folder": "SURELOCK SYSTEM INSTALLATION - ZETLAND",
+      "filename": "IMG_4024.JPG",
+      "file_size_bytes": 1087949,
+      "score": 46,
+      "reason": "Aerial perspective of a long run of vibrant orange Surelock joint formers installed in a straight line on black waterproofing membrane; construction site with trees and blue sky in background. Striking colour contrast and strong perspective depth. Best hero composition in the joints library."
+    },
+    "feature": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/SURELOCK SYSTEM INSTALLATION - ZETLAND/IMG_4025.JPG",
+      "folder": "SURELOCK SYSTEM INSTALLATION - ZETLAND",
+      "filename": "IMG_4025.JPG",
+      "file_size_bytes": 1041228,
+      "score": 47,
+      "reason": "Close-up of Surelock joint formers attached to formwork, showing the product detail including the ribbed orange former, reinforcement bars, and waterproofing membrane. Best feature image to showcase the system."
+    },
+    "process": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/CONSTRUCTION JOINTS REPAIRS - JACARANDA_/IMG_0409.JPG",
+      "folder": "CONSTRUCTION JOINTS REPAIRS - JACARANDA_",
+      "filename": "IMG_0409.JPG",
+      "file_size_bytes": 1255923,
+      "score": 43,
+      "reason": "Close-up of liquid sealant being poured/applied into a freshly cut joint channel in a concrete slab; shows the active repair process. The wet black sealant against grey concrete with wood-form edges is visually distinct and clearly illustrates the technique."
+    }
+  },
+  "post-tension-truncation": {
+    "hero": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5818.JPG",
+      "folder": "SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL",
+      "filename": "IMG_5818.JPG",
+      "file_size_bytes": 973593,
+      "score": 48,
+      "reason": "Wide shot of GPR scanning technician kneeling over scanner with blue scan-line markings visible on the slab; stud framing of new construction in background. Establishes the scanning phase of post-tension truncation work. Distinct from slab-scanning hero because this one more clearly shows the scanning-as-preparation context."
+    },
+    "feature": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/PHOTO-2026-02-17-20-16-04 4.jpg",
+      "folder": "SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL",
+      "filename": "PHOTO-2026-02-17-20-16-04 4.jpg",
+      "file_size_bytes": 212359,
+      "score": 48,
+      "reason": "Overhead view of multiple PT cable trenches cut in a cross-pattern through the slab; bundles of exposed steel strands, rebar starters, and grout cups clearly visible. Highly technical and visually distinctive — the only image in the library that unambiguously shows post-tension cables exposed during truncation work."
+    },
+    "process": {
+      "source": "C:/Users/johnn/Documents/Private-work/The Elites/Clients/TRD/TRD-content/SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL/IMG_5906.JPG",
+      "folder": "SLAB SCANNING - POST-TENSION TRUNCATION - ROUSEHILL",
+      "filename": "IMG_5906.JPG",
+      "file_size_bytes": 837565,
+      "score": 47,
+      "reason": "Worker pouring white grout from a bucket into a cut PT cable trench; the trench with exposed cables is visible below. Clear action shot showing the rectification/grouting step of the post-tension truncation repair process."
+    }
+  }
+}

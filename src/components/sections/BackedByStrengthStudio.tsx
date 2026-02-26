@@ -60,7 +60,7 @@ export function BackedByStrengthStudio() {
         <div className="mission-intro-col-sm">
           <img
             src="/images/projects/florence-capri-complex/hero.jpg"
-            alt="TRD structural alterations project at Florence & Capri Complex, Wentworth Point"
+            alt="TRD structural alterations project at One The Waterfront, Wentworth Point"
             className="mission-intro-image"
             loading="lazy"
           />
