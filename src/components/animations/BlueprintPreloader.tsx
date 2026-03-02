@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useStore } from '@/stores/useStore';
 import { useScrollLock } from '@/hooks/useScrollLock';
+import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
 import './BlueprintPreloader.css';
 
 interface BlueprintPreloaderProps {
@@ -12,78 +13,154 @@ interface BlueprintPreloaderProps {
 type Phase = 0 | 1 | 2 | 3 | 4;
 
 const PRELOADER_SESSION_KEY = 'trd-preloader-shown';
+const FONT_TIMEOUT_MS = 3000;
+const LOAD_TIMEOUT_MS = 8000;
 
 export function BlueprintPreloader({ onComplete }: BlueprintPreloaderProps) {
   const [phase, setPhase] = useState<Phase>(0);
   const [isVisible, setIsVisible] = useState(true);
-  const [shouldLockScroll, setShouldLockScroll] = useState(false); // Initialize to false
+  const [isLooping, setIsLooping] = useState(false);
+  const [shouldLockScroll, setShouldLockScroll] = useState(false);
   const { setIsLoading } = useStore();
   const hasStarted = useRef(false);
   const onCompleteRef = useRef(onComplete);
 
   useScrollLock(shouldLockScroll);
-
-  // Keep ref updated
   onCompleteRef.current = onComplete;
 
+  // Transition from looping phase 2 → phase 3 (circle expansion reveal)
+  const proceedToReveal = useCallback(() => {
+    setIsLooping(false);
+    setPhase(3);
+
+    // Trigger hero content as circles expand
+    setTimeout(() => {
+      setIsLoading(false);
+      onCompleteRef.current();
+    }, 700);
+
+    // Phase 4: fade out completely
+    setTimeout(() => {
+      setPhase(4);
+      setShouldLockScroll(false);
+    }, 2500);
+
+    // Hide loader after fade
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 3000);
+  }, [setIsLoading]);
+
   useEffect(() => {
-    // Prevent double execution
     if (hasStarted.current) return;
     hasStarted.current = true;
 
-    // Check if preloader was already shown in this session
-    const wasShown = sessionStorage.getItem(PRELOADER_SESSION_KEY);
-    if (wasShown) {
-      // Skip animation - immediately complete
-      setIsVisible(false);
-      setIsLoading(false);
-      // shouldLockScroll already false, no need to set
-      onCompleteRef.current();
-      return;
+    // Session check: skip on revisit
+    try {
+      const wasShown = sessionStorage.getItem(PRELOADER_SESSION_KEY);
+      if (wasShown) {
+        setIsVisible(false);
+        setIsLoading(false);
+        onCompleteRef.current();
+        return;
+      }
+      sessionStorage.setItem(PRELOADER_SESSION_KEY, 'true');
+    } catch {
+      // sessionStorage unavailable
     }
 
-    // Mark as shown for this session
-    sessionStorage.setItem(PRELOADER_SESSION_KEY, 'true');
-
-    // Now lock scroll for the animation
     setShouldLockScroll(true);
 
-    // Start phase 1 after a brief delay to let components render
-    const startTimer = setTimeout(() => setPhase(1), 300);
+    // Readiness gates
+    let siteReady = false;
+    let phase2Done = false;
+    let hasProceeded = false;
 
-    // Phase 2: Letters snap into focus (at 1s)
-    const phase2Timer = setTimeout(() => setPhase(2), 1000);
+    const tryProceed = () => {
+      if (hasProceeded) return;
+      if (siteReady && phase2Done) {
+        hasProceeded = true;
+        proceedToReveal();
+      }
+    };
 
-    // Phase 3: The unified zoom reveal (at 3s)
-    const phase3Timer = setTimeout(() => setPhase(3), 3000);
+    // Phase 1: Blueprint lines draw (300ms)
+    const phase1Timer = setTimeout(() => setPhase(1), 300);
 
-    // Trigger hero content to appear as circles expand (at 3.7s)
-    const contentTimer = setTimeout(() => {
-      setIsLoading(false);
-      onCompleteRef.current();
-    }, 3700);
+    // Phase 2: Letters snap into focus (1000ms)
+    const phase2Timer = setTimeout(() => {
+      setPhase(2);
+      // After text-flicker animation (0.4s) + buffer: check readiness or start looping
+      setTimeout(() => {
+        phase2Done = true;
+        if (siteReady) {
+          tryProceed();
+        } else {
+          setIsLooping(true);
+        }
+      }, 600);
+    }, 1000);
 
-    // Phase 4: Complete and fade out (at 5.5s)
-    const phase4Timer = setTimeout(() => {
-      setPhase(4);
-      // Release scroll lock
-      setShouldLockScroll(false);
-    }, 5500);
+    // === Site readiness checks (same as TRDLoader) ===
+    let fontsReady = false;
+    let pageLoaded = false;
+    let scrollTriggerReady = false;
 
-    // Hide loader after fade completes (at 6s)
-    const hideTimer = setTimeout(() => {
-      setIsVisible(false);
-    }, 6000);
+    const checkAllReady = () => {
+      if (siteReady) return;
+      if (fontsReady && pageLoaded && scrollTriggerReady) {
+        siteReady = true;
+        tryProceed();
+      }
+    };
+
+    // 1. Font readiness (with timeout for iOS)
+    Promise.race([
+      document.fonts.ready,
+      new Promise<void>(resolve => setTimeout(resolve, FONT_TIMEOUT_MS)),
+    ]).then(() => {
+      fontsReady = true;
+      checkAllReady();
+    }).catch(() => {
+      fontsReady = true;
+      checkAllReady();
+    });
+
+    // 2. Page load (with timeout)
+    if (document.readyState === 'complete') {
+      pageLoaded = true;
+    } else {
+      const onLoad = () => {
+        pageLoaded = true;
+        checkAllReady();
+      };
+      window.addEventListener('load', onLoad);
+      setTimeout(() => {
+        if (!pageLoaded) {
+          window.removeEventListener('load', onLoad);
+          pageLoaded = true;
+          checkAllReady();
+        }
+      }, LOAD_TIMEOUT_MS);
+    }
+
+    // 3. ScrollTrigger readiness
+    scrollTriggerManager.onReady(() => {
+      scrollTriggerReady = true;
+      checkAllReady();
+    });
+
+    if (scrollTriggerManager.ready) {
+      scrollTriggerReady = true;
+    }
+
+    checkAllReady();
 
     return () => {
-      clearTimeout(startTimer);
+      clearTimeout(phase1Timer);
       clearTimeout(phase2Timer);
-      clearTimeout(phase3Timer);
-      clearTimeout(contentTimer);
-      clearTimeout(phase4Timer);
-      clearTimeout(hideTimer);
     };
-  }, [setIsLoading]);
+  }, [setIsLoading, proceedToReveal]);
 
   if (!isVisible) return null;
 
@@ -92,6 +169,7 @@ export function BlueprintPreloader({ onComplete }: BlueprintPreloaderProps) {
     phase >= 2 ? 'phase-2' : '',
     phase >= 3 ? 'phase-3' : '',
     phase >= 4 ? 'phase-4' : '',
+    isLooping ? 'looping' : '',
   ].filter(Boolean).join(' ');
 
   return (

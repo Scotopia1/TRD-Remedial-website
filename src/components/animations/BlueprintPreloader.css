@@ -188,6 +188,51 @@
   100% { opacity: 1; }
 }
 
+/* --- LOOPING: Letters continuously re-trace until site is ready --- */
+.blueprint-loader-container.phase-2.looping .branding-text-stroke {
+  animation: letter-trace-loop 2.4s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+}
+
+.blueprint-loader-container.phase-2.looping .unit-circle {
+  animation: circle-pulse-loop 2.4s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+}
+
+@keyframes letter-trace-loop {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(1.15);
+  }
+  25% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1);
+  }
+  55% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1);
+  }
+  85% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(1.15);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(1.15);
+  }
+}
+
+@keyframes circle-pulse-loop {
+  0% { opacity: 0.1; }
+  25% { opacity: 0.3; }
+  55% { opacity: 0.3; }
+  85% { opacity: 0.1; }
+  100% { opacity: 0.1; }
+}
+
 /* --- PHASE 3: Circles Expand to Reveal Content --- */
 
 /* Mask circles expand to reveal more content */

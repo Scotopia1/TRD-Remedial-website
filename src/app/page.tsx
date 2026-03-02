@@ -4,7 +4,7 @@ import { useState, useCallback, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { Hero } from '@/components/sections/Hero';
 import { IntroStats } from '@/components/sections/IntroStats';
-import { TRDLoader } from '@/components/animations/TRDLoader';
+import { BlueprintPreloader } from '@/components/animations/BlueprintPreloader';
 import { FAQSchema } from '@/components/seo/FAQSchema';
 
 // Dynamic imports for below-the-fold sections (reduces initial bundle by 62%)
@@ -89,8 +89,8 @@ export default function Home() {
       {/* FAQ Schema for SEO - Phase 2 Optimization */}
       <FAQSchema />
 
-      {/* TRD Loader - animated loader with T-R-D reveal */}
-      <TRDLoader onComplete={handleOpeningComplete} />
+      {/* Blueprint Preloader - technical drawing animation with looping until site ready */}
+      <BlueprintPreloader onComplete={handleOpeningComplete} />
 
       {/* Main Content */}
       <main id="main-content" aria-label="Main content">
