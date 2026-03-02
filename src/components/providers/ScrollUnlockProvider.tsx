@@ -15,7 +15,7 @@ export function ScrollUnlockProvider({ children }: { children: React.ReactNode }
       document.documentElement.style.removeProperty('overflow');
       document.body.style.removeProperty('padding-right');
 
-      console.log('[ScrollUnlockProvider] Forced scroll unlock');
+      if (process.env.NODE_ENV === 'development') console.log('[ScrollUnlockProvider] Forced scroll unlock');
     };
 
     // Run immediately

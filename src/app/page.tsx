@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
 import { Hero } from '@/components/sections/Hero';
 import { IntroStats } from '@/components/sections/IntroStats';
 import { BlueprintPreloader } from '@/components/animations/BlueprintPreloader';
@@ -84,6 +85,17 @@ export default function Home() {
     setOpeningComplete(true);
   }, []);
 
+  // Coordinated ScrollTrigger refresh after all dynamic sections mount.
+  // Dynamic imports (ssr: false) resolve asynchronously — this ensures all
+  // components have mounted and created their ScrollTriggers before refresh.
+  useEffect(() => {
+    if (!openingComplete) return;
+    const timeoutId = setTimeout(() => {
+      scrollTriggerManager.requestRefresh();
+    }, 2000);
+    return () => clearTimeout(timeoutId);
+  }, [openingComplete]);
+
   return (
     <>
       {/* FAQ Schema for SEO - Phase 2 Optimization */}
@@ -107,9 +119,6 @@ export default function Home() {
 
           {/* Case Studies - CGMWTMAY2025 Otis Valen Style (LAZY LOADED) */}
           <CaseStudiesOtisValen />
-
-          {/* 3D Showcase - WonJyou Pinned Scroll Style */}
-          {/* <ThreeDShowcasePinned /> */}
 
           {/* Leadership Team - Scroll-Controlled Reveal Pattern (LAZY LOADED) */}
           <TeamScrollReveal />

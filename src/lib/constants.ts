@@ -32,13 +32,6 @@ export const COMPANY_INFO = {
   },
 } as const;
 
-// Hero Section Stats
-export const HERO_STATS = [
-  { label: 'Columns Removed', value: 40 },
-  { label: 'Cracks Repaired', value: 2500, unit: 'm' },
-  { label: 'Compromises', value: 0 },
-] as const;
-
 // Navigation Links
 export const NAV_LINKS = [
   { label: 'Home', href: '/' },
@@ -48,53 +41,3 @@ export const NAV_LINKS = [
   { label: 'Contact', href: '/contact' },
 ] as const;
 
-// Animation Duration
-export const ANIMATION_DURATION = {
-  fast: 0.2,
-  normal: 0.3,
-  slow: 0.5,
-  opening: 5, // Opening animation duration in seconds
-} as const;
-
-// Responsive Breakpoints (matching Tailwind defaults)
-export const BREAKPOINTS = {
-  sm: 640,
-  md: 768,
-  lg: 1024,
-  xl: 1280,
-  '2xl': 1536,
-} as const;
-
-// Color Palette (to be used in Tailwind config)
-export const COLORS = {
-  concrete: {
-    50: '#f8f9fa',
-    100: '#e9ecef',
-    200: '#dee2e6',
-    300: '#ced4da',
-    400: '#adb5bd',
-    500: '#6c757d',
-    600: '#495057',
-    700: '#343a40',
-    800: '#212529',
-    900: '#0a0c0d',
-  },
-  industrial: {
-    50: '#f5f5f5',
-    100: '#e0e0e0',
-    200: '#bdbdbd',
-    300: '#9e9e9e',
-    400: '#757575',
-    500: '#616161',
-    600: '#424242',
-    700: '#303030',
-    800: '#212121',
-    900: '#121212',
-  },
-  trd: {
-    primary: '#1a1a1a', // Charcoal (brand color)
-    secondary: '#f5f5f5', // Off-white (backgrounds)
-    accent: '#424242', // Dark gray (CTAs/highlights)
-    accentHover: '#303030', // Darker gray (hover states)
-  },
-} as const;

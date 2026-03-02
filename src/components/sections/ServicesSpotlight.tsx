@@ -159,6 +159,8 @@ const ServicesSpotlight = () => {
     const introTextElements = introTextElementsRef.current;
     const imageElements = imageElementsRef.current;
     const titleElements = titleElementsRef.current;
+    // Cache background image elements for per-frame updates (avoid DOM query in onUpdate)
+    const bgImageElements = document.querySelectorAll('.spotlight-bg-img-item');
     let currentActiveIndex = 0;
 
     /**
@@ -391,9 +393,8 @@ const ServicesSpotlight = () => {
           if (closestIndex !== currentActiveIndex) {
             if (closestIndex >= 0 && closestIndex < spotlightItems.length) {
               activeBgIndexRef.current = closestIndex;
-              // Direct DOM: show current bg, hide others
-              const bgImages = document.querySelectorAll('.spotlight-bg-img-item');
-              bgImages.forEach((img, i) => {
+              // Direct DOM: show current bg, hide others (use cached NodeList)
+              bgImageElements.forEach((img, i) => {
                 (img as HTMLElement).style.opacity = i === closestIndex ? '1' : '0';
               });
             }
@@ -425,7 +426,11 @@ const ServicesSpotlight = () => {
       },
     });
     } else {
-      // Mobile: Simplified PINNED experience with scroll-lock
+      // ============================================================
+      // MOBILE: Non-pinned vertical scroll experience
+      // Uses ScrollTrigger WITHOUT pin to avoid iOS position:fixed
+      // momentum scroll bugs (multiple simultaneous pins cause jank)
+      // ============================================================
       let currentActiveIndex = 0;
 
       // Show background image at full scale
@@ -442,9 +447,8 @@ const ServicesSpotlight = () => {
         "--after-opacity": "1",
       });
 
-      // Set initial state for floating images on mobile (will be animated)
-      // Use xPercent/yPercent instead of x/y with percentage strings — GSAP requires these for % transforms
-      imageElements.forEach((img) => gsap.set(img, { opacity: 0, xPercent: 50, yPercent: 50 }));
+      // Hide floating images on mobile (no Bezier curve animation without pin)
+      imageElements.forEach((img) => gsap.set(img, { opacity: 0 }));
 
       // Set initial header to first service name
       if (spotlightHeader) {
@@ -459,65 +463,37 @@ const ServicesSpotlight = () => {
         spotlightHeader.style.opacity = "1";
       }
 
-      // Create PINNED ScrollTrigger for mobile - simpler progression through services
+      // NON-PINNED ScrollTrigger: tracks scroll position without pinning
+      // Background crossfades and header updates as user scrolls through
       scrollTriggerRef.current = ScrollTrigger.create({
         trigger: ".services-spotlight",
         start: "top top",
         end: `+=${getStableHeight() * spotlightItems.length * 1.2}px`,
-        pin: true,
-        pinSpacing: true,
-        scrub: 0.5, // Faster scrub for mobile
+        pin: false,        // CRITICAL: No pin on mobile — eliminates iOS jank
+        scrub: 0.5,
         refreshPriority: 9,
         onUpdate: (self) => {
           const progress = self.progress;
-          const isMobile = true;
-          const containerWidth = window.innerWidth;
-          const viewportCenter = window.innerHeight / 2;
 
-          // Responsive image offset based on viewport (matches CSS breakpoints)
-          const imageSize = containerWidth <= 640 ? 160 : 180;
-          const imageOffset = imageSize / 2;
+          // Determine which service is active based on scroll progress
+          const serviceIndex = Math.min(
+            Math.floor(progress * spotlightItems.length),
+            spotlightItems.length - 1
+          );
 
-          // Animate floating images along Bezier curve and find which is closest to center
-          let closestIndex = currentActiveIndex;
-          let closestDistance = Infinity;
+          // Update background and header when active service changes
+          if (serviceIndex !== currentActiveIndex) {
+            currentActiveIndex = serviceIndex;
+            activeBgIndexRef.current = serviceIndex;
 
-          imageElements.forEach((img, index: number) => {
-            const imageProgress = getImgProgressState(index, progress, isMobile);
-
-            if (imageProgress >= 0 && imageProgress <= 1) {
-              const pos = getBezierPosition(imageProgress, isMobile);
-
-              gsap.set(img, {
-                x: pos.x - imageOffset,
-                y: pos.y - imageOffset,
-                opacity: 0.85,
-                scale: 0.95,
-              });
-
-              // Check which image center is closest to viewport center
-              const imgCenterY = pos.y;
-              const distance = Math.abs(imgCenterY - viewportCenter);
-              if (distance < closestDistance) {
-                closestDistance = distance;
-                closestIndex = index;
-              }
-            } else {
-              gsap.set(img, { opacity: 0 });
-            }
-          });
-
-          // Update background image and header when active service changes
-          if (closestIndex !== currentActiveIndex) {
-            currentActiveIndex = closestIndex;
-            activeBgIndexRef.current = closestIndex;
-            const bgImages = document.querySelectorAll('.spotlight-bg-img-item');
-            bgImages.forEach((img, i) => {
-              (img as HTMLElement).style.opacity = i === closestIndex ? '1' : '0';
+            // Update background image visibility (use cached NodeList)
+            bgImageElements.forEach((img, i) => {
+              (img as HTMLElement).style.opacity = i === serviceIndex ? '1' : '0';
             });
 
+            // Update header text to show current service name
             if (spotlightHeader) {
-              const serviceName = spotlightItems[closestIndex].name;
+              const serviceName = spotlightItems[serviceIndex].name;
               const words = serviceName.split(" ");
               let formattedName = "";
               for (let i = 0; i < words.length; i += 2) {
@@ -528,14 +504,7 @@ const ServicesSpotlight = () => {
             }
           }
 
-          // Animate titles based on active service
-          if (titleElements) {
-            titleElements.forEach((title: any, index: number) => {
-              gsap.set(title, { opacity: index === closestIndex ? 1 : 0.2 });
-            });
-          }
-
-          // Show header
+          // Keep header visible throughout scroll
           if (spotlightHeader) {
             spotlightHeader.style.opacity = "1";
           }

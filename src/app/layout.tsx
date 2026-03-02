@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
-import { ScrollUnlockProvider } from "@/components/providers/ScrollUnlockProvider";
 import { AccessibilityProvider } from "@/components/providers/AccessibilityProvider";
 import { TransitionProvider } from "@/components/providers/TransitionProvider";
 import { StructuredData } from "@/components/seo/StructuredData";

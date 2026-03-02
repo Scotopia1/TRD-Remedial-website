@@ -168,7 +168,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
       ignoreMobileResize: true,
       autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
       limitCallbacks: true,
-      syncInterval: isIOS() ? 100 : 60,
+      syncInterval: 60,
     });
 
     const isMobileWidth = window.innerWidth <= 1000;

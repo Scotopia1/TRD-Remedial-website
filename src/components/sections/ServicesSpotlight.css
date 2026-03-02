@@ -222,6 +222,12 @@
 @media (max-width: 1000px) {
   /* Mobile layout - hide titles, keep images (matches CGMWTAUG2025) */
 
+  /* Mobile: Allow section to flow naturally without pin (iOS scroll fix C1) */
+  .services-spotlight {
+    height: auto;
+    min-height: 100svh;
+  }
+
   /* Show background image statically on mobile */
   .spotlight-bg-img {
     position: absolute;
@@ -300,8 +306,7 @@
     display: block !important;
     width: 180px;
     height: 135px;  /* Maintain 4:3 aspect ratio - increased for better visibility */
-    will-change: transform, opacity;
-    transform: translate3d(0, 0, 0);  /* Force GPU acceleration */
+    /* will-change and GPU promotion handled by GSAP inline styles */
   }
 }
 
