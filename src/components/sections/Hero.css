@@ -40,6 +40,11 @@
   z-index: 1;
 }
 
+/* Hide hero text completely until loading screen is done */
+.hero-header--hidden {
+  visibility: hidden;
+}
+
 .hero-header h1 {
   color: var(--bg);
   line-height: 1;

@@ -25,7 +25,7 @@ export function Hero({ showContent = true }: HeroProps) {
         />
       </div>
 
-      <div className="hero-header">
+      <div className={`hero-header${!showContent ? ' hero-header--hidden' : ''}`}>
         <AnimatedCopy
           tag="h1"
           animateOnScroll={false}
