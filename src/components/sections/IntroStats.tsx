@@ -45,17 +45,19 @@ export function IntroStats() {
       });
 
       // Animate lines
-      gsap.to(split.lines, {
-        yPercent: 0,
-        duration: 0.75,
-        ease: 'power3.out',
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: 'top 70%',
-          toggleActions: 'play none none none',
-        },
-      });
+      if (split.lines && split.lines.length > 0) {
+        gsap.to(split.lines, {
+          yPercent: 0,
+          duration: 0.75,
+          ease: 'power3.out',
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: 'top 70%',
+            toggleActions: 'play none none none',
+          },
+        });
+      }
 
       // Request refresh after setup
       scrollTriggerManager.requestRefresh();
@@ -73,6 +75,7 @@ export function IntroStats() {
       });
 
       // Set initial opacity
+      if (!split.words || split.words.length === 0) return;
       gsap.set(split.words, { opacity: 0 });
 
       ScrollTrigger.create({
