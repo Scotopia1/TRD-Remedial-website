@@ -154,8 +154,32 @@ export function ServiceDetailClient({ service }: { service: Service }) {
         </div>
       </section>
 
-      {/* Breadcrumbs Navigation */}
-      <div className="breadcrumbs-container">
+      {/* Back Navigation */}
+      <div className="detail-nav-bar">
+        <Link
+          href="/services"
+          className="back-link"
+          onMouseEnter={() => setCursorVariant('link')}
+          onMouseLeave={() => setCursorVariant('default')}
+        >
+          <svg
+            className="back-link-arrow"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M19 12H5" />
+            <path d="M12 19l-7-7 7-7" />
+          </svg>
+          Back to Services
+        </Link>
         <Breadcrumbs
           items={[
             { label: 'Home', href: '/' },
@@ -366,9 +390,6 @@ export function ServiceDetailClient({ service }: { service: Service }) {
                     <span className="quote-mark">"</span>
                   </div>
                   <div className="testimonial-author">
-                    <AnimatedCopy delay={i * 0.1 + 0.05} tag="p" className="author-name">
-                      {testimonial.author}
-                    </AnimatedCopy>
                     <AnimatedCopy delay={i * 0.1 + 0.1} tag="p" className="author-role">
                       {testimonial.role} - {testimonial.company}
                     </AnimatedCopy>

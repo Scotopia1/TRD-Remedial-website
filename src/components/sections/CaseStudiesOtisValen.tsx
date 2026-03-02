@@ -17,11 +17,11 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 export function CaseStudiesOtisValen() {
   // Select 6 diverse real projects representing different services and categories
   const featuredProjectIds = [
-    'project-001', // Caringbah Pavilion - Carbon Fibre Strengthening
     'project-006', // Rouse Hill - PT Slab Scanning & Penetration
+    'project-011', // One The Waterfront - Structural Alterations & Multi-Service
+    'project-001', // Caringbah Pavilion - Carbon Fibre Strengthening
     'project-007', // Pelican Road - Large-Scale Defect Rectification
     'project-003', // Enfield - Curtain Wall Waterproofing
-    'project-011', // One The Waterfront - Structural Alterations & Multi-Service
     'project-012', // Zetland - SureLok TMJ Installation
   ];
 
@@ -35,82 +35,94 @@ export function CaseStudiesOtisValen() {
       href: `/projects/${project.slug}`,
     }));
 
-  const containerRef = useRef(null);
-  const headerContentRef = useRef(null);
-  const workItemsRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const headerContentRef = useRef<HTMLDivElement>(null);
+  const workItemsRef = useRef<HTMLDivElement>(null);
 
   // Header animations
   useGSAP(() => {
     if (!headerContentRef.current) return;
 
-    gsap.set(".cs-profile-icon", { scale: 0 });
-    gsap.set(".cs-circular-btn-wrapper", { scale: 0, opacity: 0 });
+    const section = headerContentRef.current;
+    const profileIcon = section.querySelector<HTMLElement>(".cs-profile-icon");
+    const circularBtn = section.querySelector<HTMLElement>(".cs-circular-btn-wrapper");
+
+    if (profileIcon) gsap.set(profileIcon, { scale: 0 });
+    if (circularBtn) gsap.set(circularBtn, { scale: 0, opacity: 0 });
 
     // Wait for fonts to load before splitting text
     document.fonts.ready.then(() => {
-      const introText = new SplitText(".cs-header-content > p", {
+      // Query elements directly from the section ref to avoid scope issues in async context
+      const introParagraph = section.querySelector<HTMLElement>(".cs-header-content > p");
+      const titleH1 = section.querySelector<HTMLElement>(".cs-header-title h1");
+
+      if (!introParagraph || !titleH1) return;
+
+      const introText = new SplitText(introParagraph, {
         type: "lines",
         linesClass: "line-wrapper",
       });
 
-      const titleText = new SplitText(".cs-header-title h1", {
+      const titleText = new SplitText(titleH1, {
         type: "lines",
         linesClass: "line-wrapper",
       });
 
+      // Use yPercent instead of y:"120%" — GSAP requires yPercent for percentage-based Y transforms
       gsap.set([introText.lines, titleText.lines], {
-        y: "120%",
+        yPercent: 120,
       });
 
       const headerTl = gsap.timeline({ delay: 0.75 });
 
-    headerTl.to(".cs-profile-icon", {
-      scale: 1,
-      duration: 1,
-      ease: "power4.out",
-    });
-
-    headerTl.to(
-      introText.lines,
-      {
-        y: "0%",
-        duration: 1,
-        ease: "power4.out",
-      },
-      "-=0.9"
-    );
-
-    headerTl.to(
-      titleText.lines,
-      {
-        y: "0%",
-        duration: 1,
-        ease: "power4.out",
-        stagger: 0.1,
-      },
-      "-=0.9"
-    );
+      if (profileIcon) {
+        headerTl.to(profileIcon, {
+          scale: 1,
+          duration: 1,
+          ease: "power4.out",
+        });
+      }
 
       headerTl.to(
-        ".cs-circular-btn-wrapper",
+        introText.lines,
         {
-          scale: 1,
-          opacity: 1,
-          duration: 0.75,
+          yPercent: 0,
+          duration: 1,
           ease: "power4.out",
         },
         "-=0.9"
       );
+
+      headerTl.to(
+        titleText.lines,
+        {
+          yPercent: 0,
+          duration: 1,
+          ease: "power4.out",
+          stagger: 0.1,
+        },
+        "-=0.9"
+      );
+
+      if (circularBtn) {
+        headerTl.to(
+          circularBtn,
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.75,
+            ease: "power4.out",
+          },
+          "-=0.9"
+        );
+      }
     }); // Close document.fonts.ready promise
 
     return () => {
-      // Cleanup function will only run if fonts are loaded
-      document.fonts.ready.then(() => {
-        const introText = document.querySelector(".cs-header-content > p");
-        const titleText = document.querySelector(".cs-header-title h1");
-        if (introText) gsap.set(introText, { clearProps: "all" });
-        if (titleText) gsap.set(titleText, { clearProps: "all" });
-      });
+      const introParagraph = section.querySelector<HTMLElement>(".cs-header-content > p");
+      const titleH1 = section.querySelector<HTMLElement>(".cs-header-title h1");
+      if (introParagraph) gsap.set(introParagraph, { clearProps: "all" });
+      if (titleH1) gsap.set(titleH1, { clearProps: "all" });
     };
   }, { scope: headerContentRef });
 

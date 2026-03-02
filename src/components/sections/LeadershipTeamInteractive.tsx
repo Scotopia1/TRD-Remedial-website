@@ -46,9 +46,10 @@ export function LeadershipTeamInteractive() {
         });
 
         // Set default state (first name element is "The Experts")
+        // Use yPercent instead of y:'100%' — GSAP requires yPercent for percentage-based Y transforms
         if (nameElements[0]) {
           const defaultLetters = nameElements[0].querySelectorAll('.letter');
-          gsap.set(defaultLetters, { y: '100%' });
+          gsap.set(defaultLetters, { y: 0, yPercent: 100 });
         }
       });
 
@@ -72,8 +73,10 @@ export function LeadershipTeamInteractive() {
             });
 
             // Reveal name with character stagger
+            // Use yPercent instead of y with percentage strings — GSAP requires yPercent for % transforms
             gsap.to(letters, {
-              y: '-100%',
+              y: 0,
+              yPercent: -100,
               ease: 'power4.out',
               duration: 0.75,
               stagger: {
@@ -94,7 +97,8 @@ export function LeadershipTeamInteractive() {
 
             // Hide name
             gsap.to(letters, {
-              y: '0%',
+              y: 0,
+              yPercent: 0,
               ease: 'power4.out',
               duration: 0.75,
               stagger: {
@@ -111,7 +115,8 @@ export function LeadershipTeamInteractive() {
           profileImagesContainer.addEventListener('mouseenter', () => {
             const defaultLetters = defaultNameElement.querySelectorAll('.letter');
             gsap.to(defaultLetters, {
-              y: '0%',
+              y: 0,
+              yPercent: 0,
               ease: 'power4.out',
               duration: 0.75,
               stagger: {
@@ -124,7 +129,8 @@ export function LeadershipTeamInteractive() {
           profileImagesContainer.addEventListener('mouseleave', () => {
             const defaultLetters = defaultNameElement.querySelectorAll('.letter');
             gsap.to(defaultLetters, {
-              y: '100%',
+              y: 0,
+              yPercent: 100,
               ease: 'power4.out',
               duration: 0.75,
               stagger: {

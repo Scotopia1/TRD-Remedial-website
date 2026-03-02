@@ -16,7 +16,6 @@ export interface FAQ {
 
 export interface ServiceTestimonial {
   quote: string;
-  author: string;
   role: string;
   company: string;
   projectType?: string;
@@ -119,14 +118,12 @@ export const SERVICES: Service[] = [
     testimonials: [
       {
         quote: 'Our 1960s office tower needed column strengthening to accommodate additional mechanical loads on upper floors. TRD\'s CFRP strengthening solution was non-invasive and completed in 2 weeks without relocating occupants. The structural upgrade was flawless and we gained 80% additional capacity per column.',
-        author: 'Christopher Lee',
         role: 'Facility Manager',
         company: 'North Sydney Business Centre',
         projectType: 'High-Rise Column Strengthening - 40 Columns',
       },
       {
         quote: 'We wanted to convert our warehouse to add a second level mezzanine, but the existing slab wasn\'t rated for the additional load. TRD strengthened our main support beams with carbon fibre, and now we have the capacity we need. The upgrade was seamless and cost-effective compared to reconstruction.',
-        author: 'Nicole Ahmed',
         role: 'Operations Director',
         company: 'Holroyd Industrial Logistics',
         projectType: 'Industrial Slab & Beam Strengthening',
@@ -140,10 +137,13 @@ export const SERVICES: Service[] = [
     tagline: 'Modifying structures safely',
     description: 'Expert structural alteration services including opening creation, wall removal, and structural support modification. We ensure stability during all alteration works.',
     features: [
-      'Wall removal',
-      'Opening creation',
-      'Beam installation',
-      'Propping and support',
+      'Load-bearing wall removals and structural demolition',
+      'New opening formations and penetrations',
+      'Steel and concrete beam installations',
+      'Temporary propping and permanent support systems',
+      'Structural reconfiguration of internal layouts',
+      'Mid-construction structural modifications',
+      'Engineering coordination through to completion',
     ],
     benefits: [
       'Space optimization',
@@ -202,14 +202,12 @@ export const SERVICES: Service[] = [
     testimonials: [
       {
         quote: 'We wanted to remove the wall between our kitchen and lounge room. TRD handled all the engineering, permits, and installation of the steel beam with absolute professionalism. The work was completed in 3 weeks with minimal disruption. Our open-plan living is perfect. Highly recommended!',
-        author: 'James Patterson',
         role: 'Homeowner',
         company: 'Mosman Heritage Home',
         projectType: 'Residential Open-Plan Renovation',
       },
       {
         quote: 'TRD managed our Westfield retail tenancy expansion requiring a major structural wall removal. Despite tight timelines and complex engineering, they delivered on schedule with zero safety incidents. Professional coordination between council, engineers, and site teams was exceptional.',
-        author: 'Lisa Wong',
         role: 'Project Manager',
         company: 'Westfield Property Group',
         projectType: 'Commercial Retail Space Expansion',
@@ -234,10 +232,10 @@ export const SERVICES: Service[] = [
       'Prevents corrosion',
       'Cost-effective repair',
     ],
-    icon: '/images/services/crack-injection/feature.jpg',
+    icon: '/images/services/concrete-repairs/feature.jpg',
     visual: '/images/services/crack-injection/hero.jpg',
-    heroImage: '/images/services/crack-injection/hero.jpg',
-    featureImage: '/images/services/crack-injection/feature.jpg',
+    heroImage: '/images/services/concrete-repairs/feature.jpg',
+    featureImage: '/images/services/concrete-repairs/feature.jpg',
     processImage: '/images/services/crack-injection/process.jpg',
     stats: [
       { value: '5,000+', label: 'Meters Injected' },
@@ -285,14 +283,12 @@ export const SERVICES: Service[] = [
     testimonials: [
       {
         quote: "TRD's crack injection work exceeded our expectations. They completed 47 units in our development with zero callbacks and minimal disruption to residents. The technical knowledge and professionalism of their team was outstanding.",
-        author: 'Sarah Mitchell',
         role: 'Development Manager',
         company: 'Pelican Properties Group',
         projectType: 'Residential Estate - 47 Units',
       },
       {
         quote: "We had active water leaks through basement cracks that three other contractors couldn't fix. TRD's polyurethane injection stopped the leaks completely within one day. Two years later, still bone dry. Highly recommended for waterproofing work.",
-        author: 'David Chen',
         role: 'Facility Manager',
         company: 'Waitara Commercial Complex',
         projectType: 'Basement Waterproofing',
@@ -368,7 +364,6 @@ export const SERVICES: Service[] = [
     testimonials: [
       {
         quote: "TRD completed our Coles supermarket concrete cutting project on time despite challenging night work restrictions. Their dust control was exceptional - the store opened on schedule with zero complaints. Professional team that understands retail constraints.",
-        author: 'James Robertson',
         role: 'Project Manager',
         company: 'Coles Group - Property Development',
         projectType: 'Retail Supermarket Modification',
@@ -393,10 +388,10 @@ export const SERVICES: Service[] = [
       'Safety hazard removal',
       'Extended durability',
     ],
-    icon: '/images/services/concrete-repairs/feature.jpg',
+    icon: '/images/services/concrete-repairs/hero.jpg',
     visual: '/images/services/concrete-repairs/hero.jpg',
     heroImage: '/images/services/concrete-repairs/hero.jpg',
-    featureImage: '/images/services/concrete-repairs/feature.jpg',
+    featureImage: '/images/services/concrete-repairs/hero.jpg',
     processImage: '/images/services/concrete-repairs/process.jpg',
     stats: [
       { value: '2,000+', label: 'Repairs' },
@@ -444,14 +439,12 @@ export const SERVICES: Service[] = [
     testimonials: [
       {
         quote: 'Our 25-year-old driveway was looking terrible with multiple spalling patches and cracks. TRD\'s concrete repair team completely transformed it in just 2 days. The finish is flawless and looks like new concrete. Excellent workmanship and fair pricing.',
-        author: 'Margaret Thompson',
         role: 'Homeowner',
         company: 'Double Bay Residential',
         projectType: 'Driveway & Patio Restoration - 150 sqm',
       },
       {
         quote: 'We needed cosmetic concrete repairs on our commercial building facade before a major client event. TRD delivered perfect color matching and invisible repairs on schedule. Their attention to detail and professional finish exceeded our expectations.',
-        author: 'Robert Chen',
         role: 'Building Manager',
         company: 'Parramatta Plaza Shopping Centre',
         projectType: 'Commercial Facade Restoration',
@@ -527,14 +520,12 @@ export const SERVICES: Service[] = [
     testimonials: [
       {
         quote: 'Before cutting our office slab for new mechanical penetrations, TRD\'s GPR scanning discovered active electrical conduits and post-tension cables we didn\'t know existed. Their expertise saved us from a potential disaster. Professional, thorough, and essential work.',
-        author: 'Michael Foster',
         role: 'Facilities Manager',
         company: 'Barangaroo CBD Office Tower',
         projectType: 'Commercial Slab Scanning - 5,000 sqm',
       },
       {
         quote: 'TRD provided fast, accurate scanning before our carpark renovation. They delivered on-site marked results within hours and generated detailed reports showing rebar layout. The scanning data was invaluable for our structural engineer\'s upgrade planning.',
-        author: 'Susan Mitchell',
         role: 'Project Manager',
         company: 'Neutral Bay Carpark Development',
         projectType: 'Carpark Scanning & Engineering',
@@ -610,14 +601,12 @@ export const SERVICES: Service[] = [
     testimonials: [
       {
         quote: 'Our heritage terrace basement had been flooding every winter for 20 years. External waterproofing would have destroyed the heritage facade. TRD\'s curtain injection fixed it without excavation. Three years later, the basement is still completely dry. Remarkable solution for impossible situations.',
-        author: 'Elizabeth Hartley',
         role: 'Heritage Property Owner',
         company: 'Paddington Terrace Residence',
         projectType: 'Heritage Basement Waterproofing',
       },
       {
         quote: 'We had an active groundwater infiltration problem in our underground carpark. TRD\'s curtain injection team worked methodically to seal 150 linear meters of basement wall. The water stopped completely and the carpark has been bone dry for 18 months. Professional team and guaranteed results.',
-        author: 'Anthony Nguyen',
         role: 'Building Manager',
         company: 'Chatswood Corporate Plaza',
         projectType: 'Commercial Carpark Waterproofing - 3 Levels',
@@ -693,14 +682,12 @@ export const SERVICES: Service[] = [
     testimonials: [
       {
         quote: 'TRD designed and installed temporary moving joints for our staged apartment complex construction. Their engineering calculations were precise, and the joints accommodated all expected movements without any cracking issues. Professional service and excellent coordination with our structural engineer.',
-        author: 'David Robertson',
         role: 'Project Manager',
         company: 'Renaissance Development Group',
         projectType: 'Multi-Stage Residential Complex - 12 Stages',
       },
       {
         quote: 'During our shopping center expansion, TRD\'s temporary joint system successfully bridged the connection between our existing slab and new construction. Zero cracking despite thermal cycling and construction loads. Highly professional and technically competent team.',
-        author: 'Patricia Zhang',
         role: 'Construction Director',
         company: 'Westpoint Shopping Centre',
         projectType: 'Commercial Expansion - Phased Construction',
@@ -766,7 +753,6 @@ export const SERVICES: Service[] = [
     testimonials: [
       {
         quote: 'TRD identified and safely truncated multiple post-tension cables for our renovation project. Their GPR scanning technology and expertise gave us complete confidence throughout the process.',
-        author: 'Construction Manager',
         role: 'Project Manager',
         company: 'Western Sydney Development',
         projectType: 'Residential Renovation',

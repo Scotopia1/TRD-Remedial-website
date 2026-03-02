@@ -31,20 +31,35 @@ class ScrollTriggerManager {
    * Initialize manager - wait for fonts and images
    */
   private async init() {
-    // Wait for fonts to load
-    await document.fonts.ready;
+    // Wait for fonts with timeout — iOS Safari can stall on document.fonts.ready
+    try {
+      await Promise.race([
+        document.fonts.ready,
+        new Promise<void>((resolve) => setTimeout(resolve, 3000)),
+      ]);
+    } catch {
+      // Font loading failed — proceed anyway
+    }
     this.fontsLoaded = true;
     this.checkAndRefresh();
 
-    // Wait for images to load
+    // Wait for images to load (also with timeout)
     if (document.readyState === 'complete') {
       this.imagesLoaded = true;
       this.checkAndRefresh();
     } else {
-      window.addEventListener('load', () => {
+      const onLoad = () => {
         this.imagesLoaded = true;
         this.checkAndRefresh();
-      });
+      };
+      window.addEventListener('load', onLoad);
+      setTimeout(() => {
+        if (!this.imagesLoaded) {
+          window.removeEventListener('load', onLoad);
+          this.imagesLoaded = true;
+          this.checkAndRefresh();
+        }
+      }, 5000);
     }
   }
 
@@ -73,7 +88,6 @@ class ScrollTriggerManager {
   private batchRefresh() {
     if (typeof window !== 'undefined') {
       this.refreshCount++;
-      console.log(`[ScrollTriggerManager] Refresh #${this.refreshCount}`);
       ScrollTrigger.refresh();
     }
   }

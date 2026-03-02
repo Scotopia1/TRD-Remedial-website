@@ -68,10 +68,11 @@ const AnimatedCopyComponent = function AnimatedCopy({
       line.innerHTML = `<span class="line-inner-${copyId}">${content}</span>`;
     });
 
-    const initialY = direction === 'top' ? '-100%' : '100%';
+    // Use yPercent instead of y with percentage strings — GSAP requires yPercent for % transforms
+    const initialYPercent = direction === 'top' ? -100 : 100;
 
     gsap.set(`.line-inner-${copyId}`, {
-      y: instantVisible ? '0%' : initialY, // Show immediately if instantVisible
+      yPercent: instantVisible ? 0 : initialYPercent, // Show immediately if instantVisible
       display: 'block',
     });
 
@@ -110,7 +111,7 @@ const AnimatedCopyComponent = function AnimatedCopy({
       });
 
       tl.to(`.line-inner-${copyId}`, {
-        y: '0%',
+        yPercent: 0,
         stagger,
         delay,
       });

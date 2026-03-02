@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { Hero } from '@/components/sections/Hero';
 import { IntroStats } from '@/components/sections/IntroStats';
-import { BlueprintPreloader } from '@/components/animations/BlueprintPreloader';
+import { TRDLoader } from '@/components/animations/TRDLoader';
 import { FAQSchema } from '@/components/seo/FAQSchema';
 
 // Dynamic imports for below-the-fold sections (reduces initial bundle by 62%)
@@ -67,13 +67,18 @@ const BackedByStrengthStudio = dynamic(
 );
 
 export default function Home() {
-  // Check if preloader was already shown in this session to avoid flash
-  const [openingComplete, setOpeningComplete] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return sessionStorage.getItem('trd-preloader-shown') === 'true';
+  // HYDRATION FIX: Always start with false to match SSR output.
+  // Reading sessionStorage in useState initializer causes server/client mismatch
+  // because the server always returns false but client may return true.
+  // Use useEffect to read sessionStorage only after hydration completes.
+  const [openingComplete, setOpeningComplete] = useState(false);
+
+  useEffect(() => {
+    // After hydration, check if preloader was already shown in this session
+    if (sessionStorage.getItem('trd-preloader-shown') === 'true') {
+      setOpeningComplete(true);
     }
-    return false;
-  });
+  }, []);
 
   const handleOpeningComplete = useCallback(() => {
     setOpeningComplete(true);
@@ -84,8 +89,8 @@ export default function Home() {
       {/* FAQ Schema for SEO - Phase 2 Optimization */}
       <FAQSchema />
 
-      {/* Blueprint Preloader - SVG animation with T-R-D reveal */}
-      <BlueprintPreloader onComplete={handleOpeningComplete} />
+      {/* TRD Loader - animated loader with T-R-D reveal */}
+      <TRDLoader onComplete={handleOpeningComplete} />
 
       {/* Main Content */}
       <main id="main-content" aria-label="Main content">

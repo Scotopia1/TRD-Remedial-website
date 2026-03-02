@@ -8,7 +8,7 @@ let originalOverflow: string | null = null;
 let originalPaddingRight: string | null = null;
 
 // Debug mode - set to true to see console logs
-const DEBUG = true;
+const DEBUG = false;
 
 function debugLog(...args: any[]) {
   if (DEBUG && typeof window !== 'undefined') {

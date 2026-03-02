@@ -108,7 +108,7 @@ export function TeamScrollReveal() {
 
                 // Slide up animation: translateY(125%) -> translateY(0%)
                 const entranceY = 125 - memberEntranceProgress * 125;
-                gsap.set(member, { y: `${entranceY}%` });
+                gsap.set(member, { y: 0, yPercent: entranceY });
 
                 // Initial letter scale animation (delayed by 0.4)
                 const teamMemberInitial = member.querySelector(
@@ -125,7 +125,7 @@ export function TeamScrollReveal() {
                 });
               } else if (progress > entranceEnd) {
                 // Set final state after animation completes
-                gsap.set(member, { y: `0%` });
+                gsap.set(member, { y: 0, yPercent: 0 });
                 const teamMemberInitial = member.querySelector(
                   '.team-member-name-initial [data-animate="initial"]'
                 );

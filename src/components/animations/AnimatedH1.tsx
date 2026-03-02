@@ -66,10 +66,11 @@ const AnimatedH1Component = function AnimatedH1({
     });
 
     // Set initial position based on direction
-    const initialY = direction === 'top' ? '-100%' : '100%';
+    // Use yPercent instead of y with percentage strings — GSAP requires yPercent for % transforms
+    const initialYPercent = direction === 'top' ? -100 : 100;
 
     gsap.set(`.line-inner-${headingId}`, {
-      y: initialY,
+      yPercent: initialYPercent,
       display: 'block',
     });
 
@@ -104,9 +105,9 @@ const AnimatedH1Component = function AnimatedH1({
           : {}),
       });
 
-      // Animate lines to y: 0%
+      // Animate lines to yPercent: 0
       tl.to(`.line-inner-${headingId}`, {
-        y: '0%',
+        yPercent: 0,
         stagger,
         delay,
       });

@@ -116,6 +116,10 @@ export function FAQ() {
           <a href="tel:0414727167" className="faq-cta-phone">
             0414 727 167
           </a>
+          <span className="faq-cta-divider">or</span>
+          <a href="tel:0404404422" className="faq-cta-phone">
+            0404 404 422
+          </a>
         </div>
       </div>
 

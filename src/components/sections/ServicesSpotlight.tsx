@@ -443,7 +443,8 @@ const ServicesSpotlight = () => {
       });
 
       // Set initial state for floating images on mobile (will be animated)
-      imageElements.forEach((img) => gsap.set(img, { opacity: 0, x: "50%", y: "50%" }));
+      // Use xPercent/yPercent instead of x/y with percentage strings — GSAP requires these for % transforms
+      imageElements.forEach((img) => gsap.set(img, { opacity: 0, xPercent: 50, yPercent: 50 }));
 
       // Set initial header to first service name
       if (spotlightHeader) {

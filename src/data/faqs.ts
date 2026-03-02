@@ -2,8 +2,8 @@
  * TRD Remedial - FAQ Data
  * Phase 2 SEO Optimization - Content Expansion
  *
- * 13 FAQs organized by category:
- * - 5 Process
+ * 12 FAQs organized by category:
+ * - 4 Process
  * - 4 Technical
  * - 4 Services
  */
@@ -17,7 +17,7 @@ export interface FAQItem {
 }
 
 export const FAQS: FAQItem[] = [
-  // ==================== PROCESS CATEGORY (5 FAQs) ====================
+  // ==================== PROCESS CATEGORY (4 FAQs) ====================
   {
     id: 'project-duration',
     question: 'How long does structural remediation take?',
@@ -35,25 +35,17 @@ export const FAQS: FAQItem[] = [
   {
     id: 'equipment-used',
     question: 'What equipment and materials do you use?',
-    answer: 'We use professional-grade equipment: Hilti diamond saws for cutting, Desoi/Hilti injection pumps, Hilti GPR scanners for slab scanning, and Building Commissioner-approved epoxy resins (Sika, BASF) and grouts. All materials meet Australian Standards AS 3600/AS 3958 for structural concrete repair.',
+    answer: 'We utilise professional-grade, industry-leading equipment across all aspects of our work — from precision diamond cutting and high-pressure injection systems to ground-penetrating radar for slab scanning. All materials and resins are sourced from trusted, top-tier manufacturers and fully comply with Australian Standards, including AS 3600 and AS 3958 for structural concrete repair.',
     category: 'process',
     keywords: ['concrete repair equipment', 'epoxy brands used', 'GPR slab scanning']
   },
   {
     id: 'warranty-period',
     question: 'What warranty do you offer on repairs?',
-    answer: 'We provide 5-10 year warranties on structural crack injection (epoxy), 3-5 years on waterproofing injection (polyurethane), and 2-5 years on concrete cutting/patching depending on application. All work is Building Commissioner-approved and complies with Australian Standards. Warranties cover materials and workmanship.',
+    answer: 'We stand behind every project we deliver. All work is carried out in accordance with Australian Standards and backed by our workmanship and materials guarantee. Warranty periods vary depending on the scope and nature of the repair — whether it\'s structural crack injection, waterproofing, or concrete cutting and patching — and are tailored to each project to ensure long-term performance and durability.',
     category: 'process',
     keywords: ['crack repair warranty', 'structural repair guarantee', 'concrete work warranty Sydney']
   },
-  {
-    id: 'safety-compliance',
-    question: 'Are you fully licensed and insured?',
-    answer: 'Yes, TRD Remedial holds Building Commissioner approval for structural remediation, $20 million public liability insurance, workers compensation insurance, and all required NSW building licenses. Our team is qualified in working at heights, confined spaces, and adheres to strict OH&S protocols on every job.',
-    category: 'process',
-    keywords: ['licensed concrete contractor', 'insured remedial services', 'Building Commissioner approved']
-  },
-
   // ==================== TECHNICAL CATEGORY (4 FAQs) ====================
   {
     id: 'epoxy-vs-polyurethane',

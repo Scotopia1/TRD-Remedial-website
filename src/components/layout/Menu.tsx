@@ -35,8 +35,7 @@ export function Menu() {
   const [showMenuLabel, setShowMenuLabel] = useState(false);
   const [menuLabelFading, setMenuLabelFading] = useState(false);
 
-  // TEMP DISABLED - Testing if this is causing issues
-  // useScrollLock(isMenuOpen);
+  useScrollLock(isMenuOpen);
 
   // Initialize window width on client + check if menu label should show
   useEffect(() => {

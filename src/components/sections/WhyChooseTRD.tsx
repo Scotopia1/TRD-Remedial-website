@@ -74,14 +74,15 @@ export function WhyChooseTRD() {
         if (!headers[0] || !headers[1] || !headers[2]) return;
 
         // First half: vertical movement
+        // Use yPercent instead of y with percentage strings — GSAP requires yPercent for % transforms
         if (self.progress <= 0.5) {
           const yProgress = self.progress / 0.5;
-          gsap.set(headers[0], { y: `${yProgress * 100}%` });
-          gsap.set(headers[2], { y: `${yProgress * -100}%` });
+          gsap.set(headers[0], { yPercent: yProgress * 100 });
+          gsap.set(headers[2], { yPercent: yProgress * -100 });
         } else {
           // Lock vertical position
-          gsap.set(headers[0], { y: '100%' });
-          gsap.set(headers[2], { y: '-100%' });
+          gsap.set(headers[0], { yPercent: 100 });
+          gsap.set(headers[2], { yPercent: -100 });
 
           // Second half: scale down
           const scaleProgress = (self.progress - 0.5) / 0.5;

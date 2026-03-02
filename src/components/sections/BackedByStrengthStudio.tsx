@@ -68,17 +68,19 @@ export function BackedByStrengthStudio() {
         <div className="mission-intro-col-lg">
           <div className="mission-intro-copy">
             <h3>
-              We are a structural engineering company dedicated to creating safe
-              and lasting solutions. Our work is rooted in technical precision,
-              guided by building standards, and shaped through close
-              collaboration with clients and industry partners.
+              We are the remedial experts. TRD Remedial are the specialist
+              contractors builders and developers across NSW trust when the scope
+              is complex, the timeline is tight, and the margin for error is zero.
+              Structural alterations, carbon fibre reinforcement, crack injection,
+              waterproofing, concrete cutting — we deliver it all, on time and to
+              standard.
             </h3>
             <br />
             <h3>
-              With a focus on carbon fibre reinforcement, concrete cutting, and
-              ground-penetrating radar, we build scalable solutions that reflect
-              quiet precision and long-term value. Every project is an exercise
-              in restraint, intention, and technical care.
+              Our work spans occupied buildings, live construction sites, and
+              Building Commissioner rectification orders. Whatever the challenge,
+              we bring the expertise, the methodology, and the accountability to
+              see it through. That's not a promise — it's how we operate.
             </h3>
 
             <div className="mission-link">

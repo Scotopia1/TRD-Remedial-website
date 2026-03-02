@@ -97,7 +97,8 @@ export function TeamCardsSticky() {
         };
         window.addEventListener('resize', handleResize, { passive: true });
 
-        ScrollTrigger.refresh();
+        // Use manager's debounced refresh to avoid redundant refresh calls
+        scrollTriggerManager.requestRefresh();
 
         return () => {
           if (scrollTriggerInstance) scrollTriggerInstance.kill();
@@ -112,14 +113,15 @@ export function TeamCardsSticky() {
           if (card) gsap.set(card, { clearProps: 'all' });
         });
 
-        ScrollTrigger.refresh();
+        // Use manager's debounced refresh to avoid redundant refresh calls
+        scrollTriggerManager.requestRefresh();
 
         const refreshHandler = () => {
           scrollTriggerManager.requestRefresh();
         };
 
         window.addEventListener('orientationchange', refreshHandler);
-        const onLoad = () => ScrollTrigger.refresh();
+        const onLoad = () => scrollTriggerManager.requestRefresh();
         window.addEventListener('load', onLoad, { passive: true });
 
         return () => {

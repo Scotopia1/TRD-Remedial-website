@@ -150,9 +150,7 @@ body::-webkit-scrollbar {
 
   /* Improve scrolling performance */
   [data-scroll-section], section, main {
-    will-change: auto; /* Let browser optimize */
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
+    will-change: auto;
   }
 }
 
@@ -250,10 +248,7 @@ html {
 /* Prevent iOS rubber-banding/bounce - Safe optimizations only */
 @supports (-webkit-touch-callout: none) {
   html, body {
-    height: 100%;
-    overflow: auto;
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior: none;
   }
 
   /* NOTE: Universal hardware acceleration removed - was causing GPU memory pressure */
@@ -276,17 +271,11 @@ html {
 
   /* Optimize images for iOS scrolling performance */
   img {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    /* Prevent image decoding lag during scroll */
     image-rendering: -webkit-optimize-contrast;
   }
 
   /* Optimize video elements for iOS */
   video {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    /* Improve video playback during scroll */
     object-fit: cover;
   }
 }
@@ -512,8 +501,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   -webkit-tap-highlight-color: transparent;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
 /* Utility Classes */

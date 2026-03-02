@@ -160,33 +160,23 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     };
     window.addEventListener('orientationchange', handleOrientationChange);
 
-    // Defer GSAP/ScrollTrigger setup to idle time for better FCP
-    const setupGSAP = () => {
-      // ScrollTrigger config - optimized for performance
-      ScrollTrigger.config({
-        ignoreMobileResize: true,
-        autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
-        limitCallbacks: true, // Reduce callback frequency
-        syncInterval: isIOS() ? 100 : 60, // iOS: sync less frequently for better performance
-      });
+    // Run GSAP/ScrollTrigger config SYNCHRONOUSLY — must happen before
+    // child components create ScrollTrigger instances. Previously deferred
+    // via requestIdleCallback which iOS lacks natively, causing a race condition
+    // where ignoreMobileResize wasn't set before ScrollTriggers were created.
+    ScrollTrigger.config({
+      ignoreMobileResize: true,
+      autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
+      limitCallbacks: true,
+      syncInterval: isIOS() ? 100 : 60,
+    });
 
-      // Optimize GSAP ticker for mobile performance
-      const isMobileWidth = window.innerWidth <= 1000;
-      if (isMobileWidth) {
-        // More forgiving on mobile, especially iOS
-        gsap.ticker.lagSmoothing(isIOS() ? 1500 : 1000, isIOS() ? 20 : 16);
-      } else {
-        gsap.ticker.lagSmoothing(500, 33);
-      }
-    };
-
-    // Defer GSAP setup during idle time
-    const requestIdleCallbackPolyfill =
-      'requestIdleCallback' in window
-        ? window.requestIdleCallback
-        : (cb: IdleRequestCallback) => setTimeout(cb, 1);
-
-    requestIdleCallbackPolyfill(setupGSAP, { timeout: 1000 });
+    const isMobileWidth = window.innerWidth <= 1000;
+    if (isMobileWidth) {
+      gsap.ticker.lagSmoothing(isIOS() ? 1500 : 1000, isIOS() ? 20 : 16);
+    } else {
+      gsap.ticker.lagSmoothing(500, 33);
+    }
 
     return () => {
       window.removeEventListener('resize', checkMobile);
