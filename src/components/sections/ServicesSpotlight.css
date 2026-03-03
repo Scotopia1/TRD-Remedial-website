@@ -222,10 +222,10 @@
 @media (max-width: 1000px) {
   /* Mobile layout - hide titles, keep images (matches CGMWTAUG2025) */
 
-  /* Mobile: Allow section to flow naturally without pin (iOS scroll fix C1) */
+  /* Mobile: Fixed viewport height for pinned GSAP ScrollTrigger */
   .services-spotlight {
-    height: auto;
-    min-height: 100svh;
+    height: 100svh;
+    height: 100dvh;
   }
 
   /* Show background image statically on mobile */

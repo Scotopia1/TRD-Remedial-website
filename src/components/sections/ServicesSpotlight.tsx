@@ -470,14 +470,18 @@ const ServicesSpotlight = () => {
         spotlightHeader.style.opacity = "1";
       }
 
-      // NON-PINNED ScrollTrigger: tracks scroll position without pinning
+      // PINNED ScrollTrigger: pins section while user scrolls through services
       // Background crossfades and header updates as user scrolls through
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent);
       scrollTriggerRef.current = ScrollTrigger.create({
         trigger: ".services-spotlight",
         start: "top top",
         end: `+=${getStableHeight() * spotlightItems.length * 1.2}px`,
-        pin: false,        // CRITICAL: No pin on mobile — eliminates iOS jank
-        scrub: 0.5,
+        pin: true,
+        pinSpacing: true,
+        scrub: isSafari && isIOSDevice ? 0.5 : 1,
+        invalidateOnRefresh: true,
         refreshPriority: 9,
         onUpdate: (self) => {
           const progress = self.progress;

@@ -232,10 +232,10 @@ export const SERVICES: Service[] = [
       'Prevents corrosion',
       'Cost-effective repair',
     ],
-    icon: '/images/services/concrete-repairs/feature.jpg',
+    icon: '/images/services/crack-injection/feature.jpg',
     visual: '/images/services/crack-injection/hero.jpg',
-    heroImage: '/images/services/concrete-repairs/feature.jpg',
-    featureImage: '/images/services/concrete-repairs/feature.jpg',
+    heroImage: '/images/services/crack-injection/hero.jpg',
+    featureImage: '/images/services/crack-injection/feature.jpg',
     processImage: '/images/services/crack-injection/process.jpg',
     stats: [
       { value: '5,000+', label: 'Meters Injected' },
@@ -391,7 +391,7 @@ export const SERVICES: Service[] = [
     icon: '/images/services/concrete-repairs/hero.jpg',
     visual: '/images/services/concrete-repairs/hero.jpg',
     heroImage: '/images/services/concrete-repairs/hero.jpg',
-    featureImage: '/images/services/concrete-repairs/hero.jpg',
+    featureImage: '/images/services/concrete-repairs/feature.jpg',
     processImage: '/images/services/concrete-repairs/process.jpg',
     stats: [
       { value: '2,000+', label: 'Repairs' },
