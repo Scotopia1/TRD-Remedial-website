@@ -232,6 +232,8 @@ const ServicesSpotlight = () => {
     // CGMWTAUG2025 pattern: Only create complex ScrollTrigger on desktop
     // Mobile gets simpler, non-pinned experience
     if (!isMobileDevice) {
+      // Desktop: Set background to scale(0) for Phase 1 animation (base CSS is scale(1) for mobile safety)
+      gsap.set(".spotlight-bg-img", { transform: "scale(0)" });
       // Desktop: Set all images to invisible initially (will be animated)
       imageElements.forEach((img) => gsap.set(img, { opacity: 0 }));
 
@@ -431,7 +433,7 @@ const ServicesSpotlight = () => {
       // Uses ScrollTrigger WITHOUT pin to avoid iOS position:fixed
       // momentum scroll bugs (multiple simultaneous pins cause jank)
       // ============================================================
-      let currentActiveIndex = 0;
+      let currentActiveIndex = -1; // Start at -1 so first update (index 0) triggers visibility
 
       // Show background image at full scale
       gsap.set(".spotlight-bg-img", { transform: "scale(1)" });
@@ -449,6 +451,11 @@ const ServicesSpotlight = () => {
 
       // Hide floating images on mobile (no Bezier curve animation without pin)
       imageElements.forEach((img) => gsap.set(img, { opacity: 0 }));
+
+      // Explicitly set first background image visible (desktop branch may have set all to opacity: 0)
+      bgImageElements.forEach((img, i) => {
+        (img as HTMLElement).style.opacity = i === 0 ? '1' : '0';
+      });
 
       // Set initial header to first service name
       if (spotlightHeader) {
