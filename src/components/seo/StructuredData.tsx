@@ -1,5 +1,5 @@
 export function StructuredData() {
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://thetrdgroup.com.au';
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://trdremedial.com.au';
 
   const organizationSchema = {
     "@context": "https://schema.org",

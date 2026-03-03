@@ -13,13 +13,13 @@ export function ProjectSchema({ project }: ProjectSchemaProps) {
     image: project.heroImage,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://thetrdgroup.com.au/projects/${project.slug}`,
+      '@id': `https://trdremedial.com.au/projects/${project.slug}`,
     },
     provider: {
       '@type': 'Organization',
       name: 'TRD Remedial',
-      url: 'https://thetrdgroup.com.au',
-      logo: 'https://thetrdgroup.com.au/images/logo.png',
+      url: 'https://trdremedial.com.au',
+      logo: 'https://trdremedial.com.au/images/logo.png',
     },
     serviceType: project.serviceType,
     location: {

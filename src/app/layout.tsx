@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     "curtain wall injection",
     "structural alterations"
   ],
-  authors: [{ name: "TRD Remedial", url: "https://thetrdgroup.com.au" }],
+  authors: [{ name: "TRD Remedial", url: "https://trdremedial.com.au" }],
   creator: "TRD Remedial",
   publisher: "TRD Remedial",
   formatDetection: {
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://thetrdgroup.com.au"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://trdremedial.com.au"),
   alternates: {
     canonical: "/",
   },
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "TRD Remedial - The Remedial Experts | Structural Solutions Sydney",
     description: "We solve structural challenges others can't handle. Expert remediation services: structural strengthening, concrete cutting, crack injection, concrete repairs, post tension truncation, slab scanning. 24/7 emergency response.",
-    url: "https://thetrdgroup.com.au",
+    url: "https://trdremedial.com.au",
     siteName: "TRD Remedial",
     locale: "en_AU",
     type: "website",

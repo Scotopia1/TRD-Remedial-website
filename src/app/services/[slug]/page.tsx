@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description: service.tagline,
       images: [{ url: service.heroImage || service.visual, width: 1920, height: 1080, alt: `${service.title} in Sydney` }],
       type: 'website',
-      url: `https://thetrdgroup.com.au/services/${service.slug}`,
+      url: `https://trdremedial.com.au/services/${service.slug}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       images: [service.heroImage || service.visual],
     },
     alternates: {
-      canonical: `https://thetrdgroup.com.au/services/${service.slug}`,
+      canonical: `https://trdremedial.com.au/services/${service.slug}`,
     },
   };
 }

@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const description = project.metaDescription || `${project.tagline} - ${project.challenge.substring(0, 120)}...`;
   const title = project.metaTitle || `${project.name} | TRD Remedial Case Study`;
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://thetrdgroup.com.au';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://trdremedial.com.au';
   const canonicalUrl = `${baseUrl}/projects/${slug}`;
 
   return {

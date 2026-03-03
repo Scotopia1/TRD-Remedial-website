@@ -13,7 +13,7 @@ interface ServiceSchemaProps {
 }
 
 export function ServiceSchema({ service }: ServiceSchemaProps) {
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://thetrdgroup.com.au';
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://trdremedial.com.au';
 
   const schema = {
     "@context": "https://schema.org",
@@ -28,8 +28,8 @@ export function ServiceSchema({ service }: ServiceSchemaProps) {
       "@id": `${SITE_URL}/#organization`,
       "name": "TRD Remedial",
       "telephone": "+61414727167",
-      "url": "https://thetrdgroup.com.au",
-      "logo": "https://thetrdgroup.com.au/logo.png",
+      "url": "https://trdremedial.com.au",
+      "logo": "https://trdremedial.com.au/logo.png",
       "address": {
         "@type": "PostalAddress",
         "addressRegion": "NSW",

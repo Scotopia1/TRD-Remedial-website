@@ -3,7 +3,7 @@ import { PROJECTS } from '@/data/projects';
 import { SERVICES } from '@/data/services';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://thetrdgroup.com.au';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://trdremedial.com.au';
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
