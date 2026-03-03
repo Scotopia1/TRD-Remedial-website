@@ -19,6 +19,13 @@
   height: 100%;
   position: relative;
   overflow: hidden;
+  background: var(--concrete-900);
+}
+
+/* Contain image fully: landscape fits height, portrait fits width, always centered */
+.service-hero-image img {
+  object-fit: contain !important;
+  object-position: center !important;
 }
 
 .service-hero-content {
