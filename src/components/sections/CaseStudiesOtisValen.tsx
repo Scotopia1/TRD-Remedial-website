@@ -17,9 +17,9 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 export function CaseStudiesOtisValen() {
   // Select 6 diverse real projects representing different services and categories
   const featuredProjectIds = [
-    'project-006', // Rouse Hill - PT Slab Scanning & Penetration
-    'project-011', // One The Waterfront - Structural Alterations & Multi-Service
     'project-001', // Caringbah Pavilion - Carbon Fibre Strengthening
+    'project-011', // One The Waterfront - Structural Alterations & Multi-Service
+    'project-006', // Rouse Hill - PT Slab Scanning & Penetration
     'project-007', // Pelican Road - Large-Scale Defect Rectification
     'project-003', // Enfield - Curtain Wall Waterproofing
     'project-012', // Zetland - SureLok TMJ Installation
