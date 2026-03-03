@@ -620,10 +620,11 @@ const ServicesSpotlight = () => {
         ))}
       </div>
 
-      {/* "Discover" header text */}
-      <div className="spotlight-header" ref={spotlightHeaderRef}>
-        <p>Our Services</p>
-      </div>
+      {/* "Discover" header text - uses dangerouslySetInnerHTML to avoid React reconciliation
+          conflicts when JS updates content via innerHTML during scroll animations */}
+      <div className="spotlight-header" ref={spotlightHeaderRef}
+        dangerouslySetInnerHTML={{ __html: '<p>Our Services</p>' }}
+      />
 
       {/* TRD-branded outline border */}
       <div className="spotlight-outline"></div>
