@@ -10,6 +10,7 @@ import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { Menu } from "@/components/layout/Menu";
 import { Footer } from "@/components/sections/Footer";
 import { WebVitals } from "@/components/analytics/WebVitals";
+import { Analytics } from "@vercel/analytics/next";
 
 export const viewport = {
   width: 'device-width',
@@ -168,6 +169,7 @@ export default function RootLayout({
             <Footer />
           </TransitionProvider>
         </AccessibilityProvider>
+        <Analytics />
       </body>
     </html>
   );
