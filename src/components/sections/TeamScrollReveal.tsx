@@ -108,7 +108,7 @@ export function TeamScrollReveal() {
 
                 // Slide up animation: translateY(125%) -> translateY(0%)
                 const entranceY = 125 - memberEntranceProgress * 125;
-                gsap.set(member, { y: 0, yPercent: entranceY });
+                gsap.set(member, { y: 0, yPercent: entranceY, force3D: true });
 
                 // Initial letter scale animation (delayed by 0.4)
                 const teamMemberInitial = member.querySelector(
@@ -122,14 +122,15 @@ export function TeamScrollReveal() {
                 );
                 gsap.set(teamMemberInitial, {
                   scale: initialLetterScaleProgress,
+                  force3D: true,
                 });
               } else if (progress > entranceEnd) {
                 // Set final state after animation completes
-                gsap.set(member, { y: 0, yPercent: 0 });
+                gsap.set(member, { y: 0, yPercent: 0, force3D: true });
                 const teamMemberInitial = member.querySelector(
                   '.team-member-name-initial [data-animate="initial"]'
                 );
-                gsap.set(teamMemberInitial, { scale: 1 });
+                gsap.set(teamMemberInitial, { scale: 1, force3D: true });
               }
             });
           },
@@ -164,10 +165,12 @@ export function TeamScrollReveal() {
 
                 gsap.set(img, {
                   x: `${slideX}%`,
+                  force3D: true,
                 });
               } else if (progress > xEnd) {
                 gsap.set(img, {
                   x: `0%`,
+                  force3D: true,
                 });
               }
 
@@ -180,27 +183,14 @@ export function TeamScrollReveal() {
                 const scaleProgress =
                   (progress - scaleStart) / (scaleEnd - scaleStart);
                 const scaleValue = 0.75 + scaleProgress * 0.25;
-                gsap.set(img, { scale: scaleValue });
+                gsap.set(img, { scale: scaleValue, force3D: true });
               } else if (progress > scaleEnd) {
-                gsap.set(img, { scale: 1 });
+                gsap.set(img, { scale: 1, force3D: true });
               }
             });
           },
         });
       }
-
-      // Debounced resize handler
-      let resizeTimer: NodeJS.Timeout;
-      const handleResize = () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          initTeamAnimations();
-          scrollTriggerManager.requestRefresh();
-        }, 250);
-      };
-
-      // Add resize listener
-      window.addEventListener('resize', handleResize);
 
       // Initialize animations after images have loaded
       waitForImagesToLoad().then(() => {
@@ -211,9 +201,8 @@ export function TeamScrollReveal() {
         }, 100);
       });
 
-      // Cleanup function
+      // Cleanup function — resize is handled by isMobile dependency re-run
       return () => {
-        window.removeEventListener('resize', handleResize);
         if (entranceAnimationRef.current)
           entranceAnimationRef.current.kill();
         if (slideInAnimationRef.current)
@@ -255,7 +244,7 @@ export function TeamScrollReveal() {
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
                     quality={85}
-                    priority={false}
+                    priority={true}
                     blurDataURL={member.blurDataURL}
                     style={{ objectFit: 'cover' }}
                   />
