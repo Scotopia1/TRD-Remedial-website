@@ -110,9 +110,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  /* Prevent pointer events from blocking image interaction */
+  pointer-events: none;
 }
 
-.team-member-name-initial h1 {
+.team-member-name-initial span {
+  display: block;
   color: var(--team-accent);
   font-size: 20rem;
   font-weight: 800;
@@ -120,6 +123,9 @@
   line-height: 1;
   will-change: transform;
   font-family: "Rader", sans-serif;
+  /* Force GPU layer for smooth scale animation */
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /* ============================================
@@ -130,6 +136,9 @@
   inset: 0;
   border-radius: 1.5rem;
   overflow: hidden;
+  /* Force GPU compositing to prevent subpixel glitches during transform */
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .team-member-img img {
@@ -138,34 +147,38 @@
   width: 100% !important;
   height: 100% !important;
   object-fit: cover;
+  /* Always fully visible — parent container handles visibility via transform */
+  opacity: 1 !important;
+  transition: none !important;
 }
 
 /* ============================================
    INITIAL ANIMATION STATES
-   (Ready for Phase 2 animations)
    ============================================ */
 
-/* Members start below viewport */
+/* Members start below viewport — hidden until GSAP entrance animation */
 .team-member {
   transform: translateY(125%);
+  /* GPU layer for smooth translate animation */
+  backface-visibility: hidden;
 }
 
-/* Initial letters start scaled to 0 */
-.team-member-name-initial h1 {
+/* Initial letter spans start scaled to 0 */
+.team-member-name-initial span[data-animate="initial"] {
   transform: scale(0);
 }
 
 /* Images start off-screen right with reduced scale */
 .team-member:nth-child(1) .team-member-img {
-  transform: translateX(300%) scale(0.75);
+  transform: translateZ(0) translateX(300%) scale(0.75);
 }
 
 .team-member:nth-child(2) .team-member-img {
-  transform: translateX(200%) scale(0.75);
+  transform: translateZ(0) translateX(200%) scale(0.75);
 }
 
 .team-member:nth-child(3) .team-member-img {
-  transform: translateX(100%) scale(0.75);
+  transform: translateZ(0) translateX(100%) scale(0.75);
 }
 
 /* ============================================
@@ -228,7 +241,7 @@
   }
 
   /* Initial Letters - Always Visible on Mobile */
-  .team-member-name-initial h1 {
+  .team-member-name-initial span {
     transform: scale(1);
     font-size: 12rem;
   }
@@ -246,14 +259,14 @@
 @media (prefers-reduced-motion: reduce) {
   /* Reset all transforms for reduced motion */
   .team-member,
-  .team-member-name-initial h1,
+  .team-member-name-initial span,
   .team-member-img {
     transform: none !important;
   }
 
   /* Disable will-change */
   .team-member,
-  .team-member-name-initial h1,
+  .team-member-name-initial span,
   .team-member-img {
     will-change: auto !important;
   }

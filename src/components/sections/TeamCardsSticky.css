@@ -64,8 +64,12 @@
   padding: 1rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   pointer-events: auto;
-  /* Initial state: hidden off-screen right until GSAP takes over */
-  transform: translateX(150vw);
+  /* Initial state: hidden off-screen right until GSAP takes over.
+     Using visibility:hidden instead of CSS transform to avoid
+     conflicting with GSAP's matrix transform and causing a flash. */
+  visibility: hidden;
+  /* GPU compositing layer for smooth GSAP transform animations */
+  backface-visibility: hidden;
 }
 
 .card .card-img {
@@ -73,6 +77,9 @@
   border-radius: 0.5rem;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.2);
+  /* GPU layer for glitch-free rendering during parent transform animation */
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .card .card-img img {
@@ -194,9 +201,10 @@
     display: flex;
   }
 
-  /* Reset card transform on mobile (they're in mobile section anyway) */
+  /* Reset card state on mobile (they're in the mobile section anyway) */
   .card {
     transform: none;
+    visibility: visible;
   }
 }
 

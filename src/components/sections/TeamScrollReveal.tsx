@@ -256,6 +256,7 @@ export function TeamScrollReveal() {
                     sizes="(max-width: 768px) 100vw, 600px"
                     quality={85}
                     priority={false}
+                    blurDataURL={member.blurDataURL}
                     style={{ objectFit: 'cover' }}
                   />
                 </div>

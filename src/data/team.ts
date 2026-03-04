@@ -6,6 +6,7 @@ export interface TeamMember {
   expertise: string[];
   bio: string;
   image: string;
+  blurDataURL?: string;
   linkedIn?: string;
 }
 
@@ -22,7 +23,8 @@ export const TEAM_MEMBERS: TeamMember[] = [
       'Strategic project planning',
     ],
     bio: 'Christopher brings a unique combination of architectural design expertise and on-site execution experience. His future-focused vision drives TRD\'s innovative approach to structural remediation, ensuring every project meets both aesthetic and structural requirements.',
-    image: '/images/team/christopher-nassif.png',
+    image: '/images/team/christopher-nassif.webp',
+    blurDataURL: 'data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADQAQCdASoKAA0ABUB8JaQAAtz+n6IegAD+6I/rCVXNH2aEKVs+t1c6xQplqQWAf5RBTsjv0Zz2gXKwFuRAjHKU4AA=',
     linkedIn: '#',
   },
   {
@@ -38,7 +40,8 @@ export const TEAM_MEMBERS: TeamMember[] = [
       'Game-changing outcomes',
     ],
     bio: 'As a licensed builder with extensive construction leadership experience, Charly ensures every TRD project is executed with precision and safety. His results-driven approach has consistently delivered game-changing outcomes for complex structural challenges.',
-    image: '/images/team/charly-nassif.png',
+    image: '/images/team/charly-nassif.webp',
+    blurDataURL: 'data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAQCdASoKAA0ABUB8JaQAAtz4P/TEAAD+6KC00GkgBiRdnInc1/oI5aJgeCK7X2OVjGO/Vn6VM24rFVrWHCt5dswTG4AA',
     linkedIn: '#',
   },
   {
@@ -54,7 +57,8 @@ export const TEAM_MEMBERS: TeamMember[] = [
       'Innovative structural solutions',
     ],
     bio: 'Fahed\'s technical command and deep structural insight make him the cornerstone of TRD\'s engineering excellence. Known for precision and innovative problem-solving, he tackles the most complex structural challenges with confidence and expertise.',
-    image: '/images/team/fahed-nassif.png',
+    image: '/images/team/fahed-nassif.webp',
+    blurDataURL: 'data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQAgCdASoKAA0ABUB8JaQAD4xwNgBM9PaAAP7ooLOTlwTjlGlfJSaJw4eMpQ5pTXLPDXaCnsdeK4degx1hCkCFTYRVo4vAAAA=',
     linkedIn: '#',
   },
 ];

@@ -144,9 +144,17 @@ export function PersonnelCard({ member, index, fileId }: PersonnelCardProps) {
               src={member.image}
               alt={`${member.name} - ${member.title}`}
               fill
-              sizes="(max-width: 768px) 100vw, 200px"
+              sizes="(max-width: 640px) 140px, (max-width: 1000px) 180px, 160px"
               quality={85}
-              style={{ objectFit: 'cover', filter: 'grayscale(100%)' }}
+              placeholder={member.blurDataURL ? 'blur' : 'empty'}
+              blurDataURL={member.blurDataURL}
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'top center',
+                filter: 'grayscale(100%)',
+                transform: 'translateZ(0)',
+                backfaceVisibility: 'hidden',
+              }}
             />
             <div className="bb-photo-scan" aria-hidden="true" />
           </div>

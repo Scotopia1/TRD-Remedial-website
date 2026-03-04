@@ -77,8 +77,11 @@ export function TeamCardsSticky() {
           });
         }
 
-        // Initial positioning
+        // Initial positioning — make cards visible after GSAP has set their position
         positionCards(0);
+        cards.forEach((card) => {
+          gsap.set(card, { visibility: 'visible' });
+        });
 
         scrollTriggerInstance = ScrollTrigger.create({
           trigger: stickySection,
@@ -164,6 +167,8 @@ export function TeamCardsSticky() {
                   sizes="(max-width: 768px) 100vw, 400px"
                   quality={85}
                   priority={false}
+                  placeholder={member.blurDataURL ? 'blur' : 'empty'}
+                  blurDataURL={member.blurDataURL}
                   style={{ objectFit: 'cover' }}
                 />
               </div>
@@ -191,6 +196,8 @@ export function TeamCardsSticky() {
                 sizes="100vw"
                 quality={85}
                 priority={false}
+                placeholder={member.blurDataURL ? 'blur' : 'empty'}
+                blurDataURL={member.blurDataURL}
                 style={{ objectFit: 'cover' }}
               />
             </div>
