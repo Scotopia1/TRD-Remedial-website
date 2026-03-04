@@ -12,6 +12,23 @@ export interface TeamMember {
 
 export const TEAM_MEMBERS: TeamMember[] = [
   {
+    id: 'fahed-nassif',
+    name: 'Fahed Nassif',
+    title: 'Lead Structural Engineer',
+    roles: ['Lead Structural Engineer'],
+    expertise: [
+      'Technical command',
+      'Structural insight',
+      'Precision engineering',
+      'Problem-solving reputation',
+      'Innovative structural solutions',
+    ],
+    bio: 'Fahed\'s technical command and deep structural insight make him the cornerstone of TRD\'s engineering excellence. Known for precision and innovative problem-solving, he tackles the most complex structural challenges with confidence and expertise.',
+    image: '/images/team/fahed-nassif.webp',
+    blurDataURL: 'data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQAgCdASoKAA0ABUB8JaQAD4xwNgBM9PaAAP7ooLOTlwTjlGlfJSaJw4eMpQ5pTXLPDXaCnsdeK4degx1hCkCFTYRVo4vAAAA=',
+    linkedIn: '#',
+  },
+  {
     id: 'christopher-nassif',
     name: 'Christopher Nassif',
     title: 'Director | Architect | Division Manager',
@@ -42,23 +59,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     bio: 'As a licensed builder with extensive construction leadership experience, Charly ensures every TRD project is executed with precision and safety. His results-driven approach has consistently delivered game-changing outcomes for complex structural challenges.',
     image: '/images/team/charly-nassif.webp',
     blurDataURL: 'data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAQCdASoKAA0ABUB8JaQAAtz4P/TEAAD+6KC00GkgBiRdnInc1/oI5aJgeCK7X2OVjGO/Vn6VM24rFVrWHCt5dswTG4AA',
-    linkedIn: '#',
-  },
-  {
-    id: 'fahed-nassif',
-    name: 'Fahed Nassif',
-    title: 'Lead Structural Engineer',
-    roles: ['Lead Structural Engineer'],
-    expertise: [
-      'Technical command',
-      'Structural insight',
-      'Precision engineering',
-      'Problem-solving reputation',
-      'Innovative structural solutions',
-    ],
-    bio: 'Fahed\'s technical command and deep structural insight make him the cornerstone of TRD\'s engineering excellence. Known for precision and innovative problem-solving, he tackles the most complex structural challenges with confidence and expertise.',
-    image: '/images/team/fahed-nassif.webp',
-    blurDataURL: 'data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQAgCdASoKAA0ABUB8JaQAD4xwNgBM9PaAAP7ooLOTlwTjlGlfJSaJw4eMpQ5pTXLPDXaCnsdeK4degx1hCkCFTYRVo4vAAAA=',
     linkedIn: '#',
   },
 ];
