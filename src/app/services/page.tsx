@@ -25,9 +25,9 @@ export default function ServicesPage() {
             Our Services
           </AnimatedH1>
           <AnimatedCopy delay={0.7} tag="p" className="services-hero-description">
-            Six specialized solutions for structural remediation.
+            Multiple disciplines. One trusted contractor.
             <br />
-            Precision engineering meets proven expertise.
+            Precision engineering meets hands-on expertise.
           </AnimatedCopy>
         </div>
       </section>
