@@ -128,9 +128,19 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // API routes with stale-while-revalidate
+      // Revalidation endpoint — must never be cached
       {
-        source: '/api/:path*',
+        source: '/api/revalidate',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-store, no-cache, must-revalidate',
+          },
+        ],
+      },
+      // Other API routes with stale-while-revalidate
+      {
+        source: '/api/:path((?!revalidate).*)',
         headers: [
           {
             key: 'Cache-Control',

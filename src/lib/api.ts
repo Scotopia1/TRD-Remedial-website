@@ -223,7 +223,7 @@ export async function getTestimonials(): Promise<Testimonial[]> {
  */
 export async function getSettings(): Promise<SiteSettings> {
   try {
-    return await fetchAPI<SiteSettings>('/api/public/settings', { revalidate: 300 });
+    return await fetchAPI<SiteSettings>('/api/public/settings', { revalidate: 60 });
   } catch (err) {
     console.error('[api] getSettings failed:', err);
     // Return a safe default so the site doesn't break if settings are unavailable.

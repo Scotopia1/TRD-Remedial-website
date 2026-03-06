@@ -57,7 +57,9 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
       }}
       enter={(next) => {
         // Reset scroll instantly when entering new page (while blocks still cover screen)
-        // Dispatch custom event for Lenis to handle instant scroll reset
+        // Reset native scroll for mobile (no Lenis on mobile)
+        window.scrollTo(0, 0);
+        // Dispatch custom event for Lenis to handle instant scroll reset (desktop)
         window.dispatchEvent(new CustomEvent('instantScrollReset'));
 
         gsap.set(blocksRef.current, { scaleX: 1, transformOrigin: 'right' });

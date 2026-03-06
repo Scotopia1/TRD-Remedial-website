@@ -69,6 +69,42 @@ export default function ProjectsListClient({ projects }: ProjectsListClientProps
 
   return (
     <div className="projects-page">
+      {/* Hero Section - 100svh, matches services-hero pattern */}
+      <section className="projects-hero" aria-label="Projects page hero">
+        <div className="projects-hero-content">
+          <p className="projects-hero-eyebrow">Portfolio</p>
+          <AnimatedH1 delay={0.3} className="projects-hero-title">
+            Our Work
+          </AnimatedH1>
+          <AnimatedCopy delay={0.55} tag="p" className="projects-hero-description">
+            Proven results across Sydney&rsquo;s most complex structural challenges.
+            <br />
+            Every project completed — on time, on spec, without compromise.
+          </AnimatedCopy>
+          <div className="projects-hero-meta">
+            <div className="projects-hero-meta-item">
+              <span className="projects-hero-meta-value">{projects.length}+</span>
+              <span className="projects-hero-meta-label">Projects Completed</span>
+            </div>
+            <div className="projects-hero-meta-divider" aria-hidden="true" />
+            <div className="projects-hero-meta-item">
+              <span className="projects-hero-meta-value">NSW</span>
+              <span className="projects-hero-meta-label">Sydney &amp; Surrounds</span>
+            </div>
+            <div className="projects-hero-meta-divider" aria-hidden="true" />
+            <div className="projects-hero-meta-item">
+              <span className="projects-hero-meta-value">2017</span>
+              <span className="projects-hero-meta-label">Est.</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="projects-hero-scroll" aria-hidden="true">
+          <div className="projects-hero-scroll-line" />
+        </div>
+      </section>
+
       <div className="projects-list">
         {projects.map((project, index) => (
           <Link
