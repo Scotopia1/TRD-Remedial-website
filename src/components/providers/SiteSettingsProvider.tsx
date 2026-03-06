@@ -3,23 +3,20 @@
 /**
  * SiteSettingsProvider
  *
- * Fetches global site settings once at the client level and makes them
- * available to all client components (Footer, Header, EmergencyCTA, etc.)
- * via React context.
+ * Receives server-fetched site settings and makes them available to all
+ * client components (Footer, Header, EmergencyCTA, etc.) via React context.
  *
- * Why client-side fetch?
- * Footer, Menu, and Header live in the root layout and are rendered as
- * 'use client' components. The simplest way to supply them with dynamic
- * settings is through a shared context that fetches from the public API.
+ * Settings are fetched server-side in the root layout and passed as
+ * initialSettings, avoiding CORS issues with cross-origin client fetches.
  */
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext } from 'react';
 import type { SiteSettings } from '@/types/api';
 
 // ---------------------------------------------------------------------------
-// Defaults — shown while settings load or if the API is unavailable
+// Defaults — used if the server fails to fetch settings
 // ---------------------------------------------------------------------------
-const DEFAULT_SETTINGS: SiteSettings = {
+export const DEFAULT_SETTINGS: SiteSettings = {
   contactEmail: 'contact@trdremedial.com.au',
   contactPhone: '0414 727 167',
   contactAddress: '2 Beryl Place Greenacre NSW 2190',
@@ -66,25 +63,15 @@ export function useSiteSettings(): SiteSettings {
 // ---------------------------------------------------------------------------
 // Provider
 // ---------------------------------------------------------------------------
-export function SiteSettingsProvider({ children }: { children: React.ReactNode }) {
-  const [settings, setSettings] = useState<SiteSettings>(DEFAULT_SETTINGS);
-
-  useEffect(() => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-    fetch(`${apiUrl}/api/public/settings`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`settings fetch ${res.status}`);
-        return res.json() as Promise<SiteSettings>;
-      })
-      .then((data) => setSettings(data))
-      .catch((err) => {
-        // Keep defaults on error — site remains functional
-        console.error('[SiteSettingsProvider] Failed to load settings:', err);
-      });
-  }, []);
-
+export function SiteSettingsProvider({
+  initialSettings,
+  children,
+}: {
+  initialSettings?: SiteSettings;
+  children: React.ReactNode;
+}) {
   return (
-    <SiteSettingsContext.Provider value={settings}>
+    <SiteSettingsContext.Provider value={initialSettings || DEFAULT_SETTINGS}>
       {children}
     </SiteSettingsContext.Provider>
   );

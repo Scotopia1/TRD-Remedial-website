@@ -118,11 +118,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteSettings = await getSettings();
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -164,7 +165,7 @@ export default function RootLayout({
       >
         {/* TEMP REMOVED ScrollUnlockProvider - Testing */}
         <WebVitals />
-        <SiteSettingsProvider>
+        <SiteSettingsProvider initialSettings={siteSettings}>
           <AccessibilityProvider>
             <ScrollToTop />
             <Menu />
