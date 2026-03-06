@@ -13,7 +13,7 @@ import type { Service } from '@/types/api';
 // ---------------------------------------------------------------------------
 
 const contactSchema = z.object({
-  name: z.string().min(1, 'Full name is required'),
+  name: z.string().min(2, 'Full name is required'),
   email: z.string().min(1, 'Email is required').email('Please enter a valid email'),
   phone: z.string().optional(),
   company: z.string().optional(),
