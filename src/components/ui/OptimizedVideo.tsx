@@ -14,8 +14,13 @@ interface OptimizedVideoProps {
   playsInline?: boolean;
 }
 
+// Strip known video extensions so we always work with a base path
+function stripVideoExt(url: string): string {
+  return url.replace(/\.(webm|mp4|mov|avi|mkv)$/i, '');
+}
+
 export function OptimizedVideo({
-  src,
+  src: rawSrc,
   poster,
   className = '',
   priority = false,
@@ -24,6 +29,7 @@ export function OptimizedVideo({
   muted = true,
   playsInline = true,
 }: OptimizedVideoProps) {
+  const src = stripVideoExt(rawSrc);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isClient, setIsClient] = useState(false);
   const [isMobileDevice, setIsMobileDevice] = useState(false);
