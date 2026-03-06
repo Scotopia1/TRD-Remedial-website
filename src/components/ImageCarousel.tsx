@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import type { ProjectImage } from '@/data/projects';
+import type { ProjectImage } from '@/types/api';
 import { useScrollLock } from '@/hooks/useScrollLock';
 import './ImageCarousel.css';
 

@@ -4,14 +4,20 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { COMPANY_VALUES } from '@/data/team';
+import type { CompanyValue } from '@/types/api';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const DIRECTIVES = COMPANY_VALUES.filter((v) => v.isText && v.title);
+interface CoreDirectivesProps {
+  values: CompanyValue[];
+  establishedYear?: string;
+}
 
-export function CoreDirectives() {
+export function CoreDirectives({ values, establishedYear = '2018' }: CoreDirectivesProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Only show text-type values that have a title (same filter as before)
+  const directives = values.filter((v) => v.isText && v.title);
 
   useGSAP(() => {
     if (!sectionRef.current) return;
@@ -101,7 +107,7 @@ export function CoreDirectives() {
       <h2 className="bb-section-title">CORE DIRECTIVES</h2>
       <div className="bb-section-title-underline" aria-hidden="true" />
 
-      {DIRECTIVES.map((directive, i) => (
+      {directives.map((directive, i) => (
         <div key={directive.id} className="bb-directive">
           <div className="bb-directive-header">
             <span className="bb-directive-prefix" aria-hidden="true">&gt; </span>
@@ -114,7 +120,7 @@ export function CoreDirectives() {
             <span className="bb-directive-status-label">STATUS: </span>
             <span className="bb-directive-badge">[ACTIVE]</span>
             <span className="bb-directive-dots" aria-hidden="true" />
-            <span className="bb-directive-since">SINCE: 2018</span>
+            <span className="bb-directive-since">SINCE: {establishedYear}</span>
           </div>
         </div>
       ))}

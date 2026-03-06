@@ -1,188 +1,237 @@
-export function StructuredData() {
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://trdremedial.com.au';
+import { getSettings, getServices, getTeamMembers } from '@/lib/api';
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+/**
+ * Format an Australian phone number (03xxxxxxxx / 04xxxxxxxx / 0414…) to
+ * the E.164-ish display format expected by schema.org: +61-XXX-XXX-XXX
+ */
+function formatPhone(phone: string): string {
+  const digits = phone.replace(/\D/g, '');
+  if (digits.startsWith('0') && digits.length >= 9) {
+    // Split after leading 0 into groups: area(3) + first(3) + last(remaining)
+    const body = digits.slice(1); // drop leading 0
+    const part1 = body.slice(0, 3);
+    const part2 = body.slice(3, 6);
+    const part3 = body.slice(6);
+    return `+61-${part1}-${part2}-${part3}`;
+  }
+  return phone;
+}
+
+/**
+ * Parse a single-string Australian address of the form
+ * "2 Beryl Place Greenacre NSW 2190" into structured parts.
+ *
+ * Strategy: last token → postCode, second-to-last → state, third-to-last →
+ * suburb, everything before → street.
+ */
+function parseAddress(raw: string): {
+  streetAddress: string;
+  addressLocality: string;
+  addressRegion: string;
+  postalCode: string;
+} {
+  const parts = raw.trim().split(/\s+/);
+  if (parts.length >= 4) {
+    const postalCode = parts[parts.length - 1];
+    const addressRegion = parts[parts.length - 2];
+    const addressLocality = parts[parts.length - 3];
+    const streetAddress = parts.slice(0, parts.length - 3).join(' ');
+    return { streetAddress, addressLocality, addressRegion, postalCode };
+  }
+  // Graceful fallback to hardcoded defaults if format is unexpected
+  return {
+    streetAddress: raw,
+    addressLocality: 'Greenacre',
+    addressRegion: 'NSW',
+    postalCode: '2190',
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
+
+export async function StructuredData() {
+  const [settings, services, teamMembers] = await Promise.all([
+    getSettings(),
+    getServices(),
+    getTeamMembers(),
+  ]);
+
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://trdremedial.com.au';
+
+  // Primary phone — use emergencyPhone1 or contactPhone, fallback to known number
+  const primaryPhone =
+    settings.emergencyPhone1 || settings.contactPhone || '0414 727 167';
+
+  const addressParts = parseAddress(
+    settings.contactAddress || '2 Beryl Place Greenacre NSW 2190',
+  );
+
+  // Build sameAs from individual social fields
+  const sameAs = [
+    settings.socialLinkedIn,
+    settings.socialFacebook,
+    settings.socialInstagram,
+  ].filter((v): v is string => Boolean(v));
+
+  // ---------------------------------------------------------------------------
+  // Schema: Organization
+  // ---------------------------------------------------------------------------
 
   const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": `${SITE_URL}/#organization`,
-    name: "TRD Remedial",
-    legalName: "Tension Reinforced Developments",
-    url: `${SITE_URL}`,
-    logo: `${SITE_URL}/trd-logo.svg`,
-    foundingDate: "2017",
-    founders: [
-      {
-        "@type": "Person",
-        name: "Christopher Nassif"
-      },
-      {
-        "@type": "Person",
-        name: "Charly Nassif"
-      },
-      {
-        "@type": "Person",
-        name: "Fahed Nassif"
-      }
-    ],
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${siteUrl}/#organization`,
+    name: settings.companyName || 'TRD Remedial',
+    alternateName: settings.companyFullName || 'TRD Remedial - The Remedial Experts',
+    legalName: settings.parentCompanyName || 'Tension Reinforced Developments',
+    url: siteUrl,
+    logo: `${siteUrl}/trd-logo.svg`,
+    foundingDate: settings.parentCompanyYear || '2017',
+    slogan: settings.tagline || 'THE REMEDIAL EXPERTS',
+    founders:
+      teamMembers.length > 0
+        ? teamMembers.map((m) => ({ '@type': 'Person', name: m.name }))
+        : [
+            { '@type': 'Person', name: 'Christopher Nassif' },
+            { '@type': 'Person', name: 'Charly Nassif' },
+            { '@type': 'Person', name: 'Fahed Nassif' },
+          ],
     contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+61-414-727-167",
-      contactType: "emergency",
-      areaServed: "AU",
-      availableLanguage: "English"
+      '@type': 'ContactPoint',
+      telephone: formatPhone(primaryPhone),
+      contactType: 'emergency',
+      areaServed: 'AU',
+      availableLanguage: 'English',
     },
-    sameAs: [
-      "https://www.linkedin.com/company/trd-remedial",
-      "https://www.facebook.com/trdremedial",
-    ]
+    ...(sameAs.length > 0 ? { sameAs } : {}),
   };
+
+  // ---------------------------------------------------------------------------
+  // Schema: LocalBusiness
+  // ---------------------------------------------------------------------------
 
   const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": `${SITE_URL}/#localbusiness`,
-    name: "TRD Remedial",
-    image: `${SITE_URL}/images/og-image.jpg`,
-    description: "Award-winning structural remediation experts in Sydney. Specializing in structural strengthening, concrete cutting, crack injection, concrete repairs, and emergency structural solutions.",
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `${siteUrl}/#localbusiness`,
+    name: settings.companyName || 'TRD Remedial',
+    image: settings.ogImage || `https://ik.imagekit.io/1fovck7sy4/trd-website/images/og-image.jpg`,
+    description:
+      settings.siteDescription ||
+      'Award-winning structural remediation experts in Sydney. Specializing in structural strengthening, concrete cutting, crack injection, concrete repairs, and emergency structural solutions.',
+    slogan: settings.valueProposition || settings.subTagline || 'When structural problems demand real answers',
     address: {
-      "@type": "PostalAddress",
-      streetAddress: "2 Beryl Place",
-      addressLocality: "Greenacre",
-      addressRegion: "NSW",
-      postalCode: "2190",
-      addressCountry: "AU"
+      '@type': 'PostalAddress',
+      streetAddress: addressParts.streetAddress,
+      addressLocality: addressParts.addressLocality,
+      addressRegion: addressParts.addressRegion,
+      postalCode: addressParts.postalCode,
+      addressCountry: 'AU',
     },
     geo: {
-      "@type": "GeoCoordinates",
-      latitude: -33.9000,
-      longitude: 151.0500
+      '@type': 'GeoCoordinates',
+      latitude: settings.geoLatitude ?? -33.9,
+      longitude: settings.geoLongitude ?? 151.05,
     },
-    telephone: "+61-414-727-167",
-    email: "contact@trdremedial.com.au",
-    url: `${SITE_URL}`,
-    priceRange: "$$",
+    telephone: formatPhone(primaryPhone),
+    email: settings.contactEmail || 'contact@trdremedial.com.au',
+    url: siteUrl,
+    priceRange: '$$',
     openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
+      '@type': 'OpeningHoursSpecification',
       dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
       ],
-      opens: "00:00",
-      closes: "23:59"
+      opens: '00:00',
+      closes: '23:59',
     },
     hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Structural Remediation Services",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Structural Strengthening",
-            description: "Carbon fibre reinforcement and advanced structural strengthening solutions"
-          }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Structural Alterations",
-            description: "Precision structural modifications and load-bearing alterations"
-          }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Crack Injection",
-            description: "Epoxy and polyurethane injection for structural crack repair and waterproofing"
-          }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Concrete Cutting",
-            description: "Precision wall sawing, floor cutting, and coring services"
-          }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Concrete Repairs",
-            description: "Comprehensive concrete patching, spalling repair, and surface restoration"
-          }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Slab Scanning",
-            description: "GPR scanning and non-invasive concrete diagnostic services"
-          }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Curtain Wall Injection",
-            description: "Waterproofing injection for curtain wall systems and facade sealing"
-          }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Temporary Moving Joints",
-            description: "Installation and management of temporary construction joint systems"
-          }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Post Tension Truncation",
-            description: "Safe truncation and repair of post-tensioned cable systems"
-          }
-        }
-      ]
+      '@type': 'OfferCatalog',
+      name: 'Structural Remediation Services',
+      itemListElement:
+        services.length > 0
+          ? services.map((s) => ({
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: s.title,
+                description: s.tagline || s.description?.substring(0, 200) || '',
+                url: `${siteUrl}/services/${s.slug}`,
+              },
+            }))
+          : [
+              {
+                '@type': 'Offer',
+                itemOffered: {
+                  '@type': 'Service',
+                  name: 'Structural Strengthening',
+                  description:
+                    'Carbon fibre reinforcement and advanced structural strengthening solutions',
+                },
+              },
+              {
+                '@type': 'Offer',
+                itemOffered: {
+                  '@type': 'Service',
+                  name: 'Concrete Repairs',
+                  description:
+                    'Comprehensive concrete patching, spalling repair, and surface restoration',
+                },
+              },
+            ],
     },
     areaServed: {
-      "@type": "State",
-      name: "New South Wales"
-    }
+      '@type': 'State',
+      name: 'New South Wales',
+    },
   };
+
+  // ---------------------------------------------------------------------------
+  // Schema: WebSite
+  // ---------------------------------------------------------------------------
 
   const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": `${SITE_URL}/#website`,
-    url: `${SITE_URL}`,
-    name: "TRD Remedial",
-    description: "The Remedial Experts - Structural Solutions Sydney",
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${siteUrl}/#website`,
+    url: siteUrl,
+    name: settings.companyName || 'TRD Remedial',
+    description:
+      settings.siteDescription || 'The Remedial Experts - Structural Solutions Sydney',
     publisher: {
-      "@id": `${SITE_URL}/#organization`
+      '@id': `${siteUrl}/#organization`,
     },
-    inLanguage: "en-AU"
+    inLanguage: 'en-AU',
   };
 
+  // ---------------------------------------------------------------------------
+  // Schema: BreadcrumbList (home)
+  // ---------------------------------------------------------------------------
+
   const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
     itemListElement: [
       {
-        "@type": "ListItem",
+        '@type': 'ListItem',
         position: 1,
-        name: "Home",
-        item: `${SITE_URL}`
-      }
-    ]
+        name: 'Home',
+        item: siteUrl,
+      },
+    ],
   };
 
   return (

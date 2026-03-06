@@ -9,10 +9,14 @@ import { FAQItem } from '@/components/ui/FAQItem';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { BlueprintCorridor } from '@/components/sections/BlueprintCorridor';
 import { useStore } from '@/stores/useStore';
-import type { Service } from '@/data/services';
-import { PROJECTS } from '@/data/projects';
+import type { Service, Project } from '@/types/api';
 
-export function ServiceDetailClient({ service }: { service: Service }) {
+interface ServiceDetailClientProps {
+  service: Service;
+  relatedProjects: Project[];
+}
+
+export function ServiceDetailClient({ service, relatedProjects }: ServiceDetailClientProps) {
   const setCursorVariant = useStore((state) => state.setCursorVariant);
 
   return (
@@ -130,6 +134,48 @@ export function ServiceDetailClient({ service }: { service: Service }) {
         </div>
       </section>
 
+      {/* Common Applications */}
+      {service.commonApplications && (
+        <section className="service-section service-applications">
+          <div className="service-content">
+            <AnimatedH1 animateOnScroll={true} className="section-title">
+              Common Applications
+            </AnimatedH1>
+            <AnimatedCopy delay={0} tag="p" className="section-copy">
+              {service.commonApplications}
+            </AnimatedCopy>
+          </div>
+        </section>
+      )}
+
+      {/* Why Choose TRD */}
+      {service.whyChooseTRD && (
+        <section className="service-section service-why-trd">
+          <div className="service-content">
+            <AnimatedH1 animateOnScroll={true} className="section-title">
+              Why Choose TRD
+            </AnimatedH1>
+            <AnimatedCopy delay={0} tag="p" className="section-copy">
+              {service.whyChooseTRD}
+            </AnimatedCopy>
+          </div>
+        </section>
+      )}
+
+      {/* Service Area */}
+      {service.serviceArea && (
+        <section className="service-section service-area">
+          <div className="service-content">
+            <AnimatedH1 animateOnScroll={true} className="section-title">
+              Service Area
+            </AnimatedH1>
+            <AnimatedCopy delay={0} tag="p" className="section-copy">
+              {service.serviceArea}
+            </AnimatedCopy>
+          </div>
+        </section>
+      )}
+
       {/* 6. Stats Section */}
       {service.stats && service.stats.length > 0 && (
         <section className="service-section service-stats">
@@ -162,25 +208,20 @@ export function ServiceDetailClient({ service }: { service: Service }) {
       )}
 
       {/* Related Case Studies */}
-      {service.relatedProjects && service.relatedProjects.length > 0 && (
+      {relatedProjects && relatedProjects.length > 0 && (
         <section className="service-section service-case-studies">
           <div className="service-content">
             <AnimatedH1 animateOnScroll={true} className="section-title">
               Featured Case Studies
             </AnimatedH1>
             <div className="case-studies-grid">
-              {service.relatedProjects.slice(0, 3).map((projectId, i) => {
-                const project = PROJECTS.find(p => p.id === projectId);
-                if (!project) return null;
-
-                return (
+              {relatedProjects.slice(0, 3).map((project, i) => (
                   <ProjectCard
-                    key={projectId}
+                    key={project.id}
                     project={project}
                     index={i}
                   />
-                );
-              })}
+                ))}
             </div>
             <Link
               href="/projects"

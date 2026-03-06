@@ -8,7 +8,7 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { AnimatedH1 } from '@/components/animations/AnimatedH1';
 import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
-import type { ProcessStep } from '@/data/services';
+import type { ProcessStep } from '@/types/api';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 

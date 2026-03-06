@@ -6,21 +6,24 @@
  * in Google search results
  */
 
-import { FAQS } from '@/data/faqs';
+import type { FAQItem } from '@/types/api';
 
-export function FAQSchema() {
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://trdremedial.com.au';
+interface FAQSchemaProps {
+  faqs: FAQItem[];
+}
 
+export function FAQSchema({ faqs }: FAQSchemaProps) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": FAQS.map((faq) => ({
+    "mainEntity": faqs.map((faq) => ({
       "@type": "Question",
       "name": faq.question,
       "acceptedAnswer": {
         "@type": "Answer",
         "text": faq.answer
-      }
+      },
+      ...(faq.keywords && faq.keywords.length > 0 ? { "keywords": faq.keywords.join(', ') } : {})
     }))
   };
 

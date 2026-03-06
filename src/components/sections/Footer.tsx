@@ -3,22 +3,36 @@
 import './Footer.css';
 
 import Link from 'next/link';
+import { useSiteSettings } from '@/components/providers/SiteSettingsProvider';
 
 export function Footer() {
+  const settings = useSiteSettings();
+  const contactEmail = settings.contactEmail;
+
+  // Generate banner spans from the bannerText setting
+  const bannerText = settings.bannerText || 'TRD REMEDIAL • THE REMEDIAL EXPERTS • ';
+  const bannerSpans = Array.from({ length: 8 }, (_, i) => (
+    <span key={i}>{bannerText}</span>
+  ));
+
+  // Nav links from settings with fallback
+  const navLinks = settings.navigationLinks?.length
+    ? settings.navigationLinks
+    : [
+        { label: 'Services', href: '/services' },
+        { label: 'Projects', href: '/projects' },
+        { label: 'About', href: '/about' },
+        { label: 'Contact', href: '/contact' },
+        { label: 'Emergency', href: '/emergency' },
+      ];
+
   return (
     <>
       {/* Sliding Banner */}
       <div className="footer-banner">
         <div className="footer-banner-track">
           <div className="footer-banner-content">
-            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
-            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
-            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
-            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
-            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
-            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
-            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
-            <span>TRD REMEDIAL • THE REMEDIAL EXPERTS • </span>
+            {bannerSpans}
           </div>
         </div>
       </div>
@@ -28,13 +42,12 @@ export function Footer() {
         <div className="footer-row">
         <div className="footer-contact">
           <h3>
-            Let&apos;s Build Together <br />
-            contact<span>@</span>trdremedial.com.au
+            {settings.footerCta || "Let's Build Together"} <br />
+            {contactEmail.split('@')[0]}<span>@</span>{contactEmail.split('@')[1]}
           </h3>
 
           <p className="secondary">
-            From structural remediation to emergency repairs — we&apos;re always ready to collaborate.
-            Reach out anytime for expert solutions.
+            {settings.footerDescription || "From structural remediation to emergency repairs — we're always ready to collaborate. Reach out anytime for expert solutions."}
           </p>
 
           <Link href="/contact" className="btn">
@@ -43,26 +56,12 @@ export function Footer() {
         </div>
 
         <div className="footer-nav">
-          <Link href="/services" className="footer-nav-item">
-            <span>Services</span>
-            <span>&#8594;</span>
-          </Link>
-          <Link href="/projects" className="footer-nav-item">
-            <span>Projects</span>
-            <span>&#8594;</span>
-          </Link>
-          <Link href="/about" className="footer-nav-item">
-            <span>About</span>
-            <span>&#8594;</span>
-          </Link>
-          <Link href="/contact" className="footer-nav-item">
-            <span>Contact</span>
-            <span>&#8594;</span>
-          </Link>
-          <Link href="/emergency" className="footer-nav-item">
-            <span>Emergency</span>
-            <span>&#8594;</span>
-          </Link>
+          {navLinks.map((link, index) => (
+            <Link key={index} href={link.href} className="footer-nav-item">
+              <span>{link.label}</span>
+              <span>&#8594;</span>
+            </Link>
+          ))}
         </div>
       </div>
 
@@ -78,7 +77,7 @@ export function Footer() {
         </div>
 
         <div className="footer-copyright-line">
-          <p className="primary sm">&copy; TRD Remedial 2025</p>
+          <p className="primary sm">{settings.copyrightText || `© ${settings.companyName || 'TRD Remedial'} 2025`}</p>
           <p className="primary sm">
             Website by{' '}
             <a

@@ -41,6 +41,7 @@ const nextConfig: NextConfig = {
         hostname: '**',
       },
     ],
+    qualities: [75, 80, 85],
     // Enhanced image optimization
     minimumCacheTTL: 31536000, // 1 year
     dangerouslyAllowSVG: true,
@@ -156,6 +157,11 @@ const nextConfig: NextConfig = {
         ],
       },
     ];
+  },
+
+  // Turbopack configuration (Next.js 16 default bundler)
+  turbopack: {
+    root: __dirname,
   },
 
   // Compression settings

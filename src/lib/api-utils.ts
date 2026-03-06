@@ -68,9 +68,10 @@ export function handleApiError(error: unknown) {
     }
   }
 
-  // Generic errors
+  // Generic errors — log detail server-side but sanitize client response
   if (error instanceof Error) {
-    return errorResponse(error.message, 500)
+    console.error('[API Error]', error.message);
+    return errorResponse('Internal server error', 500)
   }
 
   return errorResponse('An unexpected error occurred', 500)

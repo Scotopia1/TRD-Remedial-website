@@ -2,7 +2,7 @@
 
 import { useState, memo } from 'react';
 import { motion } from 'framer-motion';
-import { Service } from '@/data/services';
+import { Service } from '@/types/api';
 
 interface ServiceCardProps {
   service: Service;

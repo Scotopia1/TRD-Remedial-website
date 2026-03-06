@@ -2,12 +2,11 @@
 
 import Image, { ImageProps } from 'next/image';
 import { useState, memo } from 'react';
-import blurPlaceholders from '@/data/blurPlaceholders.json';
 
 /**
  * Optimized Image Component
  *
- * Next.js Image wrapper with blur-up pattern for progressive loading
+ * Next.js Image wrapper with blur-up pattern for progressive loading.
  *
  * PROBLEM: Images pop in suddenly, causing layout shift (CLS: 0.18)
  *
@@ -22,23 +21,20 @@ import blurPlaceholders from '@/data/blurPlaceholders.json';
  *   alt="Hero image"
  *   width={1920}
  *   height={1080}
- *   priority={true} // for above-the-fold images
+ *   priority={true}      // for above-the-fold images
+ *   blurDataURL="..."    // data:image/... from the API's blurPlaceholders field
  * />
  * ```
  *
- * For blur placeholders, add to blurPlaceholders.json:
- * ```json
- * {
- *   "/images/hero.jpg": "data:image/jpeg;base64,..."
- * }
- * ```
+ * Blur placeholders are now served from the API (stored on the Project model).
+ * Callers should pass the `blurDataURL` prop directly.
  */
 
 interface OptimizedImageProps extends Omit<ImageProps, 'placeholder' | 'blurDataURL'> {
   src: string;
   alt: string;
   priority?: boolean;
-  /** Optional blur data URL (if not using blurPlaceholders.json) */
+  /** Blur data URL for progressive loading (from API or inline). */
   blurDataURL?: string;
 }
 
@@ -52,32 +48,20 @@ const OptimizedImageComponent = function OptimizedImage({
 }: OptimizedImageProps) {
   // Priority images should be visible immediately (above-the-fold)
   const [isLoaded, setIsLoaded] = useState(priority);
+  const [hasError, setHasError] = useState(false);
 
-  // Try to load blur placeholder from JSON
-  let finalBlurDataURL = blurDataURL;
-
-  // If no explicit blurDataURL provided, try to get from blurPlaceholders.json
-  if (!finalBlurDataURL && typeof src === 'string') {
-    // Parse the src path to extract category, project/service name, and filename
-    // Expected format: /images/projects/project-name/filename.jpg or /images/services/service-name/filename.jpg
-    const match = src.match(/^\/images\/(projects|services)\/([^\/]+)\/([^\/]+?)(\.(jpg|jpeg|png|webp))?$/);
-    if (match) {
-      const [, category, name, filename] = match;
-      const placeholders = blurPlaceholders as any;
-      if (placeholders[category] && placeholders[category][name] && placeholders[category][name][filename]) {
-        finalBlurDataURL = placeholders[category][name][filename];
-      }
-    }
-  }
+  // Fallback placeholder — a transparent 1x1 data URI
+  const fallbackSrc = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
   return (
     <Image
-      src={src}
+      src={hasError ? fallbackSrc : src}
       alt={alt}
-      placeholder={finalBlurDataURL ? 'blur' : 'empty'}
-      blurDataURL={finalBlurDataURL}
+      placeholder={blurDataURL && !hasError ? 'blur' : 'empty'}
+      blurDataURL={blurDataURL && !hasError ? blurDataURL : undefined}
       priority={priority}
       onLoad={() => setIsLoaded(true)}
+      onError={() => setHasError(true)}
       className={`
         transition-opacity duration-500
         ${isLoaded ? 'opacity-100' : 'opacity-0'}

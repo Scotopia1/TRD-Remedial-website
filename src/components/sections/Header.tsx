@@ -4,13 +4,23 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { NAV_LINKS, COMPANY_INFO } from '@/lib/constants';
+const NAV_LINKS = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+] as const;
+import { useSiteSettings } from '@/components/providers/SiteSettingsProvider';
 import { cn } from '@/lib/utils';
 import { useStore } from '@/stores/useStore';
 import { MagneticText } from '@/components/ui/MagneticText';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 export function Header() {
+  const settings = useSiteSettings();
+  const emergencyPhone = settings.contactPhone[0] ?? '0414 727 167';
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [headerVisible, setHeaderVisible] = useState(true);
@@ -217,7 +227,7 @@ export function Header() {
 
             {/* Emergency Contact Button */}
             <a
-              href={`tel:${COMPANY_INFO.contact.phone.emergency1.replace(/\s/g, '')}`}
+              href={`tel:${emergencyPhone.replace(/\s/g, '')}`}
               className={cn(
                 'hidden lg:block px-6 py-3 rounded-lg font-medium',
                 'transition-all duration-300 hover:scale-105',
@@ -228,7 +238,7 @@ export function Header() {
               onMouseEnter={() => setCursorVariant('cta')}
               onMouseLeave={() => setCursorVariant('default')}
             >
-              Emergency: {COMPANY_INFO.contact.phone.emergency1}
+              Emergency: {emergencyPhone}
             </a>
 
             {/* Mobile Menu Button */}
@@ -322,13 +332,13 @@ export function Header() {
               ref={(el) => {
                 menuLinksRef.current[NAV_LINKS.length] = el;
               }}
-              href={`tel:${COMPANY_INFO.contact.phone.emergency1.replace(/\s/g, '')}`}
+              href={`tel:${emergencyPhone.replace(/\s/g, '')}`}
               className="mt-8 px-8 py-4 bg-trd-accent text-white rounded-lg font-medium text-xl opacity-0
                        hover:bg-trd-accent/90 transition-colors duration-300"
               onMouseEnter={() => setCursorVariant('cta')}
               onMouseLeave={() => setCursorVariant('default')}
             >
-              Emergency: {COMPANY_INFO.contact.phone.emergency1}
+              Emergency: {emergencyPhone}
             </a>
           </nav>
         </div>

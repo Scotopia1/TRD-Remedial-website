@@ -7,15 +7,23 @@ import { usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
 import { useStore } from '@/stores/useStore';
 import { useScrollLock } from '@/hooks/useScrollLock';
+import { useSiteSettings } from '@/components/providers/SiteSettingsProvider';
+
+const FALLBACK_MENU_LINKS = [
+  { path: '/', label: 'Home' },
+  { path: '/services', label: 'Services' },
+  { path: '/projects', label: 'Projects' },
+  { path: '/about', label: 'About' },
+  { path: '/contact', label: 'Contact' },
+];
 
 export function Menu() {
-  const menuLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/services', label: 'Services' },
-    { path: '/projects', label: 'Projects' },
-    { path: '/about', label: 'About' },
-    { path: '/contact', label: 'Contact' },
-  ];
+  const settings = useSiteSettings();
+
+  // Map navigationLinks from settings (href → path) with fallback to hardcoded list
+  const menuLinks = settings.navigationLinks?.length
+    ? settings.navigationLinks.map((link) => ({ path: link.href, label: link.label }))
+    : FALLBACK_MENU_LINKS;
 
   const pathname = usePathname();
   const menuContainer = useRef<HTMLDivElement>(null);

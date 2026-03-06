@@ -6,14 +6,20 @@
  * in Google search results for service detail pages
  */
 
-import type { Service } from '@/data/services';
+import type { Service, SiteSettings } from '@/types/api';
+
+const toTelHref = (phone: string) => `tel:${phone.replace(/\s/g, '')}`;
 
 interface ServiceSchemaProps {
   service: Service;
+  settings?: Pick<SiteSettings, 'companyName' | 'emergencyPhone1' | 'contactAddress'>;
 }
 
-export function ServiceSchema({ service }: ServiceSchemaProps) {
+export function ServiceSchema({ service, settings }: ServiceSchemaProps) {
   const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://trdremedial.com.au';
+  const companyName = settings?.companyName ?? 'TRD Remedial';
+  const phone = settings?.emergencyPhone1 ?? '0414 727 167';
+  const telHref = toTelHref(phone);
 
   const schema = {
     "@context": "https://schema.org",
@@ -26,10 +32,10 @@ export function ServiceSchema({ service }: ServiceSchemaProps) {
     "provider": {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
-      "name": "TRD Remedial",
-      "telephone": "+61414727167",
-      "url": "https://trdremedial.com.au",
-      "logo": "https://trdremedial.com.au/logo.png",
+      "name": companyName,
+      "telephone": telHref,
+      "url": SITE_URL,
+      "logo": `${SITE_URL}/trd-logo.svg`,
       "address": {
         "@type": "PostalAddress",
         "addressRegion": "NSW",
@@ -43,7 +49,7 @@ export function ServiceSchema({ service }: ServiceSchemaProps) {
     "availableChannel": {
       "@type": "ServiceChannel",
       "serviceUrl": `${SITE_URL}/services/${service.slug}`,
-      "servicePhone": "+61414727167",
+      "servicePhone": telHref,
       "availableLanguage": {
         "@type": "Language",
         "name": "English"

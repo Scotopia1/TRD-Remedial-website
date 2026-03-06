@@ -6,14 +6,23 @@ import { useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { TEAM_MEMBERS } from '@/data/team';
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
+import type { TeamMember } from '@/types/api';
 import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
 import { getStableHeight } from '@/utils/deviceDetect';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function TeamScrollReveal() {
+interface TeamScrollRevealProps {
+  /** Team members from API */
+  teamMembers?: TeamMember[];
+  /** Section heading */
+  heading?: string;
+  /** Outro text */
+  outro?: string;
+}
+
+export function TeamScrollReveal({ teamMembers = [], heading, outro }: TeamScrollRevealProps) {
   const teamSectionRef = useRef<HTMLDivElement>(null);
   const entranceAnimationRef = useRef<ScrollTrigger | null>(null);
   const slideInAnimationRef = useRef<ScrollTrigger | null>(null);
@@ -223,12 +232,12 @@ export function TeamScrollReveal() {
       <section className="team-scroll-reveal-wrapper">
         {/* Hero Section */}
         <div className="team-hero">
-          <h1>Meet The Team</h1>
+          <h1>{heading || 'Meet The Team'}</h1>
         </div>
 
         {/* Team Reveal Section */}
         <div className="team-reveal" ref={teamSectionRef}>
-          {TEAM_MEMBERS.map((member, index) => {
+          {teamMembers.map((member, index) => {
             return (
               <div key={member.id} className="team-member">
                 {/* Large Initial Letter */}
@@ -256,7 +265,7 @@ export function TeamScrollReveal() {
 
         {/* Outro Section */}
         <div className="team-outro">
-          <h2>Building Tomorrow's Structures</h2>
+          <h2>{outro || "Building Tomorrow's Structures"}</h2>
         </div>
       </section>
     </>

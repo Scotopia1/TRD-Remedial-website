@@ -12,8 +12,9 @@
  * - Integrated with FAQSchema for SEO
  */
 
-import { useState } from 'react';
-import { FAQS, getFAQsByCategory, getFAQCategories, type FAQItem } from '@/data/faqs';
+import { useState, useMemo } from 'react';
+import type { FAQItem } from '@/types/api';
+import { useSiteSettings } from '@/components/providers/SiteSettingsProvider';
 
 const categoryLabels: Record<FAQItem['category'], string> = {
   process: 'Process & Timeline',
@@ -21,7 +22,20 @@ const categoryLabels: Record<FAQItem['category'], string> = {
   services: 'Our Services',
 };
 
-export function FAQ() {
+const CATEGORY_ORDER: FAQItem['category'][] = ['process', 'technical', 'services'];
+
+interface FAQProps {
+  faqs: FAQItem[];
+  /** Section title */
+  title?: string;
+  /** Section subtitle */
+  subtitle?: string;
+  /** CTA text */
+  ctaText?: string;
+}
+
+export function FAQ({ faqs, title: sectionTitle, subtitle: sectionSubtitle, ctaText }: FAQProps) {
+  const settings = useSiteSettings();
   const [activeId, setActiveId] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<FAQItem['category']>('process');
 
@@ -36,17 +50,25 @@ export function FAQ() {
     }
   };
 
-  const categories = getFAQCategories();
-  const currentFAQs = getFAQsByCategory(activeCategory);
+  // Derive categories and filtered FAQs from the passed data
+  const categories = useMemo(() => {
+    const seen = new Set(faqs.map((f) => f.category));
+    return CATEGORY_ORDER.filter((c) => seen.has(c));
+  }, [faqs]);
+
+  const currentFAQs = useMemo(
+    () => faqs.filter((f) => f.category === activeCategory),
+    [faqs, activeCategory],
+  );
 
   return (
     <section className="faq-section" id="faq">
       <div className="faq-container">
         {/* Section Header */}
         <div className="faq-header">
-          <h2 className="faq-title">Frequently Asked Questions</h2>
+          <h2 className="faq-title">{sectionTitle || 'Frequently Asked Questions'}</h2>
           <p className="faq-subtitle">
-            Get answers to common questions about our structural remediation services across Sydney
+            {sectionSubtitle || 'Get answers to common questions about our structural remediation services across Sydney'}
           </p>
         </div>
 
@@ -108,17 +130,23 @@ export function FAQ() {
 
         {/* Call to Action */}
         <div className="faq-cta">
-          <p>Can't find your answer?</p>
+          <p>{ctaText || "Can't find your answer?"}</p>
           <a href="/contact" className="faq-cta-btn">
             Contact Us
           </a>
           <span className="faq-cta-divider">or call</span>
-          <a href="tel:0414727167" className="faq-cta-phone">
-            0414 727 167
+          <a
+            href={`tel:${(settings.emergencyPhone1 ?? '0414 727 167').replace(/\s/g, '')}`}
+            className="faq-cta-phone"
+          >
+            {settings.emergencyPhone1 ?? '0414 727 167'}
           </a>
           <span className="faq-cta-divider">or</span>
-          <a href="tel:0404404422" className="faq-cta-phone">
-            0404 404 422
+          <a
+            href={`tel:${(settings.emergencyPhone2 ?? '0404 404 422').replace(/\s/g, '')}`}
+            className="faq-cta-phone"
+          >
+            {settings.emergencyPhone2 ?? '0404 404 422'}
           </a>
         </div>
       </div>

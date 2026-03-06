@@ -9,7 +9,47 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function BackedByStrengthStudio() {
+interface BackedByStrengthStudioProps {
+  /** Header subtitle / mission statement */
+  headerSubtitle?: string;
+  /** First mission paragraph */
+  missionParagraph1?: string;
+  /** Second mission paragraph */
+  missionParagraph2?: string;
+  /** Recognition paragraph */
+  recognitionText?: string;
+  /** Mission intro image path */
+  missionImage?: string;
+  /** Section title */
+  title?: string;
+  /** Recognition label text */
+  recognitionLabel?: string;
+  /** CTA link text */
+  ctaText?: string;
+}
+
+const DEFAULT_HEADER_SUBTITLE =
+  'At TRD, we approach every project with precision and discipline. Through proven methods and technical expertise, we deliver structural solutions that reflect both our clients\u2019 needs and our commitment to excellence.';
+
+const DEFAULT_MISSION_P1 =
+  'We are the remedial experts. TRD Remedial are the specialist contractors builders and developers across NSW trust when the scope is complex, the timeline is tight, and the margin for error is zero. Structural alterations, carbon fibre reinforcement, crack injection, waterproofing, concrete cutting \u2014 we deliver it all, on time and to standard.';
+
+const DEFAULT_MISSION_P2 =
+  'Our work spans occupied buildings, live construction sites, and Building Commissioner rectification orders. Whatever the challenge, we bring the expertise, the methodology, and the accountability to see it through. That\u2019s not a promise \u2014 it\u2019s how we operate.';
+
+const DEFAULT_RECOGNITION =
+  'Our work has been recognized by industry bodies and regulatory authorities for its safety, consistency, and attention to detail. We focus on building structural solutions that go beyond code compliance\u2014we engineer lasting performance.';
+
+export function BackedByStrengthStudio({
+  headerSubtitle,
+  missionParagraph1,
+  missionParagraph2,
+  recognitionText,
+  missionImage,
+  title,
+  recognitionLabel,
+  ctaText,
+}: BackedByStrengthStudioProps = {}) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(() => {
@@ -45,12 +85,9 @@ export function BackedByStrengthStudio() {
       {/* Company Header - Title + Mission Statement */}
       <section className="strength-header">
         <div className="strength-header-copy">
-          <h1 className="strength-title">Backed by Strength</h1>
+          <h1 className="strength-title">{title || 'Backed by Strength'}</h1>
           <h2>
-            At TRD, we approach every project with precision and discipline.
-            Through proven methods and technical expertise, we deliver
-            structural solutions that reflect both our clients' needs and our
-            commitment to excellence.
+            {headerSubtitle || DEFAULT_HEADER_SUBTITLE}
           </h2>
         </div>
       </section>
@@ -59,7 +96,7 @@ export function BackedByStrengthStudio() {
       <section className="mission-intro">
         <div className="mission-intro-col-sm">
           <img
-            src="/images/projects/florence-capri-complex/hero.jpg"
+            src={missionImage || 'https://ik.imagekit.io/1fovck7sy4/trd-website/images/projects/florence-capri-complex/hero.jpg'}
             alt="TRD structural alterations project at One The Waterfront, Wentworth Point"
             className="mission-intro-image"
             loading="lazy"
@@ -68,24 +105,16 @@ export function BackedByStrengthStudio() {
         <div className="mission-intro-col-lg">
           <div className="mission-intro-copy">
             <h3>
-              We are the remedial experts. TRD Remedial are the specialist
-              contractors builders and developers across NSW trust when the scope
-              is complex, the timeline is tight, and the margin for error is zero.
-              Structural alterations, carbon fibre reinforcement, crack injection,
-              waterproofing, concrete cutting — we deliver it all, on time and to
-              standard.
+              {missionParagraph1 || DEFAULT_MISSION_P1}
             </h3>
             <br />
             <h3>
-              Our work spans occupied buildings, live construction sites, and
-              Building Commissioner rectification orders. Whatever the challenge,
-              we bring the expertise, the methodology, and the accountability to
-              see it through. That's not a promise — it's how we operate.
+              {missionParagraph2 || DEFAULT_MISSION_P2}
             </h3>
 
             <div className="mission-link">
               <a href="#case-studies" className="btn-link">
-                <span>View Our Projects</span>
+                <span>{ctaText || 'View Our Projects'}</span>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <path
                     d="M4 10h12M10 4l6 6-6 6"
@@ -104,13 +133,10 @@ export function BackedByStrengthStudio() {
       {/* Recognition - Centered Credentials */}
       <section className="recognition">
         <div className="recognition-copy">
-          <p className="sm caps">(Recognition)</p>
+          <p className="sm caps">{recognitionLabel || '(Recognition)'}</p>
           <br />
           <h2>
-            Our work has been recognized by industry bodies and regulatory
-            authorities for its safety, consistency, and attention to detail. We
-            focus on building structural solutions that go beyond code
-            compliance—we engineer lasting performance.
+            {recognitionText || DEFAULT_RECOGNITION}
           </h2>
         </div>
       </section>

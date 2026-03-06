@@ -9,7 +9,19 @@ import Link from 'next/link';
 import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
 import './IntroStats.css';
 
-export function IntroStats() {
+interface IntroStatsProps {
+  /** Body copy for the "Why TRD Remedial?" section */
+  bodyText?: string;
+  /** Section heading */
+  heading?: string;
+  /** Link text below body */
+  linkText?: string;
+}
+
+const DEFAULT_BODY_TEXT =
+  "We solve structural challenges others can't handle. As Sydney's leading structural remediation experts, we deliver precision concrete repair solutions with 8 years of proven expertise, 24/7 emergency response, and unwavering commitment to building compliance. From structural remediation Sydney projects to complex concrete repair Sydney jobs, TRD delivers solutions that last.";
+
+export function IntroStats({ bodyText, heading, linkText }: IntroStatsProps = {}) {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLHeadingElement>(null);
   const copyRef = useRef<HTMLHeadingElement>(null);
@@ -114,7 +126,7 @@ export function IntroStats() {
         {/* Header */}
         <div className="intro-header">
           <h1 ref={headerRef}>
-            Why TRD Remedial?
+            {heading || 'Why TRD Remedial?'}
           </h1>
         </div>
 
@@ -122,10 +134,10 @@ export function IntroStats() {
         <div ref={copyContainerRef} className="intro-copy">
           <div className="intro-copy-wrapper">
             <h3 ref={copyRef}>
-              We solve structural challenges others can't handle. As Sydney's leading structural remediation experts, we deliver precision concrete repair solutions with 8 years of proven expertise, 24/7 emergency response, and unwavering commitment to building compliance. From structural remediation Sydney projects to complex concrete repair Sydney jobs, TRD delivers solutions that last.
+              {bodyText || DEFAULT_BODY_TEXT}
             </h3>
             <Link href="/about" className="intro-learn-more">
-              Learn more about our approach →
+              {linkText || 'Learn more about our approach →'}
             </Link>
           </div>
         </div>

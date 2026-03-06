@@ -8,32 +8,52 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
 import { getStableHeight } from '@/utils/deviceDetect';
+import type { Testimonial } from '@/types/api';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Customer feedback data - TRD construction/engineering testimonials
-const customerFeedback = [
+// Fallback testimonials used when API data is unavailable
+const DEFAULT_FEEDBACK = [
   {
-    id: 1,
+    id: '1',
     copy: "TRD's carbon fibre reinforcement solution saved our heritage bridge from demolition. Their technical precision and minimal disruption approach exceeded all expectations.",
     author: "David Martinez",
     role: "Infrastructure Director",
   },
   {
-    id: 2,
+    id: '2',
     copy: "The GPR scanning work revealed critical structural issues we never knew existed. TRD's detailed reporting and proactive solutions prevented what could have been a catastrophic failure.",
     author: "Sarah Chen",
     role: "Facility Manager",
   },
   {
-    id: 3,
+    id: '3',
     copy: "Professional, methodical, and completely reliable. TRD handled our multi-level car park crack injection with zero downtime to our operations. Exceptional project management.",
     author: "Michael Thompson",
     role: "Property Operations",
   },
 ];
 
-export function CustomerFeedback() {
+interface CustomerFeedbackProps {
+  /** Testimonials from API */
+  testimonials?: Testimonial[];
+  /** Label text in the top bar */
+  label?: string;
+  /** Subtitle text in the top bar */
+  subtitle?: string;
+}
+
+export function CustomerFeedback({ testimonials, label, subtitle }: CustomerFeedbackProps = {}) {
+  // Map API testimonials to internal format, falling back to defaults
+  const customerFeedback = testimonials && testimonials.length > 0
+    ? testimonials.map(t => ({
+        id: t.id,
+        copy: t.quote,
+        author: t.author,
+        role: t.company ? `${t.role}, ${t.company}` : t.role,
+      }))
+    : DEFAULT_FEEDBACK;
+
   const sectionRef = useRef<HTMLElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
@@ -133,9 +153,9 @@ export function CustomerFeedback() {
       <div className="feedback-top-bar">
         <div className="feedback-top-bar-content">
           <p className="mono">
-            <span>▶</span> Client Testimonials
+            <span>▶</span> {label || 'Client Testimonials'}
           </p>
-          <p className="mono">/ Trust &amp; Reliability</p>
+          <p className="mono">/ {subtitle || 'Trust & Reliability'}</p>
         </div>
       </div>
 

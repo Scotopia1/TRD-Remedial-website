@@ -7,15 +7,34 @@ import './Hero.css';
 
 interface HeroProps {
   showContent?: boolean;
+  /** Hero taglines — defaults to ["THE", "REMEDIAL", "EXPERTS"] */
+  taglines?: string[];
+  /** CTA circular button text — defaults to "EXPLORE OUR SERVICES" */
+  ctaText?: string;
+  /** Video source path (without extension) — defaults to "/videos/hero-video" */
+  videoSrc?: string;
+  /** Video poster image path — defaults to "/videos/hero-poster.webp" */
+  videoPoster?: string;
 }
 
-export function Hero({ showContent = true }: HeroProps) {
+export function Hero({
+  showContent = true,
+  taglines,
+  ctaText,
+  videoSrc,
+  videoPoster,
+}: HeroProps) {
+  const heroTaglines = taglines && taglines.length > 0 ? taglines : ['THE', 'REMEDIAL', 'EXPERTS'];
+  const heroCtaText = ctaText || 'EXPLORE OUR SERVICES';
+  const heroVideoSrc = videoSrc || 'https://ik.imagekit.io/1fovck7sy4/trd-website/videos/hero-video';
+  const heroVideoPoster = videoPoster || 'https://ik.imagekit.io/1fovck7sy4/trd-website/videos/hero-poster.webp';
+
   return (
     <section className="hero">
       <div className="hero-img">
         <OptimizedVideo
-          src="/videos/hero-video"
-          poster="/videos/hero-poster.webp"
+          src={heroVideoSrc}
+          poster={heroVideoPoster}
           className="hero-video"
           priority={true}
           autoPlay={true}
@@ -26,33 +45,18 @@ export function Hero({ showContent = true }: HeroProps) {
       </div>
 
       <div className={`hero-header${!showContent ? ' hero-header--hidden' : ''}`}>
-        <AnimatedCopy
-          tag="h1"
-          animateOnScroll={false}
-          delay={0.2}
-          trigger={showContent}
-          instantVisible={false}
-        >
-          THE
-        </AnimatedCopy>
-        <AnimatedCopy
-          tag="h1"
-          animateOnScroll={false}
-          delay={0.35}
-          trigger={showContent}
-          instantVisible={false}
-        >
-          REMEDIAL
-        </AnimatedCopy>
-        <AnimatedCopy
-          tag="h1"
-          animateOnScroll={false}
-          delay={0.5}
-          trigger={showContent}
-          instantVisible={false}
-        >
-          EXPERTS
-        </AnimatedCopy>
+        {heroTaglines.map((line, index) => (
+          <AnimatedCopy
+            key={index}
+            tag="h1"
+            animateOnScroll={false}
+            delay={0.2 + index * 0.15}
+            trigger={showContent}
+            instantVisible={false}
+          >
+            {line}
+          </AnimatedCopy>
+        ))}
       </div>
 
       {showContent && (
@@ -68,11 +72,11 @@ export function Hero({ showContent = true }: HeroProps) {
                 </defs>
                 <text className="circular-btn-text">
                   <textPath href="#circlePath" startOffset="0%">
-                    EXPLORE OUR SERVICES • EXPLORE OUR SERVICES •
+                    {heroCtaText} &bull; {heroCtaText} &bull;
                   </textPath>
                 </text>
               </svg>
-              <div className="circular-btn-arrow">→</div>
+              <div className="circular-btn-arrow">&rarr;</div>
             </div>
           </Link>
         </div>

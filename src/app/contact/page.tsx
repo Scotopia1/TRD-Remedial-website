@@ -1,12 +1,15 @@
-'use client';
-
 import './contact.css';
 import { AnimatedH1 } from '@/components/animations/AnimatedH1';
 import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
 import Link from 'next/link';
-import { COMPANY_INFO } from '@/lib/constants';
+import { getSettings } from '@/lib/api';
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const settings = await getSettings();
+  const emergencyPhone = settings.emergencyPhone1 ?? settings.contactPhone ?? '0414 727 167';
+  const contactEmail = settings.contactEmail;
+  const currentYear = String(new Date().getFullYear()).slice(-2);
+
   return (
     <div className="contact-page">
       <section className="contact-hero">
@@ -16,7 +19,7 @@ export default function ContactPage() {
               Get In Touch
             </AnimatedH1>
             <div className="contact-year">
-              <AnimatedCopy tag="span" delay={0.1}>©25</AnimatedCopy>
+              <AnimatedCopy tag="span" delay={0.1}>©{currentYear}</AnimatedCopy>
             </div>
           </div>
 
@@ -25,9 +28,9 @@ export default function ContactPage() {
               <AnimatedCopy tag="p" delay={0.85} className="contact-label">
                 Email
               </AnimatedCopy>
-              <a href="mailto:contact@trdremedial.com.au" className="contact-value">
+              <a href={`mailto:${contactEmail}`} className="contact-value">
                 <AnimatedCopy tag="span" delay={0.95}>
-                  contact@trdremedial.com.au
+                  {contactEmail}
                 </AnimatedCopy>
               </a>
             </div>
@@ -36,9 +39,9 @@ export default function ContactPage() {
               <AnimatedCopy tag="p" delay={1} className="contact-label">
                 Phone
               </AnimatedCopy>
-              <a href={`tel:${COMPANY_INFO.contact.phone.emergency1.replace(/\s/g, '')}`} className="contact-value">
+              <a href={`tel:${emergencyPhone.replace(/\s/g, '')}`} className="contact-value">
                 <AnimatedCopy tag="span" delay={1.1}>
-                  {COMPANY_INFO.contact.phone.emergency1}
+                  {emergencyPhone}
                 </AnimatedCopy>
               </a>
             </div>
@@ -48,7 +51,7 @@ export default function ContactPage() {
                 Address
               </AnimatedCopy>
               <AnimatedCopy tag="p" delay={1.25} className="contact-value">
-                Sydney, NSW<br />Australia
+                {settings.contactAddress ?? 'Sydney, NSW'}
               </AnimatedCopy>
             </div>
 
@@ -57,9 +60,7 @@ export default function ContactPage() {
                 Business Hours
               </AnimatedCopy>
               <AnimatedCopy tag="p" delay={1.4} className="contact-value">
-                Mon-Fri: 7:00 AM - 6:00 PM<br />
-                Sat: 8:00 AM - 2:00 PM<br />
-                24/7 Emergency Service
+                {settings.businessHours ?? 'Mon-Fri: 7:00 AM - 6:00 PM\nSat: 8:00 AM - 2:00 PM\n24/7 Emergency Service'}
               </AnimatedCopy>
             </div>
           </div>
@@ -68,7 +69,7 @@ export default function ContactPage() {
 
       <section className="contact-cta">
         <AnimatedCopy tag="p" className="contact-cta-text">
-          Need expert structural remediation? We're ready to help with your project.
+          Need expert structural remediation? We&apos;re ready to help with your project.
         </AnimatedCopy>
         <div className="contact-cta-buttons">
           <Link href="/services" className="contact-cta-button">

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
 import { useStore } from '@/stores/useStore';
-import type { Project } from '@/data/projects';
+import type { Project } from '@/types/api';
 
 interface ProjectCardProps {
   project: Project;

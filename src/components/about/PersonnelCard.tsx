@@ -5,7 +5,7 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import type { TeamMember } from '@/data/team';
+import type { TeamMember } from '@/types/api';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -15,14 +15,12 @@ interface PersonnelCardProps {
   fileId: string;
 }
 
-const EXPERTISE_LEVELS: Record<string, number[]> = {
-  'christopher-nassif': [98, 91, 95, 94],
-  'charly-nassif': [96, 93, 97, 95, 90],
-  'fahed-nassif': [99, 96, 98, 94, 92],
-};
-
 export function PersonnelCard({ member, index, fileId }: PersonnelCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
+
+  // Build a flat array of percentage values from expertiseLevels (API shape)
+  // falling back to 80 when no data is available.
+  const levelValues: number[] = (Array.isArray(member.expertiseLevels) ? member.expertiseLevels : []).map((el) => el.level);
 
   useGSAP(() => {
     if (!cardRef.current) return;
@@ -32,7 +30,7 @@ export function PersonnelCard({ member, index, fileId }: PersonnelCardProps) {
     if (prefersReduced) {
       const bars = cardRef.current.querySelectorAll('.bb-expertise-fill');
       bars.forEach((bar, i) => {
-        const pct = EXPERTISE_LEVELS[member.id]?.[i] || 80;
+        const pct = levelValues[i] ?? 80;
         (bar as HTMLElement).style.width = `${pct}%`;
       });
       const scanOverlay = cardRef.current.querySelector('.bb-photo-scan');
@@ -103,7 +101,7 @@ export function PersonnelCard({ member, index, fileId }: PersonnelCardProps) {
     // Expertise bars fill
     const bars = cardRef.current.querySelectorAll('.bb-expertise-fill');
     bars.forEach((bar, i) => {
-      const pct = EXPERTISE_LEVELS[member.id]?.[i] || 80;
+      const pct = levelValues[i] ?? 80;
       gsap.fromTo(
         bar,
         { width: '0%' },
@@ -125,8 +123,6 @@ export function PersonnelCard({ member, index, fileId }: PersonnelCardProps) {
       triggers.forEach((st) => st.kill());
     };
   }, { scope: cardRef });
-
-  const levels = EXPERTISE_LEVELS[member.id] || [];
 
   return (
     <div ref={cardRef} className="bb-personnel-card">
@@ -169,9 +165,15 @@ export function PersonnelCard({ member, index, fileId }: PersonnelCardProps) {
             <span className="bb-data-label">ROLE:</span>
             <span className="bb-data-value">{member.title.toUpperCase()}</span>
           </div>
+          {member.roles && member.roles.length > 0 && (
+            <div className="bb-data-row">
+              <span className="bb-data-label">ROLES:</span>
+              <span className="bb-data-value">{member.roles.join(' | ').toUpperCase()}</span>
+            </div>
+          )}
           <div className="bb-data-row">
             <span className="bb-data-label">JOINED:</span>
-            <span className="bb-data-value">2018</span>
+            <span className="bb-data-value">{member.joinedYear ?? '2018'}</span>
           </div>
           <div className="bb-data-row">
             <span className="bb-data-label">SECURITY:</span>
@@ -180,6 +182,16 @@ export function PersonnelCard({ member, index, fileId }: PersonnelCardProps) {
               <span className="bb-personnel-redact" aria-hidden="true" />
             </span>
           </div>
+          {member.linkedIn && (
+            <div className="bb-data-row">
+              <span className="bb-data-label">LINKEDIN:</span>
+              <span className="bb-data-value">
+                <a href={member.linkedIn} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>
+                  PROFILE →
+                </a>
+              </span>
+            </div>
+          )}
 
           <div className="bb-personnel-profile">
             <span className="bb-data-label">PROFILE:</span>
@@ -190,13 +202,13 @@ export function PersonnelCard({ member, index, fileId }: PersonnelCardProps) {
 
       <div className="bb-expertise-section">
         <span className="bb-expertise-title">EXPERTISE ASSESSMENT:</span>
-        {member.expertise.map((skill, i) => (
+        {(Array.isArray(member.expertise) ? member.expertise : []).map((skill, i) => (
           <div key={skill} className="bb-expertise-row">
             <div className="bb-expertise-bar-track">
               <div className="bb-expertise-fill" />
             </div>
             <span className="bb-expertise-label">{skill}</span>
-            <span className="bb-expertise-pct">{levels[i] || 80}%</span>
+            <span className="bb-expertise-pct">{levelValues[i] ?? 80}%</span>
           </div>
         ))}
       </div>

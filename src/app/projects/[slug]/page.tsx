@@ -1,12 +1,18 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { PROJECTS } from '@/data/projects';
+import { getProjects, getProjectBySlug, getSettings } from '@/lib/api';
 import { ProjectDetailClient } from './ProjectDetailClient';
+import { ProjectSchema } from '@/components/seo/ProjectSchema';
 import './project-detail.css';
+
+export async function generateStaticParams() {
+  const projects = await getProjects();
+  return projects.map((p) => ({ slug: p.slug }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const project = PROJECTS.find((p) => p.slug === slug);
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     return {
@@ -48,18 +54,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       'concrete repair',
       'carbon fibre strengthening',
       'CFRP',
-      ...project.category,
+      ...(Array.isArray(project.category) ? project.category : []),
     ],
   };
 }
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = PROJECTS.find((p) => p.slug === slug);
+  const [project, settings] = await Promise.all([
+    getProjectBySlug(slug),
+    getSettings(),
+  ]);
 
   if (!project) {
     notFound();
   }
 
-  return <ProjectDetailClient project={project} />;
+  return (
+    <>
+      <ProjectSchema project={project} settings={settings} />
+      <ProjectDetailClient project={project} />
+    </>
+  );
 }

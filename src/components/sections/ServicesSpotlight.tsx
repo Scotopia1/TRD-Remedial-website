@@ -6,8 +6,8 @@ import Image from "next/image";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SERVICES } from "@/data/services";
 import { getStableHeight } from '@/utils/deviceDetect';
+import type { Service } from '@/types/api';
 
 interface SpotlightItem {
   name: string;
@@ -15,7 +15,16 @@ interface SpotlightItem {
   id: string;
 }
 
-const ServicesSpotlight = () => {
+interface ServicesSpotlightProps {
+  /** Services data fetched from API */
+  services?: Service[];
+  /** First intro word displayed during Phase 1 */
+  introWord1?: string;
+  /** Second intro word displayed during Phase 1 */
+  introWord2?: string;
+}
+
+const ServicesSpotlight = ({ services = [], introWord1, introWord2 }: ServicesSpotlightProps) => {
   const spotlightRef = useRef<HTMLElement>(null);
   const titlesContainerRef = useRef<HTMLDivElement>(null);
   const imagesContainerRef = useRef<HTMLDivElement>(null);
@@ -70,7 +79,7 @@ const ServicesSpotlight = () => {
 
   // Convert TRD services to spotlight items
   // Use heroImage (real project images) with visual (Unsplash) as fallback
-  const spotlightItems: SpotlightItem[] = SERVICES.map((service) => ({
+  const spotlightItems: SpotlightItem[] = services.map((service) => ({
     name: service.title,
     img: service.heroImage || service.visual,
     id: service.id,
@@ -114,7 +123,7 @@ const ServicesSpotlight = () => {
           if (index === 0) titleElement.style.opacity = "1";
           titleElement.style.cursor = "pointer";
           titleElement.onclick = () => {
-            window.location.href = `/services/${SERVICES[index].slug}`;
+            window.location.href = `/services/${services[index]?.slug || ''}`;
           };
           titlesContainer.appendChild(titleElement);
         });
@@ -550,13 +559,13 @@ const ServicesSpotlight = () => {
             className="spotlight-intro-text"
             ref={(el) => { introTextElementsRef.current[0] = el; }}
           >
-            <p>Innovative</p>
+            <p>{introWord1 || 'Innovative'}</p>
           </div>
           <div
             className="spotlight-intro-text"
             ref={(el) => { introTextElementsRef.current[1] = el; }}
           >
-            <p>Solutions</p>
+            <p>{introWord2 || 'Solutions'}</p>
           </div>
         </div>
 
@@ -608,7 +617,7 @@ const ServicesSpotlight = () => {
               src={item.img}
               alt={item.name}
               fill
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 640px) 160px, (max-width: 1024px) 180px, 200px"
               quality={85}
               priority={index === 0}
               style={{

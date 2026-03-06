@@ -6,13 +6,17 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { TEAM_MEMBERS } from '@/data/team';
 import { scrollTriggerManager } from '@/utils/scrollTriggerManager';
 import { getStableHeight } from '@/utils/deviceDetect';
+import type { TeamMember } from '@/types/api';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-export function TeamCardsSticky() {
+interface TeamCardsStickyProps {
+  teamMembers: TeamMember[];
+}
+
+export function TeamCardsSticky({ teamMembers }: TeamCardsStickyProps) {
   const stickyRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -151,7 +155,7 @@ export function TeamCardsSticky() {
 
         {/* Cards Container */}
         <div className="cards">
-          {TEAM_MEMBERS.map((member, idx) => (
+          {teamMembers.map((member, idx) => (
             <div
               className="card"
               key={member.id}
@@ -186,7 +190,7 @@ export function TeamCardsSticky() {
         <div className="mobile-header">
           <h2>Leadership Team</h2>
         </div>
-        {TEAM_MEMBERS.map((member, idx) => (
+        {teamMembers.map((member, idx) => (
           <div className="mobile-card" key={`m-${member.id}`}>
             <div className="mobile-card-image">
               <Image

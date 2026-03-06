@@ -14,26 +14,15 @@ interface StatItem {
   sublabel: string;
 }
 
-const STATS: StatItem[] = [
-  { value: 8, suffix: '+', label: 'YRS', sublabel: 'EXPERIENCE' },
-  { value: 3000, suffix: '+', label: 'LM', sublabel: 'REPAIRED' },
-  { value: 24, suffix: '/7', label: 'ERT', sublabel: 'RESPONSE' },
-  { value: 0, suffix: '', label: 'SAFETY', sublabel: 'INCIDENTS' },
-];
-
 interface DataStreamLine {
   key: string;
   value: string;
 }
 
-const DATA_STREAM: DataStreamLine[] = [
-  { key: 'projects.completed', value: '150+' },
-  { key: 'client.satisfaction.rate', value: '99.2%' },
-  { key: 'avg.response.time.hrs', value: '< 4' },
-  { key: 'buildings.serviced', value: '200+' },
-  { key: 'concrete.repaired.sqm', value: '50,000+' },
-  { key: 'carbon.fibre.installed.m', value: '2,500+' },
-];
+interface StatsReadoutProps {
+  stats: StatItem[];
+  dataStream: DataStreamLine[];
+}
 
 function formatStatValue(val: number): string {
   if (val >= 1000) return val.toLocaleString();
@@ -41,7 +30,7 @@ function formatStatValue(val: number): string {
   return String(val).padStart(3, '0');
 }
 
-export function StatsReadout() {
+export function StatsReadout({ stats, dataStream }: StatsReadoutProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -52,7 +41,7 @@ export function StatsReadout() {
     if (prefersReduced) {
       const valueEls = sectionRef.current.querySelectorAll('.bb-stat-number');
       valueEls.forEach((el, i) => {
-        const stat = STATS[i];
+        const stat = stats[i];
         if (stat) (el as HTMLElement).textContent = formatStatValue(stat.value) + stat.suffix;
       });
       const streamLines = sectionRef.current.querySelectorAll('.bb-stream-line');
@@ -68,7 +57,7 @@ export function StatsReadout() {
     statCells.forEach((cell, i) => {
       const numberEl = cell.querySelector('.bb-stat-number');
       if (!numberEl) return;
-      const stat = STATS[i];
+      const stat = stats[i];
       if (!stat) return;
 
       const counter = { val: 0 };
@@ -126,7 +115,7 @@ export function StatsReadout() {
       <div className="bb-section-title-underline" aria-hidden="true" />
 
       <div className="bb-stats-grid">
-        {STATS.map((stat, i) => (
+        {stats.map((stat, i) => (
           <div key={i} className="bb-stat-cell">
             <div className="bb-stat-noise" aria-hidden="true" />
             <span className="bb-stat-number">
@@ -140,7 +129,7 @@ export function StatsReadout() {
 
       <div className="bb-data-stream">
         <span className="bb-stream-header">DATA STREAM:</span>
-        {DATA_STREAM.map((item, i) => (
+        {dataStream.map((item, i) => (
           <div key={i} className="bb-stream-line">
             <span className="bb-stream-prefix" aria-hidden="true">&gt; </span>
             <span className="bb-stream-key">{item.key}</span>

@@ -1,9 +1,11 @@
 import { MetadataRoute } from 'next';
-import { PROJECTS } from '@/data/projects';
-import { SERVICES } from '@/data/services';
+import { getProjects, getServices } from '@/lib/api';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://trdremedial.com.au';
+
+  // Fetch dynamic data from the API
+  const [projects, services] = await Promise.all([getProjects(), getServices()]);
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
@@ -46,7 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // Dynamic project pages
-  const projectPages: MetadataRoute.Sitemap = PROJECTS.map((project) => ({
+  const projectPages: MetadataRoute.Sitemap = projects.map((project) => ({
     url: `${baseUrl}/projects/${project.slug}`,
     lastModified: new Date(project.date),
     changeFrequency: 'monthly' as const,
@@ -54,7 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Dynamic service pages
-  const servicePages: MetadataRoute.Sitemap = SERVICES.map((service) => ({
+  const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
     url: `${baseUrl}/services/${service.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,

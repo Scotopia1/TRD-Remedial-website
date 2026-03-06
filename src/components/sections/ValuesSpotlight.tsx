@@ -2,13 +2,17 @@
 
 import './ValuesSpotlight.css';
 import Image from 'next/image';
-import { COMPANY_VALUES } from '@/data/team';
+import type { CompanyValue } from '@/types/api';
 
-export function ValuesSpotlight() {
+interface ValuesSpotlightProps {
+  values: CompanyValue[];
+}
+
+export function ValuesSpotlight({ values }: ValuesSpotlightProps) {
   return (
     <section className="values-spotlight">
       <div className="values-container">
-        {COMPANY_VALUES.map((value) => (
+        {values.map((value) => (
           <div key={value.id} className="value-item">
             {value.isText ? (
               <div className="value-text">

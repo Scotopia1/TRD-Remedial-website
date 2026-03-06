@@ -9,31 +9,54 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
 import { scrollTriggerManager } from "@/utils/scrollTriggerManager";
-import { PROJECTS } from "@/data/projects";
 import { OptimizedImage } from "@/components/ui/OptimizedImage";
+import type { Project } from '@/types/api';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
-export function CaseStudiesOtisValen() {
-  // Select 6 diverse real projects representing different services and categories
-  const featuredProjectIds = [
-    'project-001', // Caringbah Pavilion - Carbon Fibre Strengthening
-    'project-011', // One The Waterfront - Structural Alterations & Multi-Service
-    'project-006', // Rouse Hill - PT Slab Scanning & Penetration
-    'project-007', // Pelican Road - Large-Scale Defect Rectification
-    'project-003', // Enfield - Curtain Wall Waterproofing
-    'project-012', // Zetland - SureLok TMJ Installation
-  ];
+const DEFAULT_FEATURED_IDS = [
+  'project-001', // Caringbah Pavilion - Carbon Fibre Strengthening
+  'project-011', // One The Waterfront - Structural Alterations & Multi-Service
+  'project-006', // Rouse Hill - PT Slab Scanning & Penetration
+  'project-007', // Pelican Road - Large-Scale Defect Rectification
+  'project-003', // Enfield - Curtain Wall Waterproofing
+  'project-012', // Zetland - SureLok TMJ Installation
+];
 
-  const caseStudiesData = featuredProjectIds
-    .map(id => PROJECTS.find(p => p.id === id))
-    .filter((project): project is NonNullable<typeof project> => project !== undefined)
-    .map(project => ({
-      title: project.name,
-      category: project.serviceType,
-      image: project.thumbnailImage || project.featuredImage,
-      href: `/projects/${project.slug}`,
-    }));
+interface CaseStudiesOtisValenProps {
+  /** All projects from API */
+  projects?: Project[];
+  /** IDs of projects to feature — defaults to curated list */
+  featuredProjectIds?: string[];
+  /** Eyebrow text above the title */
+  eyebrow?: string;
+  /** Section title */
+  title?: string;
+  /** Subtitle below the title */
+  subtitle?: string;
+  /** CTA button text */
+  ctaText?: string;
+}
+
+export function CaseStudiesOtisValen({
+  projects = [],
+  featuredProjectIds = DEFAULT_FEATURED_IDS,
+  eyebrow,
+  title,
+  subtitle,
+  ctaText,
+}: CaseStudiesOtisValenProps) {
+  // Try to match featured project IDs; fall back to first N projects if none match
+  const matched = featuredProjectIds
+    .map(id => projects.find(p => p.id === id))
+    .filter((project): project is NonNullable<typeof project> => project !== undefined);
+  const sourceProjects = matched.length > 0 ? matched : projects.slice(0, 6);
+  const caseStudiesData = sourceProjects.map(project => ({
+    title: project.name,
+    category: project.serviceType,
+    image: project.thumbnailImage || project.featuredImage,
+    href: `/projects/${project.slug}`,
+  }));
 
   const containerRef = useRef<HTMLDivElement>(null);
   const headerContentRef = useRef<HTMLDivElement>(null);
@@ -174,6 +197,9 @@ export function CaseStudiesOtisValen() {
     };
   }, { scope: workItemsRef });
 
+  // Need at least 6 case studies to render the hardcoded grid
+  if (caseStudiesData.length < 6) return null;
+
   return (
     <>
       {/* Case Studies - Header */}
@@ -185,10 +211,10 @@ export function CaseStudiesOtisValen() {
               alt="TRD Remedial"
             />
           </div>
-          <p>Proven Results, Real Projects</p>
+          <p>{eyebrow || 'Proven Results, Real Projects'}</p>
           <div className="cs-header-title">
-            <h1>Case Studies</h1>
-            <h2>Our Work In Action</h2>
+            <h1>{title || 'Case Studies'}</h1>
+            <h2>{subtitle || 'Our Work In Action'}</h2>
           </div>
           <a href="/projects" className="cs-circular-btn-wrapper">
             <div className="cs-circular-btn">
@@ -201,7 +227,7 @@ export function CaseStudiesOtisValen() {
                 </defs>
                 <text className="cs-circular-btn-text">
                   <textPath href="#csCirclePath" startOffset="0%">
-                    SEE MORE WORK • SEE MORE WORK •
+                    {ctaText || 'SEE MORE WORK'} • {ctaText || 'SEE MORE WORK'} •
                   </textPath>
                 </text>
               </svg>

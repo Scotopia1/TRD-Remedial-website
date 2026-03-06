@@ -7,7 +7,7 @@ import { ParallaxImage } from '@/components/animations/ParallaxImage';
 import { ImageCarousel } from '@/components/ImageCarousel';
 import { ProjectSchema } from '@/components/seo/ProjectSchema';
 import { useStore } from '@/stores/useStore';
-import type { Project } from '@/data/projects';
+import type { Project } from '@/types/api';
 
 export function ProjectDetailClient({ project }: { project: Project }) {
   const setCursorVariant = useStore((state) => state.setCursorVariant);
@@ -25,6 +25,12 @@ export function ProjectDetailClient({ project }: { project: Project }) {
             <span className="project-meta-date">{project.date}</span>
             <span className="project-meta-service">{project.serviceType}</span>
             <span className="project-meta-location">{project.location}</span>
+            {project.timeline && (
+              <span className="project-meta-timeline">{project.timeline}</span>
+            )}
+            {project.budget && (
+              <span className="project-meta-budget">{project.budget}</span>
+            )}
           </div>
           <AnimatedH1 delay={1} className="project-hero-title">
             {project.name}
@@ -124,6 +130,27 @@ export function ProjectDetailClient({ project }: { project: Project }) {
         </section>
       )}
 
+      {/* Before & After */}
+      {project.beforeImage && project.afterImage && (
+        <section className="project-section project-before-after">
+          <div className="project-content-wide">
+            <AnimatedH1 animateOnScroll={true} className="section-title text-center">
+              Before & After
+            </AnimatedH1>
+            <div className="before-after-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+              <div className="before-image">
+                <p className="ba-label" style={{ textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem', opacity: 0.6 }}>Before</p>
+                <ParallaxImage src={project.beforeImage} alt={`${project.name} - Before`} speed={0.1} />
+              </div>
+              <div className="after-image">
+                <p className="ba-label" style={{ textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem', opacity: 0.6 }}>After</p>
+                <ParallaxImage src={project.afterImage} alt={`${project.name} - After`} speed={0.1} />
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Testimonial */}
       {project.testimonial && (
         <section className="project-section project-testimonial">
@@ -135,6 +162,34 @@ export function ProjectDetailClient({ project }: { project: Project }) {
               <strong>{project.testimonial.author}</strong>
               <span>{project.testimonial.role}, {project.testimonial.company}</span>
             </AnimatedCopy>
+          </div>
+        </section>
+      )}
+
+      {/* Related Projects */}
+      {project.relatedProjects && project.relatedProjects.length > 0 && (
+        <section className="project-section project-related">
+          <div className="project-content">
+            <AnimatedH1 animateOnScroll={true} className="section-title">
+              Related Projects
+            </AnimatedH1>
+            <div className="related-projects-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+              {project.relatedProjects.slice(0, 3).map((rp) => (
+                <Link key={rp.id} href={`/projects/${rp.slug}`} className="related-project-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  {(rp.thumbnailImage || rp.featuredImage) && (
+                    <div style={{ position: 'relative', width: '100%', aspectRatio: '16/10', overflow: 'hidden', borderRadius: '4px' }}>
+                      <img
+                        src={rp.thumbnailImage || rp.featuredImage}
+                        alt={rp.name}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    </div>
+                  )}
+                  <h4 style={{ marginTop: '0.75rem', fontSize: '1.1rem' }}>{rp.name}</h4>
+                  {rp.serviceType && <p style={{ opacity: 0.6, fontSize: '0.85rem' }}>{rp.serviceType}</p>}
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
       )}
