@@ -58,7 +58,6 @@ export function ServicesClient({ services }: ServicesClientProps) {
             {/* Overlay with Service Info */}
             <div className="service-overlay">
               <div className="service-number">
-                {service.icon && <span className="service-icon" aria-hidden="true">{service.icon}</span>}
                 {String(index + 1).padStart(2, '0')}
               </div>
               <AnimatedH1
