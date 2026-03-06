@@ -2,10 +2,21 @@ import './contact.css';
 import { AnimatedH1 } from '@/components/animations/AnimatedH1';
 import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
 import Link from 'next/link';
-import { getSettings } from '@/lib/api';
+import { getSettings, getServices } from '@/lib/api';
+import { ContactFormClient } from './ContactFormClient';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Contact Us | TRD Remedial',
+  description:
+    'Get in touch with TRD Remedial for structural remediation, concrete repair, and emergency services across Sydney and NSW. Request a quote or consultation today.',
+};
 
 export default async function ContactPage() {
-  const settings = await getSettings();
+  const [settings, services] = await Promise.all([
+    getSettings(),
+    getServices(),
+  ]);
   const emergencyPhone = settings.emergencyPhone1 ?? settings.contactPhone ?? '0414 727 167';
   const contactEmail = settings.contactEmail;
   const currentYear = String(new Date().getFullYear()).slice(-2);
@@ -66,6 +77,8 @@ export default async function ContactPage() {
           </div>
         </div>
       </section>
+
+      <ContactFormClient services={services} />
 
       <section className="contact-cta">
         <AnimatedCopy tag="p" className="contact-cta-text">

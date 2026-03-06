@@ -234,3 +234,23 @@ export interface PageContent {
   type: 'text' | 'html' | 'json' | 'markdown';
   updatedAt?: string;
 }
+
+// ---------------------------------------------------------------------------
+// Contact form submission
+// ---------------------------------------------------------------------------
+
+export interface ContactFormData {
+  name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  serviceInterest?: string;
+  projectType?: string;
+  message: string;
+}
+
+export interface ContactSubmission extends ContactFormData {
+  id: string;
+  status: 'unread' | 'read' | 'replied';
+  createdAt: string;
+}
