@@ -1,7 +1,6 @@
 'use client';
 
 import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
-import { OptimizedVideo } from '@/components/ui/OptimizedVideo';
 import Link from 'next/link';
 import './Hero.css';
 
@@ -11,37 +10,29 @@ interface HeroProps {
   taglines?: string[];
   /** CTA circular button text — defaults to "EXPLORE OUR SERVICES" */
   ctaText?: string;
-  /** Video source URL — defaults to ImageKit hero-video-optimized.mp4 */
-  videoSrc?: string;
-  /** Video poster image path — defaults to "/videos/hero-poster.webp" */
-  videoPoster?: string;
 }
 
 export function Hero({
   showContent = true,
   taglines,
   ctaText,
-  videoSrc,
-  videoPoster,
 }: HeroProps) {
   const heroTaglines = taglines && taglines.length > 0 ? taglines : ['THE', 'REMEDIAL', 'EXPERTS'];
   const heroCtaText = ctaText || 'EXPLORE OUR SERVICES';
-  const heroVideoSrc = videoSrc || 'https://ik.imagekit.io/1fovck7sy4/trd-website/videos/hero-video-optimized.mp4';
-  const heroVideoPoster = videoPoster || 'https://ik.imagekit.io/1fovck7sy4/trd-website/videos/hero-poster.webp';
 
   return (
     <section className="hero">
       <div className="hero-img">
-        <OptimizedVideo
-          src={heroVideoSrc}
-          poster={heroVideoPoster}
+        <video
           className="hero-video"
-          priority={true}
-          autoPlay={true}
-          loop={true}
-          muted={true}
-          playsInline={true}
-        />
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+        >
+          <source src="/video/hero-video.webm" type="video/webm" />
+        </video>
       </div>
 
       <div className={`hero-header${!showContent ? ' hero-header--hidden' : ''}`}>

@@ -137,8 +137,7 @@ export default function HomeClient({
     contentValue(pageContent, 'home.hero.tagline.3'),
   ].filter(Boolean) as string[];
   const heroCtaText = contentValue(pageContent, 'home.hero.cta');
-  const heroVideoSrc = contentValue(pageContent, 'home.hero.video');
-  const heroVideoPoster = contentValue(pageContent, 'home.hero.poster');
+  // Video now served from /public/video/hero-video.webm directly
 
   // Extract intro section content
   const introBodyText = contentValue(pageContent, 'home.intro.body');
@@ -206,8 +205,6 @@ export default function HomeClient({
           showContent={openingComplete}
           taglines={taglines.length > 0 ? taglines : undefined}
           ctaText={heroCtaText}
-          videoSrc={heroVideoSrc}
-          videoPoster={heroVideoPoster}
         />
 
         {/* Rest of content - Shows after opening animation */}
