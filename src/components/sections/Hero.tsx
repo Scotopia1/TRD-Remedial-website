@@ -31,7 +31,7 @@ export function Hero({
           playsInline
           preload="auto"
         >
-          <source src="/video/hero-video.webm" type="video/webm" />
+          <source src="/video/hero-video-optimized.mp4" type="video/mp4" />
         </video>
       </div>
 
