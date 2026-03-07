@@ -1,10 +1,10 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { isIOS, isMobile } from '@/utils/deviceDetect';
+import { isMobile } from '@/utils/deviceDetect';
 
 interface OptimizedVideoProps {
-  src: string; // base path without extension (e.g., "/videos/hero-video")
+  src: string; // full URL or path to the .mp4 file
   poster?: string;
   className?: string;
   priority?: boolean; // Load immediately vs lazy
@@ -14,13 +14,8 @@ interface OptimizedVideoProps {
   playsInline?: boolean;
 }
 
-// Strip known video extensions so we always work with a base path
-function stripVideoExt(url: string): string {
-  return url.replace(/\.(webm|mp4|mov|avi|mkv)$/i, '');
-}
-
 export function OptimizedVideo({
-  src: rawSrc,
+  src,
   poster,
   className = '',
   priority = false,
@@ -29,44 +24,34 @@ export function OptimizedVideo({
   muted = true,
   playsInline = true,
 }: OptimizedVideoProps) {
-  const src = stripVideoExt(rawSrc);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isClient, setIsClient] = useState(false);
   const [isMobileDevice, setIsMobileDevice] = useState(false);
-  const [isIOSDevice, setIsIOSDevice] = useState(false);
 
-  // On mobile/iOS: defer video loading to improve first paint
-  // On desktop: respect priority prop
-  const shouldDeferLoad = isClient && (isMobileDevice || isIOSDevice);
-  // Always start false to match server render and avoid hydration mismatch
+  const shouldDeferLoad = isClient && isMobileDevice;
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
     setIsMobileDevice(isMobile());
-    setIsIOSDevice(isIOS());
   }, []);
 
   useEffect(() => {
     if (!isClient) return;
 
-    // On mobile/iOS: delay video load for better initial performance
     if (shouldDeferLoad) {
-      // Wait for idle time to load video
       const timeoutId = setTimeout(() => {
         setIsLoaded(true);
-      }, 1500); // Load after 1.5s to allow page to render first
+      }, 1500);
 
       return () => clearTimeout(timeoutId);
     }
 
-    // Desktop or priority: use intersection observer
     if (priority || !videoRef.current) {
       setIsLoaded(true);
       return;
     }
 
-    // Lazy load video using Intersection Observer
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -76,7 +61,7 @@ export function OptimizedVideo({
           }
         });
       },
-      { rootMargin: '100px' } // Start loading 100px before entering viewport
+      { rootMargin: '100px' }
     );
 
     observer.observe(videoRef.current);
@@ -84,12 +69,11 @@ export function OptimizedVideo({
     return () => observer.disconnect();
   }, [priority, isClient, shouldDeferLoad]);
 
-  // Optimize preload based on device
   const preloadStrategy = isClient
     ? shouldDeferLoad
-      ? 'none' // Don't preload on mobile/iOS
+      ? 'none'
       : priority
-      ? 'metadata' // Changed from 'auto' to 'metadata' for faster FCP
+      ? 'metadata'
       : 'none'
     : 'none';
 
@@ -103,19 +87,10 @@ export function OptimizedVideo({
       playsInline={playsInline}
       preload={preloadStrategy}
       poster={poster}
-      // iOS optimization: disable remote playback
-      x-webkit-airplay="deny"
       disableRemotePlayback
     >
       {isLoaded && (
-        <>
-          {/* Prioritize MP4 for Safari/iOS (native codec, better performance) */}
-          {isIOSDevice && <source src={`${src}-optimized.mp4`} type="video/mp4" />}
-          {/* WebM for modern browsers (Chrome, Firefox, Edge) */}
-          {!isIOSDevice && <source src={`${src}.webm`} type="video/webm" />}
-          {/* MP4 fallback for Safari and older browsers */}
-          {!isIOSDevice && <source src={`${src}-optimized.mp4`} type="video/mp4" />}
-        </>
+        <source src={src} type="video/mp4" />
       )}
       Your browser does not support the video tag.
     </video>

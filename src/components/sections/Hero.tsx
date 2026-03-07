@@ -11,7 +11,7 @@ interface HeroProps {
   taglines?: string[];
   /** CTA circular button text — defaults to "EXPLORE OUR SERVICES" */
   ctaText?: string;
-  /** Video source path (without extension) — defaults to "/videos/hero-video" */
+  /** Video source URL — defaults to ImageKit hero-video-optimized.mp4 */
   videoSrc?: string;
   /** Video poster image path — defaults to "/videos/hero-poster.webp" */
   videoPoster?: string;
@@ -26,7 +26,7 @@ export function Hero({
 }: HeroProps) {
   const heroTaglines = taglines && taglines.length > 0 ? taglines : ['THE', 'REMEDIAL', 'EXPERTS'];
   const heroCtaText = ctaText || 'EXPLORE OUR SERVICES';
-  const heroVideoSrc = videoSrc || 'https://ik.imagekit.io/1fovck7sy4/trd-website/videos/hero-video';
+  const heroVideoSrc = videoSrc || 'https://ik.imagekit.io/1fovck7sy4/trd-website/videos/hero-video-optimized.mp4';
   const heroVideoPoster = videoPoster || 'https://ik.imagekit.io/1fovck7sy4/trd-website/videos/hero-poster.webp';
 
   return (
