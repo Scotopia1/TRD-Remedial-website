@@ -63,7 +63,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     metadataBase: new URL(siteUrl),
     alternates: {
-      canonical: "/",
+      canonical: siteUrl,
     },
     manifest: "/manifest.json",
     icons: {

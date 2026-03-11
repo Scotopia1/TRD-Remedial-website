@@ -19,6 +19,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return { title: 'Service Not Found | TRD Remedial' };
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://trdremedial.com.au';
+  const canonicalUrl = `${baseUrl}/services/${service.slug}`;
+
   return {
     title: service.metaTitle || `${service.title} Sydney | TRD Remedial Services`,
     description: service.metaDescription || service.tagline + ' - ' + service.description.substring(0, 120),
@@ -28,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description: service.tagline,
       images: [{ url: service.heroImage || service.visual, width: 1920, height: 1080, alt: `${service.title} in Sydney` }],
       type: 'website',
-      url: `https://trdremedial.com.au/services/${service.slug}`,
+      url: canonicalUrl,
     },
     twitter: {
       card: 'summary_large_image',
@@ -37,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       images: [service.heroImage || service.visual],
     },
     alternates: {
-      canonical: `https://trdremedial.com.au/services/${service.slug}`,
+      canonical: canonicalUrl,
     },
   };
 }

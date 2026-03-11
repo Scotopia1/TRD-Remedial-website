@@ -1,9 +1,13 @@
 import { getProjects } from '@/lib/api';
 import ProjectsListClient from './ProjectsListClient';
+import type { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Projects | TRD Remedial',
   description: 'Explore our portfolio of structural remediation, concrete repair, and CFRP strengthening projects across Sydney and NSW.',
+  alternates: {
+    canonical: '/projects',
+  },
 };
 
 export default async function ProjectsPage() {

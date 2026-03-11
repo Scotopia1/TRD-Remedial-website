@@ -50,6 +50,18 @@ const nextConfig: NextConfig = {
     unoptimized: false,
   },
 
+  // Redirect www to non-www for canonical consolidation
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.trdremedial.com.au' }],
+        destination: 'https://trdremedial.com.au/:path*',
+        permanent: true,
+      },
+    ];
+  },
+
   // Headers for video and image files
   async headers() {
     return [

@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: 'Contact Us | TRD Remedial',
   description:
     'Get in touch with TRD Remedial for structural remediation, concrete repair, and emergency services across Sydney and NSW. Request a quote or consultation today.',
+  alternates: {
+    canonical: '/contact',
+  },
 };
 
 export default async function ContactPage() {
