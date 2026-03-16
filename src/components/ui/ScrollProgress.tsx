@@ -38,8 +38,7 @@ const ScrollProgressInternal = function ScrollProgress() {
     <div className="fixed left-0 top-0 z-50 h-1 w-full bg-gray-200">
       <div
         ref={progressRef}
-        className="h-full bg-black transition-colors"
-        style={{ width: 0 }}
+        className="h-full w-0 bg-black transition-colors"
       />
     </div>
   );
