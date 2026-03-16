@@ -26,6 +26,20 @@ export default async function ContactPage() {
 
   return (
     <div className="contact-page">
+      {/* SEO: Internal links to service pages - server rendered */}
+      <nav className="sr-only" aria-label="Our services">
+        <h2>Our Services</h2>
+        <ul>
+          {services.map((s) => (
+            <li key={s.slug}>
+              <a href={`/services/${s.slug}`}>{s.title}</a>
+            </li>
+          ))}
+        </ul>
+        <a href="/services">All Services</a>
+        <a href="/projects">Our Projects</a>
+        <a href="/about">About TRD Remedial</a>
+      </nav>
       <section className="contact-hero">
         <div className="contact-hero-content">
           <div className="contact-hero-left">

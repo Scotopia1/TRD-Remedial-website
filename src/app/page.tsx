@@ -23,13 +23,35 @@ export default async function Home() {
     ]);
 
   return (
-    <HomeClient
-      services={services}
-      projects={projects}
-      teamMembers={teamMembers}
-      testimonials={testimonials}
-      pageContent={pageContent}
-      faqs={faqs}
-    />
+    <>
+      {/* SEO: Internal links to all service and project pages - server rendered */}
+      <nav className="sr-only" aria-label="Site sections">
+        <h2>TRD Remedial Services &amp; Projects</h2>
+        <ul>
+          {services.map((s) => (
+            <li key={s.slug}>
+              <a href={`/services/${s.slug}`}>{s.title}</a>
+            </li>
+          ))}
+          {projects.slice(0, 8).map((p) => (
+            <li key={p.slug}>
+              <a href={`/projects/${p.slug}`}>{p.name}</a>
+            </li>
+          ))}
+        </ul>
+        <a href="/services">All Services</a>
+        <a href="/projects">All Projects</a>
+        <a href="/about">About Us</a>
+        <a href="/contact">Contact Us</a>
+      </nav>
+      <HomeClient
+        services={services}
+        projects={projects}
+        teamMembers={teamMembers}
+        testimonials={testimonials}
+        pageContent={pageContent}
+        faqs={faqs}
+      />
+    </>
   );
 }

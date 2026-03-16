@@ -176,17 +176,29 @@ export default async function AboutPage() {
   ];
 
   return (
-    <AboutPageClient
-      docMetaLines={docMetaLines}
-      evidenceImages={evidenceImages}
-      fileIds={fileIds}
-      teamMembers={teamMembers}
-      companyValues={companyValues}
-      stats={stats}
-      dataStream={dataStream}
-      companyDescription={companyDescription || undefined}
-      companyQuote={companyQuote || undefined}
-      establishedYear={establishedYear}
-    />
+    <>
+      {/* SEO: Internal links - server rendered */}
+      <nav className="sr-only" aria-label="Site navigation">
+        <h2>Explore TRD Remedial</h2>
+        <ul>
+          <li><a href="/services">Our Services</a></li>
+          <li><a href="/projects">Our Projects</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+          <li><a href="/">Home</a></li>
+        </ul>
+      </nav>
+      <AboutPageClient
+        docMetaLines={docMetaLines}
+        evidenceImages={evidenceImages}
+        fileIds={fileIds}
+        teamMembers={teamMembers}
+        companyValues={companyValues}
+        stats={stats}
+        dataStream={dataStream}
+        companyDescription={companyDescription || undefined}
+        companyQuote={companyQuote || undefined}
+        establishedYear={establishedYear}
+      />
+    </>
   );
 }
