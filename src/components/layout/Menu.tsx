@@ -212,9 +212,6 @@ export function Menu() {
                   src="/trd-logo.svg"
                   alt="TRD"
                   className="logo-icon"
-                  style={{
-                    filter: 'drop-shadow(1px 1px 2px rgba(0,0,0,0.5))',
-                  }}
                 />
                 {showMenuLabel && (
                   <span className={`menu-label ${menuLabelFading ? 'menu-label-fade-out' : ''}`}>

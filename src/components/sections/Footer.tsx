@@ -84,7 +84,7 @@ export function Footer() {
               href="https://theelitessolutions.com"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ textDecoration: 'underline' }}
+              className="footer-credit-link"
             >
               The Elites Solutions
             </a>

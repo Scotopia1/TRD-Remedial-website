@@ -510,6 +510,10 @@
   }
 }
 
+.footer-credit-link {
+  text-decoration: underline;
+}
+
 /* =====================================================
    ACCESSIBILITY - Reduced Motion
    ===================================================== */
