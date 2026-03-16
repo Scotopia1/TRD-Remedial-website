@@ -477,7 +477,7 @@ export function BlueprintCorridor({ steps, images, serviceName }: BlueprintCorri
     <section ref={sectionRef} className="corridor-section" aria-label={`${serviceName} process steps`}>
       {/* Section header */}
       <div className="corridor-header">
-        <AnimatedH1 animateOnScroll={true} className="corridor-header-title">
+        <AnimatedH1 animateOnScroll={true} tag="h2" className="corridor-header-title">
           Our Process
         </AnimatedH1>
       </div>

@@ -283,6 +283,7 @@ export function AboutPageClient({
         ref={heroRef}
         aria-label="File Access"
       >
+        <h1 className="sr-only">About TRD Remedial</h1>
         <div className="bb-doc-meta">
           <TypewriterText
             lines={docMetaLines}

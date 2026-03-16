@@ -55,7 +55,7 @@
   background-color: var(--team-bg-dark);
 }
 
-.team-hero h1 {
+.team-hero h2 {
   width: 75%;
   color: var(--team-accent);
   font-size: 12rem;
@@ -219,7 +219,7 @@
    ============================================ */
 @media (max-width: 1000px) {
   /* Hero & Outro Typography */
-  .team-hero h1,
+  .team-hero h2,
   .team-outro h1,
   .team-outro h2 {
     width: 100%;

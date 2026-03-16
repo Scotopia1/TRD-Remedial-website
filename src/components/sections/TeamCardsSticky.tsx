@@ -150,7 +150,7 @@ export function TeamCardsSticky({ teamMembers }: TeamCardsStickyProps) {
       <section className="team-arc-section team-desktop" ref={stickyRef}>
         {/* Section Title */}
         <div className="team-title">
-          <h1>Leadership<br />Team</h1>
+          <h2>Leadership<br />Team</h2>
         </div>
 
         {/* Cards Container */}

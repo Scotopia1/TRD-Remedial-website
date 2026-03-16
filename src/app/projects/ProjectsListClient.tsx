@@ -149,7 +149,7 @@ export default function ProjectsListClient({ projects }: ProjectsListClientProps
 
       {/* CTA Section */}
       <section className="projects-cta">
-        <AnimatedH1 animateOnScroll={true} className="projects-cta-title">
+        <AnimatedH1 animateOnScroll={true} tag="h2" className="projects-cta-title">
           Have a Project in Mind?
         </AnimatedH1>
         <AnimatedCopy

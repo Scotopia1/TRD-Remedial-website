@@ -85,7 +85,7 @@ export function BackedByStrengthStudio({
       {/* Company Header - Title + Mission Statement */}
       <section className="strength-header">
         <div className="strength-header-copy">
-          <h1 className="strength-title">{title || 'Backed by Strength'}</h1>
+          <h2 className="strength-title">{title || 'Backed by Strength'}</h2>
           <h2>
             {headerSubtitle || DEFAULT_HEADER_SUBTITLE}
           </h2>

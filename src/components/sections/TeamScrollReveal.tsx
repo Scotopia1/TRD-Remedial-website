@@ -232,7 +232,7 @@ export function TeamScrollReveal({ teamMembers = [], heading, outro }: TeamScrol
       <section className="team-scroll-reveal-wrapper">
         {/* Hero Section */}
         <div className="team-hero">
-          <h1>{heading || 'Meet The Team'}</h1>
+          <h2>{heading || 'Meet The Team'}</h2>
         </div>
 
         {/* Team Reveal Section */}

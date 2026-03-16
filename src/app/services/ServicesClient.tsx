@@ -62,6 +62,7 @@ export function ServicesClient({ services }: ServicesClientProps) {
               </div>
               <AnimatedH1
                 animateOnScroll={true}
+                tag="h2"
                 className="service-title"
               >
                 {service.title}
@@ -95,7 +96,7 @@ export function ServicesClient({ services }: ServicesClientProps) {
 
       {/* CTA Section */}
       <section className="services-cta">
-        <AnimatedH1 animateOnScroll={true} className="services-cta-title">
+        <AnimatedH1 animateOnScroll={true} tag="h2" className="services-cta-title">
           Need Expert Advice?
         </AnimatedH1>
         <AnimatedCopy

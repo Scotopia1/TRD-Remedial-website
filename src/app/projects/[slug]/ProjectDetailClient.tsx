@@ -72,7 +72,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
       {/* Challenge Section */}
       <section className="project-section">
         <div className="project-content">
-          <AnimatedH1 animateOnScroll={true} className="section-title">
+          <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
             The Challenge
           </AnimatedH1>
           <AnimatedCopy delay={0} tag="p" className="section-copy">
@@ -84,7 +84,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
       {/* Solution Section */}
       <section className="project-section">
         <div className="project-content">
-          <AnimatedH1 animateOnScroll={true} className="section-title">
+          <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
             Our Solution
           </AnimatedH1>
           <AnimatedCopy delay={0} tag="p" className="section-copy">
@@ -96,7 +96,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
       {/* Results & Stats */}
       <section className="project-section project-results">
         <div className="project-content">
-          <AnimatedH1 animateOnScroll={true} className="section-title">
+          <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
             Results
           </AnimatedH1>
           <AnimatedCopy delay={0} tag="p" className="section-copy">
@@ -108,7 +108,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
           <div className="project-stats">
             {project.stats.map((stat, i) => (
               <div key={i} className="stat">
-                <AnimatedH1 animateOnScroll={true} direction="top" className="stat-value">
+                <AnimatedH1 animateOnScroll={true} tag="h2" direction="top" className="stat-value">
                   {stat.value}
                 </AnimatedH1>
                 <p className="stat-label">{stat.label}</p>
@@ -122,7 +122,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
       {project.galleryImages && project.galleryImages.length > 0 && (
         <section className="project-section project-gallery">
           <div className="project-content-wide">
-            <AnimatedH1 animateOnScroll={true} className="section-title text-center">
+            <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title text-center">
               Project Gallery
             </AnimatedH1>
             <ImageCarousel images={project.galleryImages} projectName={project.name} />
@@ -134,7 +134,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
       {project.beforeImage && project.afterImage && (
         <section className="project-section project-before-after">
           <div className="project-content-wide">
-            <AnimatedH1 animateOnScroll={true} className="section-title text-center">
+            <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title text-center">
               Before & After
             </AnimatedH1>
             <div className="before-after-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
@@ -170,7 +170,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
       {project.relatedProjects && project.relatedProjects.length > 0 && (
         <section className="project-section project-related">
           <div className="project-content">
-            <AnimatedH1 animateOnScroll={true} className="section-title">
+            <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
               Related Projects
             </AnimatedH1>
             <div className="related-projects-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
@@ -197,7 +197,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
       {/* CTA Section */}
       <section className="project-cta">
         <div className="project-content text-center">
-          <AnimatedH1 animateOnScroll={true} className="cta-title">
+          <AnimatedH1 animateOnScroll={true} tag="h2" className="cta-title">
             Ready to Start Your Project?
           </AnimatedH1>
           <div className="cta-buttons">

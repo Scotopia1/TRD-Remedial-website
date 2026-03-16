@@ -77,7 +77,7 @@ export function CaseStudiesOtisValen({
     document.fonts.ready.then(() => {
       // Query elements directly from the section ref to avoid scope issues in async context
       const introParagraph = section.querySelector<HTMLElement>(".cs-header-content > p");
-      const titleH1 = section.querySelector<HTMLElement>(".cs-header-title h1");
+      const titleH1 = section.querySelector<HTMLElement>(".cs-header-title h2");
 
       if (!introParagraph || !titleH1) return;
 
@@ -143,7 +143,7 @@ export function CaseStudiesOtisValen({
 
     return () => {
       const introParagraph = section.querySelector<HTMLElement>(".cs-header-content > p");
-      const titleH1 = section.querySelector<HTMLElement>(".cs-header-title h1");
+      const titleH1 = section.querySelector<HTMLElement>(".cs-header-title h2");
       if (introParagraph) gsap.set(introParagraph, { clearProps: "all" });
       if (titleH1) gsap.set(titleH1, { clearProps: "all" });
     };
@@ -213,7 +213,7 @@ export function CaseStudiesOtisValen({
           </div>
           <p>{eyebrow || 'Proven Results, Real Projects'}</p>
           <div className="cs-header-title">
-            <h1>{title || 'Case Studies'}</h1>
+            <h2>{title || 'Case Studies'}</h2>
             <h2>{subtitle || 'Our Work In Action'}</h2>
           </div>
           <a href="/projects" className="cs-circular-btn-wrapper">

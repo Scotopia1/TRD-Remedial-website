@@ -187,7 +187,7 @@
 
 /* Header Content Typography */
 .cs-header-content p,
-.cs-header-title h1 {
+.cs-header-title h2 {
   line-height: 1.1;
   font-family: "Rader", sans-serif;
   color: var(--trd-primary);
@@ -200,7 +200,7 @@
   text-transform: none;
 }
 
-.cs-header-title h1 {
+.cs-header-title h2 {
   font-weight: bold;
   font-size: 7rem;
   letter-spacing: -0.35rem;
@@ -210,7 +210,7 @@
 
 /* Line wrapper for SplitText animations */
 .cs-header-content p > .line-wrapper,
-.cs-header-title h1 > .line-wrapper {
+.cs-header-title h2 > .line-wrapper {
   position: relative;
   padding: 0 0.25em;
   overflow: hidden;
@@ -219,7 +219,7 @@
 
 /* Responsive - Mobile */
 @media (max-width: 1000px) {
-  .cs-header-title h1 {
+  .cs-header-title h2 {
     font-size: 3rem;
     letter-spacing: -0.1rem;
   }
