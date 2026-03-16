@@ -78,6 +78,8 @@ export async function StructuredData() {
     settings.socialLinkedIn,
     settings.socialFacebook,
     settings.socialInstagram,
+    'https://twitter.com/trdremedial',
+    'https://youtube.com/@trdremedial',
   ].filter((v): v is string => Boolean(v));
 
   // ---------------------------------------------------------------------------

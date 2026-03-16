@@ -252,6 +252,31 @@
 }
 
 /* =====================================================
+   SOCIAL LINKS
+   ===================================================== */
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1.5em 0;
+}
+
+.footer-social a {
+  color: var(--trd-primary);
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-social a:hover {
+  color: var(--trd-accent);
+  transform: translateY(-2px);
+}
+
+/* =====================================================
    RESPONSIVE - TABLET (max-width: 1000px)
    ===================================================== */
 
@@ -347,6 +372,16 @@
 
   .footer-row:nth-child(2) {
     gap: 1.5em;
+  }
+
+  .footer-social {
+    gap: 1.25rem;
+    padding: 1.25em 0;
+  }
+
+  .footer-social a svg {
+    width: 18px;
+    height: 18px;
   }
 
   .footer-copyright-line {
@@ -463,6 +498,16 @@
     gap: 1em;
   }
 
+  .footer-social {
+    gap: 1rem;
+    padding: 1em 0;
+  }
+
+  .footer-social a svg {
+    width: 16px;
+    height: 16px;
+  }
+
   .footer-copyright-line {
     padding-top: 0.75em;
     gap: 0.4em;
@@ -527,6 +572,14 @@
   }
 
   .footer-nav-item:hover span:last-child {
+    transform: none !important;
+  }
+
+  .footer-social a {
+    transition: none !important;
+  }
+
+  .footer-social a:hover {
     transform: none !important;
   }
 }
