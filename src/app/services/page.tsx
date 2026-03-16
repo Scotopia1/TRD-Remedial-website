@@ -3,7 +3,7 @@ import { ServicesClient } from './ServicesClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Services | TRD Remedial',
+  title: 'Services',
   description: 'Comprehensive structural remediation services in Sydney - structural strengthening, crack injection, concrete cutting, concrete repairs, slab scanning, curtain wall injection, and more.',
   alternates: {
     canonical: '/services',

@@ -7,7 +7,7 @@ import { ContactFormClient } from './ContactFormClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | TRD Remedial',
+  title: 'Contact Us',
   description:
     'Get in touch with TRD Remedial for structural remediation, concrete repair, and emergency services across Sydney and NSW. Request a quote or consultation today.',
   alternates: {

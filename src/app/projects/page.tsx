@@ -3,7 +3,7 @@ import ProjectsListClient from './ProjectsListClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Projects | TRD Remedial',
+  title: 'Projects',
   description: 'Explore our portfolio of structural remediation, concrete repair, and CFRP strengthening projects across Sydney and NSW.',
   alternates: {
     canonical: '/projects',

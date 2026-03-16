@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const canonicalUrl = `${baseUrl}/services/${service.slug}`;
 
   return {
-    title: service.metaTitle || `${service.title} Sydney | TRD Remedial Services`,
+    title: service.metaTitle || `${service.title} Sydney`,
     description: service.metaDescription || service.tagline + ' - ' + service.description.substring(0, 120),
     keywords: [service.title, 'Sydney', 'NSW', 'concrete repair', 'structural remediation', ...(service.relatedServices || [])],
     openGraph: {

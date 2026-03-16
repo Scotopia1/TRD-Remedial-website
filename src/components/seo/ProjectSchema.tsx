@@ -11,22 +11,22 @@ export function ProjectSchema({ project, settings }: ProjectSchemaProps) {
 
   const schema = {
     '@context': 'https://schema.org',
-    '@type': 'Project',
+    '@type': 'CreativeWork',
     name: project.name,
     description: project.metaDescription || project.challenge,
     image: project.heroImage,
+    url: `${SITE_URL}/projects/${project.slug}`,
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': `${SITE_URL}/projects/${project.slug}`,
     },
-    provider: {
+    author: {
       '@type': 'Organization',
       name: companyName,
       url: SITE_URL,
       logo: `${SITE_URL}/trd-logo.svg`,
     },
-    serviceType: project.serviceType,
-    location: {
+    locationCreated: {
       '@type': 'Place',
       address: {
         '@type': 'PostalAddress',
@@ -35,8 +35,17 @@ export function ProjectSchema({ project, settings }: ProjectSchemaProps) {
         addressCountry: 'AU',
       },
     },
-    startDate: project.date,
+    dateCreated: project.date,
     keywords: [project.serviceType, project.location, ...(Array.isArray(project.category) ? project.category : [])].join(', '),
+    about: {
+      '@type': 'Service',
+      serviceType: project.serviceType,
+      provider: {
+        '@type': 'Organization',
+        name: companyName,
+        url: SITE_URL,
+      },
+    },
   };
 
   return (

@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: {
       default: `${settings.companyName || 'TRD Remedial'} | Expert Structural Remediation Sydney NSW`,
-      template: `%s | ${settings.companyName || 'TRD Remedial'} - ${settings.tagline || 'The Remedial Experts'}`
+      template: `%s | ${settings.companyName || 'TRD Remedial'}`
     },
     description: settings.siteDescription || "Sydney's leading structural remediation and concrete repair specialists. Expert structural strengthening, crack injection, concrete cutting, concrete repairs, post tension truncation, slab scanning, and 24/7 emergency structural solutions across NSW. Building compliance guaranteed.",
     keywords: [

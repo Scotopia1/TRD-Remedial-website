@@ -4,7 +4,7 @@ import type { PageContent } from '@/types/api';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About Us | TRD Remedial',
+  title: 'About Us',
   description: 'Learn about TRD Remedial - Sydney\'s leading structural remediation specialists. 8+ years of experience, 150+ projects completed, and 24/7 emergency response across NSW.',
   alternates: {
     canonical: '/about',
