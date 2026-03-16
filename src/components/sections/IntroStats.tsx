@@ -125,9 +125,9 @@ export function IntroStats({ bodyText, heading, linkText }: IntroStatsProps = {}
       <div className="intro-container">
         {/* Header */}
         <div className="intro-header">
-          <h1 ref={headerRef}>
+          <h2 ref={headerRef}>
             {heading || 'Why TRD Remedial?'}
-          </h1>
+          </h2>
         </div>
 
         {/* Copy */}

@@ -15,7 +15,20 @@ import type { Service, Project, TeamMember, Testimonial, PageContent, FAQItem } 
 const ServicesSpotlight = dynamic(
   () => import('@/components/sections/ServicesSpotlight'),
   {
-    loading: () => <div className="h-dvh bg-gray-50 animate-pulse" />,
+    loading: () => (
+      <section className="h-dvh bg-gray-50 animate-pulse" aria-label="Our Services">
+        <div className="sr-only">
+          <h2>Our Structural Remediation Services</h2>
+          <p>Expert services including structural strengthening, concrete repairs, crack injection, and more.</p>
+          <nav aria-label="Service links">
+            <a href="/services">View All Services</a>
+            <a href="/services/structural-strengthening">Structural Strengthening</a>
+            <a href="/services/concrete-repairs">Concrete Repairs</a>
+            <a href="/services/crack-injection">Crack Injection</a>
+          </nav>
+        </div>
+      </section>
+    ),
     ssr: false,
   }
 );
@@ -23,7 +36,15 @@ const ServicesSpotlight = dynamic(
 const CaseStudiesOtisValen = dynamic(
   () => import('@/components/sections/CaseStudiesOtisValen').then(mod => mod.CaseStudiesOtisValen),
   {
-    loading: () => <div className="h-dvh bg-gray-50 animate-pulse" />,
+    loading: () => (
+      <section className="h-dvh bg-gray-50 animate-pulse" aria-label="Case Studies">
+        <div className="sr-only">
+          <h2>Featured Projects &amp; Case Studies</h2>
+          <p>Browse our portfolio of structural remediation projects across Sydney.</p>
+          <a href="/projects">View All Projects</a>
+        </div>
+      </section>
+    ),
     ssr: false,
   }
 );
@@ -31,7 +52,15 @@ const CaseStudiesOtisValen = dynamic(
 const TeamScrollReveal = dynamic(
   () => import('@/components/sections/TeamScrollReveal').then(mod => mod.TeamScrollReveal),
   {
-    loading: () => <div className="h-dvh bg-gray-50 animate-pulse" />,
+    loading: () => (
+      <section className="h-dvh bg-gray-50 animate-pulse" aria-label="Our Team">
+        <div className="sr-only">
+          <h2>Meet Our Expert Team</h2>
+          <p>Our leadership team brings decades of experience in structural remediation.</p>
+          <a href="/about">Learn About Our Team</a>
+        </div>
+      </section>
+    ),
     ssr: false,
   }
 );
@@ -39,7 +68,14 @@ const TeamScrollReveal = dynamic(
 const CustomerFeedback = dynamic(
   () => import('@/components/sections/CustomerFeedback').then(mod => mod.CustomerFeedback),
   {
-    loading: () => <div className="h-dvh bg-gray-50 animate-pulse" />,
+    loading: () => (
+      <section className="h-dvh bg-gray-50 animate-pulse" aria-label="Testimonials">
+        <div className="sr-only">
+          <h2>Client Testimonials</h2>
+          <p>What our clients say about TRD Remedial&#39;s structural remediation services.</p>
+        </div>
+      </section>
+    ),
     ssr: false,
   }
 );
@@ -47,7 +83,16 @@ const CustomerFeedback = dynamic(
 const EmergencyCTA = dynamic(
   () => import('@/components/sections/EmergencyCTA').then(mod => mod.EmergencyCTA),
   {
-    loading: () => <div className="h-[50dvh] bg-gray-50 animate-pulse" />,
+    loading: () => (
+      <section className="h-[50dvh] bg-gray-50 animate-pulse" aria-label="Emergency Services">
+        <div className="sr-only">
+          <h2>24/7 Emergency Structural Response</h2>
+          <p>Need urgent structural repair? Contact TRD Remedial for immediate emergency response across Sydney.</p>
+          <a href="/emergency">Emergency Contact</a>
+          <a href="/contact">Get In Touch</a>
+        </div>
+      </section>
+    ),
     ssr: false,
   }
 );
@@ -55,7 +100,15 @@ const EmergencyCTA = dynamic(
 const FAQ = dynamic(
   () => import('@/components/sections/FAQ').then(mod => mod.FAQ),
   {
-    loading: () => <div className="h-dvh bg-gray-50 animate-pulse" />,
+    loading: () => (
+      <section className="h-dvh bg-gray-50 animate-pulse" aria-label="FAQ">
+        <div className="sr-only">
+          <h2>Frequently Asked Questions</h2>
+          <p>Common questions about structural remediation, concrete repairs, and our services.</p>
+          <a href="/contact">Have a Question? Contact Us</a>
+        </div>
+      </section>
+    ),
     ssr: false,
   }
 );
@@ -63,7 +116,15 @@ const FAQ = dynamic(
 const BackedByStrengthStudio = dynamic(
   () => import('@/components/sections/BackedByStrengthStudio').then(mod => mod.BackedByStrengthStudio),
   {
-    loading: () => <div className="h-dvh bg-gray-50 animate-pulse" />,
+    loading: () => (
+      <section className="h-dvh bg-gray-50 animate-pulse" aria-label="About TRD">
+        <div className="sr-only">
+          <h3>Backed by Strength</h3>
+          <p>TRD Remedial&#39;s mission and commitment to structural excellence.</p>
+          <a href="/about">About TRD Remedial</a>
+        </div>
+      </section>
+    ),
     ssr: false,
   }
 );

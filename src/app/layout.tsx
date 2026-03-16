@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: {
-      default: settings.siteTitle || `${settings.companyFullName || 'TRD Remedial - The Remedial Experts'} | Structural Solutions Sydney`,
+      default: `${settings.companyName || 'TRD Remedial'} | Expert Structural Remediation Sydney NSW`,
       template: `%s | ${settings.companyName || 'TRD Remedial'} - ${settings.tagline || 'The Remedial Experts'}`
     },
     description: settings.siteDescription || "Sydney's leading structural remediation and concrete repair specialists. Expert structural strengthening, crack injection, concrete cutting, concrete repairs, post tension truncation, slab scanning, and 24/7 emergency structural solutions across NSW. Building compliance guaranteed.",
@@ -77,7 +77,7 @@ export async function generateMetadata(): Promise<Metadata> {
       ],
     },
     openGraph: {
-      title: settings.siteTitle || "TRD Remedial - The Remedial Experts | Structural Solutions Sydney",
+      title: `${settings.companyName || 'TRD Remedial'} | Expert Structural Remediation Sydney NSW`,
       description: settings.siteDescription || `${settings.subTagline || 'When structural problems demand real answers'}. ${settings.valueProposition || 'We solve challenges others can\'t handle'}. Expert remediation services across NSW.`,
       url: siteUrl,
       siteName: settings.companyName || "TRD Remedial",
@@ -94,7 +94,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: settings.siteTitle || "TRD Remedial - The Remedial Experts",
+      title: `${settings.companyName || 'TRD Remedial'} | Expert Structural Remediation Sydney NSW`,
       description: settings.siteDescription || "Award-winning structural remediation. We solve challenges others can't handle. 24/7 emergency response.",
       images: [settings.twitterImage || "https://ik.imagekit.io/1fovck7sy4/trd-website/images/twitter-image.jpg"],
       creator: "@trdremedial",

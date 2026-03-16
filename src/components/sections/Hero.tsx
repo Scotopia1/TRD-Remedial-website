@@ -36,18 +36,21 @@ export function Hero({
       </div>
 
       <div className={`hero-header${!showContent ? ' hero-header--hidden' : ''}`}>
-        {heroTaglines.map((line, index) => (
-          <AnimatedCopy
-            key={index}
-            tag="h1"
-            animateOnScroll={false}
-            delay={0.2 + index * 0.15}
-            trigger={showContent}
-            instantVisible={false}
-          >
-            {line}
-          </AnimatedCopy>
-        ))}
+        <h1 className="hero-h1">
+          <span className="sr-only">TRD Remedial - The Remedial Experts | Structural Remediation Sydney</span>
+          {heroTaglines.map((line, index) => (
+            <AnimatedCopy
+              key={index}
+              tag="span"
+              animateOnScroll={false}
+              delay={0.2 + index * 0.15}
+              trigger={showContent}
+              instantVisible={false}
+            >
+              {line}
+            </AnimatedCopy>
+          ))}
+        </h1>
       </div>
 
       {showContent && (
