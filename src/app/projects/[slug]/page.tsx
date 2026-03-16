@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   const description = project.metaDescription || `${project.tagline} - ${project.challenge.substring(0, 120)}...`;
-  const title = project.metaTitle || `${project.name} | TRD Remedial Case Study`;
+  const title = project.metaTitle || `${project.name} — Case Study`;
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://trdremedial.com.au';
   const canonicalUrl = `${baseUrl}/projects/${slug}`;
 
@@ -61,18 +61,36 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const [project, settings] = await Promise.all([
+  const [project, settings, allProjects] = await Promise.all([
     getProjectBySlug(slug),
     getSettings(),
+    getProjects(),
   ]);
 
   if (!project) {
     notFound();
   }
 
+  const otherProjects = allProjects.filter((p) => p.slug !== slug).slice(0, 5);
+
   return (
     <>
       <ProjectSchema project={project} settings={settings} />
+      {/* SEO: Internal links - server rendered */}
+      <nav className="sr-only" aria-label="Related projects">
+        <h2>Explore More Projects</h2>
+        <ul>
+          {otherProjects.map((p) => (
+            <li key={p.slug}>
+              <a href={`/projects/${p.slug}`}>{p.name}</a>
+            </li>
+          ))}
+        </ul>
+        <a href="/projects">View All Projects</a>
+        <a href="/services">Our Services</a>
+        <a href="/contact">Contact Us</a>
+        <a href="/about">About TRD Remedial</a>
+      </nav>
       <ProjectDetailClient project={project} />
     </>
   );

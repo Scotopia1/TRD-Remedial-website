@@ -80,7 +80,7 @@ export function ServiceDetailClient({ service, relatedProjects }: ServiceDetailC
       {/* 2. Overview Section */}
       <section className="service-section service-overview">
         <div className="service-content">
-          <AnimatedH1 animateOnScroll={true} className="section-title">
+          <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
             Overview
           </AnimatedH1>
           <AnimatedCopy delay={0} tag="p" className="section-copy">
@@ -103,7 +103,7 @@ export function ServiceDetailClient({ service, relatedProjects }: ServiceDetailC
       {/* 4. Features List */}
       <section className="service-section service-features-list">
         <div className="service-content">
-          <AnimatedH1 animateOnScroll={true} className="section-title">
+          <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
             What We Provide
           </AnimatedH1>
           <ul className="features-grid">
@@ -121,7 +121,7 @@ export function ServiceDetailClient({ service, relatedProjects }: ServiceDetailC
       {/* 5. Benefits Section */}
       <section className="service-section service-benefits">
         <div className="service-content">
-          <AnimatedH1 animateOnScroll={true} className="section-title">
+          <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
             Benefits
           </AnimatedH1>
           <div className="benefits-list">
@@ -138,7 +138,7 @@ export function ServiceDetailClient({ service, relatedProjects }: ServiceDetailC
       {service.commonApplications && (
         <section className="service-section service-applications">
           <div className="service-content">
-            <AnimatedH1 animateOnScroll={true} className="section-title">
+            <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
               Common Applications
             </AnimatedH1>
             <AnimatedCopy delay={0} tag="p" className="section-copy">
@@ -152,7 +152,7 @@ export function ServiceDetailClient({ service, relatedProjects }: ServiceDetailC
       {service.whyChooseTRD && (
         <section className="service-section service-why-trd">
           <div className="service-content">
-            <AnimatedH1 animateOnScroll={true} className="section-title">
+            <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
               Why Choose TRD
             </AnimatedH1>
             <AnimatedCopy delay={0} tag="p" className="section-copy">
@@ -166,7 +166,7 @@ export function ServiceDetailClient({ service, relatedProjects }: ServiceDetailC
       {service.serviceArea && (
         <section className="service-section service-area">
           <div className="service-content">
-            <AnimatedH1 animateOnScroll={true} className="section-title">
+            <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
               Service Area
             </AnimatedH1>
             <AnimatedCopy delay={0} tag="p" className="section-copy">
@@ -185,6 +185,7 @@ export function ServiceDetailClient({ service, relatedProjects }: ServiceDetailC
                 <div key={i} className="stat">
                   <AnimatedH1
                     animateOnScroll={true}
+                    tag="h2"
                     direction="top"
                     className="stat-value"
                   >
@@ -211,7 +212,7 @@ export function ServiceDetailClient({ service, relatedProjects }: ServiceDetailC
       {relatedProjects && relatedProjects.length > 0 && (
         <section className="service-section service-case-studies">
           <div className="service-content">
-            <AnimatedH1 animateOnScroll={true} className="section-title">
+            <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
               Featured Case Studies
             </AnimatedH1>
             <div className="case-studies-grid">
@@ -240,7 +241,7 @@ export function ServiceDetailClient({ service, relatedProjects }: ServiceDetailC
       {service.faqs && service.faqs.length > 0 && (
         <section className="service-section service-faqs">
           <div className="service-content">
-            <AnimatedH1 animateOnScroll={true} className="section-title">
+            <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
               Frequently Asked Questions
             </AnimatedH1>
             <div className="faq-list">
@@ -261,7 +262,7 @@ export function ServiceDetailClient({ service, relatedProjects }: ServiceDetailC
       {service.testimonials && service.testimonials.length > 0 && (
         <section className="service-section service-testimonials">
           <div className="service-content">
-            <AnimatedH1 animateOnScroll={true} className="section-title">
+            <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
               What Our Clients Say
             </AnimatedH1>
             <div className="testimonials-carousel">
@@ -294,7 +295,7 @@ export function ServiceDetailClient({ service, relatedProjects }: ServiceDetailC
       {/* 9. CTA Section */}
       <section className="service-section service-cta">
         <div className="service-content text-center">
-          <AnimatedH1 animateOnScroll={true} className="cta-title">
+          <AnimatedH1 animateOnScroll={true} tag="h2" className="cta-title">
             Ready to Get Started?
           </AnimatedH1>
           <AnimatedCopy delay={0.15} tag="p" className="cta-description">

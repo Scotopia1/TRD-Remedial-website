@@ -12,6 +12,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 interface AnimatedH1Props {
   children: React.ReactNode;
   className?: string;
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   delay?: number;
   duration?: number;
   ease?: string;
@@ -24,6 +25,7 @@ interface AnimatedH1Props {
 const AnimatedH1Component = function AnimatedH1({
   children,
   className = '',
+  tag = 'h1',
   delay = 0,
   duration = 1,
   ease = 'power4.out',
@@ -32,6 +34,7 @@ const AnimatedH1Component = function AnimatedH1({
   animateOnScroll = false,
   direction = 'bottom',
 }: AnimatedH1Props) {
+  const Tag = tag;
   const headingRef = useRef<HTMLHeadingElement>(null);
   const [headingId, setHeadingId] = useState<string | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
@@ -136,13 +139,13 @@ const AnimatedH1Component = function AnimatedH1({
   );
 
   return (
-    <h1
+    <Tag
       ref={headingRef}
       className={`animated-h1 ${className}`}
       data-heading-id={headingId}
     >
       {children}
-    </h1>
+    </Tag>
   );
 };
 

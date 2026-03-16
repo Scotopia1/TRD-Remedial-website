@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const canonicalUrl = `${baseUrl}/services/${service.slug}`;
 
   return {
-    title: service.metaTitle || `${service.title} Sydney | TRD Remedial Services`,
+    title: service.metaTitle || `${service.title} Sydney`,
     description: service.metaDescription || service.tagline + ' - ' + service.description.substring(0, 120),
     keywords: [service.title, 'Sydney', 'NSW', 'concrete repair', 'structural remediation', ...(service.relatedServices || [])],
     openGraph: {
@@ -47,9 +47,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const [service, settings] = await Promise.all([
+  const [service, settings, allServices, allProjects] = await Promise.all([
     getServiceBySlug(slug),
     getSettings(),
+    getServices(),
+    getProjects(),
   ]);
 
   if (!service) {
@@ -59,14 +61,30 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   // Resolve related projects: fetch all projects and filter by the IDs listed on the service
   let relatedProjects: Project[] = [];
   if (service.relatedProjects && service.relatedProjects.length > 0) {
-    const allProjects = await getProjects();
     const relatedIds = new Set(service.relatedProjects);
     relatedProjects = allProjects.filter((p) => relatedIds.has(p.id) || relatedIds.has(p.slug));
   }
 
+  const otherServices = allServices.filter((s) => s.slug !== slug);
+
   return (
     <>
       <ServiceSchema service={service} settings={settings} />
+      {/* SEO: Internal links to related services - server rendered */}
+      <nav className="sr-only" aria-label="Related services">
+        <h2>Our Other Services</h2>
+        <ul>
+          {otherServices.map((s) => (
+            <li key={s.slug}>
+              <a href={`/services/${s.slug}`}>{s.title}</a>
+            </li>
+          ))}
+        </ul>
+        <a href="/services">View All Services</a>
+        <a href="/projects">View Our Projects</a>
+        <a href="/contact">Get a Free Quote</a>
+        <a href="/about">About TRD Remedial</a>
+      </nav>
       <ServiceDetailClient service={service} relatedProjects={relatedProjects} />
     </>
   );

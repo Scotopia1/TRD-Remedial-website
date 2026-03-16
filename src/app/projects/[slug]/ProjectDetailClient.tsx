@@ -72,7 +72,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
       {/* Challenge Section */}
       <section className="project-section">
         <div className="project-content">
-          <AnimatedH1 animateOnScroll={true} className="section-title">
+          <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
             The Challenge
           </AnimatedH1>
           <AnimatedCopy delay={0} tag="p" className="section-copy">
@@ -84,7 +84,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
       {/* Solution Section */}
       <section className="project-section">
         <div className="project-content">
-          <AnimatedH1 animateOnScroll={true} className="section-title">
+          <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
             Our Solution
           </AnimatedH1>
           <AnimatedCopy delay={0} tag="p" className="section-copy">
@@ -96,7 +96,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
       {/* Results & Stats */}
       <section className="project-section project-results">
         <div className="project-content">
-          <AnimatedH1 animateOnScroll={true} className="section-title">
+          <AnimatedH1 animateOnScroll={true} tag="h2" className="section-title">
             Results
           </AnimatedH1>
           <AnimatedCopy delay={0} tag="p" className="section-copy">

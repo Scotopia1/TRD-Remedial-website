@@ -7,7 +7,7 @@ import { ContactFormClient } from './ContactFormClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | TRD Remedial',
+  title: 'Contact Us',
   description:
     'Get in touch with TRD Remedial for structural remediation, concrete repair, and emergency services across Sydney and NSW. Request a quote or consultation today.',
   alternates: {
@@ -26,6 +26,20 @@ export default async function ContactPage() {
 
   return (
     <div className="contact-page">
+      {/* SEO: Internal links to service pages - server rendered */}
+      <nav className="sr-only" aria-label="Our services">
+        <h2>Our Services</h2>
+        <ul>
+          {services.map((s) => (
+            <li key={s.slug}>
+              <a href={`/services/${s.slug}`}>{s.title}</a>
+            </li>
+          ))}
+        </ul>
+        <a href="/services">All Services</a>
+        <a href="/projects">Our Projects</a>
+        <a href="/about">About TRD Remedial</a>
+      </nav>
       <section className="contact-hero">
         <div className="contact-hero-content">
           <div className="contact-hero-left">
