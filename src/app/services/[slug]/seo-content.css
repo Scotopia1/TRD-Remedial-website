@@ -1,0 +1,159 @@
+/* ==========================================================================
+   SEO Content Sections — Server-Rendered Text for Text/HTML Ratio
+
+   These sections add visible, meaningful text to service pages to improve
+   text-to-HTML ratio for search engine crawlers (Semrush warning #112).
+   Styled to blend seamlessly with the existing design system.
+   ========================================================================== */
+
+/* Service Detail Page — Summary Block */
+.seo-service-summary {
+  background-color: var(--concrete-900);
+  color: var(--concrete-100);
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--concrete-700);
+}
+
+.seo-service-summary-inner {
+  width: 80%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.seo-service-tagline {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--concrete-200);
+}
+
+.seo-service-description p {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--concrete-300);
+  margin: 0;
+}
+
+.seo-service-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  padding-top: 0.5rem;
+}
+
+.seo-service-features-label {
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--concrete-500);
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+
+.seo-service-feature-tag {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--concrete-300);
+  background: var(--concrete-800);
+  padding: 0.375rem 0.875rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--concrete-700);
+}
+
+.seo-service-meta {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--concrete-400);
+  border-top: 1px solid var(--concrete-700);
+  padding-top: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Services Listing Page — Intro Block */
+.seo-services-intro {
+  background-color: var(--concrete-900);
+  color: var(--concrete-100);
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--concrete-700);
+}
+
+.seo-services-intro-inner {
+  width: 80%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.seo-services-intro-inner p {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--concrete-300);
+  margin: 0;
+}
+
+.seo-services-intro-inner p:first-child {
+  font-size: 1.125rem;
+  color: var(--concrete-200);
+}
+
+/* Responsive — Tablet */
+@media (max-width: 900px) {
+  .seo-service-summary,
+  .seo-services-intro {
+    padding: 3.5rem 0;
+  }
+
+  .seo-service-summary-inner,
+  .seo-services-intro-inner {
+    width: 100%;
+    padding: 0 8%;
+  }
+
+  .seo-service-tagline {
+    font-size: 1.25rem;
+  }
+}
+
+/* Responsive — Small Mobile */
+@media (max-width: 480px) {
+  .seo-service-summary,
+  .seo-services-intro {
+    padding: 2.5rem 0;
+  }
+
+  .seo-service-tagline {
+    font-size: 1.1rem;
+  }
+
+  .seo-service-description p,
+  .seo-services-intro-inner p {
+    font-size: 0.9375rem;
+  }
+
+  .seo-services-intro-inner p:first-child {
+    font-size: 1rem;
+  }
+}
+
+/* Accessibility — Reduced Motion (no animations in this block anyway) */
+@media (prefers-reduced-motion: reduce) {
+  .seo-service-summary,
+  .seo-services-intro {
+    transition: none;
+  }
+}

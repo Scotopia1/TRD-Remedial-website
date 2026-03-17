@@ -1,4 +1,5 @@
 import './service-detail.css';
+import './seo-content.css';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { getServiceBySlug, getServices, getProjects, getSettings } from '@/lib/api';
@@ -85,6 +86,43 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         <a href="/contact">Get a Free Quote</a>
         <a href="/about">About TRD Remedial</a>
       </nav>
+
+      {/* Server-rendered SEO content section — improves text/HTML ratio */}
+      <section className="seo-service-summary">
+        <div className="seo-service-summary-inner">
+          <p className="seo-service-tagline">{service.tagline}</p>
+          {service.description && (
+            <div className="seo-service-description">
+              <p>{service.description}</p>
+            </div>
+          )}
+          {service.features && service.features.length > 0 && (
+            <div className="seo-service-features">
+              <span className="seo-service-features-label">Capabilities</span>
+              {service.features.map((feature, i) => (
+                <span key={i} className="seo-service-feature-tag">{feature}</span>
+              ))}
+            </div>
+          )}
+          {service.commonApplications && (
+            <div className="seo-service-description">
+              <p>{service.commonApplications}</p>
+            </div>
+          )}
+          {service.whyChooseTRD && (
+            <div className="seo-service-description">
+              <p>{service.whyChooseTRD}</p>
+            </div>
+          )}
+          <p className="seo-service-meta">
+            TRD Remedial provides expert {service.title.toLowerCase()} services across Sydney
+            and Greater NSW. As specialist remedial builders, we deliver professional structural
+            remediation solutions for residential, commercial, and industrial properties.
+            {service.serviceArea ? ` ${service.serviceArea}` : ''}
+          </p>
+        </div>
+      </section>
+
       <ServiceDetailClient service={service} relatedProjects={relatedProjects} />
     </>
   );
