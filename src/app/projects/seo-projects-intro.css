@@ -1,0 +1,45 @@
+/* ─── Server-rendered SEO Intro for Projects Listing ──────────────────────── */
+/* Visible descriptive paragraph for crawlers, placed between hero and project cards */
+
+.seo-projects-intro {
+  width: 100vw;
+  margin-left: -2rem;
+  background-color: var(--concrete-800);
+  color: var(--concrete-100);
+  padding: 3rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.seo-projects-intro-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.seo-projects-intro-inner p {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--concrete-300);
+  margin: 0;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 1000px) {
+  .seo-projects-intro {
+    margin-left: -1.5rem;
+    padding: 2.5rem 8%;
+  }
+}
+
+@media (max-width: 640px) {
+  .seo-projects-intro {
+    margin-left: -1rem;
+    padding: 2rem 6%;
+  }
+
+  .seo-projects-intro-inner p {
+    font-size: 0.95rem;
+  }
+}

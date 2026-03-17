@@ -1,0 +1,89 @@
+/* ─── Server-rendered SEO Content Section ─────────────────────────────────── */
+/* Visible descriptive text for crawlers and users, placed between schema and client component */
+
+.seo-project-summary {
+  background-color: var(--concrete-800);
+  color: var(--concrete-100);
+  padding: 4rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.seo-project-summary-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.seo-project-location {
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--trd-accent);
+}
+
+.seo-project-description p {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--concrete-100);
+  opacity: 0.85;
+  margin: 0;
+}
+
+.seo-project-challenge,
+.seo-project-solution {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--concrete-100);
+  opacity: 0.8;
+}
+
+.seo-project-challenge strong,
+.seo-project-solution strong {
+  color: var(--trd-accent);
+  font-weight: 600;
+}
+
+.seo-project-meta {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--trd-accent);
+  opacity: 0.7;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-top: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 1000px) {
+  .seo-project-summary {
+    padding: 3rem 8%;
+  }
+}
+
+@media (max-width: 640px) {
+  .seo-project-summary {
+    padding: 2.5rem 6%;
+  }
+
+  .seo-project-description p {
+    font-size: 0.95rem;
+  }
+
+  .seo-project-challenge,
+  .seo-project-solution {
+    font-size: 0.9rem;
+  }
+
+  .seo-project-meta {
+    font-size: 0.85rem;
+  }
+}
