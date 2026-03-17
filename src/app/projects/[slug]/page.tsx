@@ -4,6 +4,7 @@ import { getProjects, getProjectBySlug, getSettings } from '@/lib/api';
 import { ProjectDetailClient } from './ProjectDetailClient';
 import { ProjectSchema } from '@/components/seo/ProjectSchema';
 import './project-detail.css';
+import './seo-content.css';
 
 export async function generateStaticParams() {
   const projects = await getProjects();
@@ -91,6 +92,45 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         <a href="/contact">Contact Us</a>
         <a href="/about">About TRD Remedial</a>
       </nav>
+      {/* Server-rendered SEO content — visible descriptive text for crawlers and users */}
+      <section className="seo-project-summary">
+        <div className="seo-project-summary-inner">
+          {project.location && (
+            <p className="seo-project-location">
+              {project.serviceType} — {project.location}
+            </p>
+          )}
+          {project.tagline && (
+            <div className="seo-project-description">
+              <p>{project.tagline}</p>
+            </div>
+          )}
+          {project.challenge && (
+            <div className="seo-project-challenge">
+              <strong>The Challenge:</strong>{' '}
+              <span>{typeof project.challenge === 'string' ? project.challenge : ''}</span>
+            </div>
+          )}
+          {project.solution && (
+            <div className="seo-project-solution">
+              <strong>Our Solution:</strong>{' '}
+              <span>{typeof project.solution === 'string' ? project.solution : ''}</span>
+            </div>
+          )}
+          {project.results && (
+            <div className="seo-project-solution">
+              <strong>Results:</strong>{' '}
+              <span>{typeof project.results === 'string' ? project.results : ''}</span>
+            </div>
+          )}
+          <p className="seo-project-meta">
+            This {project.serviceType || 'structural remediation'} project by TRD Remedial
+            {project.location ? ` in ${project.location}` : ''} demonstrates our expertise in
+            delivering professional building remediation solutions across Sydney and Greater NSW.
+            {project.timeline ? ` Completed within ${project.timeline}.` : ''}
+          </p>
+        </div>
+      </section>
       <ProjectDetailClient project={project} />
     </>
   );
