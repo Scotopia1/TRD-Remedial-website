@@ -1,3 +1,4 @@
+import './[slug]/seo-content.css';
 import { getServices } from '@/lib/api';
 import { ServicesClient } from './ServicesClient';
 import type { Metadata } from 'next';
@@ -28,6 +29,24 @@ export default async function ServicesPage() {
         <a href="/projects">View Our Projects</a>
         <a href="/contact">Get a Free Quote</a>
       </nav>
+
+      {/* Server-rendered SEO intro — improves text/HTML ratio */}
+      <section className="seo-services-intro">
+        <div className="seo-services-intro-inner">
+          <p>
+            TRD Remedial delivers comprehensive structural remediation services across Sydney and NSW.
+            From concrete repairs and crack injection to structural strengthening with carbon fibre
+            reinforcement, our expert team provides solutions for residential, commercial, and
+            industrial buildings.
+          </p>
+          <p>
+            We specialise in concrete cutting, slab scanning, curtain wall injection, post-tension
+            truncation, structural alterations, and temporary moving joints. Every project is backed
+            by decades of experience and a commitment to engineering excellence.
+          </p>
+        </div>
+      </section>
+
       <ServicesClient services={services} />
     </>
   );
