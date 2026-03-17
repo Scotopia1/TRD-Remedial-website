@@ -1,4 +1,5 @@
 import './[slug]/seo-content.css';
+import './seo-services-listing.css';
 import { getServices } from '@/lib/api';
 import { ServicesClient } from './ServicesClient';
 import type { Metadata } from 'next';
@@ -43,6 +44,28 @@ export default async function ServicesPage() {
             We specialise in concrete cutting, slab scanning, curtain wall injection, post-tension
             truncation, structural alterations, and temporary moving joints. Every project is backed
             by decades of experience and a commitment to engineering excellence.
+          </p>
+        </div>
+      </section>
+
+      {/* Server-rendered SEO content — individual service descriptions for crawlers and users */}
+      <section className="seo-services-content">
+        <div className="seo-services-content-inner">
+          <h2>Comprehensive Remedial Building Services in Sydney</h2>
+          <p>
+            TRD Remedial provides a full spectrum of structural remediation services designed to address
+            every aspect of building deterioration and structural deficiency. Each service is delivered by
+            experienced remedial builders using industry-leading techniques and materials.
+          </p>
+          {services.map((s) => (
+            <div key={s.slug} className="seo-service-item">
+              <h3><a href={`/services/${s.slug}`}>{s.title}</a></h3>
+              <p>{s.tagline || s.description?.substring(0, 200)}</p>
+            </div>
+          ))}
+          <p>
+            All services are available across Sydney and Greater NSW. Contact our team for a free
+            consultation and detailed scope assessment for your project.
           </p>
         </div>
       </section>

@@ -1,0 +1,119 @@
+/* ==========================================================================
+   SEO Services Listing Content — Server-Rendered Service Summaries
+
+   Adds substantial visible text per service to the services listing page
+   to improve text-to-HTML ratio. Uses existing design system variables.
+   ========================================================================== */
+
+.seo-services-content {
+  background-color: var(--concrete-900);
+  color: var(--concrete-100);
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--concrete-700);
+}
+
+.seo-services-content-inner {
+  width: 80%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.seo-services-content-inner > h2 {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--concrete-200);
+  margin: 0 0 0.5rem 0;
+}
+
+.seo-services-content-inner > p {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--concrete-300);
+  margin: 0;
+}
+
+/* Individual service item */
+.seo-service-item {
+  padding: 1.25rem 0;
+  border-top: 1px dashed var(--concrete-700);
+}
+
+.seo-service-item:last-of-type {
+  border-bottom: 1px dashed var(--concrete-700);
+}
+
+.seo-service-item h3 {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.seo-service-item h3 a {
+  color: var(--concrete-100);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.seo-service-item h3 a:hover {
+  color: var(--concrete-300);
+}
+
+.seo-service-item p {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--concrete-400);
+  margin: 0;
+}
+
+/* Responsive — Tablet */
+@media (max-width: 900px) {
+  .seo-services-content {
+    padding: 3rem 0;
+  }
+
+  .seo-services-content-inner {
+    width: 100%;
+    padding: 0 8%;
+  }
+
+  .seo-services-content-inner > h2 {
+    font-size: 1.4rem;
+  }
+}
+
+/* Responsive — Small Mobile */
+@media (max-width: 480px) {
+  .seo-services-content {
+    padding: 2.5rem 0;
+  }
+
+  .seo-services-content-inner > h2 {
+    font-size: 1.25rem;
+  }
+
+  .seo-service-item h3 {
+    font-size: 1rem;
+  }
+
+  .seo-service-item p,
+  .seo-services-content-inner > p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Accessibility — Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .seo-service-item h3 a {
+    transition: none;
+  }
+}
