@@ -33,7 +33,7 @@ export default async function Home() {
               <a href={`/services/${s.slug}`}>{s.title}</a>
             </li>
           ))}
-          {projects.slice(0, 8).map((p) => (
+          {projects.map((p) => (
             <li key={p.slug}>
               <a href={`/projects/${p.slug}`}>{p.name}</a>
             </li>

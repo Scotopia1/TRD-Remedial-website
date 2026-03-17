@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const service = await getServiceBySlug(slug);
 
   if (!service) {
-    return { title: 'Service Not Found | TRD Remedial' };
+    return { title: 'Service Not Found' };
   }
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://trdremedial.com.au';

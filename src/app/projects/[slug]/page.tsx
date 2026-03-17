@@ -17,13 +17,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   if (!project) {
     return {
-      title: 'Project Not Found | TRD Remedial',
+      title: 'Project Not Found',
       description: 'The requested project could not be found.',
     };
   }
 
   const description = project.metaDescription || `${project.tagline} - ${project.challenge.substring(0, 120)}...`;
-  const title = project.metaTitle || `${project.name} — Case Study`;
+  // Strip trailing "| TRD Remedial" from CMS metaTitle to avoid duplication with layout template
+  const rawTitle = project.metaTitle || `${project.name} — Case Study`;
+  const title = rawTitle.replace(/\s*\|\s*TRD Remedial\s*$/i, '');
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://trdremedial.com.au';
   const canonicalUrl = `${baseUrl}/projects/${slug}`;
 
@@ -72,7 +74,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     notFound();
   }
 
-  const otherProjects = allProjects.filter((p) => p.slug !== slug).slice(0, 5);
+  const otherProjects = allProjects.filter((p) => p.slug !== slug);
 
   return (
     <>
