@@ -1,0 +1,75 @@
+.seo-contact-content {
+  background-color: var(--trd-secondary, #1a1a1a);
+  color: var(--trd-primary, #f5f5f0);
+  padding: 4rem 2rem;
+}
+
+.seo-contact-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.seo-contact-inner h2 {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--trd-accent, #c5a47e);
+  margin: 0;
+}
+
+.seo-contact-inner p {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--trd-primary, #f5f5f0);
+  opacity: 0.85;
+  margin: 0;
+}
+
+.seo-contact-details {
+  border-top: 1px dashed var(--trd-accent, #c5a47e);
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.seo-contact-details p {
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.875rem;
+  opacity: 0.75;
+}
+
+.seo-contact-details strong {
+  color: var(--trd-accent, #c5a47e);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .seo-contact-content {
+    padding: 3rem 1.5rem;
+  }
+
+  .seo-contact-inner h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .seo-contact-content {
+    padding: 2rem 1rem;
+  }
+
+  .seo-contact-inner h2 {
+    font-size: 1.25rem;
+  }
+
+  .seo-contact-inner p {
+    font-size: 0.9rem;
+  }
+}

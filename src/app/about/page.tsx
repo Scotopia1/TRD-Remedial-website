@@ -1,3 +1,4 @@
+import './seo-content.css';
 import { getTeamMembers, getCompanyValues, getPageContent } from '@/lib/api';
 import { AboutPageClient } from '@/components/about/AboutPageClient';
 import type { PageContent } from '@/types/api';
@@ -187,6 +188,29 @@ export default async function AboutPage() {
           <li><a href="/">Home</a></li>
         </ul>
       </nav>
+      {/* Server-rendered SEO content for about page */}
+      <section className="seo-about-content">
+        <div className="seo-about-inner">
+          <h2>Sydney&apos;s Trusted Structural Remediation Experts</h2>
+          <p>
+            TRD Remedial — a division of Tension Reinforced Developments — is a specialist remedial building
+            company serving Sydney and Greater New South Wales. Founded by Christopher, Charly, and Fahed Nassif,
+            our team combines decades of hands-on experience in structural engineering, concrete repairs,
+            and building remediation.
+          </p>
+          <p>
+            We specialise in structural strengthening using carbon fibre reinforcement, concrete crack injection,
+            slab scanning and GPR analysis, post-tension truncation, curtain wall waterproofing, concrete cutting,
+            and large-scale defect rectification. From emergency structural response to planned remediation programs,
+            TRD Remedial delivers solutions that meet the highest engineering standards.
+          </p>
+          <p>
+            Our commitment to quality has earned the trust of strata managers, building owners, engineers,
+            and construction professionals across residential, commercial, and industrial sectors.
+            Every project is backed by thorough assessment, transparent communication, and proven remediation methodologies.
+          </p>
+        </div>
+      </section>
       <AboutPageClient
         docMetaLines={docMetaLines}
         evidenceImages={evidenceImages}

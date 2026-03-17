@@ -1,4 +1,5 @@
 import './contact.css';
+import './seo-content.css';
 import { AnimatedH1 } from '@/components/animations/AnimatedH1';
 import { AnimatedCopy } from '@/components/animations/AnimatedCopy';
 import Link from 'next/link';
@@ -108,6 +109,28 @@ export default async function ContactPage() {
           <Link href="/projects" className="contact-cta-button contact-cta-button-secondary">
             See Our Work
           </Link>
+        </div>
+      </section>
+
+      {/* Server-rendered SEO content for contact page */}
+      <section className="seo-contact-content">
+        <div className="seo-contact-inner">
+          <h2>Contact TRD Remedial</h2>
+          <p>
+            Need expert structural remediation in Sydney? TRD Remedial provides free consultations and assessments
+            for all building types — residential, commercial, and industrial. Whether you require concrete repairs,
+            crack injection, structural strengthening, or emergency structural response, our team is ready to help.
+          </p>
+          <p>
+            We service all areas of Sydney and Greater NSW from our base in Greenacre.
+            Our experienced team can assess your structural concerns, provide detailed scope reports,
+            and deliver tailored remediation solutions. For urgent structural issues, we offer 24/7 emergency response.
+          </p>
+          <div className="seo-contact-details">
+            <p><strong>Office:</strong> 2 Beryl Place, Greenacre NSW 2190</p>
+            <p><strong>Service Area:</strong> Sydney Metropolitan, Greater NSW</p>
+            <p><strong>Availability:</strong> 24/7 Emergency Response</p>
+          </div>
         </div>
       </section>
     </div>
