@@ -150,6 +150,203 @@
   }
 }
 
+/* ==========================================================================
+   FAQ Section — Server-Rendered Q&A for Text/HTML Ratio
+   ========================================================================== */
+
+.seo-service-faq {
+  background-color: var(--concrete-900);
+  color: var(--concrete-100);
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--concrete-700);
+}
+
+.seo-service-faq-inner {
+  width: 80%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.seo-service-faq-inner h2 {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--concrete-200);
+  margin: 0 0 2rem 0;
+}
+
+.seo-faq-item {
+  border-bottom: 1px solid var(--concrete-700);
+  padding: 1.25rem 0;
+}
+
+.seo-faq-item:last-child {
+  border-bottom: none;
+}
+
+.seo-faq-item h3 {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--concrete-200);
+  margin: 0 0 0.75rem 0;
+}
+
+.seo-faq-item p {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--concrete-300);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Detailed Service Content — Benefits & Process for Text/HTML Ratio
+   ========================================================================== */
+
+.seo-service-detail-content {
+  background-color: var(--concrete-900);
+  color: var(--concrete-100);
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--concrete-700);
+}
+
+.seo-service-detail-inner {
+  width: 80%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.seo-service-detail-inner h2 {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--concrete-200);
+  margin: 0 0 1.5rem 0;
+}
+
+.seo-service-detail-inner h3 {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--concrete-200);
+  margin: 2rem 0 1rem 0;
+}
+
+.seo-service-detail-inner p {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--concrete-300);
+  margin: 0 0 1rem 0;
+}
+
+.seo-service-detail-inner ul,
+.seo-service-detail-inner ol.seo-service-process-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.seo-service-detail-inner ul li {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--concrete-300);
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.seo-service-detail-inner ul li::before {
+  content: "\2014";
+  position: absolute;
+  left: 0;
+  color: var(--concrete-500);
+}
+
+.seo-service-detail-inner ol.seo-service-process-list li {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--concrete-300);
+  padding-left: 1.5rem;
+  position: relative;
+  counter-increment: process-step;
+}
+
+.seo-service-detail-inner ol.seo-service-process-list {
+  counter-reset: process-step;
+}
+
+.seo-service-detail-inner ol.seo-service-process-list li::before {
+  content: counter(process-step) ".";
+  position: absolute;
+  left: 0;
+  color: var(--concrete-500);
+  font-family: "Messina Sans Mono", monospace;
+  font-size: 0.85rem;
+}
+
+.seo-service-detail-inner li strong {
+  color: var(--concrete-200);
+}
+
+.seo-service-detail-inner li span {
+  color: var(--concrete-400);
+}
+
+/* Responsive — Tablet */
+@media (max-width: 900px) {
+  .seo-service-faq,
+  .seo-service-detail-content {
+    padding: 3.5rem 0;
+  }
+
+  .seo-service-faq-inner,
+  .seo-service-detail-inner {
+    width: 100%;
+    padding: 0 8%;
+  }
+
+  .seo-service-faq-inner h2,
+  .seo-service-detail-inner h2 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Responsive — Small Mobile */
+@media (max-width: 480px) {
+  .seo-service-faq,
+  .seo-service-detail-content {
+    padding: 2.5rem 0;
+  }
+
+  .seo-service-faq-inner h2,
+  .seo-service-detail-inner h2 {
+    font-size: 1.1rem;
+  }
+
+  .seo-faq-item h3,
+  .seo-service-detail-inner h3 {
+    font-size: 1rem;
+  }
+
+  .seo-faq-item p,
+  .seo-service-detail-inner ul li,
+  .seo-service-detail-inner ol.seo-service-process-list li {
+    font-size: 0.9375rem;
+  }
+}
+
 /* Accessibility — Reduced Motion (no animations in this block anyway) */
 @media (prefers-reduced-motion: reduce) {
   .seo-service-summary,

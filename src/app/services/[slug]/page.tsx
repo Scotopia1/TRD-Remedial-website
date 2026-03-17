@@ -123,6 +123,55 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
+      {/* Server-rendered FAQ content for text/HTML ratio */}
+      {service.faqs && service.faqs.length > 0 && (
+        <section className="seo-service-faq">
+          <div className="seo-service-faq-inner">
+            <h2>Frequently Asked Questions About {service.title}</h2>
+            <div className="seo-faq-list">
+              {service.faqs.map((faq, i) => (
+                <div key={i} className="seo-faq-item">
+                  <h3>{faq.question}</h3>
+                  <p>{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Server-rendered detailed service content */}
+      {((service.benefits && service.benefits.length > 0) || (service.process && service.process.length > 0)) && (
+        <section className="seo-service-detail-content">
+          <div className="seo-service-detail-inner">
+            {service.benefits && service.benefits.length > 0 && (
+              <>
+                <h2>Benefits of Our {service.title} Services</h2>
+                <ul>
+                  {service.benefits.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            {service.process && service.process.length > 0 && (
+              <>
+                <h3>Our {service.title} Process</h3>
+                <ol className="seo-service-process-list">
+                  {service.process.map((step) => (
+                    <li key={step.step}>
+                      <strong>{step.title}</strong>
+                      {step.description && <span> — {step.description}</span>}
+                    </li>
+                  ))}
+                </ol>
+              </>
+            )}
+          </div>
+        </section>
+      )}
+
       <ServiceDetailClient service={service} relatedProjects={relatedProjects} />
     </>
   );
