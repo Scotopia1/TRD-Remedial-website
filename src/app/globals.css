@@ -610,6 +610,29 @@ select:focus-visible {
   border-width: 0;
 }
 
+/* SEO content sections — visually hidden, crawlable by search engines */
+.seo-home-content,
+.seo-about-content,
+.seo-contact-content,
+.seo-service-summary,
+.seo-service-faq,
+.seo-service-detail-content,
+.seo-project-summary,
+.seo-services-intro,
+.seo-services-content,
+.seo-projects-intro,
+.seo-projects-content {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 /* Keyboard navigation indicator */
 body.keyboard-nav *:focus {
   outline: 2px solid #424242 !important;
