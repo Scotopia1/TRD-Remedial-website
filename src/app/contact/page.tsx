@@ -8,11 +8,22 @@ import { ContactFormClient } from './ContactFormClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact Us',
-  description:
-    'Get in touch with TRD Remedial for structural remediation, concrete repair, and emergency services across Sydney and NSW. Request a quote or consultation today.',
+  title: 'Contact TRD Remedial | Free Quote — Structural Repair Sydney',
+  description: 'Contact TRD Remedial for structural remediation, concrete repair, and 24/7 emergency structural services across Sydney and NSW. Call 0414 727 167 or request a free quote online.',
+  keywords: [
+    'contact TRD Remedial',
+    'structural remediation quote Sydney',
+    'concrete repair quote NSW',
+    'emergency structural repair Sydney',
+    'remedial builder contact',
+  ],
   alternates: {
     canonical: '/contact',
+  },
+  openGraph: {
+    title: 'Contact TRD Remedial | Free Quote for Structural Remediation',
+    description: 'Get in touch for structural remediation, concrete repair, and emergency services. Call 0414 727 167 or request a free quote across Sydney and NSW.',
+    type: 'website',
   },
 };
 

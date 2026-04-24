@@ -5,10 +5,24 @@ import type { PageContent } from '@/types/api';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About Us',
-  description: 'Learn about TRD Remedial - Sydney\'s leading structural remediation specialists. 8+ years of experience, 150+ projects completed, and 24/7 emergency response across NSW.',
+  title: 'About TRD Remedial | Structural Remediation Experts Sydney',
+  description: 'TRD Remedial — Sydney\'s trusted structural remediation specialists since 2017. 8+ years experience, 150+ projects completed, 24/7 emergency response. Expert remedial builders for residential, commercial and industrial buildings across NSW.',
+  keywords: [
+    'TRD Remedial',
+    'structural remediation company Sydney',
+    'remedial building company NSW',
+    'concrete repair specialists Sydney',
+    'structural engineers Sydney',
+    'Tension Reinforced Developments',
+    'Christopher Nassif',
+  ],
   alternates: {
     canonical: '/about',
+  },
+  openGraph: {
+    title: 'About TRD Remedial | Structural Remediation Experts Since 2017',
+    description: 'Sydney\'s trusted structural remediation specialists. 8+ years experience, 150+ completed projects, and 24/7 emergency response across NSW.',
+    type: 'website',
   },
 };
 

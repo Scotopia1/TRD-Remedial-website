@@ -5,10 +5,26 @@ import { ServicesClient } from './ServicesClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Services',
-  description: 'Comprehensive structural remediation services in Sydney - structural strengthening, crack injection, concrete cutting, concrete repairs, slab scanning, curtain wall injection, and more.',
+  title: 'Structural Remediation Services Sydney NSW',
+  description: 'Comprehensive structural remediation services in Sydney — structural strengthening, crack injection, concrete cutting, concrete repairs, slab scanning, post-tension truncation, curtain wall injection, and more. Expert remedial builders across NSW.',
+  keywords: [
+    'structural remediation services Sydney',
+    'concrete repair Sydney',
+    'structural strengthening Sydney',
+    'crack injection Sydney',
+    'concrete cutting Sydney',
+    'slab scanning Sydney',
+    'post tension truncation Sydney',
+    'curtain wall injection Sydney',
+    'remedial building services NSW',
+  ],
   alternates: {
     canonical: '/services',
+  },
+  openGraph: {
+    title: 'Structural Remediation Services Sydney NSW | TRD Remedial',
+    description: 'Full-scope structural remediation: strengthening, crack injection, concrete repairs, slab scanning, post-tension truncation and more across Sydney and NSW.',
+    type: 'website',
   },
 };
 

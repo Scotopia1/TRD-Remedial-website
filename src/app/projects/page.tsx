@@ -5,10 +5,24 @@ import './seo-projects-intro.css';
 import './seo-projects-listing.css';
 
 export const metadata: Metadata = {
-  title: 'Projects',
-  description: 'Explore our portfolio of structural remediation, concrete repair, and CFRP strengthening projects across Sydney and NSW.',
+  title: 'Structural Remediation Projects Sydney | Case Studies',
+  description: 'Explore TRD Remedial\'s portfolio of structural remediation projects across Sydney and NSW — concrete repairs, crack injection, carbon fibre strengthening, slab scanning, post-tension truncation, and curtain wall waterproofing case studies.',
+  keywords: [
+    'structural remediation projects Sydney',
+    'concrete repair case studies',
+    'carbon fibre strengthening projects',
+    'CFRP Sydney',
+    'remedial building projects NSW',
+    'post tension truncation Schofields',
+    'structural repair Wentworth Point',
+  ],
   alternates: {
     canonical: '/projects',
+  },
+  openGraph: {
+    title: 'Structural Remediation Projects Sydney | TRD Remedial',
+    description: 'Case studies showcasing structural remediation, concrete repair, and CFRP strengthening projects delivered across Sydney and Greater NSW.',
+    type: 'website',
   },
 };
 

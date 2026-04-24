@@ -125,7 +125,7 @@ export default async function RootLayout({
 }>) {
   const siteSettings = await getSettings();
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en-AU" suppressHydrationWarning>
       <head>
         <StructuredData />
         {/* Google tag (gtag.js) */}
