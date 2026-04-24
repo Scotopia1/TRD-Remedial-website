@@ -63,16 +63,10 @@ const LogoAnimated = forwardRef<LogoAnimatedHandle, { className?: string }>(
         gsap.set(rRight,     { x: 0, opacity: 1 });
         gsap.set(shards,     { x: 0, y: 0, rotation: 0, opacity: 0 });
         gsap.set(remLetters, { opacity: 0, x: -8 });
-        gsap.set([circT, tLetter, circD, dLetter], { opacity: 1 });
-
         const tl = gsap.timeline();
 
-        // 1. Shake buildup
-        tl.to(svg, { rotation: -3, duration: 0.07, ease: 'sine.inOut', transformOrigin: '50% 50%' })
-          .to(svg, { rotation:  3, duration: 0.07, ease: 'sine.inOut' })
-          .to(svg, { rotation: -2, duration: 0.06, ease: 'sine.inOut' })
-          .to(svg, { rotation:  1, duration: 0.06, ease: 'sine.inOut' })
-          .to(svg, { rotation:  0, duration: 0.05, ease: 'sine.in'   });
+        // 1. Rotate 90° CCW (T rises to top, forming the column layout)
+        tl.to(svg, { rotation: -90, duration: 0.5, ease: 'power2.inOut', transformOrigin: '50% 50%' });
 
         // 2. Draw crack
         tl.to([crack, crackGlow], {
@@ -89,11 +83,7 @@ const LogoAnimated = forwardRef<LogoAnimatedHandle, { className?: string }>(
         }, '+=0.04');
         tl.to(flash, { opacity: 0, scale: 1.6, duration: 0.25, ease: 'power2.in' });
 
-        // 4. T + D fade out (concurrent with flash out)
-        tl.to([circT, tLetter], { opacity: 0, duration: 0.3, ease: 'power2.out' }, '<-0.1');
-        tl.to([circD, dLetter], { opacity: 0, duration: 0.3, ease: 'power2.out' }, '<');
-
-        // 5. R halves split
+        // 4. R halves split
         tl.to(rLeft,  { x: -12, opacity: 0.55, duration: 0.4, ease: 'power3.out' }, '<');
         tl.to(rRight, { x:  12, opacity: 0.55, duration: 0.4, ease: 'power3.out' }, '<');
 
@@ -136,11 +126,8 @@ const LogoAnimated = forwardRef<LogoAnimatedHandle, { className?: string }>(
         const crackLen = crack.getTotalLength();
         const tl = gsap.timeline();
 
-        // Reset any interrupted shake
-        tl.to(svg, { rotation: 0, duration: 0.15, ease: 'power2.out', transformOrigin: '50% 50%' });
-
         // 1. EMEDIAL collapses
-        tl.to(remLetters, { opacity: 0, x: -8, duration: 0.2, ease: 'power2.in', stagger: 0.02 }, '<');
+        tl.to(remLetters, { opacity: 0, x: -8, duration: 0.2, ease: 'power2.in', stagger: 0.02 });
 
         // 2. R halves reassemble
         tl.to([rLeft, rRight], { x: 0, opacity: 1, duration: 0.35, ease: 'power2.inOut' }, '-=0.05');
@@ -150,8 +137,8 @@ const LogoAnimated = forwardRef<LogoAnimatedHandle, { className?: string }>(
           strokeDashoffset: crackLen, opacity: 0, duration: 0.2, ease: 'power2.in',
         }, '-=0.1');
 
-        // 4. T and D fade back in
-        tl.to([circT, tLetter, circD, dLetter], { opacity: 1, duration: 0.35, ease: 'power2.out' }, '-=0.1');
+        // 4. Rotate back to 0°
+        tl.to(svg, { rotation: 0, duration: 0.5, ease: 'power2.inOut', transformOrigin: '50% 50%' }, '-=0.1');
       },
     }));
 
