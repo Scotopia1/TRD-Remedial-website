@@ -8,6 +8,7 @@ import { gsap } from 'gsap';
 import { useStore } from '@/stores/useStore';
 import { useScrollLock } from '@/hooks/useScrollLock';
 import { useSiteSettings } from '@/components/providers/SiteSettingsProvider';
+import LogoAnimated, { type LogoAnimatedHandle } from './LogoAnimated';
 
 const FALLBACK_MENU_LINKS = [
   { path: '/', label: 'Home' },
@@ -32,6 +33,7 @@ export function Menu() {
   const menuLinksAnimation = useRef<GSAPTimeline | null>(null);
 
   const lastScrollY = useRef(0);
+  const logoRef = useRef<LogoAnimatedHandle>(null);
   const menuBarRef = useRef<HTMLDivElement>(null);
   const { isLoading } = useStore();
 
@@ -40,17 +42,12 @@ export function Menu() {
   const previousPathRef = useRef(pathname);
   const scrollPositionRef = useRef(0);
   const [showMenuHint, setShowMenuHint] = useState(false);
-  const [showMenuLabel, setShowMenuLabel] = useState(false);
-  const [menuLabelFading, setMenuLabelFading] = useState(false);
 
   useScrollLock(isMenuOpen);
 
-  // Initialize window width on client + check if menu label should show
+  // Initialize window width on client
   useEffect(() => {
     setWindowWidth(window.innerWidth);
-    if (!localStorage.getItem('trd-menu-opened')) {
-      setShowMenuLabel(true);
-    }
   }, []);
 
   // Show menu hint for 3 seconds AFTER loading completes
@@ -71,16 +68,6 @@ export function Menu() {
     const logoButton = document.querySelector('.logo-menu-button');
     if (logoButton) {
       logoButton.classList.toggle('active');
-    }
-
-    // First time opening: persist and fade out the label
-    if (!isMenuOpen && showMenuLabel) {
-      localStorage.setItem('trd-menu-opened', 'true');
-      setMenuLabelFading(true);
-      setTimeout(() => {
-        setShowMenuLabel(false);
-        setMenuLabelFading(false);
-      }, 500);
     }
 
     setIsMenuOpen(!isMenuOpen);
@@ -151,9 +138,11 @@ export function Menu() {
     if (isMenuOpen) {
       menuAnimation.current?.play();
       menuLinksAnimation.current?.play();
+      logoRef.current?.playOpen();
     } else {
       menuAnimation.current?.reverse();
       menuLinksAnimation.current?.reverse();
+      logoRef.current?.playClose();
     }
   }, [isMenuOpen]);
 
@@ -208,16 +197,13 @@ export function Menu() {
                 aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={isMenuOpen}
               >
-                <img
-                  src="/trd-logo.svg"
-                  alt="TRD"
+                <LogoAnimated
+                  ref={logoRef}
                   className="logo-icon"
                 />
-                {showMenuLabel && (
-                  <span className={`menu-label ${menuLabelFading ? 'menu-label-fade-out' : ''}`}>
-                    MENU
-                  </span>
-                )}
+                <span className={`menu-label ${isMenuOpen ? 'menu-label-fade-out' : ''}`}>
+                  MENU
+                </span>
               </button>
             </div>
           </div>
